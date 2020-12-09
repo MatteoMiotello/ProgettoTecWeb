@@ -20,7 +20,7 @@ class Articolo {
         $this->imgPath = $this->setImgPath($imgPath);
     }
 
-    # getters
+    // getters
     public function getID() {
         return $this->ID;
     }
@@ -42,7 +42,7 @@ class Articolo {
     public function getDownVotes() {
         return $this->downVotes;
     }
-    # setters
+    // setters
     public function setID($value) {
         (ctype_digit($value) && strlen($value)<=6)? $this->ID = $value: $this->ID = null;
     }
@@ -70,21 +70,21 @@ class Articolo {
 }
 
 class Categoria {
-    private $nome;		#varchar(20),
-    private $descrizione;	#varchar(255),
+    private $nome;
+    private $descrizione;
     function __construct($nome, $descrizione)
     {
         $this->nome = $this->setNome($nome);
         $this->descrizione = $this->setDescrizione($descrizione);
     }
-    #getter
+    //getter
     public function getNome() {
         return $this->nome;
     }
     public function getCategoria() {
         return $this->descrizione;
     }
-    #setter
+    //setter
     public function setNome($value) {
         (ctype_alnum($value) && strlen($value)<=20)? $this->nome = $value: $this->nome = null;
     }
