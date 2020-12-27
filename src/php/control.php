@@ -4,7 +4,7 @@ require_once "dbConnection.php";
 $dbAccess = new DBAccess();
 $connessioneRiuscita = $dbAccess->openDBConnection();
 
-// bisogna fare la parte in cui viene selezionata la categoria, la query in caso di decisione sulla categoria e' gia' predisposta
+// todo bisogna fare la parte in cui viene selezionata la categoria, la query in caso di decisione sulla categoria e' gia' predisposta
 
 function printListaArticoli($category, $dbAccess, $connessioneRiuscita)
 {

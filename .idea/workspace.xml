@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0d03795d-8ac2-4eef-aa95-41c77b878240" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Immagini_prototipo/Articolo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Immagini_prototipo/Home.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Immagini_prototipo/login.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Immagini_prototipo/pag admin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Immagini_prototipo/pag utente.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Immagini_prototipo/revisione articolo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Immagini_prototipo/scrivi articolo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/control.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/control.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +53,7 @@
       <updated>1607536411191</updated>
       <workItem from="1607536412766" duration="2286000" />
       <workItem from="1607609477360" duration="4652000" />
-      <workItem from="1609083667856" duration="3648000" />
+      <workItem from="1609083667856" duration="5873000" />
     </task>
     <servers />
   </component>
@@ -80,9 +73,25 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1609084944843">
+    <state x="427" y="113" key="#com.intellij.ide.util.MemberChooser" timestamp="1609093125899">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1609084944843" />
+    <state x="427" y="113" key="#com.intellij.ide.util.MemberChooser/0.0.1280.800@0.0.1280.800" timestamp="1609093125899" />
+    <state x="342" y="130" key="NewPhpClassDialog" timestamp="1609092186472">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="342" y="130" key="NewPhpClassDialog/0.0.1280.800@0.0.1280.800" timestamp="1609092186472" />
+    <state x="149" y="36" key="SettingsEditor" timestamp="1609091928180">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="149" y="36" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1609091928180" />
+    <state x="484" y="178" key="refactoring.ChangeSignatureDialog" timestamp="1609093765354">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="484" y="178" key="refactoring.ChangeSignatureDialog/0.0.1280.800@0.0.1280.800" timestamp="1609093765354" />
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1609091944193">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1609091944193" />
   </component>
 </project>
