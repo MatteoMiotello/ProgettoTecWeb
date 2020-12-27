@@ -7,9 +7,7 @@ class User
 
     private $Id;
 
-    /**
-     * @var string
-     */
+    
     private $Name;
 
 
@@ -25,7 +23,7 @@ class User
     private $Permission;
 
 
-    private $img;
+    private $Img;
 
 
     /**
@@ -36,19 +34,23 @@ class User
      * @param $Email
      * @param $Password
      * @param $Permission
-     * @param $img
+     * @param $Img
      */
-    public function __construct($Id, string $Name, $Surname, $Email, $Password, $Permission, $img)
+    public function __construct($Id, string $Name, $Surname, $Email, $Password, $Permission, $Img)
     {
-        $this->Id = $Id;
-        $this->Name = $Name;
-        $this->Surname = $Surname;
-        $this->Email = $Email;
-        $this->Password = $Password;
-        $this->Permission = $Permission;
-        $this->img = $img;
-    }
+        try {
+            $this->setId($Id);
+            $this->setName($Name);
+            $this->setSurname($Surname);
+            $this->setEmail($Email);
+            $this->setPassword($Password);
+            $this->setPermission($Permission);
+            $this->setImg($Img);
 
+        } catch (Exception $exception) {
+
+        };
+    }
 
     /**
      * @return mixed
@@ -62,7 +64,7 @@ class User
     /**
      * @param mixed $Id
      */
-    public function setId($Id): void
+    public function setId( $Id ): void
     {
         $this->Id = $Id;
     }
@@ -80,9 +82,15 @@ class User
     /**
      * @param string $Name
      */
-    public function setName(string $Name): void
+    public function setName( string $Name )
     {
+        if ( !strlen( $Name ) < 30 ){
+            throw new Exception( 'Name is too long' );
+        }
+
         $this->Name = $Name;
+
+        return $this;
     }
 
 
@@ -98,9 +106,15 @@ class User
     /**
      * @param mixed $Surname
      */
-    public function setSurname($Surname): void
+    public function setSurname( $Surname )
     {
+        if ( !strlen( $Surname ) < 30 ){
+            throw new Exception( 'Surname is too long' );
+        }
+
         $this->Surname = $Surname;
+
+        return $this;
     }
 
 
@@ -114,11 +128,17 @@ class User
 
 
     /**
-     * @param mixed $Email
+     * @param $Email
      */
-    public function setEmail($Email): void
+    public function setEmail( $Email )
     {
+        if ( !strlen( $Email ) < 50 or !strstr( $Email, '@' )){
+            throw new Exception( 'User email is invalid ' );
+        }
+
         $this->Email = $Email;
+
+        return $this;
     }
 
 
@@ -134,8 +154,11 @@ class User
     /**
      * @param mixed $Password
      */
-    public function setPassword($Password): void
+    public function setPassword( $Password )
     {
+        if ( !strlen( $Password )< 128 ){
+            throw new Exception( 'Password is invalid' );
+        }
         $this->Password = $Password;
     }
 
@@ -152,9 +175,15 @@ class User
     /**
      * @param mixed $Permission
      */
-    public function setPermission($Permission): void
+    public function setPermission( $Permission )
     {
+        if ( !$Permission == UserLevelType::Administrator or !$Permission == UserLevelType::Consumer ){
+            throw new Exception( 'Permission is not a UserLevelType' );
+        }
+
         $this->Permission = $Permission;
+
+        return $this;
     }
 
 
@@ -168,28 +197,34 @@ class User
 
 
     /**
-     * @param mixed $img
+     * @param mixed $Img
      */
-    public function setImg($img): void
+    public function setImg($Img)
     {
-        $this->img = $img;
+        if ( !strlen( $Img ) < 255 ){
+            throw new Exception( 'image path is invalid' );
+        }
+        $this->img = $Img;
+        
+        return $this;
     }
 
 
     /**
      * @return User|null|User[]
      */
-    public static function getAllUsers(): ?User{
+    public static function getAllUsers(): ?User {
 
         $access = DBAccess::openDBConnection();
 
         $querySelect = 'SELECT * FROM utente';
 
-        $queryResult = mysql_query($access->getConnection(), $querySelect);
+        $queryResult = mysql_query( $access->getConnection(), $querySelect );
 
-        if (mysqli_num_rows($queryResult) == 0)
+        if (mysqli_num_rows($queryResult) == 0) {
             return null;
-        else { // ritorno la lista delle categorie all'interno del db
+        }
+        else {
             $userList = [];
             while ($riga = mysqli_fetch_assoc($queryResult)) {
                 $user = new User($riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'], $riga['password'], $riga['permesso'], $riga['img_path']);
@@ -200,20 +235,32 @@ class User
         return $userList;
     }
 
+    /**
+     * @param $id
+     * @return User|null
+     */
+    public static function getUserById( $id ): ?User  {
 
-    public static function getUserById( $id ): User  {
+        $access = DBAccess::openDBConnection();
 
+        $querySelect = sprintf( 'SELECT * FROM utente WHERE ID = %s', $id );
 
+        $result = mysql_query( $access->getConnection(), $querySelect );
+
+        if( !mysql_num_rows( $result ) ){
+          return null;
+        }
+
+        $row = mysqli_fetch_row( $result );
+
+        return ( new User( $row['ID'], $row['nome'], $row['cognome'], $row['email'], $row['password'], $row['permesso'], $row['img_path'] ) );
 
     }
 
-
+    /**
+     * @param UserLevelType $levelType
+     */
     public static function getUserByAccess( UserLevelType $levelType ){
-
+        //todo
     }
-
-
-
-
-
 }
