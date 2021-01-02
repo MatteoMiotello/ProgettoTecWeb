@@ -239,9 +239,22 @@ class User
      * @param $id
      * @return User|null
      */
-    public static function getUserById( $id ): ?User  {
+    public static function getUserById( $id ): ?User  {$access = DBAccess::openDBConnection();}
 
-        $access = DBAccess::openDBConnection();
+    public static function getArticleAuthor($id_articolo, $connection) {
+        $querySelect = "SELECT * FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = $id_articolo ";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0){
+            return null;
+        }
+        else { 
+            $riga = mysqli_fetch_assoc($queryResult);
+            $autore = new User($riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'],$riga['password'],$riga['permesso'], $riga['img_path']);
+            return $autore;
+        }
+    }
+
+  /*  public static function getUserById( $id ): User  {
 
         $querySelect = sprintf( 'SELECT * FROM utente WHERE ID = %s', $id );
 
@@ -255,7 +268,7 @@ class User
 
         return ( new User( $row['ID'], $row['nome'], $row['cognome'], $row['email'], $row['password'], $row['permesso'], $row['img_path'] ) );
 
-    }
+    }*/
 
     /**
      * @param UserLevelType $levelType
