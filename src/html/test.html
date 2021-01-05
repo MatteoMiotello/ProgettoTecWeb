@@ -21,7 +21,6 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="cat.html">Categorie</a></li>
                 <li><a href="form_articolo.html">Scrivi il tuo articolo</a></li>
-                <li><a href="login.html">Accedi</a></li>
             </ul>
         </nav>
         <form action="article_filter.html?art_text = {input}">
@@ -35,7 +34,10 @@
             <div class="fa fa-bars"></div>
           </a>
         </div>
-        <img src="../img/user_icon.png" alt="" class="user_img" id="user_desk">
+        <div class="user_cont">
+          <a href="login.html">Accedi</a>
+          <img src="../img/user_icon.png" alt="" class="user_img" id="user_desk">
+        </div>
     </header>
     <div class="mob_srch" id="search_mobile">
       <form action="article_filter.html?art_text = {input}">
@@ -44,40 +46,20 @@
     </div>
     <div class="mob_nav" id="hd">
       <nav>
-          <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="cat.html">Categorie</a></li>
-              <li><a href="form_articolo.html">Scrivi il tuo articolo</a></li>
-              <li><a href="login.html">Accedi</a></li>
+          <!--<ul id="account_nav">
+            <li><a href="login.html">Accedi/Registrati</a></li>
+            <li></li>
+            <li><a href="index.html?logout">Esci dal profilo</a></li>
+            <li><a href="user_page.html">Il mio profilo</a></li>
+          </ul>-->
+          <ul id="menu_nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cat.html">Categorie</a></li>
+            <li><a href="form_articolo.html">Scrivi il tuo articolo</a></li>
+            <li><a href="login.html">Accedi/Registrati</a></li>
           </ul>
       </nav>
     </div>
-
-    <articolo /> <!-- tag fittizio per l'inserimento dell'articolo da visualizzare per intero -->
-
-    <div class="commentArea">
-      <h2>Commenti</h2>
-      <div id="print_comm">
-        <img src="../img/user_icon.png">
-        <p>Wow che figata sto articolo!</p>
-      </div>
-      <div id="print_comm">
-        <img src="../img/user_icon.png">
-        <p>Il covid ha rotto le palle</p>
-      </div>
-      <div id="print_comm">
-        <img src="../img/user_icon.png">
-        <p>Tyler Herro < Jayson Tatum</p>
-      </div>
-      <form action="index.html" method="post">
-        <img src="../img/user_icon.png">
-        <div class="comm_container">
-          <textarea name="comment" id="insert_comment" maxlength="200" placeholder="Inserisci un commento..." required></textarea>
-          <button type="submit" name="pub_comm">Pubblica</button>
-        </div>
-      </form>
-    </div>
-
     <footer>
       <img id="html5" src="../img/badge-w3c-valid-html5.png" alt="Logo che certifica il rispetto dello standard w3c nella scrittura del codice html">
       <img id="cssLogo" src="../img/css.png" alt="Logo che certifica il rispetto dello standard w3c nella scrittura del codice css">
