@@ -30,6 +30,7 @@ CREATE TABLE categoria
 (
     nome        varchar(20),
     descrizione varchar(255),
+    img varchar(255),
     PRIMARY KEY (nome)
 ) ENGINE=InnoDB;
 

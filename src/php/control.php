@@ -107,10 +107,57 @@ function printArticoloCompleto($connessioneRiuscita, $id_articolo) {
     }
 }
 
+function printArticoloPerModifica($connessioneRiuscita, $id_articolo) {
+    if (!$connessioneRiuscita)
+        die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
+    else {
+        $printArticolo = '';
+        $articolo = Articolo::getArticolo($id_articolo, $connessioneRiuscita);
+        $autore = User::getArticleAuthor($articolo->getID(), $connessioneRiuscita);
+        $listaCategorie = Categoria::getCategorieArticolo($articolo->getID(), $connessioneRiuscita);
+        if($articolo != null) {
+            $printArticolo .= '<div class="printArticolo">';
+            $printArticolo .= '<div class="upperPrint">';
+            $printArticolo .= '<label for="titolo" >'.Titolo.'</label>';
+            $printArticolo .= '<textarea id="titolo" >'.$articolo->getTitolo().'</textarea>';
+            $printArticolo .= '<label for="descrizione" >'.Descrizione.'</label>';
+            $printArticolo .= '<textarea id="descrizione" >'.$articolo->getDescrizione().'</textarea>';
+            $printArticolo .= '</div>';
+            $printArticolo .= '<label for="testo" >'.Testo.'</label>';
+            $printArticolo .= '<textarea id="testo" >'.$articolo->getTesto().'</textarea>';
+            $printArticolo .= '</div>';
+            $printArticolo .=  '<div class="info_art">';
+            $printArticolo .= '<div id="author">';
+            if($autore) {
+                $printArticolo .= '<img src="'.$autore->getImg().'">';
+                $printArticolo .= '<p>'.$autore->getName().'</p>';
+                $printArticolo .= '<p>'.$autore->getEmail().'</p>';
+            }
+            else $printArticolo .= '<p>Autore non presente</p>';
+            $printArticolo .= '</div>'; 
+            $printArticolo .= '<div id="get_cat">';
+            if($listaCategorie) {
+                foreach($listaCategorie as $categoria) {
+                    $printArticolo .= '<p>'.$categoria->getNome().'</p>';
+                }
+            }   
+            else $printArticolo .= '<p>Categoria non presente</p>';
+            $printArticolo .= '</div>';
+            $printArticolo .= '</div>';
+        }
+        else {
+            $printArticolo .= "<div>Nessun articolo presente</div>";
+        }
+        $paginaHTML = file_get_contents('../html/generic_page_articolo.html');
+        echo str_replace("<articolo />", $printArticolo, $paginaHTML);
+    }
+}
+
 function printUsers(){
     $user = User::getAllUsers();
 }
 // print di prova
 //printArticoloCompleto($connessioneRiuscita, 156612);
-printListaArticoli(null, $connessioneRiuscita);
+//printListaArticoli(null, $connessioneRiuscita);
+printArticoloPerModifica($connessioneRiuscita, 156612);
 ?>

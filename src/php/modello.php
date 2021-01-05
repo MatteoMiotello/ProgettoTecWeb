@@ -244,7 +244,7 @@ class Categoria
 {
     private $nome;
     private $descrizione;
-
+    private $img;
     function __construct($nome, $descrizione)
     {
         try {$this->setNome($nome);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
@@ -274,11 +274,22 @@ class Categoria
             throw new Exception(CheckValues::createMsgError("Name"), 1);
     }
 
-    public function getCategoria()
+    public function getDescrizione()
     {
         return $this->descrizione;
     }
 
+    public function getImg() {
+        return $this->img;
+    }
+
+    public function setImg($value) {
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 255);
+        if($correctCharacters) 
+            $this->img = $value;
+        else 
+            throw new Exception(CheckValues::createMsgError("Img Of Category"), 1);
+    }
     public static function getCategorie($connection)
     {
         $querySelect = "SELECT * FROM categoria";
@@ -288,7 +299,7 @@ class Categoria
         else { // ritorno la lista delle categorie all'interno del db
             $listaCategorie = array();
             while ($riga = mysqli_fetch_assoc($queryResult)) {
-                $singolaCategoria = new Categoria($riga['nome'], $riga['descrizione']);
+                $singolaCategoria = new Categoria($riga['nome'], $riga['descrizione'], $riga['img']);
                 array_push($listaCategorie, $singolaCategoria);
             }
         }
@@ -296,14 +307,14 @@ class Categoria
     }
 
     public static function getCategorieArticolo($id_articolo, $connection) {
-        $querySelect = "SELECT categoria.nome, categoria.descrizione FROM cat_art INNER JOIN categoria ON cat_art.nome_cat = categoria.nome WHERE cat_art.ID_art = $id_articolo";
+        $querySelect = "SELECT categoria.nome, categoria.descrizione, categoria.img FROM cat_art INNER JOIN categoria ON cat_art.nome_cat = categoria.nome WHERE cat_art.ID_art = $id_articolo";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
             return null;
         else { // ritorno la lista delle categorie all'interno del db
             $listaCategorie = array();
             while ($riga = mysqli_fetch_assoc($queryResult)) {
-                $singolaCategoria = new Categoria($riga['nome'], $riga['descrizione']);
+                $singolaCategoria = new Categoria($riga['nome'], $riga['descrizione'], $riga['img']);
                 array_push($listaCategorie, $singolaCategoria);
             }
         }
