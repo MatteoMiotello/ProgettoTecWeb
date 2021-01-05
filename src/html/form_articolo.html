@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr" id="short_html">
+  <head>
+    <meta http-equiv="content-type" content="text/html"; charset="utf-8">
+    <title>Nome Giornale</title>
+
+    <meta name="author" content="MPAC Group">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="HTML, CSS, JavaScript, MySQL, notizie, covid, sport, economia, cultura, scienze, spettacolo, politica">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen">
+  </head>
+
+  <body id="short_body">
+    <header class="header">
+        <img src="../img/user_icon.png" alt="" class="user_img" id="user_mob">
+        <img src="../img/logo.png" alt="" id="logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cat.html">Categorie</a></li>
+                <li><a href="form_articolo.html">Scrivi il tuo articolo</a></li>
+                <li><a href="login.html">Accedi</a></li>
+            </ul>
+        </nav>
+        <form action="article_filter.html?art_text = {input}">
+          <input type="text" placeholder="Cerca.." id="search_bar" required><button type="submit" id="search_button"><i class="fa fa-search"></i></button>
+        </form>
+        <div class="mob_buttons_wrapper">
+          <a href="javascript:void(0);" class="icon search_link" onclick="searchFunction()">
+            <div class="fa fa-search"></div>
+          </a>
+          <a href="javascript:void(0);" class="icon txt_link" onclick="myFunction()">
+            <div class="fa fa-bars"></div>
+          </a>
+        </div>
+        <img src="../img/user_icon.png" alt="" class="user_img" id="user_desk">
+    </header>
+    <div class="mob_srch" id="search_mobile">
+      <form action="article_filter.html?art_text = {input}">
+        <input type="text" placeholder="Cerca.." id="search_bar_mobile" required><button type="submit" id="search_button"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <div class="mob_nav" id="hd">
+      <nav>
+          <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="cat.html">Categorie</a></li>
+              <li><a href="form_articolo.html">Scrivi il tuo articolo</a></li>
+              <li><a href="login.html">Accedi</a></li>
+          </ul>
+      </nav>
+    </div>
+
+    <div id="wrapper">
+      <form action="/post_article.php" class="form_articolo">
+        <h1>Scrivi il tuo articolo!</h1>
+        <p>Scrivi e mandaci il tuo articolo, noi penseremo a valutarlo e pubblicarlo.<br>
+          La nostra redazione studierà attentamente il tuo articolo e deciderà se può essere pubblicato o meno. In caso di riscontro positivo ci occuperemo noi
+          di curare l'accessibilità del tuo articolo e di pubblicarlo col tuo nome.
+        </p>
+        <label for="titolo_art">Titolo dell'articolo</label>
+        <input type="text" name="titolo_art" placeholder="Titolo... (Massimo 126 caratteri)" required>
+        <label for="descr_art">Descrizione articolo</label>
+        <input type="text" name="descr_art" placeholder="Descrizione... (Massimo 300 caratteri)" required>
+        <label for="testo_art">Testo dell'articolo</label>
+        <textarea maxlength="10000" name="testo_art" placeholder="Testo dell'articolo... (Massimo 10000 caratteri)" required></textarea>
+        <div class="cat_img">
+          <div class="img_sel">
+            <label for="image"><i class="fa fa-folder-open-o"></i> Scegli un'immagine</label>
+            <input type="file" name="image" accept="image/jpeg, image/png">
+          </div>
+          <div class="cat_sel">
+            <p>Scegli una o pi&ugrave; categorie:</p>
+              <div id="sport_cat" class="element">
+                <label for="sport">Sport</label>
+                <input type="checkbox" name="sport" value="Sport">
+              </div>
+              <div id="economy_cat" class="element">
+                <label for="sport">Economia</label>
+                <input type="checkbox" name="sport" value="economia">
+              </div>
+              <div id="politics_cat" class="element">
+                <label for="sport">Politica</label>
+                <input type="checkbox" name="sport" value="politica">
+              </div>
+              <div id="gossip_cat" class="element">
+                <label for="sport">Gossip</label>
+                <input type="checkbox" name="sport" value="gossip">
+              </div>
+              <div id="world_cat" class="element">
+                <label for="sport">Mondo</label>
+                <input type="checkbox" name="sport" value="modno">
+              </div>
+              <div id="science_cat" class="element">
+                <label for="sport">Scienze</label>
+                <input type="checkbox" name="sport" value="scienze">
+              </div>
+              <div id="covid_cat" class="element">
+                <label for="sport">Covid</label>
+                <input type="checkbox" name="sport" value="covid">
+              </div>
+              <div id="spett_cat" class="element">
+                <label for="sport">Spettacolo</label>
+                <input type="checkbox" name="sport" value="spettacolo">
+              </div>
+          </div>
+        </div>
+        <button type="submit" name="submit">Invia</button>
+      </form>
+    </div>
+
+
+    <footer>
+      <img id="html5" src="../img/badge-w3c-valid-html5.png" alt="Logo che certifica il rispetto dello standard w3c nella scrittura del codice html">
+      <img id="cssLogo" src="../img/css.png" alt="Logo che certifica il rispetto dello standard w3c nella scrittura del codice css">
+      <address>
+          Progetto di Tecnologie Web sviluppato da:<br>
+          <a href="mailto:andrea.polato.7@studenti.unipd.it">Andrea Polato</a><br>
+          <a href="mailto:andrea.polato.7@studenti.unipd.it">Tommaso Allegretti</a><br>
+          <a href="mailto:andrea.polato.7@studenti.unipd.it">Giosu&egrave; Calgaro</a><br>
+          <a href="mailto:andrea.polato.7@studenti.unipd.it">Matteo Miotello</a><br>
+      </address>
+    </footer>
+  </body>
+
+  <script>
+    function myFunction() {
+        var x = document.getElementById("hd");
+        if (x.className === "mob_nav") {
+          x.className += " responsive";
+        } else {
+          x.className = "mob_nav";
+        }
+      }
+
+    function searchFunction() {
+      var x = document.getElementById("search_mobile");
+      if (x.className === "mob_srch"){
+        x.className += " resp_srch";
+      } else {
+        x.className = "mob_srch";
+      }
+    }
+  </script>
+</html>
