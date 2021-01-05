@@ -112,7 +112,7 @@ header ul li #currentLink{
 }
 
 #user_desk{
-  margin: 0 2em 0 1em;
+  margin-left: 1em;
 }
 
 #user_mob{
@@ -121,12 +121,15 @@ header ul li #currentLink{
 }
 
 .user_cont{
+  margin: 0 2em 0 0.5em;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-end;
-  background: grey;
+  background: white;
+  border: solid 0px;
+  border
 }
 
 header a.icon{
@@ -302,28 +305,28 @@ article {
   -webkit-box-shadow: 0 3px 5px 3px #ccc;
   box-shadow:         0 3px 5px 3px #ccc;
   padding: 1em;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin-bottom: 2em;
 }
 
-article h3 {
-  padding-bottom: 1em;
+article div {
+  width: 65%;
 }
 
-article img {
+article > img {
   width: 30%;
-  position: relative;
-  float: left;
-  padding-right: 1em;
+  margin: auto;
+  padding-right: 5%;
   padding-bottom: 1em;
 }
 
 article a {
   width: inherit;
 }
-
-article #mobile_img {
-  display: none;
+article footer img {
+  width: 1em;
+  height: 1em;
 }
 
 aside {
@@ -334,7 +337,7 @@ aside {
   box-shadow:         0 3px 5px 3px #ccc;
   padding: 1em;
   width: 440px;
-  min-height: 600px;
+  height: fit-content;
 }
 
 @media screen and (max-width: 1200px) {
@@ -342,10 +345,10 @@ aside {
     font-size: 0.98em;
   }
 
-  article img {
+  /*article img {
     width: 100%;
     float: none;
-  }
+  }*/
 }
 
 @media screen and (max-width: 768px) {
@@ -361,21 +364,12 @@ aside {
     margin-right: 0;
   }
 
-  /*article {
-    border: none;
-    -moz-box-shadow:    0 3px 5px 3px #ccc;
-    -webkit-box-shadow: 0 3px 5px 3px #ccc;
-    box-shadow:         0 3px 5px 3px #ccc;
-  }*/
+  article div {
+    width: 100%;
+  }
 
   article img {
     display: none;
-  }
-
-  article #mobile_img {
-    display: block;
-    position: relative;
-    width: 100%;
   }
 
   aside{
@@ -568,6 +562,25 @@ footer {
     right:-2px;
   }
 }
+/* GENERIC PAGE ARTICOLO PER MODIFICA*/
+.upperPrint textarea {
+  width: 90%;
+  height: 10em;
+  margin: auto;
+}
+.upperPrint label {
+  margin: 1em;
+}
+
+.printArticolo > textarea {
+  width: 90%;
+  margin:auto;
+  height: 25em;
+}
+
+.printArticolo > label {
+  align-self: center;
+}
 
 /* GENERIC PAGE ARTICOLO*/
 .printArticolo {
@@ -706,6 +719,7 @@ footer {
   width: 100%;
 }
 
+/*  LOGIN */
 #wrapper_login{
   display: flex;
   justify-content: center;
@@ -718,7 +732,6 @@ footer {
   padding: 3em;
   border: 3px solid #3d3d3d;
   text-align: center;
-  /*border-radius: 36px;*/
 }
 
 .box h1{
