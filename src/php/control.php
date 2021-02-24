@@ -1,36 +1,51 @@
 <?php
-require_once "dbConnection.php";
-
+//error_reporting(E_ERROR | E_PARSE);
+require_once('./dBConnection.php');
+require_once('./modello.php');
 $dbAccess = new DBAccess();
-$connessioneRiuscita = $dbAccess->openDBConnection();
+//$connessioneRiuscita = DBAccess::openDBConnection();
+$HOST_DB = "localhost";
+$USARNAME = "root";
+$PASSWORD = "";
+$DATABASE_NAME = "TecWeb";
+$connessioneRiuscita = mysqli_connect($HOST_DB, $USARNAME, $PASSWORD, $DATABASE_NAME);
 
 // bisogna fare la parte in cui viene selezionata la categoria, la query in caso di decisione sulla categoria e' gia' predisposta
 
-function printListaArticoli($category, $dbAccess, $connessioneRiuscita)
+function printListaArticoli($category,$connessioneRiuscita)
 {
-    if (!$connessioneRiuscita)
+    if ($connessioneRiuscita == null) {
+        echo "errore";
         die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina 
+    }
     else {
-        $listaArticoli = $dbAccess->getArticoli($category);
+        echo " sembra ok ";
+        $listaArticoli = Articolo::getArticoli($category, $connessioneRiuscita);
+        $articlesList = '';
         if ($listaArticoli != null) {
-            $definitionListArticoli = '<dl id="articles">';
             foreach ($listaArticoli as $articolo) {
-                $definitionListArticoli .= '<dt>' . $articolo . getTitolo() . '</dt>';
-                $definitionListArticoli .= '<dd>';
-                $definitionListArticoli .= '<img src="images/' . $articolo . getImgPath() . '"alt="" />';
-                $definitionListArticoli .= $articolo . getTesto();
-                $definitionListArticoli .= '</dd>';
+              $autore = Articolo::getAutoreArticolo($articolo->getID(), $connessioneRiuscita);
+                $articlesList .= '<article>';
+                $articlesList .= '<h1>' . $articolo->getTitolo() . '</h1>';
+                $articlesList .= '<img src="images/' . $articolo->getImgPath() . '"alt="'. $articolo->getAltImg() .'" />';
+                $articlesList .= '<p>'. $articolo->getDescrizione(). '</p>';
+                $articlesList .= '<footer>';
+                $articlesList .= '</footer>';
+                $articlesList .= '</article>';
+                /*
+                $articlesList .= '<img src="images/' . $autore->getImgPath() . '"alt="" />';
+                $articlesList .= '<p>'. $autore->getSurname() . ' ' . $autore->getName() . ' ' . $autore->getMail() . '</p>';
+                $articlesList .= '</footer>';
+                $articlesList .= '</article>';*/
             }
-            $definitionListArticoli = $definitionListArticoli . "</dl>";
         } else {
             // messaggio che dice che non ci sono articoli del db
-            $definitionListArticoli = "<div>nessun articolo presente</div>";
+            $articlesList = "<div>nessun articolo presente</div>";
         }
-        $paginaHTML = file_get_contents('index.html');
-        echo str_replace("<listaArticoli />", $definitionListArticoli, $paginaHTML);
+        $paginaHTML = file_get_contents('../articolo.html');
+        echo str_replace("<listaArticoli />", $articlesList, $paginaHTML);
     }
 }
-
 
 function printCategorie($dbAccess, $connessioneRiuscita)
 {
@@ -57,4 +72,6 @@ function printCategorie($dbAccess, $connessioneRiuscita)
 function printUsers(){
     $user = User::getAllUsers();
 }
+
+printListaArticoli(null, $connessioneRiuscita);
 ?>

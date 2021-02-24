@@ -1,0 +1,50 @@
+* {
+    padding: 0em;
+    margin: 0em;
+}
+html {
+    display: block;
+    margin: auto;
+    height: 100%;
+    margin-bottom: 5em; 
+}
+
+body {
+    max-width: 1024px;
+    height: 100%;
+    margin: auto;
+    background-color: #fff;
+    font-family: "Comics San MS", cursive, sans-serif;
+    border: 1px
+}
+article > img {
+    width: 14em;
+    height: 8em;
+    margin-right: 1em;
+    border-radius: 0.7em;
+}
+article > article {
+    margin: 0.7em 1.3em 0.7em 1.3em;
+}
+article {
+    display: flex;
+    flex-direction: row;
+}
+.articolo {
+    border: 1.5px solid black;
+    border-radius: 0.7em;
+    flex-wrap: wrap;    
+}
+h1 {
+    width: 100%;
+}
+@media screen and (max-width: 600px) {
+    article {
+        flex-direction: column;
+    }
+    article>img {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 1em;
+    }
+}

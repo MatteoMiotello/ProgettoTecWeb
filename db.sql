@@ -21,6 +21,7 @@ CREATE TABLE articolo
     upvotes   int(7) NOT NULL,
     downvotes int(7) NOT NULL,
     img_path  varchar(255),
+    alt_img   varchar(255),
     PRIMARY KEY (ID),
     FOREIGN KEY (autore) REFERENCES utente (ID)
 ) ENGINE=InnoDB;
