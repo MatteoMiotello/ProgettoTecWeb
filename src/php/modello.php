@@ -1,16 +1,34 @@
 <?php
-// manca il campo descrizione 
+require_once("./models/User.php");
+class CheckValues {
+    public static function checkForCorrectValues($value,$typeOfCheck,$length) {
+        $correctCharacters = true;
+        switch($typeOfCheck) {
+            case "digit": 
+                $correctCharacters = ctype_digit($value);
+                break;
+            case "alpha":
+                $correctCharacters = ctype_alpha($value);
+                break;
+            case "alnum":
+                $correctCharacters = ctype_alnum($value);
+                break;
+            case "data":
+                $correctCharacters = DateTime::createFromFormat('Y-m-d G:i:s', $value);
+                break;
+        }
+        $correctCharacters = $correctCharacters && (strlen($value) <= $length);
+        return $correctCharacters;
+    }
+
+    public static function createMsgError($value) {
+        return "Error Processing Request, $value Has Incorrect Characters Or Is Too Long";
+    }
+}
 class Articolo
 {
-    /**
-     * @var void
-     */
     private $ID;
 
-
-    /**
-     * @var void
-     */
     private $titolo;
 
     private $descrizione;
@@ -35,23 +53,31 @@ class Articolo
     private $altImg;
 
 
-    function __construct($ID, $titolo, $testo, $descrizione, $autore, $dataPub, $upVotes, $downVotes, $imgPath, $altImg)
+    function __construct($ID, $titolo, $descrizione, $testo, $autore, $dataPub, $upVotes, $downVotes, $imgPath, $altImg)
     {
-        $this->ID = $this->setID($ID);
-        $this->titolo = $this->setTitolo($titolo);
-        $this->testo = $this->setTesto($testo);
-        $this->descrizione = $this->setDescrizione($descrizione);
-        $this->autore = $this->setAutore($autore);
-        $this->dataPub = $this->setDataPub($dataPub);
-        $this->upVotes = $this->setUpVotes($upVotes);
-        $this->downVotes = $this->setDownVotes($downVotes);
-        $this->imgPath = $this->setImgPath($imgPath);
-        $this->altImg = $this->setAltImg($altImg);
+        try {$this->setID($ID);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
+        try {$this->setTitolo($titolo);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
+        try {$this->setTesto($testo);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
+        try {$this->setDescrizione($descrizione);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
+        try {$this->setAutore($autore);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
+        try {$this->setDataPub($dataPub);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
+        try {$this->setUpVotes($upVotes);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
+        try {$this->setDownVotes($downVotes);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
+        try {$this->setImgPath($imgPath);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
+        try {$this->setAltImg($altImg);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
     }
 
     public function setImgPath($value)
     {
-        (ctype_alnum($value) && strlen($value) <= 255) ? $this->imgPath = $value : $this->imgPath = null;
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 255);
+        if($correctCharacters) 
+            $this->imgPath = "../img/Sala_del_Consiglio_dei_Ministri_(Palazzo_Chigi,_Roma).jpeg";//$value;
+        else 
+            throw new Exception(CheckValues::createMsgError("ImgPath"), 1);
+    }
+    public function getImgPath()
+    {
+        return $this->imgPath;
     }
     public function getImgPath()
     {
@@ -65,7 +91,11 @@ class Articolo
 
     public function setID($value)
     {
-        (ctype_digit($value) && strlen($value) <= 6) ? $this->ID = $value : $this->ID = null;
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "digit", 6);
+        if($correctCharacters) 
+            $this->ID = $value;
+        else 
+            throw new Exception(CheckValues::createMsgError("ID"), 1);
     }
 
     public function getTitolo()
@@ -75,7 +105,11 @@ class Articolo
 
     function setTitolo($value)
     {
-        (ctype_alnum($value) && strlen($value) <= 126) ? $this->titolo = $value : $this->titolo = "";
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 126);
+        if($correctCharacters) 
+            $this->titolo = $value;
+        else 
+            throw new Exception(CheckValues::createMsgError("Title"), 1);
     }
 
     function getDescrizione() {
@@ -83,7 +117,11 @@ class Articolo
     }
 
     function setDescrizione($value) {
-        (ctype_alpha($value) && strlen($value) <= 300) ? $this->descrizione = $value : $this->descrizione = "";
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 350);
+        if($correctCharacters) 
+            $this->descrizione = $value;
+        else
+            throw new Exception(CheckValues::createMsgError("Description"), 1);
     }
 
     public function getTesto()
@@ -93,7 +131,11 @@ class Articolo
 
     public function setTesto($value)
     {
-        (ctype_alnum($value) && strlen($value) <= 10000) ? $this->testo = $value : $this->testo = "";
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 10000);
+        if($correctCharacters) 
+            $this->testo = $value;
+        else 
+           throw new Exception(CheckValues::createMsgError("Text"), 1);
     }
 
     public function getAutore()
@@ -103,7 +145,11 @@ class Articolo
 
     public function setAutore($value)
     {
-        (ctype_digit($value) && strlen($value) <= 6) ? $this->autore = $value : $this->autore = null;
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "digit", 6);
+        if($correctCharacters) 
+            $this->autore = $value;
+        else 
+            throw new Exception(CheckValues::createMsgError("Author"), 1);
     }
 
     public function getDataPub()
@@ -113,7 +159,11 @@ class Articolo
 
     public function setDataPub($value)
     {
-        (DateTime::createFromFormat('Y/m/d', $value) !== false) ? $this->dataPub = $value : $this->dataPub = null;
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "data", 19);
+        if($correctCharacters) 
+            $this->dataPub = $value;
+        else
+            throw new Exception(CheckValues::createMsgError("Data Publishment"), 1);
     }
 
     public function getUpVotes()
@@ -123,7 +173,11 @@ class Articolo
 
     public function setUpVotes($value)
     {
-        (ctype_digit($value) && strlen($value) <= 7) ? $this->upVotes = $value : $this->upVotes = null;
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "digit", 7);
+        if($correctCharacters) 
+            $this->upVotes = $value;
+        else 
+            throw new Exception(CheckValues::createMsgError("Up Votes"), 1);
     }
 
     public function getDownVotes()
@@ -133,7 +187,60 @@ class Articolo
 
     public function setDownVotes($value)
     {
-        (ctype_digit($value) && strlen($value) <= 7) ? $this->downVotes = $value : $this->downVotes = null;
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "digit", 7);
+        if($correctCharacters) 
+            $this->downVotes = $value;
+        else 
+            throw new Exception(CheckValues::createMsgError("Down Votes"), 1);
+    }
+
+    public function setAltImg($value) {
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "alpha", 255);
+        if($correctCharacters) 
+            $this->altImg = $value;
+        else 
+            throw new Exception(CheckValues::createMsgError("Alt Image"), 1);
+    }
+
+    public function getAltImg() {
+        return $this->altImg;
+    }
+
+    //
+
+    public static function getArticoli($category, $connection)
+    {
+        if ($category != null)
+            $querySelect = "SELECT * FROM articolo, cat_art
+                            WHERE  cat_art.nome_cat = '$category' AND articolo.ID = cat_art.ID_art
+                            ORDER BY ID ASC";
+        else
+            $querySelect = "SELECT * FROM articolo ORDER BY ID ASC";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0) {
+            return null;
+        }
+        else { // ritorno la lista degli articoli all'interno del db
+            $listaArticoli = array();
+            while ($riga = mysqli_fetch_assoc($queryResult)) {
+                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'],$riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
+                array_push($listaArticoli, $singoloArticolo);
+            }
+        }
+        return $listaArticoli;
+    }
+
+    public static function getArticolo($id_articolo, $connection) {
+        $querySelect = "SELECT * FROM articolo WHERE articolo.ID=$id_articolo";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0){
+            return null;
+        }
+        else { 
+            $riga = mysqli_fetch_assoc($queryResult);
+            $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'],$riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
+            return $singoloArticolo;
+        }
     }
 
     public function setAltImg($value) {
@@ -188,18 +295,20 @@ class Categoria
 {
     private $nome;
     private $descrizione;
-
+    private $img;
     function __construct($nome, $descrizione)
     {
-        $this->nome = $this->setNome($nome);
-        $this->descrizione = $this->setDescrizione($descrizione);
+        try {$this->setNome($nome);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
+        try {$this->setDescrizione($descrizione);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
     }
-
-    //getter
 
     public function setDescrizione($value)
     {
-        (ctype_alnum($value) && strlen($value) <= 255) ? $this->nome = $value : $this->nome = "";
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 255);
+        if($correctCharacters) 
+            $this->descrizione = $value;
+        else 
+            throw new Exception(CheckValues::createMsgError("Descrizione"), 1);
     }
 
     public function getNome()
@@ -207,31 +316,56 @@ class Categoria
         return $this->nome;
     }
 
-    //setter
-
     public function setNome($value)
     {
-        (ctype_alnum($value) && strlen($value) <= 20) ? $this->nome = $value : $this->nome = null;
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "alnum", 20);
+        if($correctCharacters) 
+            $this->nome = $value;
+        else 
+            throw new Exception(CheckValues::createMsgError("Name"), 1);
     }
 
-    public function getCategoria()
+    public function getDescrizione()
     {
         return $this->descrizione;
     }
 
-    //
+    public function getImg() {
+        return $this->img;
+    }
 
-    //
-    public static function getCategorie()
+    public function setImg($value) {
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 255);
+        if($correctCharacters) 
+            $this->img = $value;
+        else 
+            throw new Exception(CheckValues::createMsgError("Img Of Category"), 1);
+    }
+    public static function getCategorie($connection)
     {
         $querySelect = "SELECT * FROM categoria";
-        $queryResult = mysql_query($this->connection, $querySelect);
+        $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
             return null;
         else { // ritorno la lista delle categorie all'interno del db
             $listaCategorie = array();
             while ($riga = mysqli_fetch_assoc($queryResult)) {
-                $singolaCategoria = new Categoria($riga['nome'], $riga['descrizione']);
+                $singolaCategoria = new Categoria($riga['nome'], $riga['descrizione'], $riga['img']);
+                array_push($listaCategorie, $singolaCategoria);
+            }
+        }
+        return $listaCategorie;
+    }
+
+    public static function getCategorieArticolo($id_articolo, $connection) {
+        $querySelect = "SELECT categoria.nome, categoria.descrizione, categoria.img FROM cat_art INNER JOIN categoria ON cat_art.nome_cat = categoria.nome WHERE cat_art.ID_art = $id_articolo";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0)
+            return null;
+        else { // ritorno la lista delle categorie all'interno del db
+            $listaCategorie = array();
+            while ($riga = mysqli_fetch_assoc($queryResult)) {
+                $singolaCategoria = new Categoria($riga['nome'], $riga['descrizione'], $riga['img']);
                 array_push($listaCategorie, $singolaCategoria);
             }
         }

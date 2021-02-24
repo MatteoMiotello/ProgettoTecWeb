@@ -2,7 +2,7 @@
 
 class DBAccess
 {
-    // 4 info per colegarsi al db
+
     private const HOST_DB = "localhost";
     private const USARNAME = "root";
     private const PASSWORD = "";
@@ -12,7 +12,7 @@ class DBAccess
     public static function openDBConnection()
     {
         $access = new DBAccess();
-        $access->setConnection(mysqli_connect(DBAccess::HOST_DB, DBAccess::USARNAME, DBAccess::PASSWORD));
+        $access->setConnection(mysqli_connect(DBAccess::HOST_DB, DBAccess::USARNAME, DBAccess::PASSWORD, DBAccess::DATABASE_NAME));
         mysqli_select_db(DBAccess::$connection, "TecWeb") or die ("no database");
         if (!$access->getConnection())
             return null;
