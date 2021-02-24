@@ -3,56 +3,25 @@
 require_once('./dBConnection.php');
 require_once('./modello.php');
 $dbAccess = new DBAccess();
-<<<<<<< HEAD
-//$connessioneRiuscita = DBAccess::openDBConnection();
-=======
 $connessioneRiuscita = DBAccess::openDBConnection();
 $connessioneRiuscita = DBAccess::getConnection();
->>>>>>> 26bc7cc368fa1740a77c0f850933b04691a5acd9
 $HOST_DB = "localhost";
 $USARNAME = "root";
 $PASSWORD = "";
 $DATABASE_NAME = "TecWeb";
-<<<<<<< HEAD
-$connessioneRiuscita = mysqli_connect($HOST_DB, $USARNAME, $PASSWORD, $DATABASE_NAME);
-=======
->>>>>>> 26bc7cc368fa1740a77c0f850933b04691a5acd9
 
 // todo bisogna fare la parte in cui viene selezionata la categoria, la query in caso di decisione sulla categoria e' gia' predisposta
 
 function printListaArticoli($category,$connessioneRiuscita)
 {
     if ($connessioneRiuscita == null) {
-<<<<<<< HEAD
-        echo "errore";
         die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina 
     }
     else {
-        echo " sembra ok ";
-=======
-        die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina 
-    }
-    else {
->>>>>>> 26bc7cc368fa1740a77c0f850933b04691a5acd9
         $listaArticoli = Articolo::getArticoli($category, $connessioneRiuscita);
         $articlesList = '';
         if ($listaArticoli != null) {
             foreach ($listaArticoli as $articolo) {
-<<<<<<< HEAD
-              $autore = Articolo::getAutoreArticolo($articolo->getID(), $connessioneRiuscita);
-                $articlesList .= '<article>';
-                $articlesList .= '<h1>' . $articolo->getTitolo() . '</h1>';
-                $articlesList .= '<img src="images/' . $articolo->getImgPath() . '"alt="'. $articolo->getAltImg() .'" />';
-                $articlesList .= '<p>'. $articolo->getDescrizione(). '</p>';
-                $articlesList .= '<footer>';
-                $articlesList .= '</footer>';
-                $articlesList .= '</article>';
-                /*
-                $articlesList .= '<img src="images/' . $autore->getImgPath() . '"alt="" />';
-                $articlesList .= '<p>'. $autore->getSurname() . ' ' . $autore->getName() . ' ' . $autore->getMail() . '</p>';
-                $articlesList .= '</footer>';
-                $articlesList .= '</article>';*/
-=======
               $autore = User::getArticleAuthor($articolo->getID(), $connessioneRiuscita);
                 $articlesList .= '<article class="articolo" >';
                 $articlesList .= '<img src="'.$articolo->getImgPath().'" class="fotoArticolo"  alt="'. $articolo->getAltImg() .'" />';
@@ -63,27 +32,18 @@ function printListaArticoli($category,$connessioneRiuscita)
                 $articlesList .=  ' </p>';
                 $articlesList .= '</div>';
                 $articlesList .= '</article>';
->>>>>>> 26bc7cc368fa1740a77c0f850933b04691a5acd9
             }
         } else {
             // messaggio che dice che non ci sono articoli del db
             $articlesList = "<div>nessun articolo presente</div>";
         }
-<<<<<<< HEAD
-        $paginaHTML = file_get_contents('../articolo.html');
-=======
         $paginaHTML = file_get_contents('../html/index.html');
->>>>>>> 26bc7cc368fa1740a77c0f850933b04691a5acd9
         echo str_replace("<listaArticoli />", $articlesList, $paginaHTML);
     }
 }
 
-<<<<<<< HEAD
-function printCategorie($dbAccess, $connessioneRiuscita)
-=======
 // da controllare in base a come hanno gestito la creazione di categorie
 function printCategorie($connessioneRiuscita)
->>>>>>> 26bc7cc368fa1740a77c0f850933b04691a5acd9
 {
     if (!$connessioneRiuscita)
         die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
@@ -196,13 +156,8 @@ function printArticoloPerModifica($connessioneRiuscita, $id_articolo) {
 function printUsers(){
     $user = User::getAllUsers();
 }
-<<<<<<< HEAD
-
-printListaArticoli(null, $connessioneRiuscita);
-=======
 // print di prova
 //printArticoloCompleto($connessioneRiuscita, 156612);
 //printListaArticoli(null, $connessioneRiuscita);
 printArticoloPerModifica($connessioneRiuscita, 156612);
->>>>>>> 26bc7cc368fa1740a77c0f850933b04691a5acd9
 ?>
