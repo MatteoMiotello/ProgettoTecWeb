@@ -71,7 +71,7 @@ class User
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()//: string
     {
         return $this->Name;
     }
@@ -82,7 +82,7 @@ class User
      */
     public function setName( string $Name )
     {
-        if ( !strlen( $Name ) < 30 ){
+        if ( !(strlen( $Name ) < 30 )){
             throw new Exception( 'Name is too long' );
         }
 
@@ -106,7 +106,7 @@ class User
      */
     public function setSurname( $Surname )
     {
-        if ( !strlen( $Surname ) < 30 ){
+        if ( !(strlen( $Surname ) < 30 )){
             throw new Exception( 'Surname is too long' );
         }
 
@@ -130,7 +130,7 @@ class User
      */
     public function setEmail( $Email )
     {
-        if ( !strlen( $Email ) < 50 or !strstr( $Email, '@' )){
+        if ( !(strlen( $Email ) < 50 )or !(strstr( $Email, '@' ))){
             throw new Exception( 'User email is invalid ' );
         }
 
@@ -190,7 +190,7 @@ class User
      */
     public function getImg()
     {
-        return $this->img;
+        return $this->Img;
     }
 
 
@@ -202,8 +202,12 @@ class User
         if ( !strlen( $Img ) < 255 ){
             throw new Exception( 'image path is invalid' );
         }
+<<<<<<< HEAD
 
         $this->img = $Img;
+=======
+        $this->img = '../../img/user_icon.png';//$Img;
+>>>>>>> origin/giosue
         
         return $this;
     }

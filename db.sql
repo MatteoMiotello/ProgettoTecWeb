@@ -14,6 +14,7 @@ CREATE TABLE articolo
 (
     ID        int(6),
     titolo    varchar(126)   NOT NULL,
+    descrizione varchar(300) NOT NULL,
     testo     varchar(10000) NOT NULL,
     autore    int(6) NOT NULL,
     data_pub  datetime,
@@ -29,6 +30,7 @@ CREATE TABLE categoria
 (
     nome        varchar(20),
     descrizione varchar(255),
+    img varchar(255),
     PRIMARY KEY (nome)
 ) ENGINE=InnoDB;
 
