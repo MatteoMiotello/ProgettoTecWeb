@@ -3,8 +3,6 @@
 
 class User
 {
-
-
     private $Id;
 
     
@@ -204,6 +202,7 @@ class User
         if ( !strlen( $Img ) < 255 ){
             throw new Exception( 'image path is invalid' );
         }
+
         $this->img = $Img;
         
         return $this;
@@ -219,7 +218,7 @@ class User
 
         $querySelect = 'SELECT * FROM utente';
 
-        $queryResult = mysql_query( $access->getConnection(), $querySelect );
+        $queryResult = mysqli_query( $access->getConnection(), $querySelect );
 
         if (mysqli_num_rows($queryResult) == 0) {
             return null;
