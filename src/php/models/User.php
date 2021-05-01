@@ -202,12 +202,8 @@ class User
         if ( !strlen( $Img ) < 255 ){
             throw new Exception( 'image path is invalid' );
         }
-<<<<<<< HEAD
 
         $this->img = $Img;
-=======
-        $this->img = '../../img/user_icon.png';//$Img;
->>>>>>> origin/giosue
         
         return $this;
     }

@@ -14,7 +14,7 @@ CREATE TABLE articolo
 (
     ID        int(6),
     titolo    varchar(126)   NOT NULL,
-    descrizione varchar(300) NOT NULL,
+    descrizione varchar(300),
     testo     varchar(10000) NOT NULL,
     autore    int(6) NOT NULL,
     data_pub  datetime,
@@ -108,5 +108,5 @@ VALUES ('123548', 'Covid'),
 
 
 
-INSERT INTO commento (ID_art, autore, testo, data_pub, upvotes, downvotes)
-VALUES ('144688', '218796', 'Wow! Anch''io ne vorrei una', '2020-12-07 15:47:00', '0', '0');
+INSERT INTO commento (ID_art, ID_com, autore, testo, data_pub, upvotes, downvotes)
+VALUES ('144688', '1', '218796', 'Wow! Anch''io ne vorrei una', '2020-12-07 15:47:00', '0', '0');

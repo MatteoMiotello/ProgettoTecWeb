@@ -7,8 +7,8 @@ $connessioneRiuscita = DBAccess::openDBConnection();
 $connessioneRiuscita = DBAccess::getConnection();
 $HOST_DB = "localhost";
 $USARNAME = "root";
-$PASSWORD = "";
-$DATABASE_NAME = "TecWeb";
+$PASSWORD = "password";
+$DATABASE_NAME = "tec_web";
 
 // todo bisogna fare la parte in cui viene selezionata la categoria, la query in caso di decisione sulla categoria e' gia' predisposta
 
