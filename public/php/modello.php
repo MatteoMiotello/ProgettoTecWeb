@@ -79,10 +79,6 @@ class Articolo
     {
         return $this->imgPath;
     }
-    public function getImgPath()
-    {
-        return $this->imgPath;
-    }
 
     public function getID()
     {
@@ -243,17 +239,12 @@ class Articolo
         }
     }
 
-    public function setAltImg($value) {
+    /*public function setAltImg($value) {
         (ctype_alpha($value) && strlen($value) <= 255) ? $this->altImg = $value : $this->altImg = "";
-    }
-
-    public function getAltImg() {
-        return $this->altImg;
-    }
-
+    }*/
     //
 
-    public static function getArticoli($category, $connection)
+  /*  public static function getArticoli($category, $connection)
     {
         if ($category != null)
             $querySelect = "SELECT * FROM articolo, cat_art
@@ -276,7 +267,7 @@ class Articolo
             }
         }
         return $listaArticoli;
-    }
+    }*/
 
     public static function getAutoreArticolo($id_articolo, $connection) {
         $querySelect = "SELECT * FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = '. $id_articolo . '";
