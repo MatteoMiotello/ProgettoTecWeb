@@ -5,8 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d03795d-8ac2-4eef-aa95-41c77b878240" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/README" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/articolo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/articolo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/style1.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/html/admin_page.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/html/article_filter.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/html/articolo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/html/cat.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/html/form_articolo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/html/form_articolo_admin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/html/generic_page_articolo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/html/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/html/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/html/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/html/user_page.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/Sala_del_Consiglio_dei_Ministri_(Palazzo_Chigi,_Roma).jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/Wrinkled-Paper-Texture.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/badge-w3c-valid-html5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/bgimage.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/boy.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/covid_cat.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/css.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/dislike.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/economy_cat.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/gossip_cat.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/like.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/newspaper-texture.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/paperboard-texture_95678-72.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/politics_cat.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/politics_cat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/science_cat.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/spett_cat.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/sport_cat.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/user_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/world_cat.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/php/control.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/php/dBConnection.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/php/models/Comment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/php/models/User.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/php/models/UserLevelType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/php/view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/styles/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/._.DS_Store" beforeDir="false" afterPath="$PROJECT_DIR$/._.DS_Store" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/ProgettoTecWeb.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ProgettoTecWeb.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
@@ -16,9 +56,61 @@
       <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/control.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/control.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/models/UserLevelType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/models/UserLevelType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentazione/Meeting13_11.md" beforeDir="false" afterPath="$PROJECT_DIR$/Documentazione/Meeting13_11.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progettazione_UI/Articolo.png" beforeDir="false" afterPath="$PROJECT_DIR$/Progettazione_UI/Articolo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progettazione_UI/Home.png" beforeDir="false" afterPath="$PROJECT_DIR$/Progettazione_UI/Home.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progettazione_UI/TecWeb.xd" beforeDir="false" afterPath="$PROJECT_DIR$/Progettazione_UI/TecWeb.xd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progettazione_UI/login.png" beforeDir="false" afterPath="$PROJECT_DIR$/Progettazione_UI/login.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progettazione_UI/pag admin.png" beforeDir="false" afterPath="$PROJECT_DIR$/Progettazione_UI/pag admin.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progettazione_UI/pag utente.png" beforeDir="false" afterPath="$PROJECT_DIR$/Progettazione_UI/pag utente.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progettazione_UI/revisione articolo.png" beforeDir="false" afterPath="$PROJECT_DIR$/Progettazione_UI/revisione articolo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progettazione_UI/scrivi articolo.png" beforeDir="false" afterPath="$PROJECT_DIR$/Progettazione_UI/scrivi articolo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/articolo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/style1.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/html/admin_page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/html/article_filter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/html/articolo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/html/cat.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/html/form_articolo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/html/form_articolo_admin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/html/generic_page_articolo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/html/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/html/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/html/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/html/user_page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/Sala_del_Consiglio_dei_Ministri_(Palazzo_Chigi,_Roma).jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/Wrinkled-Paper-Texture.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/badge-w3c-valid-html5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/bgimage.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/boy.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/covid_cat.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/css.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/dislike.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/economy_cat.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/gossip_cat.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/like.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/newspaper-texture.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/paesaggio.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/paperboard-texture_95678-72.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/politics_cat.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/politics_cat.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/science_cat.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/spett_cat.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/sport_cat.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/user_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/world_cat.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/control.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/dBConnection.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/modello.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/models/Comment.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/models/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/models/UserLevelType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/style.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +119,13 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -41,6 +140,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -52,7 +152,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -68,7 +168,9 @@
       <workItem from="1610043062489" duration="28000" />
       <workItem from="1610043092121" duration="629000" />
       <workItem from="1610201457478" duration="1259000" />
-      <workItem from="1619781674473" duration="1885000" />
+      <workItem from="1619781674473" duration="3313000" />
+      <workItem from="1619824631769" duration="1602000" />
+      <workItem from="1619868901681" duration="1588000" />
     </task>
     <servers />
   </component>
