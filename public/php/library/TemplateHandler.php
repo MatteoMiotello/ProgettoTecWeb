@@ -1,5 +1,6 @@
 <?php
 
+require_once 'Access.php';
 /**
  * Class TemplateHandler controlla la composizione della pagina
  */
@@ -21,12 +22,16 @@ class TemplateHandler {
      */
     private $Params;
 
+    /**
+     * @var Access
+     */
+    private $Access;
 
     /**
      * TemplateHandler constructor.
      */
     public function __construct() {
-
+        $this->Access = Access::create();
     }
 
     /**

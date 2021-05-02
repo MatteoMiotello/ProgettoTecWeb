@@ -195,7 +195,9 @@ class User
 
 
     /**
-     * @param mixed $Img
+     * @param $Img
+     * @return $this
+     * @throws Exception
      */
     public function setImg($Img)
     {

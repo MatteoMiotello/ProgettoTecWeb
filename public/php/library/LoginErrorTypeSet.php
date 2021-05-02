@@ -1,5 +1,4 @@
 <?php
-namespace models;
 
 class LoginErrorTypeSet
 {
@@ -9,5 +8,5 @@ class LoginErrorTypeSet
 
     const WRONG_EMAIL = 'Email errata';
 
-    const NOT_EXISTING_USER = 'User non esistente'
+    const NOT_EXISTING_USER = 'User non esistente';
 }
