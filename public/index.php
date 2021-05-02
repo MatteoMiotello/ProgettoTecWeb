@@ -7,4 +7,5 @@ error_reporting(E_ALL);
 
 ( new TemplateHandler() )
     ->setPageTitle( 'Prov' )
+    ->setParam( 'ciao', 'ciao' )
     ->render();
