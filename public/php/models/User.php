@@ -34,21 +34,7 @@ class User
      * @param $Permission
      * @param $Img
      */
-    public function __construct($Id, string $Name, $Surname, $Email, $Password, $Permission, $Img)
-    {
-        try {
-            $this->setId($Id);
-            $this->setName($Name);
-            $this->setSurname($Surname);
-            $this->setEmail($Email);
-            $this->setPassword($Password);
-            $this->setPermission($Permission);
-            $this->setImg($Img);
-
-        } catch (Exception $exception) {
-
-        };
-    }
+    public function __construct() {}
 
     /**
      * @return mixed
@@ -158,6 +144,8 @@ class User
             throw new Exception( 'Password is invalid' );
         }
         $this->Password = $Password;
+
+        return $this;
     }
 
 

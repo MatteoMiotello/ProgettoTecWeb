@@ -26,6 +26,14 @@ class DBAccess
     public function setConnection($connection) {
         DBAccess::$connection = $connection;
     }
+
+    /**
+     * @param $query
+     * @return bool|mysqli_result
+     */
+    public function query( $query ) {
+        return mysqli_query( $this->getConnection(), $query );
+    }
 }
 
 ?>

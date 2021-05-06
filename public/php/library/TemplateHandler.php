@@ -13,7 +13,14 @@ class TemplateHandler {
     /**
      * @var string
      */
-    private $Content;
+    private $Content = '';
+
+    /**
+     * Aggiunge uno script Javascript
+     *
+     * @var string
+     */
+    private $JsFooter = '';
 
     /**
      * Contiene tutti i parametri da sostituire
@@ -119,11 +126,45 @@ class TemplateHandler {
     public function render() {
         $this->setParam( '<common-title/>', $this->PageTitle );
         $this->setParam( '<main-header/>', $this->getHeaderHtml() );
-//        $this->setParam( '<main-content/>', $this->Content );
+        $this->setParam( '<main-content/>', $this->Content );
         $this->setParam( '<main-footer/>', $this->getFooterHtml() );
-
+        $this->setParam( '<main-js/>', $this->JsFooter );
         $html = $this->replaceParams( $this->getCommonHtml() );
         echo $html;
+    }
+
+
+    /**
+     * Setta il contenuto della pagina
+     *
+     * @param string $html
+     */
+    public function setContent( string $html ) {
+        $this->Content = $html;
+    }
+
+
+    /**
+     * Setta uno script js alla fine del file
+     *
+     * @param string $js puó essere codice oppure un path di un file
+     * @param bool $isFile se é un path di un file deve essere true
+     * @return self
+     */
+    public function setJsFooter( string $js, bool $isFile = false ): self {
+        if ( !$isFile ) {
+            $this->JsFooter = "<script> $js </script>";
+            return $this;
+        }
+
+        $filePath = $_SERVER['DOCUMENT_ROOT'] . $js;
+
+        if ( !file_exists( $filePath ) ) {
+            throw new Exception( 'file non esistente' );
+        }
+
+        $this->JsFooter = "<script src='$filePath'></script>";
+        return $this;
     }
 
 
@@ -143,5 +184,4 @@ class TemplateHandler {
 
         return $this;
     }
-
 }
