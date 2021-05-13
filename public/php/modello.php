@@ -1,5 +1,5 @@
 <?php
-require_once("./models/User.php");
+require_once $_SERVER['DOCUMENT_ROOT'].'/php/models/User.php';
 class CheckValues {
     public static function checkForCorrectValues($value,$typeOfCheck,$length) {
         $correctCharacters = true;
@@ -8,7 +8,9 @@ class CheckValues {
                 $correctCharacters = ctype_digit($value);
                 break;
             case "alpha":
-                $correctCharacters = ctype_alpha($value);
+                $copy = $value;
+                $copy = str_replace(' ', '', $copy);
+                $correctCharacters = ctype_alpha($copy);
                 break;
             case "alnum":
                 $correctCharacters = ctype_alnum($value);
@@ -194,8 +196,10 @@ class Articolo
         $correctCharacters = CheckValues::checkForCorrectValues($value, "alpha", 255);
         if($correctCharacters) 
             $this->altImg = $value;
-        else 
+        else {
+            print($value);
             throw new Exception(CheckValues::createMsgError("Alt Image"), 1);
+        }
     }
 
     public function getAltImg() {
@@ -287,10 +291,11 @@ class Categoria
     private $nome;
     private $descrizione;
     private $img;
-    function __construct($nome, $descrizione)
+    function __construct(string $nome, string $descrizione, string $img)
     {
         try {$this->setNome($nome);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
         try {$this->setDescrizione($descrizione);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
+        try {$this->setImg($img);} catch (Exception $e) { echo 'Caught exception: ',  $e->getMessage(), "\n";}
     }
 
     public function setDescrizione($value)
@@ -341,7 +346,7 @@ class Categoria
         else { // ritorno la lista delle categorie all'interno del db
             $listaCategorie = array();
             while ($riga = mysqli_fetch_assoc($queryResult)) {
-                $singolaCategoria = new Categoria($riga['nome'], $riga['descrizione'], $riga['img']);
+                $singolaCategoria = new Categoria(strval($riga['nome']), $riga['descrizione'], $riga['img']);
                 array_push($listaCategorie, $singolaCategoria);
             }
         }
