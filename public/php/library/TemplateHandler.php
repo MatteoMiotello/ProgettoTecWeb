@@ -180,8 +180,8 @@ class TemplateHandler {
         if ( !isset( $this->Params ) ) {
             $this->Params = [];
         }
-        $this->Params[$tag] = $var;
 
+        $this->Params = [$tag => $var]+$this->Params;
         return $this;
     }
 }
