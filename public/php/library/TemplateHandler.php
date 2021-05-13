@@ -35,6 +35,12 @@ class TemplateHandler {
     private $Access;
 
     /**
+     * @var DBConnection
+     */
+
+    private $DBConnection;
+
+    /**
      * TemplateHandler constructor.
      */
     public function __construct() {
