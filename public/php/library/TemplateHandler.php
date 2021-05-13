@@ -54,6 +54,11 @@ class TemplateHandler {
         $this->onInitialize();
     }
 
+    /**
+     * Funzione che si esegue in costruzione
+     *
+     * @throws Exception
+     */
     protected function onInitialize() {
         $this->setParam('<main-header/>', $this->getHeaderHtml());
         $this->setParam('<main-footer/>', $this->getFooterHtml());
@@ -150,6 +155,8 @@ class TemplateHandler {
     }
 
     /**
+     * Renderizza la pagina
+     *
      * @throws Exception
      */
     public function render() {
