@@ -9,9 +9,14 @@ class DBAccess {
         ( new DotEnv( $_SERVER['DOCUMENT_ROOT'] . '/../envirorment/.env' ) )->load();
 
         $access = new DBAccess();
-        $access->setConnection(mysqli_connect(getenv( 'DB_HOST' ), getenv( 'DB_USARNAME' ), getenv( 'DB_PASSWORD' ), getenv( 'DB_NAME' )));
+        $access->setConnection(mysqli_connect(
+            getenv( 'DB_HOST' ),
+            getenv( 'DB_USARNAME' ),
+            getenv( 'DB_PASSWORD' ),
+            getenv( 'DB_NAME' )
+        ));
 
-        mysqli_select_db(DBAccess::$connection, "tecWeb") or die ("no database");
+        mysqli_select_db(DBAccess::$connection, getenv( 'DB_NAME' ) ) or die ("no database");
 
         if (!$access->getConnection()) {
             return null;
