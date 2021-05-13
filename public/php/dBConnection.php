@@ -1,28 +1,36 @@
 <?php
 
-class DBAccess
-{
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/DotEnv.php';
 
-    private const HOST_DB = "localhost";
-    private const USARNAME = "root";
-    private const PASSWORD = "password";
-    private const DATABASE_NAME = "tec_web";
+class DBAccess {
     private static $connection;
 
-    public static function openDBConnection()
-    {
+    public static function openDBConnection() {
+        ( new DotEnv( $_SERVER['DOCUMENT_ROOT'] . '/../envirorment/.env' ) )->load();
+
         $access = new DBAccess();
-        $access->setConnection(mysqli_connect(DBAccess::HOST_DB, DBAccess::USARNAME, DBAccess::PASSWORD, DBAccess::DATABASE_NAME));
-        mysqli_select_db(DBAccess::$connection, "tec_web") or die ("no database");
-        if (!$access->getConnection())
+        $access->setConnection(mysqli_connect(getenv( 'DB_HOST' ), getenv( 'DB_USARNAME' ), getenv( 'DB_PASSWORD' ), getenv( 'DB_NAME' )));
+
+        mysqli_select_db(DBAccess::$connection, "tecWeb") or die ("no database");
+
+        if (!$access->getConnection()) {
             return null;
-        else return $access;
+
+        } else {
+            return $access;
+        }
     }
 
+    /**
+     * @return mixed
+     */
     public function getConnection() {
         return DBAccess::$connection;
     }
 
+    /**
+     * @param $connection
+     */
     public function setConnection($connection) {
         DBAccess::$connection = $connection;
     }
@@ -31,9 +39,7 @@ class DBAccess
      * @param $query
      * @return bool|mysqli_result
      */
-    public function query( $query ) {
-        return mysqli_query( $this->getConnection(), $query );
+    public function query($query) {
+        return mysqli_query($this->getConnection(), $query);
     }
 }
-
-?>

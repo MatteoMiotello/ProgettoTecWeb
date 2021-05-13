@@ -6,17 +6,17 @@ require( './php/library/TemplateHandler.php' );
 require_once('./php/modello.php');
 require_once('./php/dBConnection.php');
 
-$dbAccess = new DBAccess();
-$connessioneRiuscita = DBAccess::openDBConnection();
-$connessioneRiuscita = $connessioneRiuscita->getConnection();
-
 $handler = new TemplateHandler();
 $handler->setPageTitle('Home');
+$dbAccess = new DBAccess();
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/index_nuovo.html';
 
 if ( !file_exists( $filePath ) ) {
     throw new Exception( 'file non esistente' );
 }
+
+$connessioneRiuscita = DBAccess::openDBConnection();
+$connessioneRiuscita = $connessioneRiuscita->getConnection();
 
 $handler->setContent(file_get_contents($filePath));
 
