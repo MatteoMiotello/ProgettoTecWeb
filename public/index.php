@@ -2,22 +2,25 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 require( './php/library/TemplateHandler.php' );
 require_once('./php/modello.php');
 require_once('./php/dBConnection.php');
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Home');
-$dbAccess = new DBAccess();
-$filePath = $_SERVER['DOCUMENT_ROOT'].'/html/index_nuovo.html';
+$handler->setCurrentRoute( 'cat' );
 
-if ( !file_exists( $filePath ) ) {
-    throw new Exception( 'file non esistente' );
-}
+$dbAccess = new DBAccess();
+
 
 $connessioneRiuscita = DBAccess::openDBConnection();
 $connessioneRiuscita = $connessioneRiuscita->getConnection();
 
+$filePath = $_SERVER['DOCUMENT_ROOT'].'/html/index_nuovo.html';
+if ( !file_exists( $filePath ) ) {
+    throw new Exception( 'file non esistente' );
+}
 $handler->setContent(file_get_contents($filePath));
 
 if ($connessioneRiuscita == null)

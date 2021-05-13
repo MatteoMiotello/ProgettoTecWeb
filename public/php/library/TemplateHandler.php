@@ -1,6 +1,7 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/php/library/Access.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/Access.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/HeaderHandler.php';
 /**
  * Class TemplateHandler controlla la composizione della pagina
  */
@@ -41,10 +42,21 @@ class TemplateHandler {
     private $DBConnection;
 
     /**
+     * @var string
+     */
+    private $CurrentRoute;
+
+    /**
      * TemplateHandler constructor.
      */
     public function __construct() {
         $this->Access = Access::create();
+        $this->onInitialize();
+    }
+
+    protected function onInitialize() {
+        $this->setParam('<main-header/>', $this->getHeaderHtml());
+        $this->setParam('<main-footer/>', $this->getFooterHtml());
     }
 
     /**
@@ -54,13 +66,22 @@ class TemplateHandler {
      * @throws Exception
      */
     private function getHeaderHtml() {
-        $footerPath =  $_SERVER['DOCUMENT_ROOT'] . '/php/components/header.html';
+        $footerPath = $_SERVER['DOCUMENT_ROOT'] . '/php/components/header.html';
 
-        if ( !file_exists( $footerPath ) ) {
-            throw new Exception( 'header not found' );
+        if (!file_exists($footerPath)) {
+            throw new Exception('header not found');
         }
 
-        return file_get_contents( $footerPath );
+        return file_get_contents($footerPath);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function setHeaderParams() {
+        $links = HeaderHandler::getHeaderLinks( $this->CurrentRoute );
+
+        $this->setParam('<nav-link/>', $links);
     }
 
 
@@ -71,13 +92,13 @@ class TemplateHandler {
      * @throws Exception
      */
     private function getFooterHtml() {
-        $footerPath =  $_SERVER['DOCUMENT_ROOT'] . '/php/components/footer.html';
+        $footerPath = $_SERVER['DOCUMENT_ROOT'] . '/php/components/footer.html';
 
-        if ( !file_exists( $footerPath ) ) {
-            throw new Exception( 'footer not found' );
+        if (!file_exists($footerPath)) {
+            throw new Exception('footer not found');
         }
 
-        return file_get_contents( $footerPath );
+        return file_get_contents($footerPath);
     }
 
     /**
@@ -89,11 +110,11 @@ class TemplateHandler {
     private function getCommonHtml() {
         $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/common.html';
 
-        if ( !file_exists( $filePath ) ) {
-            throw new Exception( 'file non esistente' );
+        if (!file_exists($filePath)) {
+            throw new Exception('file non esistente');
         }
 
-        return file_get_contents($filePath );
+        return file_get_contents($filePath);
     }
 
 
@@ -103,14 +124,14 @@ class TemplateHandler {
      * @param $html
      * @return string|string[]
      */
-    private function replaceParams( $html ) {
-        foreach ( $this->Params as $key => $param) {
-          
-            if ( !strpos( $html, $key ) ) {
-                throw new Exception( "Parameter $key not found" );
+    private function replaceParams($html) {
+        foreach ($this->Params as $key => $param) {
+
+            if (!strpos($html, $key)) {
+                throw new Exception("Parameter $key not found");
             }
 
-            $html = str_replace( $key, $param, $html );
+            $html = str_replace($key, $param, $html);
         }
 
         return $html;
@@ -121,8 +142,9 @@ class TemplateHandler {
      * @param $title
      * @return $this
      */
-    public function setPageTitle( $title ): self {
+    public function setPageTitle($title): self {
         $this->PageTitle = "<title>$title</title>";
+        $this->setParam('<common-title/>', $this->PageTitle);
 
         return $this;
     }
@@ -131,13 +153,9 @@ class TemplateHandler {
      * @throws Exception
      */
     public function render() {
-        $this->setParam( '<common-title/>', $this->PageTitle );
-        $this->setParam( '<main-header/>', $this->getHeaderHtml() );
-        $this->setParam( '<main-content/>', $this->Content );
-        $this->setParam( '<main-footer/>', $this->getFooterHtml() );
-        $this->setParam( '<main-js/>', $this->JsFooter );
         $html = $this->getCommonHtml();
-        $html = $this->replaceParams( $html );
+        $this->setHeaderParams();
+        $html = $this->replaceParams($html);
         echo $html;
     }
 
@@ -146,8 +164,11 @@ class TemplateHandler {
      *
      * @param string $html
      */
-    public function setContent( string $html ) {
+    public function setContent(string $html) {
         $this->Content = $html;
+        $this->setParam('<main-content/>', $this->Content);
+
+        return $this;
     }
 
 
@@ -158,19 +179,21 @@ class TemplateHandler {
      * @param bool $isFile se é un path di un file deve essere true
      * @return self
      */
-    public function setJsFooter( string $js, bool $isFile = false ): self {
-        if ( !$isFile ) {
+    public function setJsFooter(string $js, bool $isFile = false): self {
+        if (!$isFile) {
             $this->JsFooter = "<script> $js </script>";
             return $this;
         }
 
         $filePath = $_SERVER['DOCUMENT_ROOT'] . $js;
 
-        if ( !file_exists( $filePath ) ) {
-            throw new Exception( 'file non esistente' );
+        if (!file_exists($filePath)) {
+            throw new Exception('file non esistente');
         }
 
         $this->JsFooter = "<script src='$filePath'></script>";
+        $this->setParam('<main-js/>', $this->JsFooter);
+
         return $this;
     }
 
@@ -182,12 +205,24 @@ class TemplateHandler {
      * @param string $var
      * @return $this
      */
-    public function setParam( string $tag, string $var ) {
-        if ( !isset( $this->Params ) ) {
+    public function setParam(string $tag, string $var) {
+        if (!isset($this->Params)) {
             $this->Params = [];
         }
 
-        $this->Params = [$tag => $var]+$this->Params;
+        $this->Params[$tag] = $var;
         return $this;
     }
+
+    /**
+     * Imposta la pagina attuale
+     *
+     * @param $currentRoute
+     * @return $this
+     */
+    public function setCurrentRoute($currentRoute) {
+        $this->CurrentRoute = $currentRoute;
+        return $this;
+    }
+
 }
