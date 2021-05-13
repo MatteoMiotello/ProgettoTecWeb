@@ -3,7 +3,8 @@
 
 abstract class UserLevelType
 {
-    const ADMINISTRATOR = ADM;
+    const ADMINISTRATOR = 'ADM';
 
-    const CONSUMER = USR;
+    const CONSUMER = 'USR';
 }
+?>

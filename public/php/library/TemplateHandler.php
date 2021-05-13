@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Access.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/php/library/Access.php';
 /**
  * Class TemplateHandler controlla la composizione della pagina
  */
@@ -99,6 +99,7 @@ class TemplateHandler {
      */
     private function replaceParams( $html ) {
         foreach ( $this->Params as $key => $param) {
+          
             if ( !strpos( $html, $key ) ) {
                 throw new Exception( "Parameter $key not found" );
             }
@@ -129,10 +130,10 @@ class TemplateHandler {
         $this->setParam( '<main-content/>', $this->Content );
         $this->setParam( '<main-footer/>', $this->getFooterHtml() );
         $this->setParam( '<main-js/>', $this->JsFooter );
-        $html = $this->replaceParams( $this->getCommonHtml() );
+        $html = $this->getCommonHtml();
+        $html = $this->replaceParams( $html );
         echo $html;
     }
-
 
     /**
      * Setta il contenuto della pagina
@@ -179,8 +180,7 @@ class TemplateHandler {
         if ( !isset( $this->Params ) ) {
             $this->Params = [];
         }
-
-        $this->Params[ $tag ] = $var;
+        $this->Params[$tag] = $var;
 
         return $this;
     }

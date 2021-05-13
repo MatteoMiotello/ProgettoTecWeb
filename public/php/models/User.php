@@ -1,5 +1,6 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'].'/php/library/UserLevelType.php';
 
 class User
 {
@@ -163,7 +164,7 @@ class User
      */
     public function setPermission( $Permission )
     {
-        if ( !$Permission == UserLevelType::Administrator or !$Permission == UserLevelType::Consumer ){
+        if ( !$Permission == UserLevelType::ADMINISTRATOR or !$Permission == UserLevelType::CONSUMER ){
             throw new Exception( 'Permission is not a UserLevelType' );
         }
 
@@ -228,7 +229,7 @@ class User
      * @param $id
      * @return User|null
      */
-    public static function getUserById( $id ): ?User  {$access = DBAccess::openDBConnection();}
+    public static function getUserById( $id )  {$access = DBAccess::openDBConnection();}
 
     public static function getArticleAuthor($id_articolo, $connection) {
         $querySelect = "SELECT * FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = $id_articolo ";
@@ -266,3 +267,4 @@ class User
         //todo
     }
 }
+?>

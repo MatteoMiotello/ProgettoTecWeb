@@ -1,5 +1,5 @@
 <?php
-require_once("./models/User.php");
+require_once $_SERVER['DOCUMENT_ROOT'].'/php/models/User.php';
 class CheckValues {
     public static function checkForCorrectValues($value,$typeOfCheck,$length) {
         $correctCharacters = true;
