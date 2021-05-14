@@ -12,11 +12,11 @@ class HeaderHandler {
     public static function getHeaderLinks( $currentLink ) {
         $params = [
             'home' => [
-                '<li><a href="index.html">Home</a></li>',
+                '<li><a href="/index.php">Home</a></li>',
                 'Home',
             ],
             'cat' => [
-                '<li><a href="cat.html">Categorie</a></li>',
+                '<li><a href="/pages/categorie.php">Categorie</a></li>',
                 'Categorie',
             ],
             'form_articolo' => [
@@ -24,21 +24,17 @@ class HeaderHandler {
                 'Scrivi il tuo articolo',
             ],
             'login' => [
-                '<li><a href="login.html">Accedi</a></li>',
+                '<li><a href="/pages/login.php">Accedi</a></li>',
                 'Accedi',
             ],
         ];
 
-        echo $currentLink;
-
-        if (!key_exists($currentLink, $params)) {
-            throw new Exception('La pagina non esiste');
+        if (key_exists($currentLink, $params)) {
+            $params[$currentLink] = [
+                '<li id="currentItem"><span lang="en" id="currentLink">' . $params[$currentLink][1] . '</span></li>',
+                $params[$currentLink][1],
+            ];
         }
-
-        $params[$currentLink] = [
-            '<li id="currentItem"><span lang="en" id="currentLink">' . $params[$currentLink][1] . '</span></li>',
-            $params[$currentLink][1],
-        ];
 
         $links = '';
 

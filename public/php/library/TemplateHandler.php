@@ -36,12 +36,6 @@ class TemplateHandler {
     private $Access;
 
     /**
-     * @var DBConnection
-     */
-
-    private $DBConnection;
-
-    /**
      * @var string
      */
     private $CurrentRoute;
