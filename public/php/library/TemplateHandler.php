@@ -2,6 +2,7 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/Access.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/HeaderHandler.php';
+
 /**
  * Class TemplateHandler controlla la composizione della pagina
  */
