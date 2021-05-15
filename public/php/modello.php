@@ -208,7 +208,7 @@ class Articolo
 
     //
 
-    public static function getArticoli($category, $connection)
+    public static function getArticoli($category, $connection, $limit)
     {
         if ($category != null)
             $querySelect = "SELECT * FROM articolo, cat_art
@@ -226,6 +226,8 @@ class Articolo
                 $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'],$riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
                 array_push($listaArticoli, $singoloArticolo);
             }
+            if($limit!=null && count($listaArticoli) >= $limit)
+                $listaArticoli = array_slice($listaArticoli, -$limit, $limit, true);
         }
         return $listaArticoli;
     }

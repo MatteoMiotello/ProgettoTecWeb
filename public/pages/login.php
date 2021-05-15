@@ -8,3 +8,4 @@ $handler->setPageTitle( 'Login' );
 $content = file_get_contents( '../html/login.html' );
 $handler->setContent( $content );
 $handler->render();
+?>
