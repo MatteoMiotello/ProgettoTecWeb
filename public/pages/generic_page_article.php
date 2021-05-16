@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php' ;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/ArticleBuilder.php';
 
 $dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
@@ -29,8 +30,23 @@ $printArticolo = '';
 $articolo = Articolo::getArticolo($id_articolo, $connessioneRiuscita);
 $autore = User::getArticleAuthor($articolo->getID(), $connessioneRiuscita);
 $listaCategorie = Categoria::getCategorieArticolo($articolo->getID(), $connessioneRiuscita);
+
 if($articolo != null) {
-    $printArticolo .= '<div class="printArticolo">';
+    $articolo = (new ArticleBuilder)
+    ->setImgArticlePath($articolo->getImgPath())
+    ->setImgArticleAlt($articolo->getAltImg())
+    ->setTitle($articolo->getTitolo())
+    ->setContent($articolo->getTesto())
+    ->setImgPathAuthor($autore->getImg())
+    ->setNameAuthor($autore->getName())
+    ->setEmailAuthor($autore->getEmail());
+    if($listaCategorie) {
+        foreach($listaCategorie as $categoria) {
+            $articolo->addCategory($categoria->getNome());
+        }
+    } 
+    $printArticolo .= $articolo->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/article.phtml'));
+ /*   $printArticolo .= '<div class="printArticolo">';
     $printArticolo .= '<div class="upperPrint">';
     $printArticolo .= '<img src="'.$articolo->getImgPath().'" alt="'.$articolo->getAltImg().'">';
     $printArticolo .= '<h1>'.$articolo->getTitolo().'</h1>';
@@ -54,7 +70,7 @@ if($articolo != null) {
     }   
     else $printArticolo .= '<p>Categoria non presente</p>';
     $printArticolo .= '</div>';
-    $printArticolo .= '</div>';
+    $printArticolo .= '</div>';*/
 }
 else {
     $printArticolo .= "<div>Nessun articolo presente</div>";

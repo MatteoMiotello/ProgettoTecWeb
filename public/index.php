@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] .  '/php/library/TemplateHandler.php' ;
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/dBConnection.php';
-
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/PreviewArticleBuilder.php';
 $dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
 $connessioneRiuscita = $connessioneRiuscita->getConnection();
@@ -29,18 +29,16 @@ else {
     $articlesList = '';
     if ($rawArticles != null) {
         foreach ($rawArticles as $articolo) {
-          $autore = User::getArticleAuthor($articolo->getID(), $connessioneRiuscita);
-            $articlesList .= '<article class="articolo" >';
-            $articlesList .= '<img src="'.$articolo->getImgPath().'" class="fotoArticolo"  alt="'. $articolo->getAltImg() .'" />';
-            $articlesList .= '<div>';
-            $articlesList .= '<h3>' . $articolo->getTitolo() . '</h1>';
-            $articlesList .= '<p>' . $articolo->getDescrizione();
-            $articlesList .= '<a href="/pages/generic_page_article.php?art_id='.$articolo->getId().'" >Continua a leggere</a>';
-            $articlesList .=  ' </p>';
-            $articlesList .= '</div>';
-            $articlesList .= '</article>';
+            $articlesList .= (new PreviewArticleBuilder)
+            ->setID($articolo->getId())
+            ->setTitle($articolo->getTitolo())
+            ->setDescription($articolo->getDescrizione())
+            ->setImgPath($articolo->getImgPath())
+            ->setImgAlt($articolo->getAltImg())
+            ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/articlePreview.phtml'))
+            ;
         }
-    } else {
+        } else {
         // messaggio che dice che non ci sono articoli del db
         $articlesList = "<div>nessun articolo presente</div>";
     }
@@ -62,5 +60,4 @@ else {
 $handler->setParam("<listaArticoli />",$articlesList);
 $handler->setParam("<news />", $covidNewsList);
 
-$handler->render(); 
-?>
+$handler->render();

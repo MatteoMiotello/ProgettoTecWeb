@@ -1,9 +1,18 @@
-<article class="articolo">
-    <img src="{{ path }}" class="fotoArticolo" alt=". $articolo->getAltImg() ."/>
-    <div>
-        <h1> .{{ titolo }}. </h1>
-        <p> {{ descrizione }}
-            <a href="generic_page_articolo.html/?art_id={id}">Continua a leggere</a>
-        </p>
+<div class="printArticolo">
+    <div class="upperPrint">
+        <img src="{{articleImgPath}}" alt="{{altImg}}">
+        <h1>{{title}}</h1>
     </div>
-</article>
+    <p>{{articleContent}}</p>
+</div>
+<div class="info_art">
+    <div id="author">
+        <img src="{{authorImg}}">
+        <p>{{authorName}}</p>
+        <p>{{authorEmail}}</p>
+    </div>
+    <div id="get_cat">
+        <!-- tag che viene sostituito dalle categorie a cui appartiene l'articolo nb=> check se sono settate altrimenti messaggio che non ci sono cateegorie-->
+        <categories />
+    </div>
+</div>

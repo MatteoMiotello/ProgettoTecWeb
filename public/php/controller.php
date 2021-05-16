@@ -12,23 +12,22 @@ $DATABASE_NAME = "tec_web";
 
 // todo bisogna fare la parte in cui viene selezionata la categoria, la query in caso di decisione sulla categoria e' gia' predisposta
 
-function printListaArticoli($category,$connessioneRiuscita)
+function printListaArticoli($limit, $connessioneRiuscita)
 {
-    if ($connessioneRiuscita == null) {
-        die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina 
-    }
+    if ($connessioneRiuscita == null)
+    die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina 
     else {
-        $listaArticoli = Articolo::getArticoli($category, $connessioneRiuscita);
+        $rawArticles = Articolo::getArticoli(null, $connessioneRiuscita, null);
         $articlesList = '';
-        if ($listaArticoli != null) {
-            foreach ($listaArticoli as $articolo) {
-              $autore = User::getArticleAuthor($articolo->getID(), $connessioneRiuscita);
+        if ($rawArticles != null) {
+            foreach ($rawArticles as $articolo) {
+                $autore = User::getArticleAuthor($articolo->getID(), $connessioneRiuscita);
                 $articlesList .= '<article class="articolo" >';
-                $articlesList .= '<img src="'.$articolo->getImgPath().'" class="fotoArticolo"  alt="'. $articolo->getAltImg() .'" />';
+                $articlesList .= '<img src="' . $articolo->getImgPath() . '" class="fotoArticolo"  alt="' . $articolo->getAltImg() . '" />';
                 $articlesList .= '<div>';
                 $articlesList .= '<h3>' . $articolo->getTitolo() . '</h1>';
                 $articlesList .= '<p>' . $articolo->getDescrizione();
-                $articlesList .= ' <a href="generic_page_articolo.html/?art_id={id}">Continua a leggere</a>';
+                $articlesList .= '<a href="/pages/generic_page_article.php?art_id=' . $articolo->getId() . '" >Continua a leggere</a>';
                 $articlesList .=  ' </p>';
                 $articlesList .= '</div>';
                 $articlesList .= '</article>';
@@ -37,8 +36,22 @@ function printListaArticoli($category,$connessioneRiuscita)
             // messaggio che dice che non ci sono articoli del db
             $articlesList = "<div>nessun articolo presente</div>";
         }
-        $paginaHTML = file_get_contents('../html/index.html');
-        echo str_replace("<listaArticoli />", $articlesList, $paginaHTML);
+    }
+    return $articlesList;
+}
+
+function printSideNews(string $category) {
+    $covidNews = Articolo::getArticoli($category, $connessioneRiuscita, 5);
+    $covidNewsList = '';
+    if ($covidNews != null) {
+        foreach ($covidNews as $articolo) {
+            $covidNewsList .= '<li>';
+            $covidNewsList .= '<a href="/pages/generic_page_article.php?art_id='.$articolo->getId().'" >'.$articolo->getTitolo().'</a>';
+            $covidNewsList .= '</li>';
+        }
+    } else {
+        // messaggio che dice che non ci sono articoli del db
+        $covidNewsList = "<div>nessuna news covid presente</div>";
     }
 }
 
