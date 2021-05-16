@@ -46,31 +46,6 @@ if($articolo != null) {
         }
     } 
     $printArticolo .= $articolo->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/article.phtml'));
- /*   $printArticolo .= '<div class="printArticolo">';
-    $printArticolo .= '<div class="upperPrint">';
-    $printArticolo .= '<img src="'.$articolo->getImgPath().'" alt="'.$articolo->getAltImg().'">';
-    $printArticolo .= '<h1>'.$articolo->getTitolo().'</h1>';
-    $printArticolo .= '</div>';
-    $printArticolo .= '<p>'.$articolo->getTesto().'</p>';
-    $printArticolo .= '</div>';
-    $printArticolo .=  '<div class="info_art">';
-    $printArticolo .= '<div id="author">';
-    if($autore) {
-        $printArticolo .= '<img src="'.$autore->getImg().'">';
-        $printArticolo .= '<p>'.$autore->getName().'</p>';
-        $printArticolo .= '<p>'.$autore->getEmail().'</p>';
-    }
-    else $printArticolo .= '<p>Autore non presente</p>';
-    $printArticolo .= '</div>'; 
-    $printArticolo .= '<div id="get_cat">';
-    if($listaCategorie) {
-        foreach($listaCategorie as $categoria) {
-            $printArticolo .= '<p>'.$categoria->getNome().'</p>';
-        }
-    }   
-    else $printArticolo .= '<p>Categoria non presente</p>';
-    $printArticolo .= '</div>';
-    $printArticolo .= '</div>';*/
 }
 else {
     $printArticolo .= "<div>Nessun articolo presente</div>";
