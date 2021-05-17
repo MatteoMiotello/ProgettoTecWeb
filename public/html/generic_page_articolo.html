@@ -55,26 +55,32 @@
 
     <articolo /> <!-- tag fittizio per l'inserimento dell'articolo da visualizzare per intero -->
 
-    <div class="commentArea">
+    <div class="commentArea vFlex">
+      <section id="votes">
+        <i class="fa fa-arrow-up" tabindex="0"></i>
+        <i class="fa fa-arrow-down" tabindex="0"></i>
+        <span id="vote_num">74</span>
+      </section>
+      <hr>
       <h2>Commenti</h2>
-      <div id="print_comm">
-        <img src="../img/user_icon.png">
+      <section class="hFlex" id="print_comm">
+      <img src="https://toppng.com/uploads/preview/donkey-from-shrek-smiling-11549860938myfrdpllko.png" alt="" class="user_img img_sm" id="user_desk">
         <p>Wow che figata sto articolo!</p>
-      </div>
-      <div id="print_comm">
-        <img src="../img/user_icon.png">
+      </section>
+      <section class="hFlex" id="print_comm">
+      <img src="https://images-na.ssl-images-amazon.com/images/I/51CP3A15JKL._AC_.jpg" alt="" class="user_img img_sm" id="user_desk">
         <p>Il covid ha rotto le palle</p>
-      </div>
-      <div id="print_comm">
-        <img src="../img/user_icon.png">
-        <p>Tyler Herro < Jayson Tatum</p>
-      </div>
-      <form action="index.html" method="post">
-        <img src="../img/user_icon.png">
-        <div class="comm_container">
-          <textarea name="comment" id="insert_comment" maxlength="200" placeholder="Inserisci un commento..." required></textarea>
-          <button type="submit" name="pub_comm">Pubblica</button>
-        </div>
+      </section>
+      <section class="hFlex" id="print_comm">
+        <img src="https://i.pinimg.com/600x315/83/22/28/83222899a6194563500c0de384edbb84.jpg" alt="" class="user_img img_sm" id="user_desk">
+        <p>Tyler Herro &lt; Jayson Tatum</p>
+      </section>
+      <form class="hFlex" action="index.html" id="post_comm" method="post">
+        <img src="https://www.cineon.it/wp-content/uploads/2020/08/Shrek.jpg" alt="" class="user_img img_sm" id="user_desk">
+        <section class="comm_container vFlex">
+          <textarea name="comment" id="insert_comment" maxlength="200" placeholder="Inserisci un commento..." tabindex="0" required></textarea>
+          <button type="submit" name="pub_comm" tabindex="0">Pubblica</button>
+        </section>
       </form>
     </div>
 
