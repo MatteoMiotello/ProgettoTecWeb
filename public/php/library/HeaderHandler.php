@@ -12,28 +12,31 @@ class HeaderHandler {
     public static function getHeaderLinks( $currentLink ) {
         $params = [
             'home' => [
-                '<li><a href="/index.php">Home</a></li>',
+                '<li><a href="/index.php" tabindex="0" lang="en">Home</a></li>',
                 'Home',
             ],
             'cat' => [
-                '<li><a href="/pages/categorie.php">Categorie</a></li>',
+                '<li><a href="/pages/categorie.php" tabindex="0">Categorie</a></li>',
                 'Categorie',
             ],
             'form_articolo' => [
-                '<li><a href="form_articolo.html">Scrivi il tuo articolo</a></li>',
+                '<li><a href="form_articolo.html" tabindex="0">Scrivi il tuo articolo</a></li>',
                 'Scrivi il tuo articolo',
-            ],
-            'login' => [
-                '<li><a href="/pages/login.php">Accedi</a></li>',
-                'Accedi',
             ],
         ];
 
         if (key_exists($currentLink, $params)) {
+          if ($currentLink=='home'){
             $params[$currentLink] = [
-                '<li id="currentItem"><span lang="en" id="currentLink">' . $params[$currentLink][1] . '</span></li>',
+                '<li class="currentItem"><div class="currentLink" lang="en">' . $params[$currentLink][1] . '</div></li>',
+                $params[$currentLink][1],
+          }
+          else {
+            $params[$currentLink] = [
+                '<li class="currentItem"><div class="currentLink">' . $params[$currentLink][1] . '</div></li>',
                 $params[$currentLink][1],
             ];
+          }
         }
 
         $links = '';
@@ -43,5 +46,7 @@ class HeaderHandler {
         }
 
         return $links;
-    } 
+    }
+
+    /* funzione div utente */
 }
