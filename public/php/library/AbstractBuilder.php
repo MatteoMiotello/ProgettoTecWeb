@@ -1,5 +1,5 @@
 <?php
-abstract class AbstractArticleBuilder {
+abstract class AbstractBuilder {
     /**
      * Contiene tutti i parametri da sostituire
      *

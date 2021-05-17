@@ -7,6 +7,8 @@ require $_SERVER['DOCUMENT_ROOT'] .  '/php/library/TemplateHandler.php' ;
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/PreviewArticleBuilder.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/NewsArticleBuilder.php';
+
 $dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
 $connessioneRiuscita = $connessioneRiuscita->getConnection();
@@ -47,9 +49,11 @@ else {
     $covidNewsList = '';
     if ($covidNews != null) {
         foreach ($covidNews as $articolo) {
-            $covidNewsList .= '<li>';
-            $covidNewsList .= '<a href="/pages/generic_page_article.php?art_id='.$articolo->getId().'" >'.$articolo->getTitolo().'</a>';
-            $covidNewsList .= '</li>';
+            $covidNewsList .= (new NewsArticleBuilder)
+            ->setTitle($articolo->getTitolo())
+            ->setID($articolo->getId())
+            ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/articleNews.phtml'))
+            ;
         }
     } else {
         // messaggio che dice che non ci sono articoli del db

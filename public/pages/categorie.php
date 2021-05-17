@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php' ;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/CategoryBuilder.php';
 
 $dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
@@ -23,16 +24,15 @@ if (!$connessioneRiuscita)
 else {
 $categorie = Categoria::getCategorie($connessioneRiuscita);
 if ($categorie != null) {
-    $listaCategoria = "<div class="."cat_page".">";
+    $listaCategoria = '';
     foreach ($categorie as $singolaCategoria) {
-        $listaCategoria .= '<a href="article_filter.html/?cat_name='. $singolaCategoria->getNome() . '">';
-        $listaCategoria .= '<figure>';
-        $listaCategoria .= '<img src="'.$singolaCategoria->getImg().'" alt="'.$singolaCategoria->getDescrizione().'">';
-        $listaCategoria .= '<figcaption>'. $singolaCategoria->getNome() . '</figcaption>';
-        $listaCategoria .= '</figure>';
-        $listaCategoria .= '</a>';
+        $listaCategoria .= (new CategoryBuilder)
+        ->setName($singolaCategoria->getNome())
+        ->setDescription($singolaCategoria->getDescrizione())
+        ->setImgCategoryPath($singolaCategoria->getImg())
+        ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/categories.phtml'))
+        ;
     }
-    $listaCategoria = $listaCategoria . "</div>";
 } else {
     // messaggio che dice che non ci sono categorie del db
     $listaCategoria = "<div>nessuna categoria presente</div>";
