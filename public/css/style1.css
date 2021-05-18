@@ -277,19 +277,16 @@ h1 {
   font-size: 1.3em;
 }
 
-.home_content .articoli {
-  margin-right: 1em;
-  width: 1220px;
-}
-
 article {
   background-color: white;
   -moz-box-shadow:    0 3px 5px 3px #ccc;
   -webkit-box-shadow: 0 3px 5px 3px #ccc;
   box-shadow:         0 3px 5px 3px #ccc;
   padding: 1em;
-  flex-wrap: wrap;
-  margin-bottom: 2em;
+}
+
+article+article {
+  margin-top: 1em;
 }
 
 article div {
@@ -298,9 +295,7 @@ article div {
 
 article > img {
   width: 30%;
-  margin: auto;
-  padding-right: 5%;
-  padding-bottom: 1em;
+  margin: auto 1em auto 0;
 }
 
 article a {
@@ -318,13 +313,18 @@ aside {
   -webkit-box-shadow: 0 3px 5px 3px #ccc;
   box-shadow:         0 3px 5px 3px #ccc;
   padding: 1em;
-  width: 440px;
+  width: 70%;
+  margin-left: 1em;
   height: fit-content;
 }
 
 aside ul li {
   display: inline-block;
-  margin: 0.5em 0;
+  padding: 1em 0;
+}
+
+aside ul li+li {
+  border-top: solid 1px lightgrey;
 }
 
 footer {
@@ -860,7 +860,7 @@ legend {
   }
 
   #wrapper{
-    padding: 0.5em;
+    padding: 1em;
   }
 
   .mob_buttons_wrapper{

@@ -1,41 +1,22 @@
 <!DOCTYPE html>
 <html lang="it" dir="ltr" id="short_html">
 <head>
-    <meta http-equiv="content-type" content="text/html" ; charset="utf-8">
+    <meta charset="utf-8">
     <common-title/>
 
     <meta name="author" content="MPAC Group">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords"
-          content="HTML, CSS, JavaScript, MySQL, notizie, covid, sport, economia, cultura, scienze, spettacolo, politica">
+    <meta name="keywords" content="HTML, CSS, JavaScript, MySQL, notizie, covid, sport, economia, cultura, scienze, spettacolo, politica">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../css/style1.css" media="screen">
+    <link rel="stylesheet" href="../css/print.css" media="print">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="../js/util.js"></script>
 </head>
-<body>
+<body class="vFlex">
 <main-header/>
 <main-content/>
 <main-footer/>
 </body>
-<main-js/>
-
-<script>
-    function myFunction() {
-        var x = document.getElementById("hd");
-        if (x.className === "mob_nav") {
-            x.className += " responsive";
-        } else {
-            x.className = "mob_nav";
-        }
-    }
-
-    function searchFunction() {
-        var x = document.getElementById("search_mobile");
-        if (x.className === "mob_srch") {
-            x.className += " resp_srch";
-        } else {
-            x.className = "mob_srch";
-        }
-    }
-</script>
 </html>
