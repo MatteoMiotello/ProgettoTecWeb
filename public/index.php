@@ -25,7 +25,7 @@ $handler->setContent(file_get_contents($filePath));
 $handler->setCurrentRoute('home');
 
 if ($connessioneRiuscita == null)
-    die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina 
+    die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
     $rawArticles = Articolo::getArticoli(null, $connessioneRiuscita, null);
     $articlesList = '';
