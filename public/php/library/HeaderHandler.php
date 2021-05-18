@@ -20,7 +20,7 @@ class HeaderHandler {
                 'Categorie',
             ],
             'form_articolo' => [
-                '<li><a href="form_articolo.html" tabindex="0"><div>Scrivi il tuo articolo</div></a></li>',
+                '<li><a href="/pages/form_article.php" tabindex="0"><div>Scrivi il tuo articolo</div></a></li>',
                 'Scrivi il tuo articolo',
             ],
         ];
