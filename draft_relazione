@@ -1,0 +1,44 @@
+1 Introduzione 
+
+1.1 Abstract
+
+Il progetto che abbiamo scelto riguarda lo sviluppo del sito web di una testata giornalistica che mira ad espandere il proprio pubblico di lettori tramite
+il passaggio al digitale delle notizie già offerte dalla versione cartacea.
+Il sito ha il principale scopo di permettere ai lettori di visionare gli articoli ma non solo, è infatti presente anche una funzione di sottomissione di articoli
+tramite la quale è concessa una forma di input al visitatore.
+L'utente può inviare, tramite il form, un articolo e un admin potrà approvarlo, modificarlo o rifiutarlo tramite l'apposita dashboard.
+Inoltre ogni articolo offre una funzionalità di mi piace, non mi piace e di commmento attraverso il quale l'utente può comunicare la propria opinione sul 
+contenuto pubblicato.
+
+
+1.2 Analisi utenza
+
+L'utenza principale saranno persone giovani dai 18 ai 35 anni in quanto target di questa campagna di digitalizzazione poichè la maggior parte del pubblico adulto 
+è già fidelizzato alla versione su carta stampata del prodotto.
+Nonostante il pubblico di riferimento sia relativamente giovane è necessario mantenere un linguaggio adatto e professionale che si addica ad una testata 
+giornalistica.
+
+
+
+2 Sviluppo
+
+2.1 Progettazione
+
+In una prima fase è stato tenuto un brainstorming dove sono state discusse: idee sull'oggetto del sito, funzionalità da implementare, 
+esperienze dei membri del gruppo con varie tecnologie web, preferenze sul layout e stile da seguire e la suddivisione dei compiti.
+Successivamente abbiamo proseguito divisi in gruppi da 2 per comodità di comunicazione: 2 persone per il front-end e 2 persone per il back-end,
+sempre tenendo periodici incontri in via telematica per aggiornamento dei progressi e critiche e migliorie al progetto.
+Finito lo sviluppo delle due parti è stata svolta infine una breve serie di incontri per apportare le ultime piccole modifiche e per
+fare un check del raggiungimento degli obbiettivi che ci eravamo posti in partenza.
+
+2.2 Design
+
+É stato deciso di adottare come standard HTML 5 per la semplicità si utilizzo ed abbiamo creato un layout estremamente intuitivo poichè si conforma alla 
+maggior parte dei moderni siti web rendendo così non necessario il compito di spiegare all'utente come navigare all'interno delle pagine.
+La gerarchia creata è stat ideata seguendo il principio che una buona gerarchia debba essere abbastanza ampia e poco profonda, in modo da rendere 
+disponibile ogni contenuto con soli pochi click.
+Inoltre le pagine di stile sono state scritte in CSS puro per rendere il codice solido ed efficiente e sono state utilizzate media queries per
+rendere il contenuto del sito fruibile per gli utenti che vi accedono attraverso la maggior parte dei dispositivi e risoluzioni.
+
+2.3 HTML e CSS
+
