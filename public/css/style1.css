@@ -769,7 +769,6 @@ legend {
   padding: 20px;
 }
 
-/* form specific formatting */
 .form-group {
   margin-top: 2em;
 }
@@ -804,7 +803,31 @@ legend {
 }
 
 .reg_form{
-  padding: 1em;
+  justify-content:center;
+}
+
+.reg_form > fieldset {
+  margin-right: 4em; 
+}
+
+.reg_form input[type=text], .reg_form input[type=password] {
+  width: 30em;
+  padding: 0.5em;
+}
+
+.reg_form fieldset+fieldset {
+  margin-top: 1em;
+}
+
+.reg_form fieldset input+label{
+  margin-top: 1em;
+}
+
+.confirm {
+  margin-top: 1em;
+}
+#reg_btn{
+  height: 3em;
 }
 
 .img_lg{
