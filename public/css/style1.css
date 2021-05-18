@@ -322,6 +322,11 @@ aside {
   height: fit-content;
 }
 
+aside ul li {
+  display: inline-block;
+  margin: 0.5em 0;
+}
+
 footer {
   background-color: #0d719d;
   justify-content: space-between;
