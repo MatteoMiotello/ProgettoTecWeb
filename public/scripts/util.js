@@ -18,7 +18,45 @@ function searchToggle() {
   }
 }
 
-// funzioni estetiche, se JS non funziona gli elementi interessati funzionano comunque come si deve
+//validazione form
+String.prototype.trim = function() {
+  return this.replace(/^\s+|\s+$/g, "");
+}
+
+function testArea(x){
+  if(x.value.trim()==''){
+    if(x === document.getElementById("titolo_art"))
+      x.setCustomValidity("Inserisci un titolo");
+    else {
+      document.getElementById("titolo_art").setCustomValidity("");
+      if(x === document.getElementById("descr_art"))
+        x.setCustomValidity("Inserisci una descrizione");
+      else {
+        document.getElementById("descr_art").setCustomValidity("");
+        x.setCustomValidity("Inserisci il testo");
+      }
+    }
+    return false;
+  }
+  else{
+    document.getElementById("testo_art").setCustomValidity("");
+    return true;
+  }
+}
+
+/* ---- Scrivi il tuo articolo ---- */
+function validateForm(){
+  var titolo = document.getElementById("titolo_art");
+  var desc = document.getElementById("descr_art");
+  var testo = document.getElementById("testo_art");
+  if(!testArea(titolo) || !testArea(desc) || !testArea(testo)){
+    return false;
+  }
+  else return true;
+}
+
+// funzioni estetiche, con JS disattivato nessuna funzionalità viene a mancare
+/* ---- nasconde il pulsante "torna su" e lo mostra solo dopo aver fatto scroll verticale ---- */
 window.onload = function() {hideBtn()};
 window.onscroll = function() {scrollFunction()};
 
@@ -35,7 +73,7 @@ function hideBtn(){
   document.getElementById("myBtn").style.display = "none";
 }
 
-function topFunction() {
+/*function topFunction() {
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-}
+}*/

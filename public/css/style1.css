@@ -802,22 +802,48 @@ legend {
   min-width: 100px
 }
 
-.reg_form{
-  justify-content:center;
+.reg_form {
+  margin:auto;
+  border: solid 2px;
+  padding: 2em;
+  width: 70%;
 }
 
-.reg_form > fieldset {
-  margin-right: 4em; 
+.img_name {
+  display: flex;
 }
 
-.reg_form input[type=text], .reg_form input[type=password] {
-  width: 30em;
+.img_name fieldset {
+  width: 100%;
+}
+
+.pro_pic {
+  justify-content: center;
+}
+
+.reg_form div{
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.img_name fieldset+fieldset {
+  margin-left: 1em;
+}
+
+.reg_form .user_img{
+  margin: 1em 0.5em;
+}
+
+.reg_form input[type=text], .reg_form input[type=email], .reg_form input[type=password] {
+  /*min-width: 25em;*/
+  /*width: 100%;*/
+  margin-top: 0.2em;
   padding: 0.5em;
 }
-
+/*
 .reg_form fieldset+fieldset {
   margin-top: 1em;
-}
+}*/
 
 .reg_form fieldset input+label{
   margin-top: 1em;
@@ -1093,6 +1119,18 @@ legend {
   .img_lg{
     width: 30vw;
     height: 30vw;
+  }
+
+  .img_name {
+    flex-direction: column;
+  }
+
+  .img_name fieldset {
+    width: auto;
+  }
+
+  .img_name fieldset+fieldset {
+    margin: 1em 0 0 0;
   }
 
   a.search_link{
