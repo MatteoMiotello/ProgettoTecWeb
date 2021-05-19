@@ -307,6 +307,25 @@ article footer img {
   height: 1em;
 }
 
+.managed{
+  justify-content: space-between;
+  align-items: center;
+}
+
+.man_btns {
+  display: flex;
+  flex-direction: column;
+  border-left: solid 2px #0d719d;
+  width: 15%!important;
+  align-items: center;
+  text-align: right;
+  justify-content: space-between;
+}
+
+.man_btns a+a{
+  margin-top: 0.2em;
+}
+
 aside {
   background-color: white;
   -moz-box-shadow:    0 3px 5px 3px #ccc;
