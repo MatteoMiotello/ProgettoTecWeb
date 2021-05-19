@@ -117,9 +117,9 @@ nav .currentItem {
   margin-left: 1em;
 }
 
-#user_desk {
+.user_desk {
   margin-right: 0.5em;
-  border-radius: 50%;
+  border-radius: 50% !important;
 }
 
 #user_mob {
@@ -307,6 +307,25 @@ article footer img {
   height: 1em;
 }
 
+.managed{
+  justify-content: space-between;
+  align-items: center;
+}
+
+.man_btns {
+  display: flex;
+  flex-direction: column;
+  border-left: solid 2px #0d719d;
+  width: 15%!important;
+  align-items: center;
+  text-align: right;
+  justify-content: space-between;
+}
+
+.man_btns a+a{
+  margin-top: 0.2em;
+}
+
 aside {
   background-color: white;
   -moz-box-shadow:    0 3px 5px 3px #ccc;
@@ -409,7 +428,7 @@ fieldset {
 }
 
 .img_sel {
-  max-height: 9em;
+  height: min-content;
 }
 
 .img_sel div+div {
@@ -418,6 +437,7 @@ fieldset {
 
 .img_sel textarea {
   resize: none;
+  margin-bottom: 0;
 }
 
 .img_sel > input {
@@ -601,16 +621,16 @@ legend {
   background-color: rgba(13, 113, 157, 0.3);
 }
 
-.commentArea #print_comm{
+.commentArea section[role=comment]{
   justify-content: flex-start;
   margin-top: 1em;
   padding: 0.5em;
 }
 
-.commentArea #print_comm img{
-  width: 48px;
-  height: 48px;
-  margin-right: 2em;
+.commentArea img{
+  width: 64px;
+  height: 64px;
+  margin-right: 1em;
 }
 
 .commentArea form {
@@ -619,17 +639,30 @@ legend {
   justify-content: space-between;
 }
 
-.commentArea form img {
+/*.commentArea form img {
   width: 48px;
   height: 48px;
   margin-right: 2em;
-}
+}*/
 
-.commentArea #print_comm p {
+.commentArea p {
   padding: 0.5em;
   border: solid 0px;
   background-color: white;
   width: 90%;
+}
+
+section[role=comment] div {
+  width: 90%;
+}
+
+section[role=comment] div p:first-child{
+  font-size: 0.8em;
+  background: transparent;
+}
+
+.info_user{
+  font-size: 0.8em;
 }
 
 .commentArea #post_comm{
@@ -903,6 +936,15 @@ legend {
   font-size: 30px;
 }
 
+th {
+  border: solid 1px;
+}
+
+td {
+  text-align: center;
+  border: solid 1px;
+}
+
 @media screen and (max-width: 1200px) {
   header {
     font-size: 0.88em;
@@ -999,7 +1041,7 @@ legend {
       display: none !important;
   }
 
-  #user_desk {
+  .user_desk {
     display: none;
   }
 

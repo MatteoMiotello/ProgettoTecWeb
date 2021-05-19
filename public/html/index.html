@@ -35,7 +35,7 @@
             <div class="fa fa-bars"></div>
           </a>
         </div>
-        <img src="../img/user_icon.png" alt="" class="user_img" id="user_desk">
+        <img src="../img/user_icon.png" alt="" class="user_img" class="user_desk">
     </header>
     <div class="mob_srch" id="search_mobile">
       <form action="article_filter.html?art_text = {input}">
@@ -69,24 +69,4 @@
     <dynamicFooter/>
 
   </body>
-
-  <script>
-    function myFunction() {
-        var x = document.getElementById("hd");
-        if (x.className === "mob_nav") {
-          x.className += " responsive";
-        } else {
-          x.className = "mob_nav";
-        }
-      }
-
-    function searchFunction() {
-      var x = document.getElementById("search_mobile");
-      if (x.className === "mob_srch"){
-        x.className += " resp_srch";
-      } else {
-        x.className = "mob_srch";
-      }
-    }
-  </script>
 </html>

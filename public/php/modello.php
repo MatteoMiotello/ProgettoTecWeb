@@ -4,7 +4,7 @@ class CheckValues {
     public static function checkForCorrectValues($value,$typeOfCheck,$length) {
         $correctCharacters = true;
         switch($typeOfCheck) {
-            case "digit": 
+            case "digit":
                 $correctCharacters = ctype_digit($value);
                 break;
             case "alpha":
@@ -18,6 +18,9 @@ class CheckValues {
             case "data":
                 $correctCharacters = DateTime::createFromFormat('Y-m-d G:i:s', $value);
                 break;
+            //controllo mail
+            //SQL injection
+            
         }
         $correctCharacters = $correctCharacters && (strlen($value) <= $length);
         return $correctCharacters;
@@ -72,9 +75,9 @@ class Articolo
     public function setImgPath($value)
     {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 255);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->imgPath = "../img/Sala_del_Consiglio_dei_Ministri_(Palazzo_Chigi,_Roma).jpeg";//$value;
-        else 
+        else
             throw new Exception(CheckValues::createMsgError("ImgPath"), 1);
     }
     public function getImgPath()
@@ -90,9 +93,9 @@ class Articolo
     public function setID($value)
     {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "digit", 6);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->ID = $value;
-        else 
+        else
             throw new Exception(CheckValues::createMsgError("ID"), 1);
     }
 
@@ -104,9 +107,9 @@ class Articolo
     function setTitolo($value)
     {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 126);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->titolo = $value;
-        else 
+        else
             throw new Exception(CheckValues::createMsgError("Title"), 1);
     }
 
@@ -116,7 +119,7 @@ class Articolo
 
     function setDescrizione($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 350);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->descrizione = $value;
         else
             throw new Exception(CheckValues::createMsgError("Description"), 1);
@@ -130,9 +133,9 @@ class Articolo
     public function setTesto($value)
     {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 10000);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->testo = $value;
-        else 
+        else
            throw new Exception(CheckValues::createMsgError("Text"), 1);
     }
 
@@ -144,9 +147,9 @@ class Articolo
     public function setAutore($value)
     {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "digit", 6);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->autore = $value;
-        else 
+        else
             throw new Exception(CheckValues::createMsgError("Author"), 1);
     }
 
@@ -158,7 +161,7 @@ class Articolo
     public function setDataPub($value)
     {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "data", 19);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->dataPub = $value;
         else
             throw new Exception(CheckValues::createMsgError("Data Publishment"), 1);
@@ -172,9 +175,9 @@ class Articolo
     public function setUpVotes($value)
     {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "digit", 7);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->upVotes = $value;
-        else 
+        else
             throw new Exception(CheckValues::createMsgError("Up Votes"), 1);
     }
 
@@ -186,15 +189,15 @@ class Articolo
     public function setDownVotes($value)
     {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "digit", 7);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->downVotes = $value;
-        else 
+        else
             throw new Exception(CheckValues::createMsgError("Down Votes"), 1);
     }
 
     public function setAltImg($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "alpha", 255);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->altImg = $value;
         else {
             print($value);
@@ -238,7 +241,7 @@ class Articolo
         if (mysqli_num_rows($queryResult) == 0){
             return null;
         }
-        else { 
+        else {
             $riga = mysqli_fetch_assoc($queryResult);
             $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'],$riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
             return $singoloArticolo;
@@ -269,7 +272,7 @@ class Articolo
                 $singoloArticolo = new static($riga['ID'], $riga['titolo'], $riga['descrizione'],$riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
                 array_push($listaArticoli, $singoloArticolo);
                 echo "dio merda ";
-                echo get_class($singoloArticolo->getTesto());  
+                echo get_class($singoloArticolo->getTesto());
             }
         }
         return $listaArticoli;
@@ -303,9 +306,9 @@ class Categoria
     public function setDescrizione($value)
     {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 255);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->descrizione = $value;
-        else 
+        else
             throw new Exception(CheckValues::createMsgError("Descrizione"), 1);
     }
 
@@ -317,9 +320,9 @@ class Categoria
     public function setNome($value)
     {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "alnum", 20);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->nome = $value;
-        else 
+        else
             throw new Exception(CheckValues::createMsgError("Name"), 1);
     }
 
@@ -334,9 +337,9 @@ class Categoria
 
     public function setImg($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 255);
-        if($correctCharacters) 
+        if($correctCharacters)
             $this->img = $value;
-        else 
+        else
             throw new Exception(CheckValues::createMsgError("Img Of Category"), 1);
     }
     public static function getCategorie($connection)

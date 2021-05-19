@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../css/style1.css" media="screen">
     <link rel="stylesheet" href="../css/print.css" media="print">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <script type="text/javascript" src="../js/util.js"></script>
+    <script type="text/javascript" src="../scripts/util.js"></script>
   </head>
 
   <body class="vFlex">
@@ -72,47 +72,23 @@
     </nav>
   </div>
   <div id="wrapper" class="vFlex">
-    <h1>Registrati</h1>
-    <form class="reg_form vFlex" action="register.php" method="post">
-      <div class="img_name">
-        <fieldset class="hFlex pro_pic">
-          <legend>Scegli l'immagine del profilo</legend>
-          <div class="vFlex">
-            <input type="radio" id="male_icon">
-            <img class="user_img" src="../img/male_icon.png" alt="Icona utente maschio">
-          </div>
-          <div class="vFlex">
-            <input type="radio" id="female_icon">
-            <img class="user_img" src="../img/female_icon.png" alt="Icona utente femmina">
-          </div>
-          <div class="vFlex">
-            <input type="radio" id="genderfluid_icon">
-            <img class="user_img" src="../img/genderfluid_icon.png" alt="Icona utente gender fluid">
-          </div>
-        </fieldset>
-        <fieldset class="vFlex">
-          <legend>Inserisci i tuoi dati personali</legend>
-          <label for="nome">Nome</label>
-          <input type="text" id="nome" required>
-          <label for="cognome">Cognome</label>
-          <input type="text" id="cognome" required>
-        </fieldset>
-      </div>
-        <fieldset class="vFlex">
-          <legend>Inserisci i dati d'accesso</legend>
-          <label for="email">Email</label>
-          <input type="email" id="email" required>
-          <label for="password">Password</label>
-          <input type="password" id="password" required>
-          <label for="password">Ripeti password</label>
-          <input type="password" id="password" required>
-        </fieldset>
-        <div class="confirm">
-          <input type="checkbox" id="privacy" value="Accetto bla bla privacy" required>
-          <span>Accetto l'informativa della <a href="#">privacy</a></span>
-        </div>
-        <input type="submit" id="reg_btn" value="Conferma dati">
-    </form>
+    <h1>Gestisci articoli</h1>
+    <table>
+      <!--Non so se usare thead e tbody perchè non ci sarebbe un tfoot-->
+      <tr>
+        <th scope="col">id Articolo</th>
+        <th scope="col">Titolo Articolo</th>
+        <th scope="col">Autore</th>
+        <th scope="col" colspan="2">Azioni</th>
+      </tr>
+      <tr>
+        <td>1345</td>
+        <td>Titolo di un articolo da gestire</td>
+        <td>Autore</td>
+        <td><a href="form_articolo_admin.html">Modifica</a></td>
+        <td><a href="proto_gestione_art.html/query_delete">Elimina</a></td>
+      </tr>
+    </table>
   </div>
 
     <footer class="hFlex">
