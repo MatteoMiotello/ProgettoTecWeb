@@ -36,5 +36,5 @@ if ($categorie != null) {
     $listaCategoria = "<div>nessuna categoria presente</div>";
 }
 $handler->setParam("<listaCategorie />",$listaCategoria);
-$handler->render(); 
+$handler->render();
 }
