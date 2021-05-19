@@ -1,4 +1,5 @@
 <?php
+// nel caso in cui non esistesse nessun id deve essere ritornato un errore
 $id_articolo = $_GET['art_id'];
 print($id_art);
 ini_set('display_errors', 1);
@@ -28,10 +29,10 @@ if (!$connessioneRiuscita)
 else {
 $printArticolo = '';
 $articolo = Articolo::getArticolo($id_articolo, $connessioneRiuscita);
-$autore = User::getArticleAuthor($articolo->getID(), $connessioneRiuscita);
-$listaCategorie = Categoria::getCategorieArticolo($articolo->getID(), $connessioneRiuscita);
 
 if($articolo != null) {
+    $autore = User::getArticleAuthor($articolo->getID(), $connessioneRiuscita);
+    $listaCategorie = Categoria::getCategorieArticolo($articolo->getID(), $connessioneRiuscita);
     $articolo = (new ArticleBuilder)
     ->setImgArticlePath($articolo->getImgPath())
     ->setImgArticleAlt($articolo->getAltImg())
