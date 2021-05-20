@@ -82,6 +82,7 @@ class TemplateHandler {
         $links = HeaderHandler::getHeaderLinks( $this->CurrentRoute );
 
         $this->setParam('<nav-link/>', $links);
+        /*$this->setParam('<user-cont/>', $uCont);*/
     }
 
 

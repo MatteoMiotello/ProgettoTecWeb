@@ -20,7 +20,7 @@ class CheckValues {
                 break;
             //controllo mail
             //SQL injection
-            
+
         }
         $correctCharacters = $correctCharacters && (strlen($value) <= $length);
         return $correctCharacters;
@@ -246,6 +246,19 @@ class Articolo
             $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'],$riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
             return $singoloArticolo;
         }
+    }
+
+    public static function searchArticolo($keyword, $connection){
+      $querySelect = "SELECT * FROM articolo, cat_art WHERE articolo.ID=cat_art.ID_art AND (articolo.testo LIKE '$keyword' OR articolo.descrizione LIKE '$keyword' OR articolo.titolo LIKE '$keyword')";
+      $queryResult = mysqli_query($connection, $querySelect);
+      if (mysqli_num_rows($queryResult) == 0){
+          return null;
+      }
+      else {
+          $riga = mysqli_fetch_assoc($queryResult);
+          $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'],$riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
+          return $singoloArticolo;
+      }
     }
 
     /*public function setAltImg($value) {
