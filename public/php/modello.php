@@ -291,44 +291,23 @@ class Articolo {
         }
     }
 
-<<<<<<< HEAD
 
-//    public static function getArticoli($keyword, $connection, $limit) {
-//        $querySelect = "SELECT *  FROM articolo WHERE articolo.titolo LIKE '%$keyword%' OR articolo.descrizione LIKE '%$keyword%' OR articolo.testo LIKE '%$keyword%'";
-//        $queryResult = mysqli_query($connection, $querySelect);
-//        if (mysqli_num_rows($queryResult) == 0) {
-//            return null;
-//        } else { // ritorno la lista degli articoli all'interno del db
-//            $listaArticoli = array();
-//            while ($riga = mysqli_fetch_assoc($queryResult)) {
-//                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
-//                array_push($listaArticoli, $singoloArticolo);
-//            }
-//            if ($limit != null && count($listaArticoli) >= $limit)
-//                $listaArticoli = array_slice($listaArticoli, -$limit, $limit, true);
-//        }
-//        return $listaArticoli;
-//    }
-=======
-    public static function searchArticolo($keyword, $connection, $limit)
-    {
+    public static function searchArticolo($keyword, $connection, $limit) {
         $querySelect = "SELECT *  FROM articolo WHERE articolo.titolo LIKE '%$keyword%' OR articolo.descrizione LIKE '%$keyword%' OR articolo.testo LIKE '%$keyword%'";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0) {
             return null;
-        }
-        else { // ritorno la lista degli articoli all'interno del db
+        } else { // ritorno la lista degli articoli all'interno del db
             $listaArticoli = array();
             while ($riga = mysqli_fetch_assoc($queryResult)) {
-                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'],$riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
+                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
                 array_push($listaArticoli, $singoloArticolo);
             }
-            if($limit!=null && count($listaArticoli) >= $limit)
+            if ($limit != null && count($listaArticoli) >= $limit)
                 $listaArticoli = array_slice($listaArticoli, -$limit, $limit, true);
         }
         return $listaArticoli;
     }
->>>>>>> 2ff796c2e63da6f542b617266fc0e742c7c97e3b
 
 
     /*public function setAltImg($value) {
