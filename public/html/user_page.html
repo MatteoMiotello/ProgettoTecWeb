@@ -48,58 +48,44 @@
         </nav>
       </div>
 
-        <div class="row">
-            <div class="col user">
-                <img src="../img/user_icon.png" alt="" id="prof_pic">
-                <form action="upload.php" method="post" enctype="multipart/form-data">
-                    Cambia immagine:
-                    <br>
-                    <input type="file" name="fileToUpload" id="fileToUpload">
-                    <br>
-                    <input type="submit" value="Carica immagine" name="submit">
-                </form>
+        <div id="wrapper" class="vFlex">
+          <h1>Il mio profilo</h1>
+          <div class="hFlex" role="cont_utente">
+            <div class="vFlex">
+              <img src="../img/male_icon.png" alt="Immagine utente">
+              <strong>Dati personali</strong>
+              <p>Nome: </p><get-nome/>
+              <p>Cognome: </p><get-cognome/>
+              <p>Email: </p><get-email/>
             </div>
-
-            <div class="col user">
-                <h2>Info</h2>
-                <ul>
-                    <li>Nome: <span id="fname">Mario</span></li>
-                    <li>Cognome: <span id="lname">Rossi</span></li>
-                    <li>Email: <span id="email">mario.rossi@gmail.com</span></li>
-                </ul>
+            <div class="vFlex">
+              <div>
+                <strong>Statistiche</strong>
+                <p>Numero di articoli scritti: <written-art/></p>
+                <p>Numero di like messi: <likes-given/></p>
+                <p>Numero di like ricevuti: <likes-received/></p>
+              </div>
+              <div class="vFlex">
+                <strong>Operazioni</strong>
+                <a href="form_articolo_admin.php">Aggiungi un articolo</a>
+                <a href="proto_gestione_art.html">Gestisci articoli</a>
+              </div>
             </div>
-
-            <div class="col user">
-                <h2>Statistiche</h2>
-                <ul>
-                    <li>Mi piace: <span id="likes">120</span></li>
-                    <li>Non mi piace: <span id="dislikes">43</span></li>
-                    <li>Commenti: <span id="comm">21</span></li>
-                    <li>Articoli pubblicati: <span id="art_num">3</span></li>
-                </ul>
-            </div>
-
-            <div class="col user"></div>
-            <div class="col user">
-                <form id="pw_reset" action="index.html" method="post">
-                    <h2>Reset Password</h2>
-                    <br>
-                    <p>Old Password:</p>
-                    <input type="password" placeholder="Password" id="old_pw">
-                    <br>
-                    <p>New Password:</p>
-                    <input type="password" placeholder="Password" id="new_pw1">
-                    <br>
-                    <p>Confirm new Password:</p>
-                    <input type="password" placeholder="Password" id="new_2pw">
-                    <br>
-                    <input type="submit" value="Reset">
-                </form>
-            </div>
+          </div>
+          <form class="vFlex" action="user_page.php" method="post">
+            <h2>Modifica le tue credenziali d'accesso</h2>
+            <label for="curr_pw">Password attuale</label>
+            <input type="password" id="curr_pw">
+            <label for="new_pw">Password nuova</label>
+            <input type="password" id="new_pw">
+            <label for="rep_pw">Ripeti la nuova password</label>
+            <input type="password" id="rep_pw">
+            <button type="submit" name="cambio_pw">Conferma</button>
+          </form>
         </div>
 
         <dynamicFooter/>
-        
+
       </body>
 
       <script>

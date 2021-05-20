@@ -771,70 +771,50 @@ section[role=comment] div p:first-child{
 }
 
 /* USER/ADMIN PAGE */
-.row{
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  margin: 2em;
+div[role=cont_utente]{
+  width: 100%;
+  justify-content: space-around;
+  font-size: 1.4em;
+  padding-bottom: 2em;
+  border-bottom: solid 2px #0d719d;
 }
 
-.col{
-  padding-top: 2em;
-  margin: 1em;
+div[role=cont_utente] img{
+  width: 128px;
+  height: 128px;
+  margin-bottom: 1em;
 }
 
-
-.col ul{
-  list-style: none;
+div[role=cont_utente] p{
+  margin-top: 0.2em;
 }
 
-.col img{
-  max-width: 8em;
-  max-height: 8em;
+div[role=cont_utente] div{
+  justify-content: space-between;
 }
 
-#pw_reset input{
-  margin: 1em;
-  padding: 0.5em;
+div[role=cont_utente]+form{
+  background: #f0ffff;
+  padding: 2em 0 0.5em 0;
+  align-items: center;
+}
+
+div[role=cont_utente]+form label{
+  margin-top: 0.5em;
+}
+
+div[role=cont_utente]+form input{
+  width: 80%;
+  text-align: center;
+}
+
+div[role=cont_utente]+form button{
+  width: 50%;
+  height: 44px;
+  margin-top: 1em;
 }
 
 /* REGISTER & USER PAGE */
-.main-content {
-  padding: 20px;
-}
-
-.form-group {
-  margin-top: 2em;
-}
-
-.form-group label {
-  flex: none;
-  display: block;
-  width: 125px;
-  font-weight: bold;
-  font-size: 1em;
-}
-.form-group label.right-inline {
-  text-align: right;
-  padding-right: 8px;
-  padding-left: 10px;
-  width: auto;
-}
-
-.form-group .input-control {
-  flex: 1 1 auto;
-  display: block;
-  margin-bottom: 10px;
-  margin-right: 8px;
-  padding: 4px;
-  margin-top: -4px;
-}
-
-.form_btn {
-  padding: 5px 15px;
-  margin: 5px;
-  min-width: 100px
-}
-
 .reg_form {
   margin:auto;
   border: solid 2px;
@@ -867,7 +847,8 @@ section[role=comment] div p:first-child{
   margin: 1em 0.5em;
 }
 
-.reg_form input[type=text], .reg_form input[type=email], .reg_form input[type=password] {
+/*.reg_form input[type=text], .reg_form input[type=email], .reg_form input[type=password] {*/
+input[type=text], input[type=email], input[type=password] {
   /*min-width: 25em;*/
   /*width: 100%;*/
   margin-top: 0.2em;
