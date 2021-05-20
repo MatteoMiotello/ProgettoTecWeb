@@ -248,7 +248,7 @@ class Articolo
         }
     }
 
-    public static function getArticoli($keyword, $connection, $limit)
+    public static function searchArticolo($keyword, $connection, $limit)
     {
         $querySelect = "SELECT *  FROM articolo WHERE articolo.titolo LIKE '%$keyword%' OR articolo.descrizione LIKE '%$keyword%' OR articolo.testo LIKE '%$keyword%'";
         $queryResult = mysqli_query($connection, $querySelect);
