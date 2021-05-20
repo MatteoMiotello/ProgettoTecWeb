@@ -35,7 +35,15 @@ class User
      * @param $Permission
      * @param $Img
      */
-    public function __construct() {}
+    public function __construct($ID, $nome, $cognome, $email, $password, $permesso, $img_path) {
+        $this->Id = $ID;
+        $this->Name = $nome;
+        $this->Surname = $cognome;
+        $this->Email = $email;
+        $this->Password = $password;
+        $this->Permission = $permesso;
+        $this->Img = $img_path;
+    }
 
     /**
      * @return mixed
@@ -229,7 +237,7 @@ class User
      * @param $id
      * @return User|null
      */
-    public static function getUserById( $id )  {$access = DBAccess::openDBConnection();}
+   // public static function getUserById( $id )  {$access = DBAccess::openDBConnection();}
 
     public static function getArticleAuthor($id_articolo, $connection) {
         $querySelect = "SELECT * FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = $id_articolo ";
@@ -244,21 +252,27 @@ class User
         }
     }
 
-  /*  public static function getUserById( $id ): User  {
+    public static function getUserById($Connection, $Id ) {
 
-        $querySelect = sprintf( 'SELECT * FROM utente WHERE ID = %s', $id );
+        $querySelect = "SELECT * FROM utente WHERE utente.ID = $Id";
 
-        $result = mysql_query( $access->getConnection(), $querySelect );
+        $result = mysqli_query( $Connection, $querySelect );
 
-        if( !mysql_num_rows( $result ) ){
+        if(!$result) {
+            print("yep 1 dio can");
+            return null;
+        }
+
+        if( mysqli_num_rows( $result ) == 0){
+            print("yep 2 dio can");
           return null;
         }
 
-        $row = mysqli_fetch_row( $result );
+        $row = mysqli_fetch_assoc( $result );
 
         return ( new User( $row['ID'], $row['nome'], $row['cognome'], $row['email'], $row['password'], $row['permesso'], $row['img_path'] ) );
 
-    }*/
+    }
 
     /**
      * @param UserLevelType $levelType

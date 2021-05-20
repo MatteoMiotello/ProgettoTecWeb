@@ -1,14 +1,16 @@
 <?php
 // nel caso in cui non esistesse nessun id deve essere ritornato un errore
 $id_articolo = $_GET['art_id'];
-print($id_art);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php' ;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/Comment.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/ArticleBuilder.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/CommentBuilder.php';
 
 $dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
@@ -51,8 +53,22 @@ if($articolo != null) {
 else {
     $printArticolo .= "<div>Nessun articolo presente</div>";
 }
+$rawComments = Comment::getCommentsFromArticle($connessioneRiuscita, $id_articolo);
+if($rawComments) {
+    $comment = '';
+    foreach($rawComments as $rawCommento) {
+        print($rawCommento->getTesto(). " ");
+        $author = User::getUserById($connessioneRiuscita, $rawCommento->getIdAutore());
+        $comment .= (new CommentBuilder)
+        ->setComment($rawCommento->getTesto())
+        ->setName($author->getName())
+        ->setSurname($author->getSurname())
+        ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/comment.phtml'));
+    }
+}
+else  $comment = '<p>Nessun commento trovato</p>';
 }
 $handler->setParam("<articolo />", $printArticolo);
+$handler->setParam("<listaCommenti />", $comment);
 
-$handler->render(); 
-?>
+$handler->render();

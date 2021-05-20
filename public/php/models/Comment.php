@@ -33,18 +33,6 @@ class Comment
      */
     private $DataPubblicazione;
 
-
-    /**
-     * @var int $UpVotes
-     */
-    private $UpVotes;
-
-
-    /**
-     * @var int $DownVotes
-     */
-    private $DownVotes;
-
     /**
      * Comment constructor.
      * @param int $IdArticolo
@@ -52,18 +40,14 @@ class Comment
      * @param int $IdAutore
      * @param string $Testo
      * @param string $DataPubblicazione
-     * @param int $UpVotes
-     * @param int $DownVotes
      */
-    public function __construct(int $IdArticolo, int $IdCommento, int $IdAutore, string $Testo, string $DataPubblicazione, int $UpVotes, int $DownVotes)
+    public function __construct(int $IdArticolo, int $IdCommento, int $IdAutore, string $Testo, string $DataPubblicazione)
     {
         $this->IdArticolo = $IdArticolo;
         $this->IdCommento = $IdCommento;
         $this->IdAutore = $IdAutore;
         $this->Testo = $Testo;
         $this->DataPubblicazione = $DataPubblicazione;
-        $this->UpVotes = $UpVotes;
-        $this->DownVotes = $DownVotes;
     }
 
 
@@ -147,45 +131,13 @@ class Comment
         $this->DataPubblicazione = $DataPubblicazione;
     }
 
-    /**
-     * @return int
-     */
-    public function getUpVotes(): int
-    {
-        return $this->UpVotes;
-    }
-
-    /**
-     * @param int $UpVotes
-     */
-    public function setUpVotes(int $UpVotes): void
-    {
-        $this->UpVotes = $UpVotes;
-    }
-
-    /**
-     * @return int
-     */
-    public function getDownVotes(): int
-    {
-        return $this->DownVotes;
-    }
-
-    /**
-     * @param int $DownVotes
-     */
-    public function setDownVotes(int $DownVotes): void
-    {
-        $this->DownVotes = $DownVotes;
-    }
-
 
     public static function getAllComments(): ?Comment {
         $access = DBAccess::openDBConnection();
 
         $query = 'SELECT * FROM commento';
 
-        $queryResult = mysql_query( $access->getConnection(), $query );
+        $queryResult = mysqli_query( $access->getConnection(), $query );
 
         if ( !mysqli_num_rows( $queryResult )){
             return null;
@@ -196,7 +148,7 @@ class Comment
         $result = [];
 
         foreach ( $rows as $row ) {
-            $comment = new Comment( $row['ID_art'], $row['ID_com'], $row['autore'], $row['testo'], $row['data_pub'], $row['upvotes'], $row['downvotes'] );
+            $comment = new Comment( $row['ID_art'], $row['ID_com'], $row['autore'], $row['testo'], $row['data_pub']);
 
             array_push( $result, $comment );
         }
@@ -210,11 +162,25 @@ class Comment
 
         $query = sprintf( 'SELECT * FROM utente WHERE ID = %s', $this->getIdAutore() );
 
-        $queryResult = mysql_query( $access->getConnection(), $query );
+        $queryResult = mysqli_query( $access->getConnection(), $query );
 
-        $row = mysql_fetch_row( $queryResult );
+        $row = mysqli_fetch_row( $queryResult );
 
         return ( new User( $row['ID'], $row['nome'], $row['cognome'], $row['email'], $row['password'], $row['permesso'], $row['img_row'] ));
     }
 
+    public static function getCommentsFromArticle($Connection, $IdArticolo) {
+        $querySelect = "SELECT * FROM commento WHERE commento.ID_art = $IdArticolo";
+        $queryResult = mysqli_query($Connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0)
+            return null;
+        else { // ritorno la lista delle categorie all'interno del db
+            $listaCommenti = array();
+            while ($row = mysqli_fetch_assoc($queryResult)) {
+                $singoloCommento = new Comment( $row['ID_art'], $row['ID_com'], $row['autore'], $row['testo'], $row['data_pub']);
+                array_push($listaCommenti, $singoloCommento);
+            }
+        }
+        return $listaCommenti;
+    }
 }

@@ -114,8 +114,6 @@ CREATE TABLE `commento` (
   `autore` int(6) NOT NULL,
   `testo` varchar(10000) NOT NULL,
   `data_pub` datetime NOT NULL,
-  `upvotes` int(7) DEFAULT NULL,
-  `downvotes` int(7) DEFAULT NULL,
   PRIMARY KEY (`ID_art`,`ID_com`),
   KEY `autore` (`autore`),
   CONSTRAINT `commento_ibfk_1` FOREIGN KEY (`ID_art`) REFERENCES `articolo` (`ID`),
@@ -129,7 +127,7 @@ CREATE TABLE `commento` (
 
 LOCK TABLES `commento` WRITE;
 /*!40000 ALTER TABLE `commento` DISABLE KEYS */;
-INSERT INTO `commento` VALUES (144688,1,218796,'Wow! Anch\'io ne vorrei una','2020-12-07 15:47:00',0,0);
+INSERT INTO `commento` VALUES (144688,1,218796,'Wow! Anch\'io ne vorrei una','2020-12-07 15:47:00'),(144688,462759,125333,'Mi tenete sempre aggiornato, giornale online dell\'anno!','2021-05-19 18:58:00'),(156612,462745,716989,'articolo stupendo, siete fantastici!','2021-05-19 18:58:00'),(878541,430759,125333,'Fossi giornalista scriverei solo per voi, anche gratis!','2021-05-19 18:58:00'),(878541,530759,125333,'Quando mi dissero foste i migliori non gli credetti, ora posso solo rimangiarmi la parola :) <3 <3','2021-05-19 18:58:00');
 /*!40000 ALTER TABLE `commento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,4 +169,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-18 10:21:06
+-- Dump completed on 2021-05-20 10:22:14
