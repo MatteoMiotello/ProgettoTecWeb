@@ -22,7 +22,7 @@ $handler->setContent(file_get_contents($filePath));
 if ($connessioneRiuscita == null)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
-    $rawArticles = Articolo::searchArticolo($search, $connessioneRiuscita);
+    $rawArticles = Articolo::searchArticolo($search, $connessioneRiuscita, 20);
     $articlesList = '';
     if ($rawArticles != null) {
         foreach ($rawArticles as $articolo) {
