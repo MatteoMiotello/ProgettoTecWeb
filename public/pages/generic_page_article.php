@@ -57,14 +57,17 @@ $rawComments = Comment::getCommentsFromArticle($connessioneRiuscita, $id_articol
 if($rawComments) {
     $comment = '';
     foreach($rawComments as $rawCommento) {
-        print($rawCommento->getTesto(). " ");
         $author = User::getUserById($connessioneRiuscita, $rawCommento->getIdAutore());
         $comment .= (new CommentBuilder)
         ->setComment($rawCommento->getTesto())
         ->setName($author->getName())
         ->setSurname($author->getSurname())
-        ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/comment.phtml'));
+        ->setImg($author->getImg())
+        ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/previusComment.phtml'));
     }
+    // controllo se l'utente e' loggato o meno
+    $comment .= (new CommentBuilder)
+    ->setImg($author->getImg())->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/newComment.phtml'));
 }
 else  $comment = '<p>Nessun commento trovato</p>';
 }

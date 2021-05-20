@@ -156,7 +156,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` VALUES (125333,'Giosuè','Calgaro','giosue@admin.com','/*hash(admin)*/','adm','/*path*/'),(218796,'Utente','Standard','utente@user.com','/*hash(user)*/','adm','/*path*/'),(456468,'Matteo','Miotello','matteo@admin.com','/*hash(admin)*/','adm','/*path*/'),(716989,'Andrea','Polato','andrea@admin.com','/*hash(admin)*/','adm','/*path*/'),(846787,'Tommaso','Allegretti','tommaso@admin.com','/*hash(admin)*/','adm','/*path*/');
+INSERT INTO `utente` VALUES (125333,'Giosuè','Calgaro','giosue@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(218796,'Utente','Standard','utente@user.com','/*hash(user)*/','adm','/img/genderfluid_icon.png'),(456468,'Matteo','Miotello','matteo@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(716989,'Andrea','Polato','andrea@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(846787,'Tommaso','Allegretti','tommaso@admin.com','/*hash(admin)*/','adm','/img/male_icon.png');
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -169,4 +169,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-20 10:22:14
+-- Dump completed on 2021-05-20 10:58:01

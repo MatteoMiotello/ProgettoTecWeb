@@ -6,10 +6,12 @@ class CommentBuilder extends AbstractBuilder {
     CONST USERNAME = '{{userName}}';
     CONST USERSURNAME = '{{userSurname}}';
     CONST USERCOMMENT = '{{text}}';
+    CONST USERIMG = '{{userImg}}';
 
     private $Name;
     private $Surname;
     private $Comment;
+    private $Img;
 
     function __construct() {
         $this->Params[CommentBuilder::USERNAME] = 'Nessun nome presente';
@@ -44,6 +46,16 @@ class CommentBuilder extends AbstractBuilder {
     public function setComment($Comment) {
         $this->Comment = $Comment;
         $this->Params[CommentBuilder::USERCOMMENT] = $this->getComment();
+        return $this;
+    }
+
+    public function getImg() {
+        return $this->Img;
+    }
+
+    public function setImg($Img) {
+        $this->Img = $Img;
+        $this->Params[CommentBuilder::USERIMG] = $this->getImg();
         return $this;
     }
 }
