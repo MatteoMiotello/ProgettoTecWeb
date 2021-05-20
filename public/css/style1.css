@@ -971,6 +971,7 @@ td {
   .resp_srch #search_bar_mobile{
     width: 100%;
     padding-left: 1em;
+    margin: 0;
     border: none;
     outline: none;
   }
@@ -987,6 +988,11 @@ td {
 
   .menu_noJS {
     display: block;
+  }
+
+  .menu_noJS .currentLink{
+    transform: skew(0);
+    padding: 0;
   }
 
   #logo{
