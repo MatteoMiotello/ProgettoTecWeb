@@ -17,6 +17,8 @@ $handler = new TemplateHandler();
 $handler->setPageTitle('Home');
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/index_nuovo.html';
 
+$handler->setBreadcrumb( 'Home' );
+
 if ( !file_exists( $filePath ) ) {
     throw new Exception( 'file non esistente' );
 }

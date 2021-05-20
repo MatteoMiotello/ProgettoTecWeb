@@ -18,4 +18,3 @@ abstract class AbstractBuilder {
         return $html;
     }
 }
-?>

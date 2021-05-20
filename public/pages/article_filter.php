@@ -14,6 +14,9 @@ $connessioneRiuscita = $connessioneRiuscita->getConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Categoria'.$CategoryName);
+$handler->setBreadcrumb( 'Articoli della categoria: ' . $CategoryName )
+    ->addLink( '/index.php', 'Home' )
+    ->addLink( '/pages/categorie.php', 'Categorie' );
 
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/article_filter_nuovo.html';
 

@@ -13,6 +13,7 @@ $connessioneRiuscita = $connessioneRiuscita->getConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Form Articolo');
+$handler->setBreadcrumb('Scrivi un articolo' );
 
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/form_articolo_admin_nuovo.html';
 
