@@ -1,6 +1,7 @@
 <?php
 // nel caso in cui non esistesse nessun id deve essere ritornato un errore
-$id_articolo = $_GET['art_id'];
+if($_GET['art_id'])
+    $id_articolo = $_GET['art_id'];
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -15,6 +16,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/CommentBuilder.php';
 $dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
 $connessioneRiuscita = $connessioneRiuscita->getConnection();
+
+if($connessioneRiuscita && isset($_POST['comment'])) {
+    $utente = 125333;
+    Comment::uploadNewComment($id_articolo, $utente,''. $_POST['comment'].'', ''.date("Y-m-d h:i:s").'', $connessioneRiuscita);
+}
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Articolo');
@@ -67,7 +73,9 @@ if($rawComments) {
     }
     // controllo se l'utente e' loggato o meno
     $comment .= (new CommentBuilder)
-    ->setImg($author->getImg())->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/newComment.phtml'));
+    ->setImg($author->getImg()) /* qui al posto di author va l'utente loggato */
+    ->setArticleId($id_articolo)
+    ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/newComment.phtml'));
 }
 else  $comment = '<p>Nessun commento trovato</p>';
 }

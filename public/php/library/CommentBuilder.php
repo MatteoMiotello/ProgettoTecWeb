@@ -7,11 +7,13 @@ class CommentBuilder extends AbstractBuilder {
     CONST USERSURNAME = '{{userSurname}}';
     CONST USERCOMMENT = '{{text}}';
     CONST USERIMG = '{{userImg}}';
+    CONST ARTICLEID = '{{articleId}}';
 
     private $Name;
     private $Surname;
     private $Comment;
     private $Img;
+    private $ArticleId;
 
     function __construct() {
         $this->Params[CommentBuilder::USERNAME] = 'Nessun nome presente';
@@ -57,6 +59,16 @@ class CommentBuilder extends AbstractBuilder {
         $this->Img = $Img;
         $this->Params[CommentBuilder::USERIMG] = $this->getImg();
         return $this;
+    }
+
+    public function setArticleId($Id) {
+        $this->ArticleId = $Id;
+        $this->Params[CommentBuilder::ARTICLEID] = $this->getArticleId();
+        return $this;
+    }
+
+    public function getArticleId() {
+        return $this->ArticleId;
     }
 }
 ?>

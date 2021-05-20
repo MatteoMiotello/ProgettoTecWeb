@@ -110,15 +110,16 @@ DROP TABLE IF EXISTS `commento`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `commento` (
   `ID_art` int(6) NOT NULL,
-  `ID_com` int(6) NOT NULL,
+  `ID_com` int(6) NOT NULL AUTO_INCREMENT,
   `autore` int(6) NOT NULL,
   `testo` varchar(10000) NOT NULL,
   `data_pub` datetime NOT NULL,
-  PRIMARY KEY (`ID_art`,`ID_com`),
-  KEY `autore` (`autore`),
+  PRIMARY KEY (`ID_com`),
+  KEY `commento_ibfk_1` (`ID_art`),
+  KEY `commento_ibfk_2` (`autore`),
   CONSTRAINT `commento_ibfk_1` FOREIGN KEY (`ID_art`) REFERENCES `articolo` (`ID`),
   CONSTRAINT `commento_ibfk_2` FOREIGN KEY (`autore`) REFERENCES `utente` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=530763 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +128,7 @@ CREATE TABLE `commento` (
 
 LOCK TABLES `commento` WRITE;
 /*!40000 ALTER TABLE `commento` DISABLE KEYS */;
-INSERT INTO `commento` VALUES (144688,1,218796,'Wow! Anch\'io ne vorrei una','2020-12-07 15:47:00'),(144688,462759,125333,'Mi tenete sempre aggiornato, giornale online dell\'anno!','2021-05-19 18:58:00'),(156612,462745,716989,'articolo stupendo, siete fantastici!','2021-05-19 18:58:00'),(878541,430759,125333,'Fossi giornalista scriverei solo per voi, anche gratis!','2021-05-19 18:58:00'),(878541,530759,125333,'Quando mi dissero foste i migliori non gli credetti, ora posso solo rimangiarmi la parola :) <3 <3','2021-05-19 18:58:00');
+INSERT INTO `commento` VALUES (144688,1,218796,' Wow!','2020-12-07 15:47:00'),(156612,430759,716989,'articolo stupendo, siete fantastici!','2021-05-19 18:58:00');
 /*!40000 ALTER TABLE `commento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,4 +170,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-20 10:58:01
+-- Dump completed on 2021-05-20 16:12:07

@@ -183,4 +183,10 @@ class Comment
         }
         return $listaCommenti;
     }
+
+    public static function uploadNewComment($ArticleId, $AuthorId, $Comment, $DataPub, $Connection) {
+        $querySelect = "INSERT INTO commento(ID_art, autore, testo, data_pub) VALUES($ArticleId, $AuthorId, '$Comment', '$DataPub')";
+        $queryResult = mysqli_query($Connection, $querySelect);
+        return $queryResult;
+    }
 }
