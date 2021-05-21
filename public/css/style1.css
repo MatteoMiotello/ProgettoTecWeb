@@ -1104,9 +1104,9 @@ td {
   .cat_page figcaption {
     font-size: 1.3em;
     padding: 2% 0;
-    bottom: -3.5px;
+    bottom: -7px;
     left:0;
-    right: -1.5px;
+    right: -2px;
   }
 
   .cat_img {
