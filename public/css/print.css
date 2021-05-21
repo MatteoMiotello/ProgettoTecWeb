@@ -1,0 +1,33 @@
+@import "style1.css";
+
+html{
+  background: transparent;
+}
+
+header, header *, nav, .breadcrumbs, footer, footer *, body img{
+  display: none !important;
+  /*background: transparent !important;*/
+}
+
+#wrapper{
+  padding: 0;
+}
+
+.home_content article+article{
+  border-top: solid 1px lightgrey;
+}
+
+article, aside {
+  -moz-box-shadow:    0 0 0 0;
+  -webkit-box-shadow: 0 0 0 0;
+  box-shadow: 0 0 0 0;
+  padding: 0.5em 0.5em 0.5em 1em;
+}
+
+aside{
+  border-left: solid 1px lightgrey;
+}
+
+article div{
+  width: 100%;
+}
