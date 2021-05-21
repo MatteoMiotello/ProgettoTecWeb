@@ -16,7 +16,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/CommentBuilder.php';
 $dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
 $connessioneRiuscita = $connessioneRiuscita->getConnection();
-
+//TODO: sistemare
 if ($connessioneRiuscita && isset($_POST['comment'])) {
     $utente = 125333;
     Comment::uploadNewComment($id_articolo, $utente, '' . $_POST['comment'] . '', '' . date("Y-m-d h:i:s") . '', $connessioneRiuscita);

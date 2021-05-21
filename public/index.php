@@ -7,7 +7,6 @@ require $_SERVER['DOCUMENT_ROOT'] .  '/php/library/TemplateHandler.php' ;
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/PreviewArticleBuilder.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/NewsArticleBuilder.php';
 
 $dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
@@ -51,7 +50,7 @@ else {
     $covidNewsList = '';
     if ($covidNews != null) {
         foreach ($covidNews as $articolo) {
-            $covidNewsList .= (new NewsArticleBuilder)
+            $covidNewsList .= (new PreviewArticleBuilder)
             ->setTitle($articolo->getTitolo())
             ->setID($articolo->getId())
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/articleNews.phtml'))

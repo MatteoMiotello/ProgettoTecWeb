@@ -59,8 +59,8 @@ class Articolo {
 
     private $altImg;
 
-
-    function __construct($ID, $titolo, $descrizione, $testo, $autore, $dataPub, $upVotes, $downVotes, $imgPath, $altImg) {
+    private $validation;
+    function __construct($ID, $titolo, $descrizione, $testo, $autore, $dataPub, $upVotes, $downVotes, $imgPath, $altImg, $validation) {
         try {
             $this->setID($ID);
         } catch (Exception $e) {
@@ -111,6 +111,7 @@ class Articolo {
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
+        $this->validation = $validation;
     }
 
 
@@ -254,8 +255,14 @@ class Articolo {
     public function getAltImg() {
         return $this->altImg;
     }
-
-
+    
+    public function getValidation() {
+        return $this->validation;
+    }
+    public function setValidation($validation) {
+        $this->validation = $validation;
+        // qui bisogna fare la query per aggiornare la validazione dell-articolo
+    }
     public static function getArticoli($category, $connection, $limit) {
         if ($category != null)
             $querySelect = "SELECT * FROM articolo, cat_art
@@ -269,7 +276,7 @@ class Articolo {
         } else { // ritorno la lista degli articoli all'interno del db
             $listaArticoli = array();
             while ($riga = mysqli_fetch_assoc($queryResult)) {
-                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
+                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img'], $riga['verificato']);
                 array_push($listaArticoli, $singoloArticolo);
             }
             if ($limit != null && count($listaArticoli) >= $limit)
@@ -286,11 +293,10 @@ class Articolo {
             return null;
         } else {
             $riga = mysqli_fetch_assoc($queryResult);
-            $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
+            $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img'], $riga['verificato']);
             return $singoloArticolo;
         }
     }
-
 
     public static function searchArticolo($keyword, $connection, $limit) {
         $querySelect = "SELECT *  FROM articolo WHERE articolo.titolo LIKE '%$keyword%' OR articolo.descrizione LIKE '%$keyword%' OR articolo.testo LIKE '%$keyword%'";
@@ -300,7 +306,7 @@ class Articolo {
         } else { // ritorno la lista degli articoli all'interno del db
             $listaArticoli = array();
             while ($riga = mysqli_fetch_assoc($queryResult)) {
-                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
+                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img'], $riga['verificato']);
                 array_push($listaArticoli, $singoloArticolo);
             }
             if ($limit != null && count($listaArticoli) >= $limit)

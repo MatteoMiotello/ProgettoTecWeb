@@ -56,7 +56,7 @@ class Access {
      *
      * @return bool
      */
-    public function isAuthenticated(): bool {
+    public static function isAuthenticated(): bool {
         if (!key_exists('authenticated', $_SESSION) || !$_SESSION['authenticated']) {
             return false;
         }

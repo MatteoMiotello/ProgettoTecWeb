@@ -10,6 +10,7 @@ class PreviewArticleBuilder extends AbstractBuilder {
     CONST IMGALT = '{{altImg}}';
     CONST IMGPATH = '{{imgPath}}';
     CONST ID = '{{articleID}}';
+    CONST VALIDATIONOPTION = '<acceptArticle />';
     /**
      * Titolo dell'articolo
      * @var string
@@ -116,6 +117,14 @@ class PreviewArticleBuilder extends AbstractBuilder {
     public function setImgAlt($imgAlt) {
         $this->imgAlt = $imgAlt;
         $this->Params[PreviewArticleBuilder::IMGALT] = $this->getImgAlt();
+        return $this;
+    }
+
+    public function setValidationOption($articolo) {
+        if($articolo->getValidation())
+            $this->Params[PreviewArticleBuilder::VALIDATIONOPTION] = "";
+        else 
+            $this->Params[PreviewArticleBuilder::VALIDATIONOPTION] = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/acceptArticleManagment.phtml');
         return $this;
     }
 }

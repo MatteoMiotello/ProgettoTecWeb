@@ -21,16 +21,14 @@ $handler->setContent(file_get_contents($filePath));
 if ($connessioneRiuscita == null)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
-    $rawArticles = Articolo::getArticoli($CategoryName, $connessioneRiuscita, null);
+    $rawArticles = Articolo::getArticoli(null, $connessioneRiuscita, null);
     $articlesList = '';
     if ($rawArticles != null) {
         foreach ($rawArticles as $articolo) {
             $articlesList .= (new PreviewArticleBuilder)
             ->setID($articolo->getId())
             ->setTitle($articolo->getTitolo())
-            ->setDescription($articolo->getDescrizione())
-            ->setImgPath($articolo->getImgPath())
-            ->setImgAlt($articolo->getAltImg())
+            ->setValidationOption($articolo)
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/articleManager.phtml'))
             ;
         }
@@ -40,6 +38,5 @@ else {
     }
 }
 $handler->setParam("<listaArticoli />",$articlesList);
+$handler->setParam("{{categoryName}}","Articoli");
 $handler->render();
-
-?>
