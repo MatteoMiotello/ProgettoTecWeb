@@ -345,7 +345,7 @@ class Articolo {
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
             return null;
-        else { // ritorno la lista degli articoli all'interno del db
+        else { 
             $riga = mysqli_fetch_assoc($queryResult);
             $autore = new User($riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'], $riga['password'], $riga['permesso'], $riga['img_path']);
             return $autore;
