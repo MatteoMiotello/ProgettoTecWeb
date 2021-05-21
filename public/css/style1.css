@@ -429,14 +429,16 @@ fieldset {
 
 .img_sel {
   height: min-content;
+  width: 50%;
 }
 
-.img_sel div+div {
+.img_sel input+label {
   margin-top: 1em;
 }
 
 .img_sel textarea {
   resize: none;
+  width: 100%;
   margin-bottom: 0;
 }
 
@@ -447,6 +449,7 @@ fieldset {
 .element {
   display: flex;
   flex-direction: row-reverse;
+  margin-top: 0.4em;
 }
 
 .element label {
@@ -455,10 +458,6 @@ fieldset {
 
 legend {
   padding: 0 0.5em;
-}
-
-.element {
-  margin-top: 0.2em;
 }
 
 .form_articolo > button {
@@ -1105,9 +1104,9 @@ td {
   .cat_page figcaption {
     font-size: 1.3em;
     padding: 2% 0;
-    bottom: -3.5px;
+    bottom: -7px;
     left:0;
-    right: -1.5px;
+    right: -2px;
   }
 
   .cat_img {
@@ -1117,6 +1116,7 @@ td {
   .img_sel{
     align-items: flex-start;
     margin-top: 1em;
+    width: auto;
   }
 
   .cat_sel {
