@@ -7,7 +7,7 @@
         </ul>
     </nav>
     <form method="post" action="/pages/article_search.php">
-        <input type="text" name="search" placeholder="Cerca..." id="search_bar" tabindex="0" required>
+        <input type="text" name="search" placeholder="Ricerca articoli" id="search_bar" tabindex="0" required>
         <button type="submit" value="submit" id="search_button" tabindex="0"><i class="fa fa-search"></i></button>
     </form>
     <div class="right_section hFlex">
@@ -31,8 +31,8 @@
       </div>
 </header>
 <div class="mob_srch" id="search_mobile">
-    <form action="article_filter.html?art_text = {input}">
-        <input type="text" placeholder="Cerca.." id="search_bar_mobile" required>
+    <form method="post" action="/pages/article_search.php">
+        <input type="text" placeholder="Ricerca articoli" id="search_bar_mobile" required>
         <button type="submit" id="search_button_mob"><i class="fa fa-search"></i></button>
     </form>
 </div>
