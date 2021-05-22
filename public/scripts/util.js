@@ -55,6 +55,11 @@ function validateForm(){
   else return true;
 }
 
+function isValid(x){
+  if(x.value.trim()=='' || !x.checkValidity())
+    return false;
+  return true;
+}
 
 /* ---- Login ---- */
 function validateLogin(){
@@ -93,6 +98,174 @@ function validateLogin(){
   return true;
 }
 
+
+/* ---- Registration ---- */
+function validateReg(){
+  var name = document.getElementById("nome");
+  var surn = document.getElementById("cognome");
+  var email = document.getElementById("email");
+  var pass = document.getElementById("password1");
+  var pass1 = document.getElementById("password2");
+
+  /* Elimina il messaggio d'errore dal browser, ma se JS viene disabilitato i campi rimangono 'required' */
+  name.removeAttribute("required");
+  surn.removeAttribute("required");
+  email.removeAttribute("required");
+  pass.removeAttribute("required");
+  pass1.removeAttribute("required");
+/*-----------------------------------------------------------------------------------------------------*/
+
+  var n = document.getElementById("name_err");
+  var s = document.getElementById("surn_err");
+  var m = document.getElementById("mail_err");
+  var p = document.getElementById("pass_err");
+  var p1 = document.getElementById("pass1_err");
+
+
+  if(!isValid(name) && !isValid(surn) && !isValid(email) && !isValid(pass)){
+    n.style.display = "inline-block";
+    s.style.display = "inline-block";
+    m.style.display = "inline-block";
+    p.style.display = "inline-block";
+  }
+  if(isValid(name) && !isValid(surn) && !isValid(email) && !isValid(pass)){
+    n.style.display = "none";
+    s.style.display = "inline-block";
+    m.style.display = "inline-block";
+    p.style.display = "inline-block";
+  }
+  if(!isValid(name) && isValid(surn) && !isValid(email) && !isValid(pass)){
+    n.style.display = "inline-block";
+    s.style.display = "none";
+    m.style.display = "inline-block";
+    p.style.display = "inline-block";
+  }
+  if(!isValid(name) && !isValid(surn) && isValid(email) && !isValid(pass)){
+    n.style.display = "inline-block";
+    s.style.display = "inline-block";
+    m.style.display = "none";
+    p.style.display = "inline-block";
+  }
+  if(!isValid(name) && !isValid(surn) && !isValid(email) && isValid(pass)){
+    n.style.display = "inline-block";
+    s.style.display = "inline-block";
+    m.style.display = "inline-block";
+    p.style.display = "none";
+    if(pass.value===pass1.value){
+      p1.style.display = "none";
+    }
+    else {
+      p1.style.display = "inline-block";
+    }
+  }
+  if(isValid(name) && isValid(surn) && !isValid(email) && !isValid(pass)){
+    n.style.display = "none";
+    s.style.display = "none";
+    m.style.display = "inline-block";
+    p.style.display = "inline-block";
+  }
+  if(isValid(name) && !isValid(surn) && isValid(email) && !isValid(pass)){
+    n.style.display = "none";
+    s.style.display = "inline-block";
+    m.style.display = "none";
+    p.style.display = "inline-block";
+  }
+  if(isValid(name) && !isValid(surn) && !isValid(email) && isValid(pass)){
+    n.style.display = "none";
+    s.style.display = "inline-block";
+    m.style.display = "inline-block";
+    p.style.display = "none";
+    if(pass.value===pass1.value){
+      p1.style.display = "none";
+    }
+    else {
+      p1.style.display = "inline-block";
+    }
+  }
+  if(!isValid(name) && isValid(surn) && isValid(email) && !isValid(pass)){
+    n.style.display = "inline-block";
+    s.style.display = "none";
+    m.style.display = "none";
+    p.style.display = "inline-block";
+  }
+  if(!isValid(name) && isValid(surn) && !isValid(email) && isValid(pass)){
+    n.style.display = "inline-block";
+    s.style.display = "none";
+    m.style.display = "inline-block";
+    p.style.display = "none";
+    if(pass.value===pass1.value){
+      p1.style.display = "none";
+    }
+    else {
+      p1.style.display = "inline-block";
+    }
+  }
+  if(!isValid(name) && !isValid(surn) && isValid(email) && isValid(pass)){
+    n.style.display = "inline-block";
+    s.style.display = "inline-block";
+    m.style.display = "none";
+    p.style.display = "none";
+    if(pass.value===pass1.value){
+      p1.style.display = "none";
+    }
+    else {
+      p1.style.display = "inline-block";
+    }
+  }
+  if(isValid(name) && isValid(surn) && isValid(email) && !isValid(pass)){
+    n.style.display = "none";
+    s.style.display = "none";
+    m.style.display = "none";
+    p.style.display = "inline-block";
+  }
+  if(isValid(name) && isValid(surn) && !isValid(email) && isValid(pass)){
+    n.style.display = "none";
+    s.style.display = "none";
+    m.style.display = "inline-block";
+    p.style.display = "none";
+    if(pass.value===pass1.value){
+      p1.style.display = "none";
+    }
+    else {
+      p1.style.display = "inline-block";
+    }
+  }
+  if(isValid(name) && !isValid(surn) && isValid(email) && isValid(pass)){
+    n.style.display = "none";
+    s.style.display = "inline-block";
+    m.style.display = "none";
+    p.style.display = "none";
+    if(pass.value===pass1.value){
+      p1.style.display = "none";
+    }
+    else {
+      p1.style.display = "inline-block";
+    }
+  }
+  if(!isValid(name) && isValid(surn) && isValid(email) && isValid(pass)){
+    n.style.display = "inline-block";
+    s.style.display = "none";
+    m.style.display = "none";
+    p.style.display = "none";
+    if(pass.value===pass1.value){
+      p1.style.display = "none";
+    }
+    else {
+      p1.style.display = "inline-block";
+    }
+  }
+  if(isValid(name) && isValid(surn) && isValid(email) && isValid(pass)){
+    n.style.display = "none";
+    s.style.display = "none";
+    m.style.display = "none";
+    p.style.display = "none";
+    if(pass.value===pass1.value){
+      return true;
+    }
+  }
+  return false;
+}
+
 // funzioni estetiche, con JS disattivato nessuna funzionalità viene a mancare
 /* ---- nasconde il pulsante "torna su" e lo mostra solo dopo aver fatto scroll verticale ---- */
 window.onload = function() {hideBtn()};
@@ -110,8 +283,3 @@ function scrollFunction() {
 function hideBtn(){
   document.getElementById("myBtn").style.display = "none";
 }
-
-/*function topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-}*/

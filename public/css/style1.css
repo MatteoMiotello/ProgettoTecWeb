@@ -709,9 +709,13 @@ section[role=comment] div p:first-child{
   font-weight: 500;
 }
 
-#mail_err, #pass_err, #err_msg{
+#mail_err, #pass_err, #pass1_err, #err_msg, #name_err, #surn_err{
   display: none;
   color: red;
+}
+
+label > #mail_err, label > #pass_err, label > #pass1_err, label > #name_err, label > #surn_err{
+  margin-left: 1em;
 }
 
 .box input[type="email"], .box input[type="password"]{
