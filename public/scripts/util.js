@@ -55,6 +55,44 @@ function validateForm(){
   else return true;
 }
 
+
+/* ---- Login ---- */
+function validateLogin(){
+  var email = document.getElementById("email_addr");
+  var pass = document.getElementById("pw");
+
+  /* Elimina il messaggio d'errore dal browser, ma se JS viene disabilitato i campi rimangono 'required' */
+  email.removeAttribute("required");
+  pass.removeAttribute("required");
+  /*-----------------------------------------------------------------------------------------------------*/
+
+  var m = document.getElementById("mail_err");
+  var p = document.getElementById("pass_err");
+  if(email.value.trim()=='' || !email.checkValidity()){
+    email.setCustomValidity("");
+    m.style.display = "block";
+    if(pass.value.trim()==''){
+      pass.setCustomValidity("");
+      p.style.display = "block";
+    }
+    else {
+      p.style.display = "none";
+    }
+    return false;
+  }
+  else {
+    m.style.display = "none";
+    if(pass.value.trim()==''){
+      pass.setCustomValidity("");
+      p.style.display = "block";
+      return false
+    }
+  }
+  m.style.display = "none";
+  p.style.display = "none";
+  return true;
+}
+
 // funzioni estetiche, con JS disattivato nessuna funzionalità viene a mancare
 /* ---- nasconde il pulsante "torna su" e lo mostra solo dopo aver fatto scroll verticale ---- */
 window.onload = function() {hideBtn()};

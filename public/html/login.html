@@ -1,10 +1,13 @@
 <div id="wrapper" class="vFlex">
   <div class="vFlex" id="wrapper_login">
-    <form class="box" action="index.html" method="post" id="log">
+    <form class="box" action="index.php" onsubmit="return validateLogin()" method="post" id="log">
         <h1><span lang="en">LOGIN</span></h1>
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password" id="pw">
-        <input type="submit" value="Login" id="log_btn">
+        <p id="mail_err">Indirizzo email non valido</p>
+        <input type="email" id="email_addr" placeholder="Email" required>
+        <p id="pass_err">Inserisci la password</p>
+        <input type="password" placeholder="Password" id="pw" required>
+        <p id="err_msg">Indirizzo email e/o password errati</p>
+        <input type="submit" onclick="validateLogin()" value="Login" id="log_btn">
     </form>
     <form class="box" action="register.html" method="post" id="reg">
       <p>Non sei ancora registrato?</p>
