@@ -56,8 +56,15 @@ function validateForm(){
 }
 
 function isValid(x){
-  if(x.value.trim()=='' || !x.checkValidity())
+  if(x===document.getElementById("email")){
+    var ex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    if(!ex.test(x.value))
+      return false;
+  }
+  else{
+    if(x.value.trim()=='' || !x.checkValidity())
     return false;
+  }
   return true;
 }
 
@@ -108,8 +115,12 @@ function validateReg(){
   var pass1 = document.getElementById("password2");
 
   /* Elimina il messaggio d'errore dal browser, ma se JS viene disabilitato i campi rimangono 'required' */
+
+  name.removeAttribute("pattern");
   name.removeAttribute("required");
+  surn.removeAttribute("pattern");
   surn.removeAttribute("required");
+  email.removeAttribute("pattern");
   email.removeAttribute("required");
   pass.removeAttribute("required");
   pass1.removeAttribute("required");
@@ -151,7 +162,7 @@ function validateReg(){
     s.style.display = "inline-block";
     m.style.display = "inline-block";
     p.style.display = "none";
-    if(pass.value===pass1.value){
+    if(pass.value==pass1.value){
       p1.style.display = "none";
     }
     else {
@@ -175,7 +186,7 @@ function validateReg(){
     s.style.display = "inline-block";
     m.style.display = "inline-block";
     p.style.display = "none";
-    if(pass.value===pass1.value){
+    if(pass.value==pass1.value){
       p1.style.display = "none";
     }
     else {
@@ -193,7 +204,7 @@ function validateReg(){
     s.style.display = "none";
     m.style.display = "inline-block";
     p.style.display = "none";
-    if(pass.value===pass1.value){
+    if(pass.value==pass1.value){
       p1.style.display = "none";
     }
     else {
@@ -205,7 +216,7 @@ function validateReg(){
     s.style.display = "inline-block";
     m.style.display = "none";
     p.style.display = "none";
-    if(pass.value===pass1.value){
+    if(pass.value==pass1.value){
       p1.style.display = "none";
     }
     else {
@@ -223,7 +234,7 @@ function validateReg(){
     s.style.display = "none";
     m.style.display = "inline-block";
     p.style.display = "none";
-    if(pass.value===pass1.value){
+    if(pass.value==pass1.value){
       p1.style.display = "none";
     }
     else {
@@ -235,7 +246,7 @@ function validateReg(){
     s.style.display = "inline-block";
     m.style.display = "none";
     p.style.display = "none";
-    if(pass.value===pass1.value){
+    if(pass.value==pass1.value){
       p1.style.display = "none";
     }
     else {
@@ -247,7 +258,7 @@ function validateReg(){
     s.style.display = "none";
     m.style.display = "none";
     p.style.display = "none";
-    if(pass.value===pass1.value){
+    if(pass.value==pass1.value){
       p1.style.display = "none";
     }
     else {
@@ -259,7 +270,7 @@ function validateReg(){
     s.style.display = "none";
     m.style.display = "none";
     p.style.display = "none";
-    if(pass.value===pass1.value){
+    if(pass.value==pass1.value){
       return true;
     }
   }

@@ -83,34 +83,31 @@
           </div>
           <div class="vFlex">
             <input type="radio" name="pic_sel" id="female_icon">
-            <img class="user_img" src="../img/female_icon.png" alt="Icona utente femmina" title="Icona utente maschio">
+            <img class="user_img" src="../img/female_icon.png" alt="Icona utente femmina" title="Icona utente femmina">
           </div>
           <div class="vFlex">
             <input type="radio" name="pic_sel" id="genderfluid_icon">
-            <img class="user_img" src="../img/genderfluid_icon.png" alt="Icona utente gender fluid" title="Icona utente maschio">
+            <img class="user_img" src="../img/genderfluid_icon.png" alt="Icona utente non binario" title="Icona utente non binario">
           </div>
         </fieldset>
         <fieldset class="vFlex">
           <legend>Inserisci i tuoi dati personali</legend>
           <label for="nome">Nome<span id="name_err">Sono accettati solo caratteri alfabetici</span></label>
-          <input type="text" id="nome" required>
+          <input type="text" id="nome" pattern="^[a-zA-Z]$" required>
           <label for="cognome">Cognome<span id="surn_err">Sono accettati solo caratteri alfabetici</span></label>
-          <input type="text" id="cognome" required>
+          <input type="text" id="cognome" pattern="^[a-zA-Z]$" required>
         </fieldset>
       </div>
         <fieldset class="vFlex">
           <legend>Inserisci i dati d'accesso</legend>
           <label for="email">Email <span id="mail_err">Inserisci un Indirizzo valido</span></label>
-          <input type="email" id="email" required>
+          <input type="text" id="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
           <label for="password">Password (almeno 8 caratteri) <span id="pass_err">Inserisci una password valida</span></label>
           <input type="password" id="password1" required>
           <label for="password">Ripeti password <span id="pass1_err">Le password non combaciano</span></label>
           <input type="password" id="password2" required>
         </fieldset>
-        <div class="confirm">
-          <input type="checkbox" id="privacy" value="Accetto bla bla privacy" required>
-          <span>Accetto l'informativa della <a href="#">privacy</a></span>
-        </div>
+        <span>Cliccando conferma accetti l'informativa della <a href="#">privacy</a></span>
         <input type="submit" onclick="validateReg()" id="reg_btn" value="Conferma dati">
     </form>
   </div>
