@@ -940,6 +940,14 @@ td {
   text-align: center;
   justify-content: center;
 }
+
+.articolo_non_validato {
+  background-color: red;
+  color: white;
+  text-align: center;
+  justify-content: center;
+}
+
 @media screen and (max-width: 1200px) {
   header {
     font-size: 0.88em;

@@ -316,10 +316,10 @@ class Articolo {
         return $listaArticoli;
     }
 
-    public static function validateArticle($Id, $Connection) {
+    public static function validateArticle($Id, $Connection): mysqli {
         $querySelect = "UPDATE articolo SET articolo.verificato = 1 WHERE articolo.ID = $Id";
         $queryResult = mysqli_query($Connection, $querySelect);
-        return $queryResult;
+        return $Connection;
     }
 
     /*public function setAltImg($value) {

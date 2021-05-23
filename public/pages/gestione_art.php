@@ -29,10 +29,10 @@ else {
     if (isset($_GET['art_id'])) {
         $id_art = $_GET['art_id'];
         $result = Articolo::validateArticle($id_art, $connessioneRiuscita);
-        if ($result)
+        if (mysqli_affected_rows($result))
             $articlesList .= '<article class="articolo_validato"><p>Articolo con id=' . $id_art . ' è stato validato con successo </p></article>';
         else
-            $articlesList .= '<article class="articolo_validato"><p>Articolo con id=' . $id_art . ' è stato validato con successo </p></articl>';
+            $articlesList .= '<article class="articolo_non_validato"><p>L\'articolo selezionato non è presente</p></article>';
     }
     $rawArticles = Articolo::getArticoli(null, $connessioneRiuscita, null);
     if ($rawArticles != null) {
