@@ -1,0 +1,308 @@
+
+
+
+
+Relazione Progetto Tecnologie Web a.s. 2020/2021
+
+
+Tommaso Allegretti: 1201247 - tommaso.allegretti@unipd.it
+Giosuè Calgaro
+Matteo Miotello
+Andrea Polato
+
+
+1 Introduzione 
+ 
+
+1.1 Abstract
+
+Il progetto che abbiamo scelto riguarda lo sviluppo del sito web di una testata giornalistica che mira ad espandere il proprio pubblico di lettori tramite il passaggio al digitale delle notizie già offerte dalla versione cartacea.
+
+Il sito ha il principale scopo di permettere ai lettori di visionare gli articoli ma non solo, è infatti presente anche una funzione di sottomissione di articoli tramite la quale è concessa una forma di input al visitatore.
+
+L'utente può inviare, tramite il form, un articolo e un admin potrà approvarlo, modificarlo o rifiutarlo tramite l'apposita dashboard.
+
+Inoltre ogni articolo offre una funzionalità di mi piace, non mi piace e di commmento attraverso il quale l'utente può comunicare la propria opinione sul contenuto pubblicato.
+
+
+1.2 Analisi utenza
+
+L'utenza principale saranno persone giovani dai 18 ai 35 anni in quanto target di questa campagna di digitalizzazione poichè la maggior parte del pubblico adulto  è già fidelizzato alla versione su carta stampata del prodotto.
+
+Nonostante il pubblico di riferimento sia relativamente giovane è necessario mantenere un linguaggio adatto e professionale che si addica ad una testata giornalistica.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2 Sviluppo
+
+
+2.1 Progettazione
+
+In una prima fase è stato tenuto un brainstorming dove sono state discusse: idee sull'oggetto del sito, funzionalità da implementare, esperienze dei membri del gruppo con varie tecnologie web, preferenze sul layout e stile da seguire e la suddivisione dei compiti.
+
+Successivamente abbiamo proseguito divisi in gruppi da 2 per comodità di comunicazione: 2 persone per il front-end e 2 persone per il back-end, sempre tenendo periodici incontri in via telematica per aggiornamento dei progressi e critiche e migliorie al progetto.
+
+Finito lo sviluppo delle due parti è stata svolta infine una breve serie di incontri per apportare le ultime modifiche e per fare un check del raggiungimento degli obbiettivi che ci eravamo posti in partenza.
+
+
+2.2 Design
+
+É stato deciso di adottare come standard HTML 5 per la semplicità si utilizzo ed abbiamo creato un layout estremamente intuitivo poichè si conforma alla maggior parte dei moderni siti web rendendo così non necessario spiegare all'utente come navigare all'interno delle pagine.
+
+La gerarchia creata è stat ideata seguendo il principio che una buona gerarchia debba essere abbastanza ampia e poco profonda, in modo da rendere disponibile ogni contenuto con pochi click.
+
+Inoltre le pagine di stile sono state scritte in CSS puro per rendere il codice solido ed efficiente e sono state utilizzate media queries per rendere il contenuto del sito fruibile per gli utenti che vi accedono attraverso la maggior parte dei dispositivi e risoluzioni.
+
+
+2.3 HTML e CSS
+
+La separazione tra parte statica e parte dinamica è stata effettuata utilizzando un codice statico per quanto riguarda i pannelli e i menu del sito, mentre le informazioni che vengono necessariamente prese dal database sono ovviamente dinamiche, di queste fanno parte gli articoli, i titoli degli stessi,
+nomi utente, numero di like, commenti, ecc.
+
+Abbiamo deciso di non sviluppare delle pagine con uso di template in modo da ridurre al minimo il numero di chiamate da effettuare al database e quindi migliorare le performance del sito.
+
+
+
+Per quanto riguarda l'adattamento alle varie risoluzioni abbiamo utilizzato delle media query che adattino lo stile alle principali risoluzioni utilizzate (desktop, tablet, mobile), per quanto la maggior parte dell'intefaccia sia rimasta invariata, sono stati presi alcuni accorgimenti per renderla più facilmente utilizzabile dagli utenti che utilizzano dispositivi mobili.
+
+Il menu che in modalità desktop è un semplice menu a barra in cima alla pagina è stato cambiato in un menu "ad hamburger" in quanto la maggior parte degli utenti che utilizzano dispositivi mobili sono abituati (e si aspettano) di trovare quel tipo di funzionalità, rendendo il sito più intuitivo.
+
+Inoltre tutte le grandezze sono state specificate in unità relative in modo che una piccola variazione di risoluzione non crei problemi con il layout (em e %).
+
+
+2.4 PHP
+
+
+2.5 Javascript
+
+La parte di Javascript è stata sviluppata con lo scopo di rendere più interattive e dinamiche alcune parti dell'interfaccia grafica, in particolar modo è stato
+utilizzato per:
+
+mostrare/nascondere il menu ad hamburger in base alla risoluzione del dispositivo da cui si visita il sito web
+
+cambiare il modo in cui si accede alla barra di ricerca in base alla risoluzione del dispositivo da cui si visita il sito web (da mobile la barra è acceduta tramite il menu ad hamburger)
+
+mostrare il bottone "go to top", che serve a tornare a in cima alla pagina, una volta scesi verso il basso
+
+
+Come si può notare la parte di Javascript è molto ridotta e si limita a poche funzionalità in modo da migliorare le performance e il range di browser in grado di supportare il nostro sito.
+
+A questo scopo abbiamo evitato qualunque utilizzo di AJAX in modo da rendere il sito fruibile anche per versioni browser più datate.
+
+
+
+
+
+
+
+
+
+
+3 Accessibilità
+
+Grande attenzione è stata dedicata allo scopo di rendere il nostro sito il più accessibile possibile in quanto crediamo che una fonte di notizie dovrebbe essere fruibile da qualsiasi categoria di persone.
+
+Abbiamo cercato di prendere tutte le misure che ci permettessero di rendere il contenuto del sito adatto anche a utenti con impedimenti visivi, per i quali può essere molto difficile visitare (e comprendere i contenuti) di un sito web.
+
+Sono stati ordinati i bottoni dell'intefaccia con dei tabindex in modo da fornire all'utente un modo di scorrere agevolmente i contenuti delle pagine in sequenza logica. 
+
+Ogni immagine è stata contrassegnata con rispettivo alt in modo che, anche se lette da screen reader, le immagini possano lo stesso fornire un qualche tipo di informazione al lettore.
+
+Ricordiamo tuttavia che il nostro progetto non si basa sulla trasmissione di informazioni tramite immagini, per questo esse rappresentano solo un media aggiuntivo attraverso il quale ricevere l'informazione.
+
+Nelle fasi iniziali del progetto avevamo pensato all'idea di rendere possibile l'upload di immagini da parte dell'utente per quanto riguarda la feature "scrivi il tuo articolo".
+
+Idea poi scartata poichè al momento dell'approvazione dell'articolo l'admin avrebbe anche dovuto scegliere un alt per l'immagine o, ancora peggio, affidare all'utente che propone l'articolo questo compito.
+
+Secondo gli standard HTML i link sono rimasti inalterati in modo da mostrare all'utente esattamente quali link sono già stati visitati e su quali si sta passando sopra col cursore.
+
+IMMAGINE LINK COLOR MERDA
+
+3.1 Colori
+
+DESCRIZIONE TEST SUI COLORI + IMMAGINI
+
+3.2 Screen Reader
+
+DESCRIZIONE TEST SCREEN READER
+
+
+
+
+
+4 Mobile
+
+
+DESCRIZIONE ROBE MOBILE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IMMAGINI DIFFERENZA DESKTOP - MOBILE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5 Configurazione
+
+Di seguito viene  spiegato come accedere al sito e testare tutte le features disponibili.
+
+5.1 Requisiti
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Suddivisione compiti:
+
+Referente: Giosuè Calgaro
+
+Front-end:
+
+Ideazione layout: Andrea Polato, Tommaso Allegretti
+Sviluppo HTML: Andrea Polato, Tommaso Allegretti
+Sviluppo CSS: Andrea Polato, Tommaso Allegretti
+CSS di stampa: Tommaso Allegretti
+Test screen reader: Andrea Polato
+Test colore: Andrea Polato
+Ricerca immagini: Tommaso Allegretti
+
+Back-end:
+
