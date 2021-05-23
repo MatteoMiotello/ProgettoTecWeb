@@ -1,4 +1,10 @@
 <?php
+
+$id_articolo = null;
+
+if(isset($_GET['art_id']))
+    $id_articolo = $_GET['art_id'];
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -21,26 +27,38 @@ $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/form_articolo_admin_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 $handler->setCurrentRoute('form_articolo');
 
-if (!$connessioneRiuscita)
+if (!$connessioneRiuscita && !$id_articolo)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
+    $articolo = Articolo::getArticolo($id_articolo, $connessioneRiuscita);
+    $autore = User::getArticleAuthor($articolo->getID(), $connessioneRiuscita);
+    $categorieArticolo = Categoria::getCategorieArticolo($articolo->getID(), $connessioneRiuscita);
 $categorie = Categoria::getCategorie($connessioneRiuscita);
+$articleContent = (new ArticleBuilder)
+->setTitle($articolo->getTitle())
+->setDescription($articolo->getDescription())
+->setContent($articolo->getContent())
+->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/formArticleContent.phtml'));
 if ($categorie != null) {
     $listaCategoria = '';
     foreach ($categorie as $singolaCategoria) {
-        $listaCategoria .= (new CategoryBuilder)
-        ->setName($singolaCategoria->getNome())
-        ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/chooseCategoryFormArticle.phtml'))
-        ;
+        $value = (new CategoryBuilder)
+        ->setName($singolaCategoria->getNome());
+
+        foreach($categorieArticolo as $cat){
+            if($singolaCategoria->getNome() == $cat->getNome())
+                $value->setActive();
+        }
+
+        $listaCategoria .= $value->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/chooseCategoryFormArticle.phtml'));
     }
 } else {
     // messaggio che dice che non ci sono categorie del db
     $listaCategoria = "<div>nessuna categoria presente</div>";
 }
 
-$articleContent = (new ArticleBuilder)->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/formArticleContent.phtml'));
 $handler->setParam("<formArticleContent />", $articleContent);
-
 $handler->setParam("<listaCategorie />",$listaCategoria);
 $handler->render(); 
 }
+ 

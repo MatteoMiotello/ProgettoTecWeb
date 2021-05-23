@@ -60,8 +60,8 @@ else {
         $articolo = (new ArticleBuilder)
             ->setImgArticlePath($articolo->getImgPath())
             ->setImgArticleAlt($articolo->getAltImg())
-            ->setTitle($articolo->getTitolo())
-            ->setContent($articolo->getTesto())
+            ->setTitle($articolo->getTitle())
+            ->setContent($articolo->getContent())
             ->setImgPathAuthor($autore->getImg())
             ->setNameAuthor($autore->getName())
             ->setEmailAuthor($autore->getEmail());
@@ -78,7 +78,7 @@ else {
     if ($rawComments) {
         $comment = '';
         foreach ($rawComments as $rawCommento) {
-            $author = User::getUserById($connessioneRiuscita, $rawCommento->getIdAutore());
+            $author = User::getUserById($rawCommento->getIdAutore(), $connessioneRiuscita);
             $comment .= (new CommentBuilder)
                 ->setComment($rawCommento->getTesto())
                 ->setName($author->getName())

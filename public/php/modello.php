@@ -67,22 +67,22 @@ class Articolo {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
         try {
-            $this->setTitolo($titolo);
+            $this->setTitle($titolo);
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
         try {
-            $this->setTesto($testo);
+            $this->setContent($testo);
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
         try {
-            $this->setDescrizione($descrizione);
+            $this->setDescription($descrizione);
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
         try {
-            $this->setAutore($autore);
+            $this->setAuthor($autore);
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
@@ -143,12 +143,12 @@ class Articolo {
     }
 
 
-    public function getTitolo() {
+    public function getTitle() {
         return $this->titolo;
     }
 
 
-    function setTitolo($value) {
+    function setTitle($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 126);
         if ($correctCharacters)
             $this->titolo = $value;
@@ -157,12 +157,12 @@ class Articolo {
     }
 
 
-    function getDescrizione() {
+    function getDescription() {
         return $this->descrizione;
     }
 
 
-    function setDescrizione($value) {
+    function setDescription($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 350);
         if ($correctCharacters)
             $this->descrizione = $value;
@@ -171,12 +171,12 @@ class Articolo {
     }
 
 
-    public function getTesto() {
+    public function getContent() {
         return $this->testo;
     }
 
 
-    public function setTesto($value) {
+    public function setContent($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 10000);
         if ($correctCharacters)
             $this->testo = $value;
@@ -185,12 +185,12 @@ class Articolo {
     }
 
 
-    public function getAutore() {
+    public function getAuthor() {
         return $this->autore;
     }
 
 
-    public function setAutore($value) {
+    public function setAuthor($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "digit", 6);
         if ($correctCharacters)
             $this->autore = $value;
@@ -262,6 +262,7 @@ class Articolo {
     public function setValidation($validation) {
         $this->validation = $validation;
         // qui bisogna fare la query per aggiornare la validazione dell-articolo
+        // non  necessariamente, basta aggiungere una query che prenda tutti i valori dell'articolo e li salva.
     }
     public static function getArticoli($category, $connection, $limit) {
         if ($category != null)
@@ -315,6 +316,11 @@ class Articolo {
         return $listaArticoli;
     }
 
+    public static function validateArticle($Id, $Connection) {
+        $querySelect = "UPDATE articolo SET articolo.verificato = 1 WHERE articolo.ID = $Id";
+        $queryResult = mysqli_query($Connection, $querySelect);
+        return $queryResult;
+    }
 
     /*public function setAltImg($value) {
         (ctype_alpha($value) && strlen($value) <= 255) ? $this->altImg = $value : $this->altImg = "";

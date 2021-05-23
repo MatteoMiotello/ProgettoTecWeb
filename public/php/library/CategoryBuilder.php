@@ -6,14 +6,18 @@ class CategoryBuilder extends AbstractBuilder {
     CONST CATEGORYNAME = '{{categoryName}}';
     CONST CATEGORYIMG = '{{categoryImg}}';
     CONST CATEGORYDESCRIPTION = '{{categoryDescription}}';
+    CONST ISACTIVE = '{{checked}}';
 
     private $Name;
     private $Description;
     private $ImgCategoryPath;
+    private $isActive;
 
     function __construct() {
         $this->Params[CategoryBuilder::CATEGORYNAME] = 'Nessun nome categoria presente';
         $this->Params[CategoryBuilder::CATEGORYDESCRIPTION] = 'Nessuna descrizione categoria presente';
+        $this->Params[CategoryBuilder::ISACTIVE] = "";
+        $this->isActive = false;
     }
 
     public function getName() {
@@ -44,6 +48,16 @@ class CategoryBuilder extends AbstractBuilder {
         $this->ImgCategoryPath = $Img;
         $this->Params[CategoryBuilder::CATEGORYIMG] = $this->getImgCategoryPath();
         return $this;
+    }
+
+    public function setActive() {
+        $this->isActive = true;
+        $this->Params[CategoryBuilder::ISACTIVE] = "Checked";
+        return $this;
+    }
+
+    public function isActive() {
+        return $this->isActive;
     }
 }
 ?>

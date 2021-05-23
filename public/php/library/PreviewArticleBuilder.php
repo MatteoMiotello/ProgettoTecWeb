@@ -120,11 +120,12 @@ class PreviewArticleBuilder extends AbstractBuilder {
         return $this;
     }
 
-    public function setValidationOption($articolo) {
-        if($articolo->getValidation())
+    public function setValidationOption($bool) {
+        if($bool)
             $this->Params[PreviewArticleBuilder::VALIDATIONOPTION] = "";
-        else 
+        else {
             $this->Params[PreviewArticleBuilder::VALIDATIONOPTION] = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/acceptArticleManagment.phtml');
+        }
         return $this;
     }
 }

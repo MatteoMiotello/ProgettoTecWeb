@@ -1,15 +1,7 @@
 <div id="wrapper" class="vFlex">
     <form action="/post_article.php" class="form_articolo vFlex" enctype="multipart/form-data">
         <h1>Scrivi il tuo articolo!</h1>
-        <fieldset class="cont_art vFlex">
-          <legend>Contenuto dell'articolo</legend>
-          <label for="titolo_art">Titolo dell'articolo (massimo 126 caratteri)</label>
-          <textarea spellcheck="true" maxlength="126" id="titolo_art" rows="2" placeholder="Titolo..." tabindex="0" required></textarea>
-          <label for="descr_art">Descrizione articolo (massimo 300 caratteri)</label>
-          <textarea spellcheck="true" maxlength="300" id="descr_art" rows="3" placeholder="Descrizione..." tabindex="0" required></textarea>
-          <label for="testo_art">Testo dell'articolo (massimo 10000 caratteri)</label>
-          <textarea spellcheck="true" maxlength="10000" id="testo_art" rows="10" placeholder="Testo dell'articolo..." tabindex="0" required></textarea>
-        </fieldset>
+        <formArticleContent />
         <div class="cat_img hFlex">
             <fieldset class="cat_sel vFlex">
                 <legend>Scegli una o pi&ugrave; categorie: (opzionale)</legend>

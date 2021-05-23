@@ -6,6 +6,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php' ;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/CategoryBuilder.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
 
 $dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
@@ -37,6 +38,8 @@ if ($categorie != null) {
     // messaggio che dice che non ci sono categorie del db
     $listaCategoria = "<div>nessuna categoria presente</div>";
 }
+$articleContent = (new ArticleBuilder)->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/formArticleContent.phtml'));
+$handler->setParam("<formArticleContent />", $articleContent);
 $handler->setParam("<listaCategorie />",$listaCategoria);
 $handler->render();
 }

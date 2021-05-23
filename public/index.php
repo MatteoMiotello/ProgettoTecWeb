@@ -34,8 +34,8 @@ else {
         foreach ($rawArticles as $articolo) {
             $articlesList .= (new PreviewArticleBuilder)
             ->setID($articolo->getId())
-            ->setTitle($articolo->getTitolo())
-            ->setDescription($articolo->getDescrizione())
+            ->setTitle($articolo->getTitle())
+            ->setDescription($articolo->getDescription())
             ->setImgPath($articolo->getImgPath())
             ->setImgAlt($articolo->getAltImg())
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/articlePreview.phtml'))
@@ -51,7 +51,7 @@ else {
     if ($covidNews != null) {
         foreach ($covidNews as $articolo) {
             $covidNewsList .= (new PreviewArticleBuilder)
-            ->setTitle($articolo->getTitolo())
+            ->setTitle($articolo->getTitle())
             ->setID($articolo->getId())
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/articleNews.phtml'))
             ;
