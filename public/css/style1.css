@@ -709,10 +709,15 @@ section[role=comment] div p:first-child{
   font-weight: 500;
 }
 
-#mail_err, #pass_err, #err_msg{
+#mail_err, #pass_err, #pass1_err, #err_msg, #name_err, #surn_err, #titl_err, #desc_err, #text_err{
   display: none;
   color: red;
+  margin-left: 1em;
 }
+
+/*label > #mail_err, label > #pass_err, label > #pass1_err, label > #name_err, label > #surn_err, label{
+  margin-left: 1em;
+}*/
 
 .box input[type="email"], .box input[type="password"]{
   background: none;
@@ -867,8 +872,8 @@ input[type=text], input[type=email], input[type=password] {
   margin-top: 1em;
 }
 
-.confirm {
-  margin-top: 1em;
+fieldset + span {
+  margin: 1em 0 0.5em 0;
 }
 #reg_btn{
   height: 3em;
