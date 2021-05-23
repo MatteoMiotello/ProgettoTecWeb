@@ -24,22 +24,30 @@ String.prototype.trim = function() {
 }
 
 function testArea(x){
+  var t = document.getElementById("titl_err");
+  var d = document.getElementById("desc_err");
+  var tx = document.getElementById("text_err");
   if(x.value.trim()==''){
     if(x === document.getElementById("titolo_art"))
-      x.setCustomValidity("Inserisci un titolo");
+      t.style.display= "inline-block";
     else {
-      document.getElementById("titolo_art").setCustomValidity("");
       if(x === document.getElementById("descr_art"))
-        x.setCustomValidity("Inserisci una descrizione");
+        d.style.display= "inline-block";
+      else
+        tx.style.display= "inline-block";
+      }
+      return false;
+    }
+  else{
+    if(x === document.getElementById("titolo_art"))
+      t.style.display = "none";
+    else{
+      if(x === document.getElementById("descr_art"))
+        d.style.display = "none";
       else {
-        document.getElementById("descr_art").setCustomValidity("");
-        x.setCustomValidity("Inserisci il testo");
+        tx.style.display = "none";
       }
     }
-    return false;
-  }
-  else{
-    document.getElementById("testo_art").setCustomValidity("");
     return true;
   }
 }
@@ -49,6 +57,12 @@ function validateForm(){
   var titolo = document.getElementById("titolo_art");
   var desc = document.getElementById("descr_art");
   var testo = document.getElementById("testo_art");
+  titolo.removeAttribute("required");
+  desc.removeAttribute("required");
+  testo.removeAttribute("required");
+  testArea(titolo);
+  testArea(desc);
+  testArea(testo);
   if(!testArea(titolo) || !testArea(desc) || !testArea(testo)){
     return false;
   }
