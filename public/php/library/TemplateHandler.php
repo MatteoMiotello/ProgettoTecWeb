@@ -103,9 +103,11 @@ class TemplateHandler {
      */
     public function setHeaderParams() {
         $links = HeaderHandler::getHeaderLinks($this->CurrentRoute);
+        $user = HeaderHandler::getUserInfo();
 
         $this->setParam('<nav-link/>', $links);
-        $this->setParam('<user-cont/>', TemplateHandler::getUserCont());
+        $this->setParam( '<userCont/>', $user );
+
     }
 
 
