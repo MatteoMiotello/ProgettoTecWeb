@@ -25,6 +25,12 @@ if ($connessioneRiuscita && isset($_POST['comment'])) {
 $handler = new TemplateHandler();
 $handler->setPageTitle('Articolo');
 $handler->setBreadcrumb('Articolo');
+$handler
+    ->addLink('/index.php', 'Home');
+
+if (strpos($_SERVER['HTTP_REFERER'], 'categorie.php')) {
+    $handler->addLink('/pages/categorie.php', 'Categorie');
+}
 
 // reperisco il link alla categoria dalla quale arriva tramite referer
 if (strpos($_SERVER['HTTP_REFERER'], '?cat_name=')) {
@@ -33,12 +39,12 @@ if (strpos($_SERVER['HTTP_REFERER'], '?cat_name=')) {
     $categoryName = ucfirst($categoryName);
 
     $linkTitle = 'Categoria: ' . $categoryName;
+    $handler->addLink('/pages/categorie.php', 'Categorie');
+
+    $handler->addLink($_SERVER['HTTP_REFERER'], $linkTitle);
 }
 
-$handler
-    ->addLink('/inddex.php', 'Home')
-    ->addLink('/pages/categorie.php', 'Categorie')
-    ->addLink($_SERVER['HTTP_REFERER'], $linkTitle);
+
 
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/generic_page_articolo_nuovo.html';
 
