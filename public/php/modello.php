@@ -59,58 +59,19 @@ class Articolo {
 
     private $altImg;
 
-
-    function __construct($ID, $titolo, $descrizione, $testo, $autore, $dataPub, $upVotes, $downVotes, $imgPath, $altImg) {
-        try {
+    private $validation;
+    function __construct($ID, $titolo, $descrizione, $testo, $autore, $dataPub, $upVotes, $downVotes, $imgPath, $altImg, $validation) {
             $this->setID($ID);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
-        try {
-            $this->setTitolo($titolo);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
-        try {
-            $this->setTesto($testo);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
-        try {
-            $this->setDescrizione($descrizione);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
-        try {
-            $this->setAutore($autore);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
-        try {
+            $this->setTitle($titolo);
+            $this->setContent($testo);
+            $this->setDescription($descrizione);
+            $this->setAuthor($autore);
             $this->setDataPub($dataPub);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
-        try {
             $this->setUpVotes($upVotes);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
-        try {
             $this->setDownVotes($downVotes);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
-        try {
             $this->setImgPath($imgPath);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
-        try {
             $this->setAltImg($altImg);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
+            $this->validation = $validation;
     }
 
 
@@ -142,12 +103,12 @@ class Articolo {
     }
 
 
-    public function getTitolo() {
+    public function getTitle() {
         return $this->titolo;
     }
 
 
-    function setTitolo($value) {
+    function setTitle($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 126);
         if ($correctCharacters)
             $this->titolo = $value;
@@ -156,12 +117,12 @@ class Articolo {
     }
 
 
-    function getDescrizione() {
+    function getDescription() {
         return $this->descrizione;
     }
 
 
-    function setDescrizione($value) {
+    function setDescription($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 350);
         if ($correctCharacters)
             $this->descrizione = $value;
@@ -170,12 +131,12 @@ class Articolo {
     }
 
 
-    public function getTesto() {
+    public function getContent() {
         return $this->testo;
     }
 
 
-    public function setTesto($value) {
+    public function setContent($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 10000);
         if ($correctCharacters)
             $this->testo = $value;
@@ -184,12 +145,12 @@ class Articolo {
     }
 
 
-    public function getAutore() {
+    public function getAuthor() {
         return $this->autore;
     }
 
 
-    public function setAutore($value) {
+    public function setAuthor($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "digit", 6);
         if ($correctCharacters)
             $this->autore = $value;
@@ -254,9 +215,18 @@ class Articolo {
     public function getAltImg() {
         return $this->altImg;
     }
+    
+    public function getValidation() {
+        return $this->validation;
+    }
+    public function setValidation($validation) {
+        $this->validation = $validation;
+        // qui bisogna fare la query per aggiornare la validazione dell-articolo
+        // non  necessariamente, basta aggiungere una query che prenda tutti i valori dell'articolo e li salva.
+    }
+    public static function getArticoli($category,$limit) {
+        $connection = DBAccess::openDBConnection();
 
-
-    public static function getArticoli($category, $connection, $limit) {
         if ($category != null)
             $querySelect = "SELECT * FROM articolo, cat_art
                             WHERE  cat_art.nome_cat = '$category' AND articolo.ID = cat_art.ID_art
@@ -269,7 +239,7 @@ class Articolo {
         } else { // ritorno la lista degli articoli all'interno del db
             $listaArticoli = array();
             while ($riga = mysqli_fetch_assoc($queryResult)) {
-                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
+                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img'], $riga['verificato']);
                 array_push($listaArticoli, $singoloArticolo);
             }
             if ($limit != null && count($listaArticoli) >= $limit)
@@ -279,20 +249,21 @@ class Articolo {
     }
 
 
-    public static function getArticolo($id_articolo, $connection) {
+    public static function getArticolo($id_articolo) {
+        $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT * FROM articolo WHERE articolo.ID=$id_articolo";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0) {
             return null;
         } else {
             $riga = mysqli_fetch_assoc($queryResult);
-            $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
+            $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img'], $riga['verificato']);
             return $singoloArticolo;
         }
     }
 
-
-    public static function searchArticolo($keyword, $connection, $limit) {
+    public static function searchArticolo($keyword, $limit) {
+        $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT *  FROM articolo WHERE articolo.titolo LIKE '%$keyword%' OR articolo.descrizione LIKE '%$keyword%' OR articolo.testo LIKE '%$keyword%'";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0) {
@@ -300,7 +271,7 @@ class Articolo {
         } else { // ritorno la lista degli articoli all'interno del db
             $listaArticoli = array();
             while ($riga = mysqli_fetch_assoc($queryResult)) {
-                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
+                $singoloArticolo = new Articolo($riga['ID'], $riga['titolo'], $riga['descrizione'], $riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img'], $riga['verificato']);
                 array_push($listaArticoli, $singoloArticolo);
             }
             if ($limit != null && count($listaArticoli) >= $limit)
@@ -309,7 +280,23 @@ class Articolo {
         return $listaArticoli;
     }
 
+    public static function validateArticle($Id): mysqli {
+        $Connection = DBAccess::openDBConnection();
+        $querySelect = "UPDATE articolo SET articolo.verificato = 1 WHERE articolo.ID = $Id";
+        $queryResult = mysqli_query($Connection, $querySelect);
+        return $Connection;
+    }
 
+    public static function loadNewArticle($articolo) {
+        $Connection = DBAccess::openDBConnection();
+        $querySelect = "INSERT INTO articolo(titolo, descrizione, testo, autore, data_pub, upvotes, downvotes, img_path, alt_img, verificato) values($articolo->getTitle(), $articolo->getDescription(), $articolo->getContent(), $articolo->getAuthor(), $articolo->getDataPub(), $articolo->getUpVotes(), $articolo->getDownVotes(), $articolo->getImgPath(), $articolo->getAltImg(), $articolo->getValidation()";
+        $queryResult = mysqli_query($Connection, $querySelect);
+        if (mysqli_affected_rows($Connection) == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     /*public function setAltImg($value) {
         (ctype_alpha($value) && strlen($value) <= 255) ? $this->altImg = $value : $this->altImg = "";
     }*/
@@ -340,12 +327,13 @@ class Articolo {
           return $listaArticoli;
       }*/
 
-    public static function getAutoreArticolo($id_articolo, $connection) {
+    public static function getAutoreArticolo($id_articolo) {
+        $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT * FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = '. $id_articolo . '";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
             return null;
-        else { // ritorno la lista degli articoli all'interno del db
+        else { 
             $riga = mysqli_fetch_assoc($queryResult);
             $autore = new User($riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'], $riga['password'], $riga['permesso'], $riga['img_path']);
             return $autore;
@@ -422,7 +410,8 @@ class Categoria {
     }
 
 
-    public static function getCategorie($connection) {
+    public static function getCategorie() {
+        $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT * FROM categoria";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
@@ -438,7 +427,8 @@ class Categoria {
     }
 
 
-    public static function getCategorieArticolo($id_articolo, $connection) {
+    public static function getCategorieArticolo($id_articolo) {
+        $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT categoria.nome, categoria.descrizione, categoria.img FROM cat_art INNER JOIN categoria ON cat_art.nome_cat = categoria.nome WHERE cat_art.ID_art = $id_articolo";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
@@ -451,6 +441,17 @@ class Categoria {
             }
         }
         return $listaCategorie;
+    }
+
+    public static function loadNewCategoryForArticle($category, $article_id) {
+        $connection = DBAccess::openDBConnection();
+        $querySelect = "INSERT INTO cat_art values($article_id,$category) ";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_affected_rows($connection) == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
 

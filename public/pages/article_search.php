@@ -8,9 +8,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/PreviewArticleBuilder.php';
 
-$dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
-$connessioneRiuscita = $connessioneRiuscita->getConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Risultati ricera per: '.$search);
@@ -22,14 +20,14 @@ $handler->setContent(file_get_contents($filePath));
 if ($connessioneRiuscita == null)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
-    $rawArticles = Articolo::searchArticolo($search, $connessioneRiuscita, 20);
+    $rawArticles = Articolo::searchArticolo($search, 20);
     $articlesList = '';
     if ($rawArticles != null) {
         foreach ($rawArticles as $articolo) {
             $articlesList .= (new PreviewArticleBuilder)
             ->setID($articolo->getId())
-            ->setTitle($articolo->getTitolo())
-            ->setDescription($articolo->getDescrizione())
+            ->setTitle($articolo->getTitle())
+            ->setDescription($articolo->getDescription())
             ->setImgPath($articolo->getImgPath())
             ->setImgAlt($articolo->getAltImg())
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/articlePreview.phtml'))
@@ -43,5 +41,4 @@ else {
 $handler->setParam("{{categoryName}}",'Risultati ricerca');
 $handler->setParam("<listaArticoli />",$articlesList);
 $handler->render();
-/*print_r($_POST)*/
 ?>

@@ -12,6 +12,7 @@ class UserBuilder extends AbstractBuilder {
     const WRITTENARTICLES = '{{numberOfArticles}}';
     const GIVENLIKES = '{{givenLikes}}';
     const RECEIVEDLIKES = '{{receivedLikes}}';
+    const USERADMINOPTION = '<userAdminOption />';
 
     /**
      * @var string
@@ -48,8 +49,14 @@ class UserBuilder extends AbstractBuilder {
      */
     private $ReceivedLikes;
 
+    public function __construct()
+    {
+        $this->Params[UserBuilder::USERNAME] = 'Nessun nome presente';
+        $this->Params[UserBuilder::USERSURNAME] = 'Nessun cognome presente';
+        $this->Params[UserBuilder::USEREMAIL] = 'Nessuna Email presente';
+    }
 
-    /**
+    /** 
      * @return mixed
      */
     public function getUserName() {
@@ -86,7 +93,15 @@ class UserBuilder extends AbstractBuilder {
         return $this;
     }
 
+    public function getUserEmail() {
+        return $this->UserEmail;
+    }
 
+    public function setUserEmail($Mail) {
+        $this->UserEmail = $Mail;
+        $this->Params[UserBuilder::USEREMAIL] = $this->getUserEmail();
+        return $this;
+    }
     /**
      * @return mixed
      */
@@ -148,7 +163,7 @@ class UserBuilder extends AbstractBuilder {
      * @return mixed
      */
     public function getReceivedLikes() {
-        return $this->GivenLikes;
+        return $this->ReceivedLikes;
     }
 
 
@@ -159,6 +174,14 @@ class UserBuilder extends AbstractBuilder {
     public function setReceivedLikes($Number) {
         $this->ReceivedLikes = $Number;
         $this->Params[UserBuilder::RECEIVEDLIKES] = $this->getReceivedLikes();
+        return $this;
+    }
+
+    public function setUserAdminOption($bool) {
+        if($bool)
+            $this->Params[UserBuilder::USERADMINOPTION] =  file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/userAdminOption.phtml');
+        else 
+            $this->Params[UserBuilder::USERADMINOPTION] =  "";
         return $this;
     }
 }

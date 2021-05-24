@@ -8,9 +8,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/PreviewArticleBuilder.php';
 
-$dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
-$connessioneRiuscita = $connessioneRiuscita->getConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Categoria'.$CategoryName);
@@ -25,14 +23,14 @@ $handler->setContent(file_get_contents($filePath));
 if ($connessioneRiuscita == null)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina 
 else {
-    $rawArticles = Articolo::getArticoli($CategoryName, $connessioneRiuscita, null);
+    $rawArticles = Articolo::getArticoli($CategoryName, null);
     $articlesList = '';
     if ($rawArticles != null) {
         foreach ($rawArticles as $articolo) {
             $articlesList .= (new PreviewArticleBuilder)
             ->setID($articolo->getId())
-            ->setTitle($articolo->getTitolo())
-            ->setDescription($articolo->getDescrizione())
+            ->setTitle($articolo->getTitle())
+            ->setDescription($articolo->getDescription())
             ->setImgPath($articolo->getImgPath())
             ->setImgAlt($articolo->getAltImg())
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/articlePreview.phtml'))

@@ -7,32 +7,27 @@
         </ul>
     </nav>
     <form method="post" action="/pages/article_search.php">
-        <input type="text" name="search" placeholder="Cerca..." id="search_bar" tabindex="0" required>
+        <input type="text" name="search" placeholder="Ricerca articoli" id="search_bar" tabindex="0" required>
         <button type="submit" value="submit" id="search_button" tabindex="0"><i class="fa fa-search"></i></button>
     </form>
     <div class="right_section hFlex">
         <div class="mob_buttons_wrapper hFlex">
-            <a href="javascript:void(0);" class="icon search_link" tabindex="0" onclick="searchToggle()">
-                <div class="fa fa-search"></div>
+            <a href="javascript:void(0);" title="Mostra barra di ricerca" class="icon search_link" tabindex="0" onclick="searchToggle()">
+                <div class="fa fa-search"><span class="sr-only">Mostra barra di ricerca</span></div>
             </a>
-            <a href="javascript:void(0);" class="icon txt_link" tabindex="0" onclick="menuToggle()">
-                <div class="fa fa-bars"></div>
+            <a href="javascript:void(0);" title="Mostra menu a comparsa" class="icon txt_link" tabindex="0" onclick="menuToggle()">
+                <div class="fa fa-bars"><span class="sr-only">Mostra menu a comparsa</span></div>
             </a>
         </div>
         <div class="user_cont hFlex">
             <userCont/>
             <!--*SE BISOGNA EFFETTUARE L'ACCESSO:* <<a href="login.html" tabindex="0"><div>Accedi/Registrati</div></a>>-->
-            <!--*SE E' GIA STATO EFFETTUATO:* <div class="logout_cont vFlex">
-                  <a href="user_page.html">Il mio profilo</a>
-                  <a href="index.html?logout_php">Esci</a>
-            </div>
-            <user-image/>-->
         </div>
       </div>
 </header>
 <div class="mob_srch" id="search_mobile">
-    <form action="article_filter.html?art_text = {input}">
-        <input type="text" placeholder="Cerca.." id="search_bar_mobile" required>
+    <form method="post" action="/pages/article_search.php">
+        <input type="text" placeholder="Ricerca articoli" id="search_bar_mobile" required>
         <button type="submit" id="search_button_mob"><i class="fa fa-search"></i></button>
     </form>
 </div>

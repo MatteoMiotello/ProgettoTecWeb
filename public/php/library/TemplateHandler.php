@@ -82,6 +82,21 @@ class TemplateHandler {
         return file_get_contents($footerPath);
     }
 
+    /**
+    *Sceglie il contenitore utente da mostrare
+    *
+    *@throws Exception
+    */
+    private function getUserCont() {
+        if(Access::isAuthenticated()){
+          $uCont = $_SERVER['DOCUMENT_ROOT'] . '/php/components/userContainer.phtml';
+        }
+        else{
+          $uCont = $_SERVER['DOCUMENT_ROOT'] . '/php/components/visitorContainer.phtml';
+        }
+        return file_get_contents($uCont);
+    }
+
 
     /**
      * @throws Exception
@@ -92,7 +107,7 @@ class TemplateHandler {
 
         $this->setParam('<nav-link/>', $links);
         $this->setParam( '<userCont/>', $user );
-        /*$this->setParam('<user-cont/>', $uCont);*/
+
     }
 
 

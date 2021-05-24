@@ -29,8 +29,8 @@ CREATE TABLE `articolo` (
   `testo` varchar(10000) NOT NULL,
   `autore` int(6) NOT NULL,
   `data_pub` datetime DEFAULT NULL,
-  `upvotes` int(7) NOT NULL,
-  `downvotes` int(7) NOT NULL,
+  `upvotes` int(7) DEFAULT 0,
+  `downvotes` int(7) DEFAULT 0,
   `img_path` varchar(255) DEFAULT NULL,
   `alt_img` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -119,7 +119,7 @@ CREATE TABLE `commento` (
   KEY `commento_ibfk_2` (`autore`),
   CONSTRAINT `commento_ibfk_1` FOREIGN KEY (`ID_art`) REFERENCES `articolo` (`ID`),
   CONSTRAINT `commento_ibfk_2` FOREIGN KEY (`autore`) REFERENCES `utente` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=530763 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=530765 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +128,7 @@ CREATE TABLE `commento` (
 
 LOCK TABLES `commento` WRITE;
 /*!40000 ALTER TABLE `commento` DISABLE KEYS */;
-INSERT INTO `commento` VALUES (144688,1,218796,' Wow!','2020-12-07 15:47:00'),(156612,430759,716989,'articolo stupendo, siete fantastici!','2021-05-19 18:58:00');
+INSERT INTO `commento` VALUES (144688,1,218796,' Wow!','2020-12-07 15:47:00'),(156612,430759,716989,'articolo stupendo, siete fantastici!','2021-05-19 18:58:00'),(144688,530763,125333,'figata','2021-05-20 04:20:13'),(156612,530764,125333,'Neanche quelli di huffpost scrivono articoli come i vostri!','2021-05-20 04:22:59');
 /*!40000 ALTER TABLE `commento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,6 +160,37 @@ LOCK TABLES `utente` WRITE;
 INSERT INTO `utente` VALUES (125333,'Giosuè','Calgaro','giosue@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(218796,'Utente','Standard','utente@user.com','/*hash(user)*/','adm','/img/genderfluid_icon.png'),(456468,'Matteo','Miotello','matteo@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(716989,'Andrea','Polato','andrea@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(846787,'Tommaso','Allegretti','tommaso@admin.com','/*hash(admin)*/','adm','/img/male_icon.png');
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `voto`
+--
+
+DROP TABLE IF EXISTS `voto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `voto` (
+  `utente` int(6) NOT NULL,
+  `articolo` int(6) NOT NULL,
+  `ID` int(6) NOT NULL AUTO_INCREMENT,
+  `up` tinyint(1) DEFAULT 0,
+  `down` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`ID`),
+  KEY `utente` (`utente`),
+  KEY `articolo` (`articolo`),
+  CONSTRAINT `voto_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`ID`) ON DELETE CASCADE,
+  CONSTRAINT `voto_ibfk_2` FOREIGN KEY (`articolo`) REFERENCES `articolo` (`ID`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `voto`
+--
+
+LOCK TABLES `voto` WRITE;
+/*!40000 ALTER TABLE `voto` DISABLE KEYS */;
+INSERT INTO `voto` VALUES (125333,878541,1,1,0),(456468,878541,2,1,0);
+/*!40000 ALTER TABLE `voto` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -170,4 +201,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-20 16:12:07
+-- Dump completed on 2021-05-21 15:39:39

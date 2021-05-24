@@ -1,35 +1,14 @@
 <div id="wrapper" class="vFlex">
-    <h1>Il mio profilo</h1>
-    <div class="hFlex" role="cont_utente">
-      <div class="vFlex">
-        <img src="{{userImg}}" alt="">
-        <strong>Dati personali</strong>
-        <p>Nome: {{userName}}</p>
-        <p>Cognome: {{userSurname}}</p>
-        <p>Email: {{userEmail}}</p>
-      </div>
-      <div class="vFlex">
-        <div>
-          <strong>Statistiche</strong>
-          <p>Numero di articoli scritti: {{numberOfArticles}}</p>
-          <p>Numero di like messi: {{givenLikes}}</p>
-          <p>Numero di like ricevuti: {{receivedLikes}}</p>
-        </div>
-        <div class="vFlex">
-          <strong>Operazioni</strong>
-          <a href="form_articolo_admin.php">Aggiungi un articolo</a>
-          <a href="proto_gestione_art.html">Gestisci articoli</a>
-        </div>
-      </div>
-    </div>
-    <form class="vFlex" action="user_page.php" method="post">
-      <h2>Modifica le tue credenziali d'accesso</h2>
-      <label for="curr_pw">Password attuale</label>
-      <input type="password" id="curr_pw">
-      <label for="new_pw">Password nuova</label>
-      <input type="password" id="new_pw">
-      <label for="rep_pw">Ripeti la nuova password</label>
-      <input type="password" id="rep_pw">
-      <button type="submit" name="cambio_pw">Conferma</button>
-    </form>
-  </div>
+  <h1>Il mio profilo</h1>
+<personalUserInfo />
+  <form class="vFlex" action="user_page.php" method="post">
+    <h2>Modifica le tue credenziali d'accesso</h2>
+    <label for="curr_pw">Password attuale</label>
+    <input type="password" id="curr_pw">
+    <label for="new_pw">Password nuova</label>
+    <input type="password" id="new_pw">
+    <label for="rep_pw">Ripeti la nuova password</label>
+    <input type="password" id="rep_pw">
+    <button type="submit" name="cambio_pw">Conferma</button>
+  </form>
+</div>

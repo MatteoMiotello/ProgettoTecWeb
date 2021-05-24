@@ -8,6 +8,7 @@ class ArticleBuilder extends AbstractBuilder
      * Le costanti aiutano a tenere traccia delle label utilizzate per la sostituzione dei parametri
      */
     const TITOLO = '{{title}}';
+    const DESCRIPTION = '{{description}}';
     const ARTICLECONTENT = '{{articleContent}}';
     const IMGALTARTICLE = '{{altImg}}';
     const IMGPATHARTICLE = '{{articleImgPath}}';
@@ -19,12 +20,13 @@ class ArticleBuilder extends AbstractBuilder
 
     function __construct()
     {
-        $this->Params[ArticleBuilder::TITOLO] = 'Nessun titolo presente';
-        $this->Params[ArticleBuilder::ARTICLECONTENT] = 'Nessun contenuto presente';
-        $this->Params[ArticleBuilder::AUTHORNAME] = 'Nessun nome autore presente';
-        $this->Params[ArticleBuilder::AUTHOREMAIL] = 'Nessuna mail autore presente';
-        $this->Params[ArticleBuilder::ARTICLECATEGORIES] = 'Nessuna categoria presente';
-        $this->Params[ArticleBuilder::ARTICLECOMMENTS] = 'Nessun commento presente';
+        $this->Params[ArticleBuilder::TITOLO] = "";
+        $this->Params[ArticleBuilder::DESCRIPTION] = "";
+        $this->Params[ArticleBuilder::ARTICLECONTENT] = "";
+        $this->Params[ArticleBuilder::AUTHORNAME] = "";
+        $this->Params[ArticleBuilder::AUTHOREMAIL] = "";
+        $this->Params[ArticleBuilder::ARTICLECATEGORIES]  = "";
+        $this->Params[ArticleBuilder::ARTICLECOMMENTS] = "";
     }
 
     /**
@@ -32,6 +34,11 @@ class ArticleBuilder extends AbstractBuilder
      * @var string
      */
     private $Title;
+
+    /**
+     * Descrizione dell'articolo
+     */
+    private $Description;
 
     /**
      * Contenuto dell'articolo
@@ -204,6 +211,22 @@ class ArticleBuilder extends AbstractBuilder
         $this->ImgPathUser = $path;
         $this->Params[ArticleBuilder::IMGPATHAUTHOR] = $this->getImgPathAuthor();
         return $this;
+    }
+
+    /**
+     * @param $Description
+     */
+    public function setDescription($Description) {
+        $this->Description = $Description;
+        $this->Params[ArticleBuilder::DESCRIPTION] = $this->getDescription();
+        return $this;
+    } 
+
+    /**
+     * @return mixed
+     */
+    public function getDescription() {
+        return $this->Description;
     }
 
     /**

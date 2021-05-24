@@ -429,14 +429,16 @@ fieldset {
 
 .img_sel {
   height: min-content;
+  width: 50%;
 }
 
-.img_sel div+div {
+.img_sel input+label {
   margin-top: 1em;
 }
 
 .img_sel textarea {
   resize: none;
+  width: 100%;
   margin-bottom: 0;
 }
 
@@ -447,6 +449,7 @@ fieldset {
 .element {
   display: flex;
   flex-direction: row-reverse;
+  margin-top: 0.4em;
 }
 
 .element label {
@@ -455,10 +458,6 @@ fieldset {
 
 legend {
   padding: 0 0.5em;
-}
-
-.element {
-  margin-top: 0.2em;
 }
 
 .form_articolo > button {
@@ -710,10 +709,20 @@ section[role=comment] div p:first-child{
   font-weight: 500;
 }
 
-.box input[type="text"], .box input[type="password"]{
+#mail_err, #pass_err, #pass1_err, #err_msg, #name_err, #surn_err, #titl_err, #desc_err, #text_err{
+  display: none;
+  color: red;
+  margin-left: 1em;
+}
+
+/*label > #mail_err, label > #pass_err, label > #pass1_err, label > #name_err, label > #surn_err, label{
+  margin-left: 1em;
+}*/
+
+.box input[type="email"], .box input[type="password"]{
   background: none;
   display: block;
-  margin: 20px auto;
+  margin: 0.2em auto 2em auto;
   text-align: center;
   border: 2px solid #3d3d3d;
   padding: 14px 10px;
@@ -723,12 +732,12 @@ section[role=comment] div p:first-child{
   transition: 0.25s;
 }
 
-.box input[type="text"]:focus, .box input[type="password"]:focus{
+.box input[type="email"]:focus, .box input[type="password"]:focus{
   width: 90%;
   border-color:#0d719d;
 }
 
-.box input[type="text"]:hover, .box input[type="password"]:hover{
+.box input[type="email"]:hover, .box input[type="password"]:hover{
   border-color:#0d719d;
 }
 
@@ -863,8 +872,8 @@ input[type=text], input[type=email], input[type=password] {
   margin-top: 1em;
 }
 
-.confirm {
-  margin-top: 1em;
+fieldset + span {
+  margin: 1em 0 0.5em 0;
 }
 #reg_btn{
   height: 3em;
@@ -924,6 +933,19 @@ th {
 td {
   text-align: center;
   border: solid 1px;
+}
+.articolo_validato {
+  background-color: green;
+  color: white;
+  text-align: center;
+  justify-content: center;
+}
+
+.articolo_non_validato {
+  background-color: red;
+  color: white;
+  text-align: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1200px) {
@@ -1105,9 +1127,9 @@ td {
   .cat_page figcaption {
     font-size: 1.3em;
     padding: 2% 0;
-    bottom: -3.5px;
+    bottom: -7px;
     left:0;
-    right: -1.5px;
+    right: -2px;
   }
 
   .cat_img {
@@ -1117,6 +1139,7 @@ td {
   .img_sel{
     align-items: flex-start;
     margin-top: 1em;
+    width: auto;
   }
 
   .cat_sel {
