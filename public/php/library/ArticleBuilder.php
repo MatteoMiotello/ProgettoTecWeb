@@ -1,26 +1,32 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/php/library/AbstractBuilder.php');
 
-class ArticleBuilder extends AbstractBuilder {
+class ArticleBuilder extends AbstractBuilder
+{
 
     /**
      * Le costanti aiutano a tenere traccia delle label utilizzate per la sostituzione dei parametri
      */
-    CONST TITOLO = '{{title}}';
-    CONST ARTICLECONTENT = '{{articleContent}}';
-    CONST IMGALTARTICLE = '{{altImg}}';
-    CONST IMGPATHARTICLE = '{{articleImgPath}}';
-    CONST AUTHORNAME = '{{authorName}}';
-    CONST AUTHOREMAIL = '{{authorEmail}}';
-    CONST IMGPATHAUTHOR = '{{authorImg}}';
-    CONST ARTICLECATEGORIES = '<categories />';
+    const TITOLO = '{{title}}';
+    const DESCRIPTION = '{{description}}';
+    const ARTICLECONTENT = '{{articleContent}}';
+    const IMGALTARTICLE = '{{altImg}}';
+    const IMGPATHARTICLE = '{{articleImgPath}}';
+    const AUTHORNAME = '{{authorName}}';
+    const AUTHOREMAIL = '{{authorEmail}}';
+    const IMGPATHAUTHOR = '{{authorImg}}';
+    const ARTICLECATEGORIES = '<categories />';
+    const ARTICLECOMMENTS = '<listaCommenti />';
 
-    function __construct() {
-        $this->Params[ArticleBuilder::TITOLO] = 'Nessun titolo presente';
-        $this->Params[ArticleBuilder::ARTICLECONTENT] = 'Nessun contenuto presente';
-        $this->Params[ArticleBuilder::AUTHORNAME] = 'Nessun nome autore presente';
-        $this->Params[ArticleBuilder::AUTHOREMAIL] = 'Nessuna mail autore presente';
-        $this->Params[ArticleBuilder::ARTICLECATEGORIES]='Nessuna categoria presente';
+    function __construct()
+    {
+        $this->Params[ArticleBuilder::TITOLO] = "";
+        $this->Params[ArticleBuilder::DESCRIPTION] = "";
+        $this->Params[ArticleBuilder::ARTICLECONTENT] = "";
+        $this->Params[ArticleBuilder::AUTHORNAME] = "";
+        $this->Params[ArticleBuilder::AUTHOREMAIL] = "";
+        $this->Params[ArticleBuilder::ARTICLECATEGORIES]  = "";
+        $this->Params[ArticleBuilder::ARTICLECOMMENTS] = "";
     }
 
     /**
@@ -28,6 +34,11 @@ class ArticleBuilder extends AbstractBuilder {
      * @var string
      */
     private $Title;
+
+    /**
+     * Descrizione dell'articolo
+     */
+    private $Description;
 
     /**
      * Contenuto dell'articolo
@@ -62,26 +73,33 @@ class ArticleBuilder extends AbstractBuilder {
     /**
      * Email dell'autore dell'articolo
      *@var string  
-    */
+     */
     private $AuthorEmail;
 
     /**
      * Nome dell'autore dell'articolo
      *@var string  
-    */
+     */
     private $AuthorName;
 
     /**
+     * Commenti all'articolo
+     * @var array
+     */
+    private $Comments;
+    /**
      * @return mixed
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->Title;
     }
 
     /**
      * @param mixed $Title
      */
-    public function setTitle($Title): self {
+    public function setTitle($Title): self
+    {
         $this->Title = $Title;
         $this->Params[ArticleBuilder::TITOLO] = $this->getTitle();
         return $this;
@@ -90,14 +108,16 @@ class ArticleBuilder extends AbstractBuilder {
     /**
      * @return mixed 
      */
-    public function getContent() {
+    public function getContent()
+    {
         return $this->Content;
     }
 
     /**
      * @param mixed $Content
      */
-    public function setContent($Content){
+    public function setContent($Content)
+    {
         $this->Content = $Content;
         $this->Params[ArticleBuilder::ARTICLECONTENT] = $this->getContent();
         return $this;
@@ -106,14 +126,16 @@ class ArticleBuilder extends AbstractBuilder {
     /**
      * @return mixed
      */
-    public function getImgArticlePath() {
+    public function getImgArticlePath()
+    {
         return $this->ImgPathArticle;
     }
 
     /**
      * @param $ImgPath
      */
-    public function setImgArticlePath($ImgPath) {
+    public function setImgArticlePath($ImgPath)
+    {
         $this->ImgPathArticle = $ImgPath;
         $this->Params[ArticleBuilder::IMGPATHARTICLE] = $this->getImgArticlePath();
         return $this;
@@ -122,14 +144,16 @@ class ArticleBuilder extends AbstractBuilder {
     /**
      * @return mixed
      */
-    public function getImgArticleAlt() {
+    public function getImgArticleAlt()
+    {
         return $this->ImgAltArticle;
     }
 
     /**
      * @param $imgAlt
      */
-    public function setImgArticleAlt($ImgAlt) {
+    public function setImgArticleAlt($ImgAlt)
+    {
         $this->ImgAltArticle = $ImgAlt;
         $this->Params[ArticleBuilder::IMGALTARTICLE] = $this->getImgArticleAlt();
         return $this;
@@ -138,14 +162,16 @@ class ArticleBuilder extends AbstractBuilder {
     /**
      * @return mixed 
      */
-    public function getNameAuthor() {
+    public function getNameAuthor()
+    {
         return $this->AuthorName;
     }
 
     /**
      * @param $Name
      */
-    public function setNameAuthor($Name) {
+    public function setNameAuthor($Name)
+    {
         $this->AuthorName = $Name;
         $this->Params[ArticleBuilder::AUTHORNAME] = $this->getNameAuthor();
         return $this;
@@ -154,14 +180,16 @@ class ArticleBuilder extends AbstractBuilder {
     /**
      * @return mixed 
      */
-    public function getEmailAuthor() {
+    public function getEmailAuthor()
+    {
         return $this->AuthorEmail;
     }
 
     /**
      * @param $Email
      */
-    public function setEmailAuthor($Email) {
+    public function setEmailAuthor($Email)
+    {
         $this->AuthorEmail = $Email;
         $this->Params[ArticleBuilder::IMGALTARTICLE] = $this->getEmailAuthor();
         return $this;
@@ -170,25 +198,44 @@ class ArticleBuilder extends AbstractBuilder {
     /**
      * @return mixed 
      */
-    public function getImgPathAuthor() {
+    public function getImgPathAuthor()
+    {
         return $this->ImgPathUser;
     }
 
     /**
      * @param mixed $path
      */
-    public function setImgPathAuthor($path) {
+    public function setImgPathAuthor($path)
+    {
         $this->ImgPathUser = $path;
         $this->Params[ArticleBuilder::IMGPATHAUTHOR] = $this->getImgPathAuthor();
         return $this;
     }
 
     /**
+     * @param $Description
+     */
+    public function setDescription($Description) {
+        $this->Description = $Description;
+        $this->Params[ArticleBuilder::DESCRIPTION] = $this->getDescription();
+        return $this;
+    } 
+
+    /**
+     * @return mixed
+     */
+    public function getDescription() {
+        return $this->Description;
+    }
+
+    /**
      * @param $categoria
      */
-    public function addCategory($categoria) {
-        if($this->Categories != '')
-            $this->Categories = $this->Categories . '<p>'.$categoria.'</p>';
+    public function addCategory($categoria)
+    {
+        if ($this->Categories != '')
+            $this->Categories = $this->Categories . '<p>' . $categoria . '</p>';
         else {
             $this->Categories = $categoria;
         }
@@ -198,7 +245,22 @@ class ArticleBuilder extends AbstractBuilder {
     /**
      * @return mixed
      */
-    public function getCategories() {
+    public function getCategories()
+    {
         return $this->Categories;
+    }
+
+    public function getComments() {
+        return $this->Comments;
+    }
+
+    public function addComment($Comment)
+    {
+        if ($this->Comments != '')
+            $this->Comments = $this->Categories . $Comment;
+        else {
+            $this->Comments = $Comment;
+        }
+        $this->Params[ArticleBuilder::ARTICLECOMMENTS] = $this->getComments();
     }
 }

@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../css/style1.css" media="screen">
     <link rel="stylesheet" href="../css/print.css" media="print">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <script type="text/javascript" src="../js/util.js"></script>
+    <script type="text/javascript" src="../scripts/util.js"></script>
   </head>
 
   <body class="vFlex">
@@ -45,7 +45,7 @@
                 <a href="user_page.html">Il mio profilo</a>
                 <a href="index.html?logout_php">Esci</a>
           </div>-->
-          <img src="https://www.cineon.it/wp-content/uploads/2020/08/Shrek.jpg" alt="" class="user_img img_sm" id="user_desk">
+          <img src="https://www.cineon.it/wp-content/uploads/2020/08/Shrek.jpg" alt="" class="user_img img_sm" class="user_desk">
         </div>
       </div>
     </header>
@@ -70,38 +70,6 @@
             <li><a href="login.html">Accedi/Registrati</a></li>
         </ul>
     </nav>
-  </div>
-  <div id="wrapper" class="vFlex">
-    <h1>Registrati</h1>
-    <form class="reg_form hFlex" action="register.php" method="post">
-      <fieldset class="vFlex">
-        <legend>Scegli l'immagine del profilo</legend>
-        <img src="" alt="">
-      </fieldset>
-      <div class="vFlex">
-        <fieldset class="vFlex">
-          <legend>Inserisci i tuoi dati personali</legend>
-          <label for="nome">Nome</label>
-          <input type="text" id="nome" required>
-          <label for="cognome">Cognome</label>
-          <input type="text" id="cognome" required>
-        </fieldset>
-        <fieldset class="vFlex">
-          <legend>Inserisci i dati d'accesso</legend>
-          <label for="email">Email</label>
-          <input type="text" id="email" required>
-          <label for="password">Password</label>
-          <input type="password" id="password" required>
-          <label for="password">Ripeti password</label>
-          <input type="password" id="password" required>
-        </fieldset>
-        <div class="confirm">
-          <input type="checkbox" id="privacy" value="Accetto bla bla privacy" required>
-          <span>Accetto l'informativa della <a href="#">privacy</a></span>
-        </div>
-        <input type="submit" id="reg_btn" value="Conferma dati">
-      </div>
-    </form>
   </div>
 
     <footer class="hFlex">

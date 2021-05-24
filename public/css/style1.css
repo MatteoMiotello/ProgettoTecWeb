@@ -117,9 +117,9 @@ nav .currentItem {
   margin-left: 1em;
 }
 
-#user_desk {
+.user_desk {
   margin-right: 0.5em;
-  border-radius: 50%;
+  border-radius: 50% !important;
 }
 
 #user_mob {
@@ -307,6 +307,25 @@ article footer img {
   height: 1em;
 }
 
+.managed{
+  justify-content: space-between;
+  align-items: center;
+}
+
+.man_btns {
+  display: flex;
+  flex-direction: column;
+  border-left: solid 2px #0d719d;
+  width: 15%!important;
+  align-items: center;
+  text-align: right;
+  justify-content: space-between;
+}
+
+.man_btns a+a{
+  margin-top: 0.2em;
+}
+
 aside {
   background-color: white;
   -moz-box-shadow:    0 3px 5px 3px #ccc;
@@ -409,15 +428,18 @@ fieldset {
 }
 
 .img_sel {
-  max-height: 9em;
+  height: min-content;
+  width: 50%;
 }
 
-.img_sel div+div {
+.img_sel input+label {
   margin-top: 1em;
 }
 
 .img_sel textarea {
   resize: none;
+  width: 100%;
+  margin-bottom: 0;
 }
 
 .img_sel > input {
@@ -427,6 +449,7 @@ fieldset {
 .element {
   display: flex;
   flex-direction: row-reverse;
+  margin-top: 0.4em;
 }
 
 .element label {
@@ -435,10 +458,6 @@ fieldset {
 
 legend {
   padding: 0 0.5em;
-}
-
-.element {
-  margin-top: 0.2em;
 }
 
 .form_articolo > button {
@@ -601,16 +620,16 @@ legend {
   background-color: rgba(13, 113, 157, 0.3);
 }
 
-.commentArea #print_comm{
+.commentArea section[role=comment]{
   justify-content: flex-start;
   margin-top: 1em;
   padding: 0.5em;
 }
 
-.commentArea #print_comm img{
-  width: 48px;
-  height: 48px;
-  margin-right: 2em;
+.commentArea img{
+  width: 64px;
+  height: 64px;
+  margin-right: 1em;
 }
 
 .commentArea form {
@@ -619,17 +638,30 @@ legend {
   justify-content: space-between;
 }
 
-.commentArea form img {
+/*.commentArea form img {
   width: 48px;
   height: 48px;
   margin-right: 2em;
-}
+}*/
 
-.commentArea #print_comm p {
+.commentArea p {
   padding: 0.5em;
   border: solid 0px;
   background-color: white;
   width: 90%;
+}
+
+section[role=comment] div {
+  width: 90%;
+}
+
+section[role=comment] div p:first-child{
+  font-size: 0.8em;
+  background: transparent;
+}
+
+.info_user{
+  font-size: 0.8em;
 }
 
 .commentArea #post_comm{
@@ -677,10 +709,20 @@ legend {
   font-weight: 500;
 }
 
-.box input[type="text"], .box input[type="password"]{
+#mail_err, #pass_err, #pass1_err, #err_msg, #name_err, #surn_err, #titl_err, #desc_err, #text_err{
+  display: none;
+  color: red;
+  margin-left: 1em;
+}
+
+/*label > #mail_err, label > #pass_err, label > #pass1_err, label > #name_err, label > #surn_err, label{
+  margin-left: 1em;
+}*/
+
+.box input[type="email"], .box input[type="password"]{
   background: none;
   display: block;
-  margin: 20px auto;
+  margin: 0.2em auto 2em auto;
   text-align: center;
   border: 2px solid #3d3d3d;
   padding: 14px 10px;
@@ -690,12 +732,12 @@ legend {
   transition: 0.25s;
 }
 
-.box input[type="text"]:focus, .box input[type="password"]:focus{
+.box input[type="email"]:focus, .box input[type="password"]:focus{
   width: 90%;
   border-color:#0d719d;
 }
 
-.box input[type="text"]:hover, .box input[type="password"]:hover{
+.box input[type="email"]:hover, .box input[type="password"]:hover{
   border-color:#0d719d;
 }
 
@@ -738,93 +780,100 @@ legend {
 }
 
 /* USER/ADMIN PAGE */
-.row{
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  margin: 2em;
+div[role=cont_utente]{
+  width: 100%;
+  justify-content: space-around;
+  font-size: 1.4em;
+  padding-bottom: 2em;
+  border-bottom: solid 2px #0d719d;
 }
 
-.col{
-  padding-top: 2em;
-  margin: 1em;
+div[role=cont_utente] img{
+  width: 128px;
+  height: 128px;
+  margin-bottom: 1em;
 }
 
-
-.col ul{
-  list-style: none;
+div[role=cont_utente] p{
+  margin-top: 0.2em;
 }
 
-.col img{
-  max-width: 8em;
-  max-height: 8em;
+div[role=cont_utente] div{
+  justify-content: space-between;
 }
 
-#pw_reset input{
-  margin: 1em;
-  padding: 0.5em;
+div[role=cont_utente]+form{
+  background: #f0ffff;
+  padding: 2em 0 0.5em 0;
+  align-items: center;
+}
+
+div[role=cont_utente]+form label{
+  margin-top: 0.5em;
+}
+
+div[role=cont_utente]+form input{
+  width: 80%;
+  text-align: center;
+}
+
+div[role=cont_utente]+form button{
+  width: 50%;
+  height: 44px;
+  margin-top: 1em;
 }
 
 /* REGISTER & USER PAGE */
-.main-content {
-  padding: 20px;
+.reg_form {
+  margin:auto;
+  border: solid 2px;
+  padding: 2em;
+  width: 70%;
 }
 
-.form-group {
-  margin-top: 2em;
+.img_name {
+  display: flex;
 }
 
-.form-group label {
-  flex: none;
-  display: block;
-  width: 125px;
-  font-weight: bold;
-  font-size: 1em;
-}
-.form-group label.right-inline {
-  text-align: right;
-  padding-right: 8px;
-  padding-left: 10px;
-  width: auto;
+.img_name fieldset {
+  width: 100%;
 }
 
-.form-group .input-control {
-  flex: 1 1 auto;
-  display: block;
-  margin-bottom: 10px;
-  margin-right: 8px;
-  padding: 4px;
-  margin-top: -4px;
+.pro_pic {
+  justify-content: center;
 }
 
-.form_btn {
-  padding: 5px 15px;
-  margin: 5px;
-  min-width: 100px
+.reg_form div{
+  justify-content: center;
+  margin-bottom: 1em;
 }
 
-.reg_form{
-  justify-content:center;
+.img_name fieldset+fieldset {
+  margin-left: 1em;
 }
 
-.reg_form > fieldset {
-  margin-right: 4em; 
+.reg_form .user_img{
+  margin: 1em 0.5em;
 }
 
-.reg_form input[type=text], .reg_form input[type=password] {
-  width: 30em;
+/*.reg_form input[type=text], .reg_form input[type=email], .reg_form input[type=password] {*/
+input[type=text], input[type=email], input[type=password] {
+  /*min-width: 25em;*/
+  /*width: 100%;*/
+  margin-top: 0.2em;
   padding: 0.5em;
 }
-
+/*
 .reg_form fieldset+fieldset {
   margin-top: 1em;
-}
+}*/
 
 .reg_form fieldset input+label{
   margin-top: 1em;
 }
 
-.confirm {
-  margin-top: 1em;
+fieldset + span {
+  margin: 1em 0 0.5em 0;
 }
 #reg_btn{
   height: 3em;
@@ -877,6 +926,28 @@ legend {
   font-size: 30px;
 }
 
+th {
+  border: solid 1px;
+}
+
+td {
+  text-align: center;
+  border: solid 1px;
+}
+.articolo_validato {
+  background-color: green;
+  color: white;
+  text-align: center;
+  justify-content: center;
+}
+
+.articolo_non_validato {
+  background-color: red;
+  color: white;
+  text-align: center;
+  justify-content: center;
+}
+
 @media screen and (max-width: 1200px) {
   header {
     font-size: 0.88em;
@@ -922,6 +993,7 @@ legend {
   .resp_srch #search_bar_mobile{
     width: 100%;
     padding-left: 1em;
+    margin: 0;
     border: none;
     outline: none;
   }
@@ -938,6 +1010,11 @@ legend {
 
   .menu_noJS {
     display: block;
+  }
+
+  .menu_noJS .currentLink{
+    transform: skew(0);
+    padding: 0;
   }
 
   #logo{
@@ -973,7 +1050,7 @@ legend {
       display: none !important;
   }
 
-  #user_desk {
+  .user_desk {
     display: none;
   }
 
@@ -1050,9 +1127,9 @@ legend {
   .cat_page figcaption {
     font-size: 1.3em;
     padding: 2% 0;
-    bottom: -3.5px;
+    bottom: -7px;
     left:0;
-    right: -1.5px;
+    right: -2px;
   }
 
   .cat_img {
@@ -1062,6 +1139,7 @@ legend {
   .img_sel{
     align-items: flex-start;
     margin-top: 1em;
+    width: auto;
   }
 
   .cat_sel {
@@ -1093,6 +1171,18 @@ legend {
   .img_lg{
     width: 30vw;
     height: 30vw;
+  }
+
+  .img_name {
+    flex-direction: column;
+  }
+
+  .img_name fieldset {
+    width: auto;
+  }
+
+  .img_name fieldset+fieldset {
+    margin: 1em 0 0 0;
   }
 
   a.search_link{

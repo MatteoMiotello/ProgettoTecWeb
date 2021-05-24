@@ -2,6 +2,7 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/Access.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/HeaderHandler.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/BreadcrumbsBuilder.php';
 
 /**
  * Class TemplateHandler controlla la composizione della pagina
@@ -41,6 +42,10 @@ class TemplateHandler {
      */
     private $CurrentRoute;
 
+
+    private $Breadcrumb;
+
+
     /**
      * TemplateHandler constructor.
      */
@@ -48,6 +53,7 @@ class TemplateHandler {
         $this->Access = Access::create();
         $this->onInitialize();
     }
+
 
     /**
      * Funzione che si esegue in costruzione
@@ -58,6 +64,7 @@ class TemplateHandler {
         $this->setParam('<main-header/>', $this->getHeaderHtml());
         $this->setParam('<main-footer/>', $this->getFooterHtml());
     }
+
 
     /**
      * Ritorna l'html dell'header
@@ -76,12 +83,29 @@ class TemplateHandler {
     }
 
     /**
+    *Sceglie il contenitore utente da mostrare
+    *
+    *@throws Exception
+    */
+    private function getUserCont() {
+        if(Access::isAuthenticated()){
+          $uCont = $_SERVER['DOCUMENT_ROOT'] . '/php/components/userContainer.phtml';
+        }
+        else{
+          $uCont = $_SERVER['DOCUMENT_ROOT'] . '/php/components/visitorContainer.phtml';
+        }
+        return file_get_contents($uCont);
+    }
+
+
+    /**
      * @throws Exception
      */
     public function setHeaderParams() {
-        $links = HeaderHandler::getHeaderLinks( $this->CurrentRoute );
+        $links = HeaderHandler::getHeaderLinks($this->CurrentRoute);
 
         $this->setParam('<nav-link/>', $links);
+        $this->setParam('<user-cont/>', TemplateHandler::getUserCont());
     }
 
 
@@ -100,6 +124,7 @@ class TemplateHandler {
 
         return file_get_contents($footerPath);
     }
+
 
     /**
      * Ritorna l'html della pagina
@@ -149,6 +174,33 @@ class TemplateHandler {
         return $this;
     }
 
+
+    /**
+     * @param $breadcrumb
+     * @return $this
+     */
+    public function setBreadcrumb($breadcrumb) {
+        $this->Breadcrumb = new BreadcrumbsBuilder($breadcrumb);
+
+        return $this;
+    }
+
+
+    /**
+     * @param $route
+     * @param $title
+     */
+    public function addLink($route, $title) {
+        if (!isset($this->Breadcrumb)) {
+            throw new Exception('breadcrumb is not initialized');
+        }
+
+        $this->Breadcrumb->addLink($route, $title);
+
+        return $this;
+    }
+
+
     /**
      * Renderizza la pagina
      *
@@ -157,9 +209,20 @@ class TemplateHandler {
     public function render() {
         $html = $this->getCommonHtml();
         $this->setHeaderParams();
+
+
+        if ( !isset($this->Breadcrumb) ) {
+            $this->setParam('<main-breadcrumb/>', '');
+        } else {
+            $breadcrumbs = $this->Breadcrumb->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/php/components/breadcrumbs.phtml"));
+            $this->setParam('<main-breadcrumb/>', $breadcrumbs);
+        }
+
+
         $html = $this->replaceParams($html);
         echo $html;
     }
+
 
     /**
      * Setta il contenuto della pagina
@@ -215,6 +278,7 @@ class TemplateHandler {
         $this->Params[$tag] = $var;
         return $this;
     }
+
 
     /**
      * Imposta la pagina attuale

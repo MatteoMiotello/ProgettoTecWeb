@@ -7,15 +7,14 @@ require $_SERVER['DOCUMENT_ROOT'] .  '/php/library/TemplateHandler.php' ;
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/PreviewArticleBuilder.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/NewsArticleBuilder.php';
 
-$dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
-$connessioneRiuscita = $connessioneRiuscita->getConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Home');
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/index_nuovo.html';
+
+$handler->setBreadcrumb( 'Home' );
 
 if ( !file_exists( $filePath ) ) {
     throw new Exception( 'file non esistente' );
@@ -27,14 +26,14 @@ $handler->setCurrentRoute('home');
 if ($connessioneRiuscita == null)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
-    $rawArticles = Articolo::getArticoli(null, $connessioneRiuscita, null);
+    $rawArticles = Articolo::getArticoli(null, null);
     $articlesList = '';
     if ($rawArticles != null) {
         foreach ($rawArticles as $articolo) {
             $articlesList .= (new PreviewArticleBuilder)
             ->setID($articolo->getId())
-            ->setTitle($articolo->getTitolo())
-            ->setDescription($articolo->getDescrizione())
+            ->setTitle($articolo->getTitle())
+            ->setDescription($articolo->getDescription())
             ->setImgPath($articolo->getImgPath())
             ->setImgAlt($articolo->getAltImg())
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/articlePreview.phtml'))
@@ -45,12 +44,12 @@ else {
         $articlesList = "<div>nessun articolo presente</div>";
     }
 
-    $covidNews = Articolo::getArticoli('Covid', $connessioneRiuscita, 5);
+    $covidNews = Articolo::getArticoli('Covid', 5);
     $covidNewsList = '';
     if ($covidNews != null) {
         foreach ($covidNews as $articolo) {
-            $covidNewsList .= (new NewsArticleBuilder)
-            ->setTitle($articolo->getTitolo())
+            $covidNewsList .= (new PreviewArticleBuilder)
+            ->setTitle($articolo->getTitle())
             ->setID($articolo->getId())
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/articleNews.phtml'))
             ;

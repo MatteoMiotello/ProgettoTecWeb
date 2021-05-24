@@ -1,5 +1,5 @@
 <?php
-$CategoryName = $_GET['cat_name'];
+$search = $_POST['search'];
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -11,19 +11,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/PreviewArticleBuilder.ph
 $connessioneRiuscita = DBAccess::openDBConnection();
 
 $handler = new TemplateHandler();
-$handler->setPageTitle('Categoria'.$CategoryName);
-$handler->setBreadcrumb( 'Articoli della categoria: ' . $CategoryName )
-    ->addLink( '/index.php', 'Home' )
-    ->addLink( '/pages/categorie.php', 'Categorie' );
+$handler->setPageTitle('Risultati ricera per: '.$search);
 
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/article_filter_nuovo.html';
 
 $handler->setContent(file_get_contents($filePath));
 
 if ($connessioneRiuscita == null)
-    die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina 
+    die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
-    $rawArticles = Articolo::getArticoli($CategoryName, null);
+    $rawArticles = Articolo::searchArticolo($search, 20);
     $articlesList = '';
     if ($rawArticles != null) {
         foreach ($rawArticles as $articolo) {
@@ -41,9 +38,7 @@ else {
         $articlesList = "<div>nessun articolo presente</div>";
     }
 }
-$handler->setParam("{{categoryName}}",$CategoryName);
+$handler->setParam("{{categoryName}}",'Risultati ricerca');
 $handler->setParam("<listaArticoli />",$articlesList);
-$handler->render(); 
-
+$handler->render();
 ?>
-

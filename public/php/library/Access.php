@@ -45,9 +45,9 @@ class Access {
     /**
      * @return User|null
      */
-    public function getUser(): User {
-        $this->User = User::getUserById($_SESSION['user_id']);
-        return $this->User;
+    public static function getUser($Connection): User {
+        $User = User::getUserById($_SESSION['user_id'], $Connection);
+        return $User;
     }
 
 
@@ -56,7 +56,7 @@ class Access {
      *
      * @return bool
      */
-    public function isAuthenticated(): bool {
+    public static function isAuthenticated(): bool {
         if (!key_exists('authenticated', $_SESSION) || !$_SESSION['authenticated']) {
             return false;
         }

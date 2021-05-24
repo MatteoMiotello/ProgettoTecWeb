@@ -7,12 +7,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/CategoryBuilder.php';
 
-$dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
-$connessioneRiuscita = $connessioneRiuscita->getConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Categorie');
+$handler->setBreadcrumb( 'Categorie' )
+    ->addLink( '/index.php', 'Home' );
 
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/cat_nuovo.html';
 
@@ -22,7 +22,7 @@ $handler->setCurrentRoute('cat');
 if (!$connessioneRiuscita)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
-$categorie = Categoria::getCategorie($connessioneRiuscita);
+$categorie = Categoria::getCategorie();
 if ($categorie != null) {
     $listaCategoria = '';
     foreach ($categorie as $singolaCategoria) {

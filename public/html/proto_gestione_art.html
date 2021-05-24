@@ -2,7 +2,7 @@
 <html lang="it" dir="ltr" id="short_html">
   <head>
     <meta charset="utf-8">
-    <title>Accedi - ViTimes</title>
+    <title>Registrati - ViTimes</title>
 
     <meta name="author" content="MPAC Group">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,15 +12,15 @@
     <link rel="stylesheet" type="text/css" href="../css/style1.css" media="screen">
     <link rel="stylesheet" href="../css/print.css" media="print">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <script type="text/javascript" src="../js/util.js"></script>
+    <script type="text/javascript" src="../scripts/util.js"></script>
   </head>
 
   <body class="vFlex">
-    <a href="#top"><img src="../img/top.png" alt="Torna all'inizio" id="myBtn"></a>
+    <a href="#top"><img src="../img/top.png" alt="Torna su" id="myBtn"></a>
     <header id="top" class="hFlex">
       <img src="https://www.cineon.it/wp-content/uploads/2020/08/Shrek.jpg" alt="immagine del profilo" class="user_img img_sm" id="user_mob">
       <img src="../img/logo.png" alt="" id="logo">
-      <nav title="menu principale" class="hFlex">
+      <nav class="hFlex">
         <ul class="hFlex">
             <li><a href="index.html"><div lang="en">Home</div></a></li>
             <li><a href="cat.html"><div>Categorie</div></a></li>
@@ -28,7 +28,7 @@
         </ul>
       </nav>
       <form action="article_filter.html?art_text = {input}">
-        <input type="text" placeholder="Cerca su ViTimes" id="search_bar" tabindex="0" required><button type="submit" id="search_button" tabindex="0"><i class="fa fa-search"></i></button>
+        <input type="text" placeholder="Cerca.." id="search_bar" tabindex="0" required><button type="submit" id="search_button" tabindex="0"><i class="fa fa-search"></i></button>
       </form>
       <div class="right_section hFlex">
         <div class="mob_buttons_wrapper hFlex">
@@ -39,21 +39,23 @@
             <div class="fa fa-bars"></div>
           </a>
         </div>
-        <div class="currentItem user_cont hFlex">
-          <div class="currentLink"><p>Accedi/Registrati</p></div>
+        <div class="user_cont hFlex">
+          <a href="login.html" tabindex="0"><div>Accedi/Registrati</div></a>
           <!--<div class="logout_cont vFlex">
                 <a href="user_page.html">Il mio profilo</a>
                 <a href="index.html?logout_php">Esci</a>
           </div>-->
-          <img src="https://www.cineon.it/wp-content/uploads/2020/08/Shrek.jpg" alt="" class="user_img img_sm" id="user_desk">
+          <img src="https://www.cineon.it/wp-content/uploads/2020/08/Shrek.jpg" alt="" class="user_img img_sm" class="user_desk">
         </div>
       </div>
     </header>
     <div class="breadcrumbs">
       <ul>
-        <li class="currentLink">Accedi/Registrati</li>
+        <li><a href="login.html">Accedi/Registrati</a></li>
+        <li class="currentLink">Registrati</li>
       </ul>
     </div>
+
   <div class="mob_srch" id="search_mobile">
     <form action="article_filter.html?art_text = {input}">
       <input type="text" placeholder="Cerca.." id="search_bar_mobile" required><button type="submit" id="search_button_mob"><i class="fa fa-search"></i></button>
@@ -65,24 +67,30 @@
             <li><a href="index.html"><span lang="en">Home</span></a></li>
             <li><a href="cat.html">Categorie</a></li>
             <li><a href="form_articolo.html">Scrivi il tuo articolo</a></li>
-            <li class="currentItem"><span class="currentLink">Accedi/Registrati</span></li>
+            <li><a href="login.html">Accedi/Registrati</a></li>
         </ul>
     </nav>
   </div>
   <div id="wrapper" class="vFlex">
-    <div class="vFlex" id="wrapper_login">
-    <form class="box" action="index.html" method="post" id="log">
-        <h1><span lang="en">LOGIN</span></h1>
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password" id="pw">
-        <input type="submit" value="Login" id="log_btn">
-    </form>
-    <form class="box" action="register.html" method="post" id="reg">
-      <p>Non sei ancora registrato?</p>
-      <input type="submit" value="Registrati">
-    </form>
-    </div>
+    <h1>Gestisci articoli</h1>
+    <table>
+      <!--Non so se usare thead e tbody perchè non ci sarebbe un tfoot-->
+      <tr>
+        <th scope="col">id Articolo</th>
+        <th scope="col">Titolo Articolo</th>
+        <th scope="col">Autore</th>
+        <th scope="col" colspan="2">Azioni</th>
+      </tr>
+      <tr>
+        <td>1345</td>
+        <td>Titolo di un articolo da gestire</td>
+        <td>Autore</td>
+        <td><a href="form_articolo_admin.html">Modifica</a></td>
+        <td><a href="proto_gestione_art.html/query_delete">Elimina</a></td>
+      </tr>
+    </table>
   </div>
+
     <footer class="hFlex">
       <img id="html5" src="../img/badge-w3c-valid-html5.png" alt="Logo che certifica il rispetto dello standard w3c nella scrittura del codice html">
       <img id="cssLogo" src="../img/css.png" alt="Logo che certifica il rispetto dello standard w3c nella scrittura del codice css">
