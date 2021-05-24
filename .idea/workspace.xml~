@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d03795d-8ac2-4eef-aa95-41c77b878240" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/envirorment/.env" beforeDir="false" afterPath="$PROJECT_DIR$/envirorment/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/html/common.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/common.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/article_filter.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/article_filter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/categorie.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/categorie.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/form_article.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/form_article.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/form_article_admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/form_article_admin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/pages/generic_page_article.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/generic_page_article.php" afterDir="false" />
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/public/php/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/components/header.html" afterDir="false" />
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/public/php/control.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/control.php" afterDir="false" />
@@ -25,8 +31,6 @@
       <change beforePath="$PROJECT_DIR$/public/php/library/TemplateHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/TemplateHandler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/php/library/UserBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/UserBuilder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/php/modello.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/modello.php" afterDir="false" />
-=======
->>>>>>> 98604b6fc9ff6370fc771a54271a0a3f4f87525c
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,13 +114,8 @@
       <workItem from="1621077650654" duration="2877000" />
 =======
       <workItem from="1621077650654" duration="1703000" />
-<<<<<<< HEAD
       <workItem from="1621528179608" duration="8115000" />
 >>>>>>> ec425a501a312582ab508ed352babea3bd227b61
-=======
-      <workItem from="1621528179608" duration="12308000" />
-      <workItem from="1621889882590" duration="989000" />
->>>>>>> 98604b6fc9ff6370fc771a54271a0a3f4f87525c
     </task>
     <servers />
   </component>

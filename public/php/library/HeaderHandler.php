@@ -49,5 +49,21 @@ class HeaderHandler {
         return $links;
     }
 
+
+    public static function getUserInfo() {
+        $access = Access::create();
+
+        if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' ) or strpos( $_SERVER[ 'REQUEST_URI' ], 'register.php' ) ) {
+            return '';
+        }
+
+        if ( !$access->isAuthenticated() ) {
+            return '<a href="login.php" tabindex="0"><div>Accedi/Registrati</div></a>';
+        }
+
+        $html = '<div class="logout_cont vFlex">
+                  <a href="user_page.html">Il mio profilo</a>
+                  <a href="index.html?logout_php">Esci</a></div>';
+    }
     /* funzione div utente */
 }

@@ -1,9 +1,14 @@
 <?php
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dbConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/LoginErrorTypeSet.php';
+
 class LoginHandler {
     /**
      * @param $email
      * @param $password
-     * @return bool|string
+     * @return bool|User
      * @throws \Exception
      */
     public static function checkLogin($email, $password) {
@@ -11,23 +16,20 @@ class LoginHandler {
 
         $usernameQuery = "SELECT * FROM `utente` WHERE email = '$email'";
 
-        $result = $connection
+        $riga = $connection
             ->query($usernameQuery)
             ->fetch_assoc();
 
-        if (is_null($result) or empty( $result )) {
-            return 'Username non trovato';
+        if (is_null($riga) or empty( $riga )) {
+            return false;
         }
 
-        $user = ( new \User( ) )
-            ->setName( $result['name'] )
-            ->setEmail( $result['email'] )
-            ->setPassword( $result['password'] );
+        $user = new \User( $riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'], $riga['password'], $riga['permesso'], $riga['img_path'] );
 
         if ( !password_verify( $user->getPassword(), $password ) ) {
-            return 'Password non valida';
+            return false;
         }
 
-        return true;
+        return $user;
     }
 }

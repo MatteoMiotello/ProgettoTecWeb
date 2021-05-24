@@ -1,17 +1,23 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/php/models/User.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
+
 class Access {
     /**
      * @var User $User
      */
     private $User;
 
+
     /**
      * Access constructor.
-     * @param User $User
+     * @param null|User $User
      */
-    public function __construct(User $User) {
+<<<<<<< HEAD
+    private function __construct(User $User) {
+=======
+    public function __construct(User $User = null) {
+>>>>>>> 98604b6fc9ff6370fc771a54271a0a3f4f87525c
         $this->User = $User;
     }
 
@@ -30,15 +36,16 @@ class Access {
      * @return Access|null
      */
     public static function create(): ?Access {
-        session_start();
-
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         if (empty($_SESSION['user_id'])) {
-            return null;
+            return new static();
         }
 
         $user = User::getUserById($_SESSION['user_id']);
 
-        return new Access($user);
+        return new static($user);
     }
 
 
