@@ -1,10 +1,13 @@
 <?php
+
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/LoginHandler.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
 
-$email = $_POST['email'];
-$password = $_POST['password'];
-
+$email = $_POST['email_addr'];
+$password = $_POST['pw'];
+var_dump( $email );
+var_dump( $password );
 $result = LoginHandler::checkLogin( $email, $password );
 
 if ( $result instanceof User ) {
