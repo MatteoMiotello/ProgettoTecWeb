@@ -11,7 +11,7 @@ class Access {
      * Access constructor.
      * @param User $User
      */
-    public function __construct(User $User) {
+    private function __construct(User $User) {
         $this->User = $User;
     }
 
