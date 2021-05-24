@@ -11,8 +11,7 @@ $connessioneRiuscita = DBAccess::openDBConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Categorie');
-$handler->setBreadcrumb( 'Categorie' )
-    ->addLink( '/index.php', 'Home' );
+$handler->setBreadcrumb( 'Categorie' );
 
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/cat_nuovo.html';
 

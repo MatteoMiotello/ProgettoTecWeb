@@ -13,8 +13,7 @@ $connessioneRiuscita = DBAccess::openDBConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Form Articolo');
-$handler->setBreadcrumb('Scrivi un articolo')
-    ->addLink('/index.php', 'Home');
+$handler->setBreadcrumb('Scrivi un articolo');
 
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/form_articolo_nuovo.html';
 

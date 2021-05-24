@@ -24,8 +24,6 @@ if ($connessioneRiuscita && isset($_POST['comment'])) {
 $handler = new TemplateHandler();
 $handler->setPageTitle('Articolo');
 $handler->setBreadcrumb('Articolo');
-$handler
-    ->addLink('/index.php', 'Home');
 
 if (strpos($_SERVER['HTTP_REFERER'], 'categorie.php')) {
     $handler->addLink('/pages/categorie.php', 'Categorie');
@@ -42,15 +40,6 @@ if (strpos($_SERVER['HTTP_REFERER'], '?cat_name=')) {
 
     $handler->addLink($_SERVER['HTTP_REFERER'], $linkTitle);
 }
-
-<<<<<<< HEAD
-
-=======
-/*$handler
-    ->addLink('/inddex.php', 'Home')
-    ->addLink('/pages/categorie.php', 'Categorie')
-    ->addLink($_SERVER['HTTP_REFERER'], $linkTitle);*/
->>>>>>> ec425a501a312582ab508ed352babea3bd227b61
 
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/generic_page_articolo_nuovo.html';
 

@@ -5,61 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d03795d-8ac2-4eef-aa95-41c77b878240" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/html/form_articolo_nuovo_per_modifica.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/html/registrati_nuovo.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pages/modify_article_admin.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pages/register.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/php/components/acceptArticleManagment.phtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/php/components/formArticleContent.phtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/php/components/personalUserInfo.phtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/php/components/userAdminOption.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/envirorment/.env" beforeDir="false" afterPath="$PROJECT_DIR$/envirorment/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/print.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/print.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style1.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style1.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/admin_page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/article_filter.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/cat.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/form_articolo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/form_articolo_admin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/form_articolo_admin_nuovo.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/form_articolo_admin_nuovo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/form_articolo_nuovo.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/form_articolo_nuovo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/generic_page_articolo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/login_vecchio.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/user_page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/html/user_page_nuovo.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/user_page_nuovo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pages/article_filter.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/article_filter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pages/article_search.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/article_search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pages/categorie.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/categorie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pages/form_article.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/form_article.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pages/form_article_admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/form_article_admin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/pages/generic_page_article.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/generic_page_article.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pages/gestione_art.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/gestione_art.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pages/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/components/articleManager.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/components/articleManager.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/components/chooseCategoryFormArticle.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/components/chooseCategoryFormArticle.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/components/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/components/userContainer.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/components/userContainer.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/components/visitorContainer.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/components/visitorContainer.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/dBConnection.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/dBConnection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/library/AbstractBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/AbstractBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/library/Access.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/Access.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/library/ArticleBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/ArticleBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/library/CategoryBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/CategoryBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/library/NewsArticleBuilder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/library/PreviewArticleBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/PreviewArticleBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/library/TemplateHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/TemplateHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/library/UserBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/UserBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/library/UserLevelType.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/UserLevelType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/modello.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/modello.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/models/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scripts/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/util.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +88,8 @@
       <workItem from="1620335432171" duration="3764000" />
       <workItem from="1620938512502" duration="6428000" />
       <workItem from="1621077650654" duration="1703000" />
-      <workItem from="1621528179608" duration="12139000" />
+      <workItem from="1621528179608" duration="12308000" />
+      <workItem from="1621889882590" duration="989000" />
     </task>
     <servers />
   </component>
