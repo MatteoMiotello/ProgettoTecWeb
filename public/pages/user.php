@@ -12,9 +12,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/UserBuilder.php';
 
-$dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
-$connessioneRiuscita = $connessioneRiuscita->getConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Pagina utente');
@@ -26,10 +24,10 @@ $handler->setContent(file_get_contents($filePath));
 if ($connessioneRiuscita == null)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
-    $userModel = User::getUserById($IdUtente, $connessioneRiuscita);
-    $numberOfArticles = User::getNumberOfWrittenArticles($IdUtente, $connessioneRiuscita);
-    $givenLikes = User::getNumberOfGivenLikes($IdUtente, $connessioneRiuscita);
-    $receivedLikes = User::getNumberOfLikesReceived($IdUtente, $connessioneRiuscita);
+    $userModel = User::getUserById($IdUtente);
+    $numberOfArticles = User::getNumberOfWrittenArticles($IdUtente);
+    $givenLikes = User::getNumberOfGivenLikes($IdUtente);
+    $receivedLikes = User::getNumberOfLikesReceived($IdUtente);
     if($userModel) {
         $userPage = (new UserBuilder)
         ->setUserName($userModel->getName())

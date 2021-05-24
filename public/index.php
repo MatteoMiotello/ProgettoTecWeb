@@ -8,9 +8,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/PreviewArticleBuilder.php';
 
-$dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
-$connessioneRiuscita = $connessioneRiuscita->getConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Home');
@@ -28,7 +26,7 @@ $handler->setCurrentRoute('home');
 if ($connessioneRiuscita == null)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
-    $rawArticles = Articolo::getArticoli(null, $connessioneRiuscita, null);
+    $rawArticles = Articolo::getArticoli(null, null);
     $articlesList = '';
     if ($rawArticles != null) {
         foreach ($rawArticles as $articolo) {
@@ -46,7 +44,7 @@ else {
         $articlesList = "<div>nessun articolo presente</div>";
     }
 
-    $covidNews = Articolo::getArticoli('Covid', $connessioneRiuscita, 5);
+    $covidNews = Articolo::getArticoli('Covid', 5);
     $covidNewsList = '';
     if ($covidNews != null) {
         foreach ($covidNews as $articolo) {

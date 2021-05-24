@@ -169,7 +169,8 @@ class Comment
         return ( new User( $row['ID'], $row['nome'], $row['cognome'], $row['email'], $row['password'], $row['permesso'], $row['img_row'] ));
     }
 
-    public static function getCommentsFromArticle($Connection, $IdArticolo) {
+    public static function getCommentsFromArticle($IdArticolo) {
+        $Connection = DBAccess::openDBConnection();
         $querySelect = "SELECT * FROM commento WHERE commento.ID_art = $IdArticolo";
         $queryResult = mysqli_query($Connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
@@ -184,7 +185,8 @@ class Comment
         return $listaCommenti;
     }
 
-    public static function uploadNewComment($ArticleId, $AuthorId, $Comment, $DataPub, $Connection) {
+    public static function uploadNewComment($ArticleId, $AuthorId, $Comment, $DataPub) {
+        $Connection = DBAccess::openDBConnection();
         $querySelect = "INSERT INTO commento(ID_art, autore, testo, data_pub) VALUES($ArticleId, $AuthorId, '$Comment', '$DataPub')";
         $queryResult = mysqli_query($Connection, $querySelect);
         return $queryResult;

@@ -8,9 +8,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/CategoryBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
 
-$dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
-$connessioneRiuscita = $connessioneRiuscita->getConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Form Articolo');
@@ -24,7 +22,7 @@ $handler->setCurrentRoute('form_articolo');
 if (!$connessioneRiuscita)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
-$categorie = Categoria::getCategorie($connessioneRiuscita);
+$categorie = Categoria::getCategorie();
 if ($categorie != null) {
     $listaCategoria = '';
     foreach ($categorie as $singolaCategoria) {

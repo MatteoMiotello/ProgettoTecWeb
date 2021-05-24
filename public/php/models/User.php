@@ -238,8 +238,9 @@ class User
         return $userList;
     }
 
-    public static function getArticleAuthor($id_articolo, $connection)
+    public static function getArticleAuthor($id_articolo)
     {
+        $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT * FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = $id_articolo ";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0) {
@@ -251,8 +252,9 @@ class User
         }
     }
 
-    public static function getUserById($Id, $Connection)
+    public static function getUserById($Id)
     {
+        $Connection = DBAccess::openDBConnection();
 
         $querySelect = "SELECT * FROM utente WHERE utente.ID = $Id";
 
@@ -271,8 +273,10 @@ class User
         return (new User($row['ID'], $row['nome'], $row['cognome'], $row['email'], $row['password'], $row['permesso'], $row['img_path']));
     }
 
-    public static function getNumberOfWrittenArticles($Id, $Connection)
+    public static function getNumberOfWrittenArticles($Id)
     {
+        $Connection = DBAccess::openDBConnection();
+
         $querySelect = "SELECT count(*) FROM articolo WHERE autore = $Id";
 
         $result = mysqli_query($Connection, $querySelect);
@@ -290,8 +294,9 @@ class User
         return $row;
     }
 
-    public static function getNumberOfLikesReceived($Id, $Connection)
+    public static function getNumberOfLikesReceived($Id)
     {
+        $Connection = DBAccess::openDBConnection();
         $querySelect = "SELECT SUM(articolo.upvotes) as result from articolo, utente where utente.ID=$Id and utente.ID = articolo.autore";
         $queryResult = mysqli_query($Connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
@@ -301,12 +306,16 @@ class User
         }
     }
 
-    public static function getNumberOfGivenLikes($Id, $Connection)
+    public static function getNumberOfGivenLikes($Id)
     {
+        $Connection = DBAccess::openDBConnection();
+
         $querySelect = "SELECT SUM(voto.up) from voto where utente=$Id";
         $queryResult = mysqli_query($Connection, $querySelect);
+
         if(!$queryResult)
             return null;
+            
         if (mysqli_num_rows($queryResult) == 0)
             return null;
         else {

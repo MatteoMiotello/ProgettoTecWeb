@@ -14,9 +14,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/CategoryBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
 
-$dbAccess = new DBAccess();
 $connessioneRiuscita = DBAccess::openDBConnection();
-$connessioneRiuscita = $connessioneRiuscita->getConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Form Articolo');
@@ -30,10 +28,10 @@ $handler->setCurrentRoute('form_articolo');
 if (!$connessioneRiuscita && !$id_articolo)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
-    $articolo = Articolo::getArticolo($id_articolo, $connessioneRiuscita);
-    $autore = User::getArticleAuthor($articolo->getID(), $connessioneRiuscita);
-    $categorieArticolo = Categoria::getCategorieArticolo($articolo->getID(), $connessioneRiuscita);
-$categorie = Categoria::getCategorie($connessioneRiuscita);
+    $articolo = Articolo::getArticolo($id_articolo);
+    $autore = User::getArticleAuthor($articolo->getID());
+    $categorieArticolo = Categoria::getCategorieArticolo($articolo->getID());
+$categorie = Categoria::getCategorie();
 $articleContent = (new ArticleBuilder)
 ->setTitle($articolo->getTitle())
 ->setDescription($articolo->getDescription())
