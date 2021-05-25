@@ -206,7 +206,6 @@ class Articolo {
         if ($correctCharacters)
             $this->altImg = $value;
         else {
-            print($value);
             throw new Exception(CheckValues::createMsgError("Alt Image"), 1);
         }
     }

@@ -324,6 +324,27 @@ class User
     }
 
     /**
+     * @param $User
+     */
+
+    public static function loadNewUser($User) {
+        $name = $User->getName();
+        $Surname = $User->getSurname();
+        $Email = $User->getEmail();
+        $pass = $User->getPassword();
+        $perm = $User->getPermission();
+        $img = $User->getImg();
+        $connection = DBAccess::openDBConnection();
+        $querySelect = 'insert into utente(nome, cognome, email,password, permesso, img_path) values("'.$name.'","'.$Surname.'", "'.$Email.'", "'.$pass.'", "'.$perm.'", "'.$img.'")';
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_affected_rows($connection) == 0 || !$queryResult) {
+            return null;
+        } else {
+            return true;
+        }
+    }
+    
+    /**
      * @param UserLevelType $levelType
      */
     public static function getUserByAccess(UserLevelType $levelType)
