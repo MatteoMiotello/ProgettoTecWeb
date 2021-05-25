@@ -220,7 +220,6 @@ class TemplateHandler {
             $this->setParam('<main-breadcrumb/>', $breadcrumbs);
         }
 
-
         $html = $this->replaceParams($html);
         echo $html;
     }
@@ -291,6 +290,24 @@ class TemplateHandler {
     public function setCurrentRoute($currentRoute) {
         $this->CurrentRoute = $currentRoute;
         return $this;
+    }
+
+    /**
+     * Imposta un messaggio di errore 
+     * @param $string
+    */
+    public function setOperationError($string) {
+        $component = str_replace('{{messge}}', $string, file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/operationError.phtml'));
+        $this->setParam('<operationResult />', $component );
+    }
+
+    /**
+     * Imposta un messaggio di errore 
+     * @param $string
+    */
+    public function setOperationDone($string) {
+        $component = str_replace('{{messge}}', $string, file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/operationDone.phtml'));
+        $this->setParam('<operationResult />', $component );
     }
 
 }
