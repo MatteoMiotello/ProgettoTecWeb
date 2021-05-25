@@ -3,9 +3,9 @@
     <form class="box" action="after_login.php" onsubmit="return validateLogin()" method="POST" id="log">
         <h1><span lang="en">LOGIN</span></h1>
         <p id="mail_err">Indirizzo email non valido</p>
-        <input type="email" id="email_addr" placeholder="Email" required>
+        <input type="email" id="email_addr" placeholder="Email" name="email" required>
         <p id="pass_err">Inserisci la password</p>
-        <input type="password" placeholder="Password" id="pw" required>
+        <input type="password" placeholder="Password" id="pw" name="password" required>
         <p id="err_msg">Indirizzo email e/o password errati</p>
         <input type="submit" onclick="validateLogin()" value="Login" id="log_btn">
     </form>

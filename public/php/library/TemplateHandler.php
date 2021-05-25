@@ -292,5 +292,4 @@ class TemplateHandler {
         $this->CurrentRoute = $currentRoute;
         return $this;
     }
-
 }
