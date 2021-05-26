@@ -1,21 +1,24 @@
 <div id="wrapper" class="vFlex">
     <h1>Registrati</h1>
-    <operationResult /> 
+    <operationResult />
     <form class="reg_form vFlex" action="register.php" onsubmit="return validateReg()" method="post">
       <div class="img_name">
-        <fieldset class="hFlex pro_pic">
+        <fieldset class="pro_pic">
           <legend>Scegli l'icona del profilo</legend>
-          <div class="vFlex">
-            <input type="radio" name="pic_sel" id="male_icon" value="male" >
-            <img class="user_img" src="../img/male_icon.png" alt="Icona utente maschio" title="Icona utente maschio">
-          </div>
-          <div class="vFlex">
-            <input type="radio" name="pic_sel" id="female_icon" value="female">
-            <img class="user_img" src="../img/female_icon.png" alt="Icona utente femmina" title="Icona utente femmina">
-          </div>
-          <div class="vFlex">
-            <input type="radio" name="pic_sel" id="genderfluid_icon" value="genderfluid">
-            <img class="user_img" src="../img/genderfluid_icon.png" alt="Icona utente non binario" title="Icona utente non binario">
+          <span id="icon_err">Scegli un'icona del profilo</span>
+          <div class="hFlex">
+            <div class="vFlex">
+              <input type="radio" name="pic_sel" id="male_icon" value="male" required>
+              <img class="user_img" src="../img/male_icon.png" alt="Icona utente maschio" title="Icona utente maschio">
+            </div>
+            <div class="vFlex">
+              <input type="radio" name="pic_sel" id="female_icon" value="female" required>
+              <img class="user_img" src="../img/female_icon.png" alt="Icona utente femmina" title="Icona utente femmina">
+            </div>
+            <div class="vFlex">
+              <input type="radio" name="pic_sel" id="genderfluid_icon" value="genderfluid" required>
+              <img class="user_img" src="../img/genderfluid_icon.png" alt="Icona utente non binario" title="Icona utente non binario">
+            </div>
           </div>
         </fieldset>
         <fieldset class="vFlex">
@@ -30,6 +33,8 @@
           <legend>Inserisci i dati d'accesso</legend>
           <label for="email">Email <span id="mail_err">Inserisci un Indirizzo valido</span></label>
           <input name="email" type="text" id="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+          <label for="username">Nome utente <span id="user_err">Nome utente già presente</span></label>
+          <input name="username" type="text" id="username" required>
           <label for="password">Password (almeno 8 caratteri) <span id="pass_err">Inserisci una password valida</span></label>
           <input name="password" type="password" id="password1" required>
           <label for="password">Ripeti password <span id="pass1_err">Le password non combaciano</span></label>
