@@ -1,6 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/UserLevelType.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
 
 class User {
     private $Id;
@@ -39,11 +40,9 @@ class User {
         if(!CheckValues::checkForCorrectValues($nome, "alpha", 255))
           throw new Exception("Invalid name");
         if(!CheckValues::checkForCorrectValues($cognome, "alpha", 255))
-          throw new Exception("Invalid name");
+          throw new Exception("Invalid surname");
         if(!CheckValues::checkForCorrectValues($email, "email", 255))
-          throw new Exception("Invalid name");
-        if(!CheckValues::checkForCorrectValues($password, "alnum", 255))
-          throw new Exception("Invalid name");
+          throw new Exception("Invalid email");
         $this->Id = $ID;
         $this->Name = $nome;
         $this->Surname = $cognome;
@@ -192,7 +191,7 @@ class User {
         }
     }
 
-    
+
     /**
      * @param UserLevelType $levelType
      */
