@@ -12,6 +12,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/ArticleBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/CommentBuilder.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/Access.php';
 
 $connessioneRiuscita = DBAccess::openDBConnection();
 
@@ -24,7 +25,9 @@ if ($connessioneRiuscita && isset($_POST['comment'])) {
 $handler = new TemplateHandler();
 $handler->setPageTitle('Articolo');
 $handler->setBreadcrumb('Articolo');
+$filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/generic_page_articolo_nuovo.html';
 
+$handler->setContent(file_get_contents($filePath));
 if (strpos($_SERVER['HTTP_REFERER'], 'categorie.php')) {
     $handler->addLink('/pages/categorie.php', 'Categorie');
 }
@@ -41,13 +44,10 @@ if (strpos($_SERVER['HTTP_REFERER'], '?cat_name=')) {
     $handler->addLink($_SERVER['HTTP_REFERER'], $linkTitle);
 }
 
-$filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/generic_page_articolo_nuovo.html';
-
 if (!file_exists($filePath)) {
     throw new Exception('file non esistente');
 }
 
-$handler->setContent(file_get_contents($filePath));
 
 if (!$connessioneRiuscita)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
@@ -55,7 +55,7 @@ else {
     $printArticolo = '';
     $articolo = Articolo::getArticolo($id_articolo);
 
-    if ($articolo != null) {
+    if ($articolo) {
         $autore = User::getArticleAuthor($articolo->getID());
         $listaCategorie = Categoria::getCategorieArticolo($articolo->getID());
         $articolo = (new ArticleBuilder)
@@ -72,8 +72,15 @@ else {
             }
         }
         $printArticolo .= $articolo->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/article.phtml'));
-    } else {
-        $printArticolo .= "<div>Nessun articolo presente</div>";
+    } 
+    /**
+     * Nel caso in cui non venisse trovato l'articolo si imposta un messaggio di errore attraverso il template
+     */
+    else {
+        $handler->setOperationError("Nessun articolo trovato, you tried ;)");
+        $handler->setParam("<commentArea />", "");
+        $handler->render();
+        return;
     }
     $rawComments = Comment::getCommentsFromArticle($id_articolo);
     if ($rawComments) {
@@ -87,14 +94,23 @@ else {
                 ->setImg($author->getImg())
                 ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/previusComment.phtml'));
         }
-        // controllo se l'utente e' loggato o meno
-        $comment .= (new CommentBuilder)
+    } 
+    else  $comment = '<p>Nessun commento trovato</p>';
+    // controllo se l'utente e' loggato, in tal caso puo' commentare l'articolo
+    if(Access::isAuthenticated()) {
+        $user = null;
+        if(isset($_SESSION['user_id']))
+            $user = Access::getUser($_SESSION['user_id']);
+        if($user) {
+            $comment .= (new CommentBuilder)
             ->setImg($author->getImg())/* qui al posto di author va l'utente loggato */
             ->setArticleId($id_articolo)
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/newComment.phtml'));
-    } else  $comment = '<p>Nessun commento trovato</p>';
+        }
+    }
 }
 $handler->setParam("<articolo />", $printArticolo);
+$handler->setParam("<commentArea />", file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/commentArea.phtml'));
 $handler->setParam("<listaCommenti />", $comment);
 
 $handler->render();

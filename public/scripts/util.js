@@ -23,32 +23,80 @@ String.prototype.trim = function () {
     return this.replace(/^\s+|\s+$/g, "");
 }
 
-function testArea(x) {
+function testFormArea(x) {
     var t = document.getElementById("titl_err");
     var d = document.getElementById("desc_err");
     var tx = document.getElementById("text_err");
     if (x.value.trim() == '') {
-        if (x === document.getElementById("titolo_art"))
+        switch (x) {
+          case document.getElementById("titolo_art"):
             t.style.display = "inline-block";
-        else {
-            if (x === document.getElementById("descr_art"))
-                d.style.display = "inline-block";
-            else
-                tx.style.display = "inline-block";
+            break;
+          case document.getElementById("descr_art"):
+            d.style.display = "inline-block";
+            break;
+          case document.getElementById("testo_art"):
+            tx.style.display = "inline-block";
+            break;
         }
         return false;
     } else {
-        if (x === document.getElementById("titolo_art"))
-            t.style.display = "none";
-        else {
-            if (x === document.getElementById("descr_art"))
-                d.style.display = "none";
-            else {
-                tx.style.display = "none";
-            }
-        }
-        return true;
+      switch (x) {
+        case document.getElementById("titolo_art"):
+          t.style.display = "none";
+          break;
+        case document.getElementById("descr_art"):
+          d.style.display = "none";
+          break;
+        case document.getElementById("testo_art"):
+          tx.style.display = "none";
+          break;
+      }
+      return true;
     }
+}
+
+function testRegArea(x) {
+  /*var i = document.getElementById("icon_err");*/
+  var n = document.getElementById("name_err");
+  var s = document.getElementById("surn_err");
+  var m = document.getElementById("mail_err");
+  /*var u = document.getElementById("aka_err");*/
+  var p = document.getElementById("pass_err");
+
+  if (!isValid(x)) {
+    switch (x) {
+      case document.getElementById("nome"):
+        n.style.display = "inline-block";
+        break;
+      case document.getElementById("cognome"):
+        s.style.display = "inline-block";
+        break;
+      case document.getElementById("email"):
+        m.style.display = "inline-block";
+        break;
+      case document.getElementById("password1"):
+        p.style.display = "inline-block";
+        break;
+      }
+      return false;
+  } else {
+    switch (x) {
+      case document.getElementById("nome"):
+        n.style.display = "none";
+        break;
+      case document.getElementById("cognome"):
+        s.style.display = "none";
+        break;
+      case document.getElementById("email"):
+        m.style.display = "none";
+        break;
+      case document.getElementById("password1"):
+        p.style.display = "none";
+        break;
+      }
+      return true;
+  }
 }
 
 /* ---- Scrivi il tuo articolo ---- */
@@ -59,10 +107,10 @@ function validateForm() {
     titolo.removeAttribute("required");
     desc.removeAttribute("required");
     testo.removeAttribute("required");
-    testArea(titolo);
-    testArea(desc);
-    testArea(testo);
-    if (!testArea(titolo) || !testArea(desc) || !testArea(testo)) {
+    testFormArea(titolo);
+    testFormArea(desc);
+    testFormArea(testo);
+    if (!testFormArea(titolo) || !testFormArea(desc) || !testFormArea(testo)) {
         return false;
     } else return true;
 }
@@ -129,165 +177,60 @@ function validateLogin() {
 
 /* ---- Registration ---- */
 function validateReg() {
+    var chk = document.querySelector('input[name="pic_sel"]:checked');
     var name = document.getElementById("nome");
     var surn = document.getElementById("cognome");
     var email = document.getElementById("email");
+    var user = document.getElementById("username");
     var pass = document.getElementById("password1");
     var pass1 = document.getElementById("password2");
 
     /* Elimina il messaggio d'errore dal browser, ma se JS viene disabilitato i campi rimangono 'required' */
-
+    document.querySelector('input[name=pic_sel]').removeAttribute("required");
     name.removeAttribute("pattern");
     name.removeAttribute("required");
     surn.removeAttribute("pattern");
     surn.removeAttribute("required");
     email.removeAttribute("pattern");
     email.removeAttribute("required");
+    user.removeAttribute("required");
     pass.removeAttribute("required");
     pass1.removeAttribute("required");
     /*-----------------------------------------------------------------------------------------------------*/
 
-    var n = document.getElementById("name_err");
-    var s = document.getElementById("surn_err");
-    var m = document.getElementById("mail_err");
-    var p = document.getElementById("pass_err");
+    var i = document.getElementById("icon_err");
     var p1 = document.getElementById("pass1_err");
 
-
-    if (!isValid(name) && !isValid(surn) && !isValid(email) && !isValid(pass)) {
-        n.style.display = "inline-block";
-        s.style.display = "inline-block";
-        m.style.display = "inline-block";
-        p.style.display = "inline-block";
+    var t0;
+    var t1 = testRegArea(name);
+    var t2 = testRegArea(surn);
+    var t3 = testRegArea(email);
+    var t4 = testRegArea(pass);
+    var t5;
+    if(t4){
+      if (pass.value == pass1.value) {
+          p1.style.display = "none";
+          t5 = true;
+      }
+      else{
+          p1.style.display = "inline-block";
+          t5 = false;
+      }
     }
-    if (isValid(name) && !isValid(surn) && !isValid(email) && !isValid(pass)) {
-        n.style.display = "none";
-        s.style.display = "inline-block";
-        m.style.display = "inline-block";
-        p.style.display = "inline-block";
+    else {
+      t5 = false;
+      p1.style.display = "none";
     }
-    if (!isValid(name) && isValid(surn) && !isValid(email) && !isValid(pass)) {
-        n.style.display = "inline-block";
-        s.style.display = "none";
-        m.style.display = "inline-block";
-        p.style.display = "inline-block";
+    if(chk != null){
+      t0 = true;
+      i.style.display = "none";
     }
-    if (!isValid(name) && !isValid(surn) && isValid(email) && !isValid(pass)) {
-        n.style.display = "inline-block";
-        s.style.display = "inline-block";
-        m.style.display = "none";
-        p.style.display = "inline-block";
+    else{
+      t0 = false;
+      i.style.display = "block";
     }
-    if (!isValid(name) && !isValid(surn) && !isValid(email) && isValid(pass)) {
-        n.style.display = "inline-block";
-        s.style.display = "inline-block";
-        m.style.display = "inline-block";
-        p.style.display = "none";
-        if (pass.value == pass1.value) {
-            p1.style.display = "none";
-        } else {
-            p1.style.display = "inline-block";
-        }
-    }
-    if (isValid(name) && isValid(surn) && !isValid(email) && !isValid(pass)) {
-        n.style.display = "none";
-        s.style.display = "none";
-        m.style.display = "inline-block";
-        p.style.display = "inline-block";
-    }
-    if (isValid(name) && !isValid(surn) && isValid(email) && !isValid(pass)) {
-        n.style.display = "none";
-        s.style.display = "inline-block";
-        m.style.display = "none";
-        p.style.display = "inline-block";
-    }
-    if (isValid(name) && !isValid(surn) && !isValid(email) && isValid(pass)) {
-        n.style.display = "none";
-        s.style.display = "inline-block";
-        m.style.display = "inline-block";
-        p.style.display = "none";
-        if (pass.value == pass1.value) {
-            p1.style.display = "none";
-        } else {
-            p1.style.display = "inline-block";
-        }
-    }
-    if (!isValid(name) && isValid(surn) && isValid(email) && !isValid(pass)) {
-        n.style.display = "inline-block";
-        s.style.display = "none";
-        m.style.display = "none";
-        p.style.display = "inline-block";
-    }
-    if (!isValid(name) && isValid(surn) && !isValid(email) && isValid(pass)) {
-        n.style.display = "inline-block";
-        s.style.display = "none";
-        m.style.display = "inline-block";
-        p.style.display = "none";
-        if (pass.value == pass1.value) {
-            p1.style.display = "none";
-        } else {
-            p1.style.display = "inline-block";
-        }
-    }
-    if (!isValid(name) && !isValid(surn) && isValid(email) && isValid(pass)) {
-        n.style.display = "inline-block";
-        s.style.display = "inline-block";
-        m.style.display = "none";
-        p.style.display = "none";
-        if (pass.value == pass1.value) {
-            p1.style.display = "none";
-        } else {
-            p1.style.display = "inline-block";
-        }
-    }
-    if (isValid(name) && isValid(surn) && isValid(email) && !isValid(pass)) {
-        n.style.display = "none";
-        s.style.display = "none";
-        m.style.display = "none";
-        p.style.display = "inline-block";
-    }
-    if (isValid(name) && isValid(surn) && !isValid(email) && isValid(pass)) {
-        n.style.display = "none";
-        s.style.display = "none";
-        m.style.display = "inline-block";
-        p.style.display = "none";
-        if (pass.value == pass1.value) {
-            p1.style.display = "none";
-        } else {
-            p1.style.display = "inline-block";
-        }
-    }
-    if (isValid(name) && !isValid(surn) && isValid(email) && isValid(pass)) {
-        n.style.display = "none";
-        s.style.display = "inline-block";
-        m.style.display = "none";
-        p.style.display = "none";
-        if (pass.value == pass1.value) {
-            p1.style.display = "none";
-        } else {
-            p1.style.display = "inline-block";
-        }
-    }
-    if (!isValid(name) && isValid(surn) && isValid(email) && isValid(pass)) {
-        n.style.display = "inline-block";
-        s.style.display = "none";
-        m.style.display = "none";
-        p.style.display = "none";
-        if (pass.value == pass1.value) {
-            p1.style.display = "none";
-        } else {
-            p1.style.display = "inline-block";
-        }
-    }
-    if (isValid(name) && isValid(surn) && isValid(email) && isValid(pass)) {
-        n.style.display = "none";
-        s.style.display = "none";
-        m.style.display = "none";
-        p.style.display = "none";
-        if (pass.value == pass1.value) {
-            return true;
-        }
-    }
+    if (t0 && t1 && t2 && t3 && t4 && t5)
+        return true;
     return false;
 }
 

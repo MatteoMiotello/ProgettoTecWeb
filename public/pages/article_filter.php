@@ -1,5 +1,9 @@
 <?php
-$CategoryName = $_GET['cat_name'];
+
+$CategoryName = '';
+if(isset($_GET['cat_name']))
+    $CategoryName = $_GET['cat_name'];
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -40,6 +44,7 @@ else {
         $articlesList = "<div>nessun articolo presente</div>";
     }
 }
+$handler->setNoOperation();
 $handler->setParam("{{categoryName}}",$CategoryName);
 $handler->setParam("<listaArticoli />",$articlesList);
 $handler->render(); 

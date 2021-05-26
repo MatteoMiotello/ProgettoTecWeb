@@ -11,9 +11,7 @@ $connessioneRiuscita = DBAccess::openDBConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Gestione Articoli');
-
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/article_filter_nuovo.html';
-
 $handler->setContent(file_get_contents($filePath));
 
 if ($connessioneRiuscita == null)
@@ -25,13 +23,21 @@ else {
      */
     $id_art = null;
     if (isset($_GET['art_id'])) {
-        $id_art = $_GET['art_id'];
-        $result = Articolo::validateArticle($id_art);
-        if (mysqli_affected_rows($result))
-            $articlesList .= '<article class="articolo_validato"><p>Articolo con id=' . $id_art . ' è stato validato con successo </p></article>';
-        else
-            $articlesList .= '<article class="articolo_non_validato"><p>L\'articolo selezionato non è presente</p></article>';
-    }
+        //controllo se l'operazione da eseguire e' un'eliminazione
+        if (isset($_GET['del'])) {
+            $result = Articolo::deleteArticle($_GET['art_id']);
+            if ($result)
+                $handler->setOperationDone('Articolo con id=' . $_GET['art_id'] . ' è stato eliminato con successo');
+            else
+                $handler->setOperationError('L\'articolo con id=' . $_GET['art_id'] . ' selezionato per l\'eliminazione non è presente');
+        } else {
+            $result = Articolo::validateArticle($_GET['art_id']);
+            if ($result)
+                $handler->setOperationDone('Articolo con id=' . $_GET['art_id'] . ' è stato validato con successo');
+            else
+                $handler->setOperationError('L\'articolo selezionato non è presente');
+        }
+    } else $handler->setNoOperation();
     $rawArticles = Articolo::getArticoli(null, null);
     if ($rawArticles != null) {
         foreach ($rawArticles as $articolo) {

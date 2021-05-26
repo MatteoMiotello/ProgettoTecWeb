@@ -709,10 +709,14 @@ section[role=comment] div p:first-child{
   font-weight: 500;
 }
 
-#mail_err, #pass_err, #pass1_err, #err_msg, #name_err, #surn_err, #titl_err, #desc_err, #text_err{
+#icon_err, #mail_err, #user_err, #pass_err, #pass1_err, #err_msg, #name_err, #surn_err, #titl_err, #desc_err, #text_err{
   display: none;
   color: red;
   margin-left: 1em;
+}
+
+#icon_err {
+  margin-bottom: 0.5em;
 }
 
 /*label > #mail_err, label > #pass_err, label > #pass1_err, label > #name_err, label > #surn_err, label{
@@ -833,6 +837,7 @@ div[role=cont_utente]+form button{
 
 .img_name {
   display: flex;
+  margin-bottom: 1em;
 }
 
 .img_name fieldset {
@@ -845,7 +850,6 @@ div[role=cont_utente]+form button{
 
 .reg_form div{
   justify-content: center;
-  margin-bottom: 1em;
 }
 
 .img_name fieldset+fieldset {
@@ -1027,6 +1031,7 @@ td {
 
   #logo{
     margin: 0;
+    margin-left: 0.5em;
   }
 
   .home_content .articoli {

@@ -310,4 +310,10 @@ class TemplateHandler {
         $this->setParam('<operationResult />', $component );
     }
 
+    /**
+     * Toglie il tag <operationResul />
+     */
+    public function setNoOperation() {
+        $this->setParam('<operationResult />', "" );
+    }
 }

@@ -62,8 +62,8 @@ CREATE TABLE `cat_art` (
   `nome_cat` varchar(20) NOT NULL,
   PRIMARY KEY (`nome_cat`,`ID_art`),
   KEY `ID_art` (`ID_art`),
-  CONSTRAINT `cat_art_ibfk_1` FOREIGN KEY (`nome_cat`) REFERENCES `categoria` (`nome`),
-  CONSTRAINT `cat_art_ibfk_2` FOREIGN KEY (`ID_art`) REFERENCES `articolo` (`ID`)
+  CONSTRAINT `cat_art_ibfk_2` FOREIGN KEY (`ID_art`) REFERENCES `articolo` (`ID`) ON DELETE CASCADE,
+  CONSTRAINT `cat_art_ibfk_3` FOREIGN KEY (`nome_cat`) REFERENCES `categoria` (`nome`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -73,7 +73,6 @@ CREATE TABLE `cat_art` (
 
 LOCK TABLES `cat_art` WRITE;
 /*!40000 ALTER TABLE `cat_art` DISABLE KEYS */;
-INSERT INTO `cat_art` VALUES (123548,'Covid'),(878541,'Covid'),(123548,'Economia'),(878541,'Economia'),(123548,'Politica'),(156612,'Spettacolo'),(144688,'Sport');
 /*!40000 ALTER TABLE `cat_art` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,10 +115,10 @@ CREATE TABLE `commento` (
   `testo` varchar(10000) NOT NULL,
   `data_pub` datetime NOT NULL,
   PRIMARY KEY (`ID_com`),
-  KEY `ID_art` (`ID_art`),
   KEY `autore` (`autore`),
-  CONSTRAINT `commento_ibfk_3` FOREIGN KEY (`ID_art`) REFERENCES `articolo` (`ID`),
-  CONSTRAINT `commento_ibfk_4` FOREIGN KEY (`autore`) REFERENCES `utente` (`ID`)
+  KEY `ID_art` (`ID_art`),
+  CONSTRAINT `commento_ibfk_4` FOREIGN KEY (`autore`) REFERENCES `utente` (`ID`),
+  CONSTRAINT `commento_ibfk_5` FOREIGN KEY (`ID_art`) REFERENCES `articolo` (`ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=530768 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -129,7 +128,6 @@ CREATE TABLE `commento` (
 
 LOCK TABLES `commento` WRITE;
 /*!40000 ALTER TABLE `commento` DISABLE KEYS */;
-INSERT INTO `commento` VALUES (144688,1,218796,' Wow!','2020-12-07 15:47:00'),(156612,430759,716989,'articolo stupendo, siete fantastici!','2021-05-19 18:58:00'),(144688,530763,125333,'figata','2021-05-20 04:20:13'),(156612,530764,125333,'Neanche quelli di huffpost scrivono articoli come i vostri!','2021-05-20 04:22:59'),(156612,530765,125333,'fra commento fra','2021-05-23 03:31:05'),(156612,530766,125333,'bella fra comento fra','2021-05-23 03:31:13'),(156612,530767,125333,'bella fra','2021-05-24 06:51:45');
 /*!40000 ALTER TABLE `commento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,10 +174,10 @@ CREATE TABLE `voto` (
   `up` tinyint(1) DEFAULT 0,
   `down` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`ID`),
-  KEY `articolo` (`articolo`),
   KEY `utente` (`utente`),
-  CONSTRAINT `voto_ibfk_2` FOREIGN KEY (`articolo`) REFERENCES `articolo` (`ID`),
-  CONSTRAINT `voto_ibfk_3` FOREIGN KEY (`utente`) REFERENCES `utente` (`ID`)
+  KEY `articolo` (`articolo`),
+  CONSTRAINT `voto_ibfk_3` FOREIGN KEY (`utente`) REFERENCES `utente` (`ID`),
+  CONSTRAINT `voto_ibfk_4` FOREIGN KEY (`articolo`) REFERENCES `articolo` (`ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -189,7 +187,6 @@ CREATE TABLE `voto` (
 
 LOCK TABLES `voto` WRITE;
 /*!40000 ALTER TABLE `voto` DISABLE KEYS */;
-INSERT INTO `voto` VALUES (125333,878541,1,1,0),(456468,878541,2,1,0);
 /*!40000 ALTER TABLE `voto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -202,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-25 21:45:05
+-- Dump completed on 2021-05-26 12:17:26

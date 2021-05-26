@@ -4,6 +4,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
 class CheckValues {
     public static function checkForCorrectValues($value, $typeOfCheck, $length) {
         $correctCharacters = true;
+        $value = trim($value);
+        $value = htmlspecialchars($value);
         switch ($typeOfCheck) {
             case "digit":
                 $correctCharacters = ctype_digit($value);
@@ -214,7 +216,7 @@ class Articolo {
     public function getAltImg() {
         return $this->altImg;
     }
-    
+
     public function getValidation() {
         return $this->validation;
     }
@@ -279,11 +281,11 @@ class Articolo {
         return $listaArticoli;
     }
 
-    public static function validateArticle($Id): mysqli {
+    public static function validateArticle($Id) {
         $Connection = DBAccess::openDBConnection();
         $querySelect = "UPDATE articolo SET articolo.verificato = 1 WHERE articolo.ID = $Id";
         $queryResult = mysqli_query($Connection, $querySelect);
-        return $Connection;
+        return $queryResult;
     }
 
     public static function loadNewArticle($articolo) {
@@ -296,46 +298,28 @@ class Articolo {
             return true;
         }
     }
-    /*public function setAltImg($value) {
-        (ctype_alpha($value) && strlen($value) <= 255) ? $this->altImg = $value : $this->altImg = "";
-    }*/
-    //
-
-    /*  public static function getArticoli($category, $connection)
-      {
-          if ($category != null)
-              $querySelect = "SELECT * FROM articolo, cat_art
-                              WHERE  cat_art.nome_cat = '$category' AND articolo.ID = cat_art.ID_art
-                              ORDER BY ID ASC";
-          else
-              $querySelect = "SELECT * FROM articolo ORDER BY ID ASC";
-          $queryResult = mysqli_query($connection, $querySelect);
-          printf("Error: %s\n", mysqli_error($connection));
-          if (mysqli_num_rows($queryResult) == 0) {
-              return null;
-          }
-          else { // ritorno la lista degli articoli all'interno del db
-              $listaArticoli = array();
-              while ($riga = mysqli_fetch_assoc($queryResult)) {
-                  $singoloArticolo = new static($riga['ID'], $riga['titolo'], $riga['descrizione'],$riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
-                  array_push($listaArticoli, $singoloArticolo);
-                  echo "dio merda ";
-                  echo get_class($singoloArticolo->getTesto());
-              }
-          }
-          return $listaArticoli;
-      }*/
 
     public static function getAutoreArticolo($id_articolo) {
         $connection = DBAccess::openDBConnection();
-        $querySelect = "SELECT * FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = '. $id_articolo . '";
+        $querySelect = "SELECT * FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = $id_articolo";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
             return null;
-        else { 
+        else {
             $riga = mysqli_fetch_assoc($queryResult);
             $autore = new User($riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'], $riga['password'], $riga['permesso'], $riga['img_path']);
             return $autore;
+        }
+    }
+
+    public static function deleteArticle($id_articolo) {
+        $connection = DBAccess::openDBConnection();
+        $querySelect = "DELETE FROM articolo WHERE articolo.ID = $id_articolo";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_affected_rows($connection) == 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 }
