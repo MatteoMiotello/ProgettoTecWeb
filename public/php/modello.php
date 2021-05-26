@@ -4,6 +4,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
 class CheckValues {
     public static function checkForCorrectValues($value, $typeOfCheck, $length) {
         $correctCharacters = true;
+        $value = trim($value);
+        $value = htmlspecialchars($value);
         switch ($typeOfCheck) {
             case "digit":
                 $correctCharacters = ctype_digit($value);
@@ -214,7 +216,7 @@ class Articolo {
     public function getAltImg() {
         return $this->altImg;
     }
-    
+
     public function getValidation() {
         return $this->validation;
     }
@@ -303,7 +305,7 @@ class Articolo {
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
             return null;
-        else { 
+        else {
             $riga = mysqli_fetch_assoc($queryResult);
             $autore = new User($riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'], $riga['password'], $riga['permesso'], $riga['img_path']);
             return $autore;
