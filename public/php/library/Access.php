@@ -60,7 +60,7 @@ class Access {
      * @return bool
      */
     public static function isAuthenticated(): bool {
-        if (!key_exists('authenticated', $_SESSION) || !$_SESSION['authenticated']) {
+        if ( !isset( $_SESSION['authenticated'] ) or !$_SESSION['authenticated']) {
             return false;
         }
 
@@ -93,5 +93,10 @@ class Access {
         }
 
         return false;
+    }
+
+    public function logIn( User $user ) {
+        $_SESSION[ 'authenticated' ] = true;
+        $_SESSION[ 'user_id' ] = $user->getId();
     }
 }

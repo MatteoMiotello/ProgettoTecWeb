@@ -108,8 +108,8 @@ function validateForm() {
     desc.removeAttribute("required");
     testo.removeAttribute("required");
     testFormArea(titolo);
-    testArea(desc);
-    testArea(testo);
+    testFormArea(desc);
+    testFormArea(testo);
     if (!testFormArea(titolo) || !testFormArea(desc) || !testFormArea(testo)) {
         return false;
     } else return true;
@@ -186,7 +186,7 @@ function validateReg() {
     var pass1 = document.getElementById("password2");
 
     /* Elimina il messaggio d'errore dal browser, ma se JS viene disabilitato i campi rimangono 'required' */
-    document.querySelector('input[name="pic_sel"]').removeAttribute("required");
+    document.querySelector('input[name=pic_sel]').removeAttribute("required");
     name.removeAttribute("pattern");
     name.removeAttribute("required");
     surn.removeAttribute("pattern");
