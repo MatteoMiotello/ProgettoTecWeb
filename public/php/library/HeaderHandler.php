@@ -58,12 +58,14 @@ class HeaderHandler {
         }
 
         if ( !$access->isAuthenticated() ) {
-            return '<a href="login.php" tabindex="0"><div>Accedi/Registrati</div></a>';
+            return '<a href="/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a>';
         }
 
         $html = '<div class="logout_cont vFlex">
-                  <a href="user_page.html">Il mio profilo</a>
-                  <a href="index.html?logout_php">Esci</a></div>';
+                  <a href="/pages/user_page.html?user=' . $_SESSION['user_id'] . '">Il mio profilo</a>
+                  <a href="/pages/logout.php">Esci</a></div>';
+
+        return $html;
     }
     /* funzione div utente */
 }

@@ -25,8 +25,7 @@ class LoginHandler {
         }
 
         $user = new \User( $riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'], $riga['password'], $riga['permesso'], $riga['img_path'] );
-
-        if ( !password_verify( $user->getPassword(), $password ) ) {
+        if ( !password_verify( $password, $user->getPassword() ) ) {
             return false;
         }
 

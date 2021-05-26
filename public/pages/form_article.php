@@ -30,7 +30,7 @@ else {
     $articleContent = '';
     if(Access::isAuthenticated()) {
         if(isset($_SESSION['user_id']))
-            $author = Access::getUser($_SESSION['user_id']);
+            $author = Access::getUser();
     } 
     /**
      * controllo se la form e' gia' stata compilata, in tal caso emetto un messaggio di avvenuta operazione con relativo esito

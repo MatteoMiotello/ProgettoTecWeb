@@ -912,11 +912,15 @@ fieldset + span {
   font-size: 30px;
   margin: 0 0.5em;
 }
-
+.fa-arrow-down-colored {
+  color:blue
+}
 .fa-arrow-down:hover{
   color: blue;
 }
-
+.fa-arrow-up-colored {
+  color: blue;
+}
 .fa-arrow-up{
   font-size: 30px;
   margin: 0 0.5em;
@@ -1220,4 +1224,7 @@ td {
   address{
     width: 100%;
   }
+}
+@media screen and (max-width: 480px){
+  
 }

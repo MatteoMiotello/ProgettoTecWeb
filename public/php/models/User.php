@@ -1,7 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/UserLevelType.php';
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 class User
 {
     private $Id;
@@ -266,17 +266,13 @@ class User
 
         $querySelect = "SELECT * FROM utente WHERE utente.ID = $Id";
 
-        $result = mysqli_query($Connection, $querySelect);
+        $row = $Connection
+            ->query($querySelect)
+            ->fetch_assoc();
 
-        if (!$result) {
+        if ( is_null( $row )  or empty( $row ) ) {
             return null;
         }
-
-        if (mysqli_num_rows($result) == 0) {
-            return null;
-        }
-
-        $row = mysqli_fetch_assoc($result);
 
         return (new User($row['ID'], $row['nome'], $row['cognome'], $row['email'], $row['password'], $row['permesso'], $row['img_path']));
     }
@@ -348,6 +344,17 @@ class User
         if (mysqli_affected_rows($connection) == 0 || !$queryResult) {
             return null;
         } else {
+            return true;
+        }
+    }
+
+    public static function checkVote($id_articolo, $id_utente) {
+        $Connection = DBAccess::openDBConnection();
+        $querySelect = "SELECT * from voto WHERE utente=$id_utente AND articolo=$id_articolo";
+        $queryResult = mysqli_query($Connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0)
+            return null;
+        else {
             return true;
         }
     }
