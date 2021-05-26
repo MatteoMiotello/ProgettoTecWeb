@@ -62,7 +62,7 @@ class HeaderHandler {
         }
 
         $html = '<div class="logout_cont vFlex">
-                  <a href="/pages/user_page.html?user=' . $_SESSION['user_id'] . '">Il mio profilo</a>
+                  <a href="/pages/user.php?user=' . $_SESSION['user_id'] . '">Il mio profilo</a>
                   <a href="/pages/logout.php">Esci</a></div>';
 
         return $html;

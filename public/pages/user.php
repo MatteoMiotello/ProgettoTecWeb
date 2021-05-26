@@ -20,6 +20,7 @@ $handler->setPageTitle('Pagina utente');
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/user_page_nuovo.html';
 
 $handler->setContent(file_get_contents($filePath));
+$IdUtente = $_GET['user'];
 
 if ($connessioneRiuscita == null)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina

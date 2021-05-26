@@ -88,7 +88,7 @@ class Access {
      * @return bool
      */
     public function isEndUser(): bool {
-        if ($this->User->getPermission() == UserLevelType::CONSUMER) {
+        if ($this->User->getPermission() == UserLevelType::CUSTOMER) {
             return true;
         }
 

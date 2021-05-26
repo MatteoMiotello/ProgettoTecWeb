@@ -14,12 +14,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/ArticleBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/CommentBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/voteBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/Access.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/voteHandler.php';
 
 $connessioneRiuscita = DBAccess::openDBConnection();
 
-//TODO: sistemare
-if ($connessioneRiuscita && isset($_POST['comment'])) {
-    $utente = 125333;
+if ($connessioneRiuscita && isset($_POST['comment']) && Access::isAuthenticated()) {
+    $utente = Access::getUser();
     Comment::uploadNewComment($id_articolo, $utente, '' . $_POST['comment'] . '', '' . date("Y-m-d h:i:s") . '', $connessioneRiuscita);
 }
 
@@ -29,22 +29,25 @@ $handler->setBreadcrumb('Articolo');
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/generic_page_articolo_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 
-// da errori a caso
-/*if (strpos($_SERVER['HTTP_REFERER'], 'categorie.php')) {
-    $handler->addLink('/pages/categorie.php', 'Categorie');
-}*/
+
+if ( !empty( $_SERVER['HTTP_REFERER'] ) ) {
+    if (strpos($_SERVER['HTTP_REFERER'], 'categorie.php')) {
+        $handler->addLink('/pages/categorie.php', 'Categorie');
+    }
 
 // reperisco il link alla categoria dalla quale arriva tramite referer
-/*if (strpos($_SERVER['HTTP_REFERER'], '?cat_name=')) {
-    $array = explode('=', $_SERVER['HTTP_REFERER']);
-    $categoryName = array_pop($array);
-    $categoryName = ucfirst($categoryName);
+    if (strpos($_SERVER['HTTP_REFERER'], '?cat_name=')) {
+        $array = explode('=', $_SERVER['HTTP_REFERER']);
+        $categoryName = array_pop($array);
+        $categoryName = ucfirst($categoryName);
 
-    $linkTitle = 'Categoria: ' . $categoryName;
-    $handler->addLink('/pages/categorie.php', 'Categorie');
+        $linkTitle = 'Categoria: ' . $categoryName;
+        $handler->addLink('/pages/categorie.php', 'Categorie');
 
-    $handler->addLink($_SERVER['HTTP_REFERER'], $linkTitle);
-}*/
+        $handler->addLink($_SERVER['HTTP_REFERER'], $linkTitle);
+    }
+}
+
 
 if (!file_exists($filePath)) {
     throw new Exception('file non esistente');
@@ -56,15 +59,15 @@ if (!$connessioneRiuscita)
 else {
     // prelevo l'articolo dal db e costruisco la visualizzazione dello stesso tramite builder
     $printArticolo = '';
-    $articolo = Articolo::getArticolo($id_articolo);
-    if ($articolo) {
-        $autore = User::getArticleAuthor($articolo->getID());
-        $listaCategorie = Categoria::getCategorieArticolo($articolo->getID());
+    $articoloModel = Articolo::getArticolo($id_articolo);
+    if ($articoloModel) {
+        $autore = User::getArticleAuthor($articoloModel->getID());
+        $listaCategorie = Categoria::getCategorieArticolo($articoloModel->getID());
         $articolo = (new ArticleBuilder)
-            ->setImgArticlePath($articolo->getImgPath())
-            ->setImgArticleAlt($articolo->getAltImg())
-            ->setTitle($articolo->getTitle())
-            ->setContent($articolo->getContent())
+            ->setImgArticlePath($articoloModel->getImgPath())
+            ->setImgArticleAlt($articoloModel->getAltImg())
+            ->setTitle($articoloModel->getTitle())
+            ->setContent($articoloModel->getContent())
             ->setImgPathAuthor($autore->getImg())
             ->setNameAuthor($autore->getName())
             ->setEmailAuthor($autore->getEmail());
@@ -89,7 +92,7 @@ else {
     if ($rawComments) {
         $comment = '';
         foreach ($rawComments as $rawCommento) {
-            $author = Access::getUser();
+            $author = User::getArticleAuthor( $articoloModel->getID() );
             $comment .= (new CommentBuilder)
                 ->setComment($rawCommento->getTesto())
                 ->setName($author->getName())
@@ -120,9 +123,23 @@ else {
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/newComment.phtml'));
             // se l'utente effettivamente esiste allora do anche la possibilita' di dare un voto all'articolo
             $votes->setAutenticationOptions();
-            
-            // nel caso in cui l'utente avesse gia' votato l'articolo allora coloro la scelta, altrimenti no
-            
+            $voteHandler = new VoteHandler( $articoloModel );
+
+            if ( isset( $_GET['type'] ) ) {
+                if ($_GET['type'] == "up") {
+                    $voteHandler->addUpVote($user);
+                } elseif ($_GET['type'] == "down") {
+                    $voteHandler->addDownVote($user);
+                }
+            }
+
+            if ( $voteHandler->getVotes( $user ) ) {
+                $votes->setUpVotesColored(  );
+            } elseif ( $voteHandler->getVotes( $user ) === false ) {
+                $votes->setDownVotesColored(  );
+            } else {
+                $votes->resetVotesColored();
+            }
         }
     }
     $votes->setAutenticationOptions();

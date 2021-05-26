@@ -913,13 +913,13 @@ fieldset + span {
   margin: 0 0.5em;
 }
 .fa-arrow-down-colored {
-  color:blue
+  color:green;
 }
 .fa-arrow-down:hover{
   color: blue;
 }
 .fa-arrow-up-colored {
-  color: blue;
+  color: green;
 }
 .fa-arrow-up{
   font-size: 30px;
