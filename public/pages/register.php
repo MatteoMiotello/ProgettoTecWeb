@@ -12,7 +12,7 @@ $handler = new TemplateHandler();
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/registrati_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 
-// TODO: manca la parte in cui vengono raccolti valori 
+// TODO: manca la parte in cui vengono raccolti valori
 const male = '../img/male_icon.png';
 const famale = '../img/female_icon.png';
 const genderfluid = '../img/genderfluid_icon.png';
@@ -33,7 +33,7 @@ if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) &
                 $_POST['pic_sel'] = genderfluid;
         }
 
-        $newUser = new User(null, $_POST['nome'], $_POST['cognome'], $_POST['email'],  password_hash( $_POST['password'], PASSWORD_DEFAULT ),'usr', $_POST['pic_sel']);
+        $newUser = new User(null, CheckValues::sanitize($_POST['nome']), CheckValues::sanitize($_POST['cognome']), CheckValues::sanitize($_POST['email']),  CheckValues::sanitize($_POST['password']),'usr', $_POST['pic_sel']);
 
         if(User::loadNewUser($newUser)) {
             $handler->setOperationDone("Registrazione riuscita! Scrivi e commenta in libertà!");
@@ -51,7 +51,7 @@ $handler->setPageTitle('Registrati');
     ->addLink( '/pages/categorie.php', 'Categorie' );*/
 
 if ($connessioneRiuscita == null)
-    die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina 
+    die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
 }
 
