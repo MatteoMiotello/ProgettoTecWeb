@@ -111,7 +111,7 @@ class Articolo {
 
 
     function setTitle($value) {
-        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 126);
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 127);
         if ($correctCharacters)
             $this->titolo = $value;
         else

@@ -1,7 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/UserLevelType.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dbConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 class User
 {
     private $Id;
