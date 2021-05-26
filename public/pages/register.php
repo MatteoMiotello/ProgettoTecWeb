@@ -33,7 +33,7 @@ if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) &
                 $_POST['pic_sel'] = genderfluid;
         }
 
-        $newUser = new User(null, $_POST['nome'], $_POST['cognome'], $_POST['email'],  $_POST['password'],'usr', $_POST['pic_sel']);
+        $newUser = new User(null, $_POST['nome'], $_POST['cognome'], $_POST['email'],  password_hash( $_POST['password'], PASSWORD_DEFAULT ),'usr', $_POST['pic_sel']);
 
         if(User::loadNewUser($newUser)) {
             $handler->setOperationDone("Registrazione riuscita! Scrivi e commenta in libertà!");
