@@ -5,7 +5,7 @@
       <div class="img_name">
         <fieldset class="pro_pic">
           <legend>Scegli l'icona del profilo</legend>
-          <span id="icon_err">Scegli un'icona del profilo</span>
+          <p id="icon_err">Scegli un'icona del profilo</p>
           <div class="hFlex">
             <div class="vFlex">
               <input type="radio" name="pic_sel" id="male_icon" value="male" required>
@@ -33,8 +33,6 @@
           <legend>Inserisci i dati d'accesso</legend>
           <label for="email">Email <span id="mail_err">Inserisci un Indirizzo valido</span></label>
           <input name="email" type="text" id="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
-          <label for="username">Nome utente <span id="user_err">Nome utente già presente</span></label>
-          <input name="username" type="text" id="username" required>
           <label for="password">Password (almeno 8 caratteri) <span id="pass_err">Inserisci una password valida</span></label>
           <input name="password" type="password" id="password1" required>
           <label for="password">Ripeti password <span id="pass1_err">Le password non combaciano</span></label>

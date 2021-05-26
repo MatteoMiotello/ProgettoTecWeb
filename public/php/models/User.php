@@ -37,6 +37,14 @@ class User
      */
     public function __construct($ID, $nome, $cognome, $email, $password, $permesso, $img_path)
     {
+        if(!CheckValues::checkForCorrectValues($nome, "alpha", 255))
+          throw new Exception("Invalid name");
+        if(!CheckValues::checkForCorrectValues($cognome, "alpha", 255))
+          throw new Exception("Invalid name");
+        if(!CheckValues::checkForCorrectValues($email, "email", 255))
+          throw new Exception("Invalid name");
+        if(!CheckValues::checkForCorrectValues($password, "alnum", 255))
+          throw new Exception("Invalid name");
         $this->Id = $ID;
         $this->Name = $nome;
         $this->Surname = $cognome;
@@ -315,7 +323,7 @@ class User
 
         if(!$queryResult)
             return null;
-            
+
         if (mysqli_num_rows($queryResult) == 0)
             return null;
         else {
@@ -343,7 +351,7 @@ class User
             return true;
         }
     }
-    
+
     /**
      * @param UserLevelType $levelType
      */

@@ -181,7 +181,6 @@ function validateReg() {
     var name = document.getElementById("nome");
     var surn = document.getElementById("cognome");
     var email = document.getElementById("email");
-    var user = document.getElementById("username");
     var pass = document.getElementById("password1");
     var pass1 = document.getElementById("password2");
 
@@ -193,7 +192,6 @@ function validateReg() {
     surn.removeAttribute("required");
     email.removeAttribute("pattern");
     email.removeAttribute("required");
-    user.removeAttribute("required");
     pass.removeAttribute("required");
     pass1.removeAttribute("required");
     /*-----------------------------------------------------------------------------------------------------*/
