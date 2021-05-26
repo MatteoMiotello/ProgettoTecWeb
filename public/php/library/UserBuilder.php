@@ -153,7 +153,10 @@ class UserBuilder extends AbstractBuilder {
      * @return $this
      */
     public function setGivenLikes($Number) {
-        $this->GivenLikes = $Number;
+        if($Number!="")
+            $this->GivenLikes = $Number;
+        else 
+            $this->GivenLikes = '0';
         $this->Params[UserBuilder::GIVENLIKES] = $this->getGivenLikes();
         return $this;
     }
@@ -172,7 +175,10 @@ class UserBuilder extends AbstractBuilder {
      * @return $this
      */
     public function setReceivedLikes($Number) {
-        $this->ReceivedLikes = $Number;
+        if($Number != "")
+            $this->ReceivedLikes = $Number;
+        else 
+            $this->ReceivedLikes = '0';
         $this->Params[UserBuilder::RECEIVEDLIKES] = $this->getReceivedLikes();
         return $this;
     }

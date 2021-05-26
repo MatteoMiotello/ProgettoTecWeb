@@ -12,6 +12,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/ArticleBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/CommentBuilder.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/voteBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/Access.php';
 
 $connessioneRiuscita = DBAccess::openDBConnection();
@@ -26,14 +27,15 @@ $handler = new TemplateHandler();
 $handler->setPageTitle('Articolo');
 $handler->setBreadcrumb('Articolo');
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/generic_page_articolo_nuovo.html';
-
 $handler->setContent(file_get_contents($filePath));
-if (strpos($_SERVER['HTTP_REFERER'], 'categorie.php')) {
+
+// da errori a caso
+/*if (strpos($_SERVER['HTTP_REFERER'], 'categorie.php')) {
     $handler->addLink('/pages/categorie.php', 'Categorie');
-}
+}*/
 
 // reperisco il link alla categoria dalla quale arriva tramite referer
-if (strpos($_SERVER['HTTP_REFERER'], '?cat_name=')) {
+/*if (strpos($_SERVER['HTTP_REFERER'], '?cat_name=')) {
     $array = explode('=', $_SERVER['HTTP_REFERER']);
     $categoryName = array_pop($array);
     $categoryName = ucfirst($categoryName);
@@ -42,7 +44,7 @@ if (strpos($_SERVER['HTTP_REFERER'], '?cat_name=')) {
     $handler->addLink('/pages/categorie.php', 'Categorie');
 
     $handler->addLink($_SERVER['HTTP_REFERER'], $linkTitle);
-}
+}*/
 
 if (!file_exists($filePath)) {
     throw new Exception('file non esistente');
@@ -52,9 +54,9 @@ if (!file_exists($filePath)) {
 if (!$connessioneRiuscita)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
+    // prelevo l'articolo dal db e costruisco la visualizzazione dello stesso tramite builder
     $printArticolo = '';
     $articolo = Articolo::getArticolo($id_articolo);
-
     if ($articolo) {
         $autore = User::getArticleAuthor($articolo->getID());
         $listaCategorie = Categoria::getCategorieArticolo($articolo->getID());
@@ -82,6 +84,7 @@ else {
         $handler->render();
         return;
     }
+    // prelevo i commenti dell'articolo da visualizzare dal db
     $rawComments = Comment::getCommentsFromArticle($id_articolo);
     if ($rawComments) {
         $comment = '';
@@ -96,21 +99,38 @@ else {
         }
     } 
     else  $comment = '<p>Nessun commento trovato</p>';
-    // controllo se l'utente e' loggato, in tal caso puo' commentare l'articolo
+
+    $upVotes = Articolo::getUpVotesFromArticle($id_articolo);
+    $downVotes = Articolo::getDownVotesFromArticle($id_articolo);
+    $votes = (new VoteBuilder)
+    ->setUpVotes($upVotes['SUM(voto.up)'])
+    ->setDownVote($downVotes['SUM(voto.down)'])
+    ->setArticleId($id_articolo);
+    // controllo se l'utente e' loggato, in tal caso puo' commentare l'articolo, altrimenti no
     if(Access::isAuthenticated()) {
         $user = null;
         if(isset($_SESSION['user_id']))
             $user = Access::getUser();
         if($user) {
+            // se esiste una chiave di sessione per l'utente, e se effettivamente l'utente esiste allora 
+            //do la possibilita' di commentare l'articolo altrimenti se l'utente non esiste non mostro nulla
             $comment .= (new CommentBuilder)
             ->setImg($user->getImg())/* qui al posto di author va l'utente loggato */
             ->setArticleId($id_articolo)
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/newComment.phtml'));
+            // se l'utente effettivamente esiste allora do anche la possibilita' di dare un voto all'articolo
+            $votes->setAutenticationOptions();
+            
+            // nel caso in cui l'utente avesse gia' votato l'articolo allora coloro la scelta, altrimenti no
+            
         }
     }
+    $votes->setAutenticationOptions();
+    $votes = $votes->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/commentArea.phtml'));
 }
-$handler->setParam("<articolo />", $printArticolo);
-$handler->setParam("<commentArea />", file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/commentArea.phtml'));
+$handler->setParam("<commentArea />", $votes);
 $handler->setParam("<listaCommenti />", $comment);
+
+$handler->setParam("<articolo />", $printArticolo);
 
 $handler->render();

@@ -111,7 +111,7 @@ class Articolo {
 
 
     function setTitle($value) {
-        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 200);
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 127);
         if ($correctCharacters)
             $this->titolo = $value;
         else
@@ -320,6 +320,27 @@ class Articolo {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public static function getUpVotesFromArticle($id_articolo) {
+        $connection = DBAccess::openDBConnection();
+        $querySelect = "SELECT SUM(voto.up) FROM voto WHERE articolo = $id_articolo";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0) {
+            return false;
+        } else {
+            return mysqli_fetch_assoc($queryResult);
+        }
+    }
+    public static function getDownVotesFromArticle($id_articolo) {
+        $connection = DBAccess::openDBConnection();
+        $querySelect = "SELECT SUM(voto.down) FROM voto WHERE articolo = $id_articolo";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0) {
+            return false;
+        } else {
+            return  mysqli_fetch_assoc($queryResult);
         }
     }
 }
