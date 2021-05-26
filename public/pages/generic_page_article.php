@@ -86,7 +86,7 @@ else {
     if ($rawComments) {
         $comment = '';
         foreach ($rawComments as $rawCommento) {
-            $author = User::getUserById($rawCommento->getIdAutore());
+            $author = Access::getUser();
             $comment .= (new CommentBuilder)
                 ->setComment($rawCommento->getTesto())
                 ->setName($author->getName())
@@ -100,10 +100,10 @@ else {
     if(Access::isAuthenticated()) {
         $user = null;
         if(isset($_SESSION['user_id']))
-            $user = Access::getUser($_SESSION['user_id']);
+            $user = Access::getUser();
         if($user) {
             $comment .= (new CommentBuilder)
-            ->setImg($author->getImg())/* qui al posto di author va l'utente loggato */
+            ->setImg($user->getImg())/* qui al posto di author va l'utente loggato */
             ->setArticleId($id_articolo)
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/newComment.phtml'));
         }

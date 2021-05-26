@@ -1,7 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/UserLevelType.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dbConnection.php';
+
 class User
 {
     private $Id;
@@ -258,17 +258,13 @@ class User
 
         $querySelect = "SELECT * FROM utente WHERE utente.ID = $Id";
 
-        $result = mysqli_query($Connection, $querySelect);
+        $row = $Connection
+            ->query($querySelect)
+            ->fetch_assoc();
 
-        if (!$result) {
+        if ( is_null( $row )  or empty( $row ) ) {
             return null;
         }
-
-        if (mysqli_num_rows($result) == 0) {
-            return null;
-        }
-
-        $row = mysqli_fetch_assoc($result);
 
         return (new User($row['ID'], $row['nome'], $row['cognome'], $row['email'], $row['password'], $row['permesso'], $row['img_path']));
     }
