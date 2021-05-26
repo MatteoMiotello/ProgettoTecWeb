@@ -343,6 +343,17 @@ class User
             return true;
         }
     }
+
+    public static function checkVote($id_articolo, $id_utente) {
+        $Connection = DBAccess::openDBConnection();
+        $querySelect = "SELECT * from voto WHERE utente=$id_utente AND articolo=$id_articolo";
+        $queryResult = mysqli_query($Connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0)
+            return null;
+        else {
+            return true;
+        }
+    }
     
     /**
      * @param UserLevelType $levelType

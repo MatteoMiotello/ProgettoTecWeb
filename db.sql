@@ -147,7 +147,7 @@ CREATE TABLE `utente` (
   `permesso` char(3) NOT NULL,
   `img_path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=846791 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=846792 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +156,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` VALUES (125333,'Giosuè','Calgaro','giosue@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(218796,'Utente','Standard','utente@user.com','/*hash(user)*/','adm','/img/genderfluid_icon.png'),(456468,'Matteo','Miotello','matteo@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(716989,'Andrea','Polato','andrea@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(846787,'Tommaso','Allegretti','tommaso@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(846788,'Giosue','Calgaroo','meiogio7@gmail.com','admin','usr','img'),(846789,'Giosuè','Calgaro','giosue.calgaro@studenti.unipd.it','12345678','usr','../img/genderfluid_icon.png'),(846790,'Giosuè','Calgaro','giosue.calgaro@studenti.unipd.it','12345678','usr','../img/genderfluid_icon.png');
+INSERT INTO `utente` VALUES (125333,'Giosuè','Calgaro','giosue@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(218796,'Utente','Standard','utente@user.com','/*hash(user)*/','adm','/img/genderfluid_icon.png'),(456468,'Matteo','Miotello','matteo@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(716989,'Andrea','Polato','andrea@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(846787,'Tommaso','Allegretti','tommaso@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(846788,'Giosue','Calgaroo','meiogio7@gmail.com','admin','usr','img'),(846789,'Giosuè','Calgaro','giosue.calgaro@studenti.unipd.it','12345678','usr','../img/genderfluid_icon.png'),(846790,'Giosuè','Calgaro','giosue.calgaro@studenti.unipd.it','12345678','usr','../img/genderfluid_icon.png'),(846791,'Giosuè','Calgaro','giosue.calgaro@studenti.unipd.it','12345678','usr','../img/genderfluid_icon.png');
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,15 +170,13 @@ DROP TABLE IF EXISTS `voto`;
 CREATE TABLE `voto` (
   `utente` int(6) NOT NULL,
   `articolo` int(6) NOT NULL,
-  `ID` int(6) NOT NULL AUTO_INCREMENT,
   `up` tinyint(1) DEFAULT 0,
   `down` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`ID`),
-  KEY `utente` (`utente`),
+  PRIMARY KEY (`utente`,`articolo`),
   KEY `articolo` (`articolo`),
   CONSTRAINT `voto_ibfk_3` FOREIGN KEY (`utente`) REFERENCES `utente` (`ID`),
   CONSTRAINT `voto_ibfk_4` FOREIGN KEY (`articolo`) REFERENCES `articolo` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,4 +197,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-26 12:17:26
+-- Dump completed on 2021-05-26 21:32:22
