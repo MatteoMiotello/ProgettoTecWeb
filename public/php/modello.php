@@ -312,7 +312,6 @@ class Articolo {
 
     public static function deleteArticle($id_articolo) {
         $connection = DBAccess::openDBConnection();
-        print("DELETE FROM articolo WHERE ID = $id_articolo");
         $querySelect = "DELETE FROM articolo WHERE articolo.ID = $id_articolo";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_affected_rows($connection) == 0) {
