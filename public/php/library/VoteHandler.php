@@ -59,7 +59,7 @@ class VoteHandler {
 
         if(!$result)
             return null;
-        
+
         if ($result['up'] == 1) {
             return true;
         }
