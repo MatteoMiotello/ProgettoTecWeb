@@ -22,7 +22,7 @@ if ( !file_exists( $filePath ) ) {
 
 $handler->setContent(file_get_contents($filePath));
 $handler->setCurrentRoute('home');
-
+$handler->setAuthors( 'Ciao, come va' );
 if ($connessioneRiuscita == null)
     die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
