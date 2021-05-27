@@ -10,7 +10,7 @@ class VoteBuilder extends AbstractBuilder {
     const ARTICLEID = '{{articleId}}';
     const ARROWUPCOLORED = '{{colour_up}}';
     const ARROWDOWNCOLORED = '{{colour_down}}';
-
+    
     private $UpVotes;
 
     private $DownVotes;

@@ -2,6 +2,7 @@
 // nel caso in cui non esistesse nessun id deve essere ritornato un errore
 if ($_GET['art_id'])
     $id_articolo = $_GET['art_id'];
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -27,7 +28,7 @@ $connessioneRiuscita = DBAccess::openDBConnection();
 
 if ($connessioneRiuscita && isset($_POST['comment']) && Access::isAuthenticated()) {
     $utente = Access::getUser();
-    $result = Comment::uploadNewComment($id_articolo,'', $utente->getId() , '' .$_POST['comment'] . '', '' . date("Y-m-d h:i:s") . '', $connessioneRiuscita);
+    $result = Comment::uploadNewComment($id_articolo,$utente->getId(), '' .$_POST['comment'] . '', '' . date("Y-m-d h:i:s") . '');
 }
 
 if ( !empty( $_SERVER['HTTP_REFERER'] ) ) {
@@ -103,12 +104,7 @@ else {
     }
     else  $comment = '<p>Nessun commento trovato</p>';
 
-    $upVotes = Articolo::getUpVotesFromArticle($id_articolo);
-    $downVotes = Articolo::getDownVotesFromArticle($id_articolo);
-    $votes = (new VoteBuilder)
-    ->setUpVotes($upVotes['SUM(voto.up)'])
-    ->setDownVote($downVotes['SUM(voto.down)'])
-    ->setArticleId($id_articolo);
+    $votes = (new VoteBuilder);
     // controllo se l'utente e' loggato, in tal caso puo' commentare l'articolo, altrimenti no
     if(Access::isAuthenticated()) {
         $user = null;
@@ -128,10 +124,10 @@ else {
             if ( isset( $_GET['type'] ) ) {
                 if ($_GET['type'] == "up") {
                     $voteHandler->addUpVote($user);
-                    header("Refresh: 0; url=generic_page_article.php?art_id=$id_articolo");
+                   // header("Refresh: 0; url=generic_page_article.php?art_id=$id_articolo");
                 } elseif ($_GET['type'] == "down") {
                     $voteHandler->addDownVote($user);
-                    header("Refresh: 0; url=generic_page_article.php?art_id=$id_articolo");
+                  //  header("Refresh: 0; url=generic_page_article.php?art_id=$id_articolo");
                 }
             }
 
@@ -144,6 +140,15 @@ else {
             }
         }
     }
+
+    // Prendo il numero di upVotes e downVotes per questo articolo dal db
+    $upVotes = Articolo::getUpVotesFromArticle($id_articolo);
+    $downVotes = Articolo::getDownVotesFromArticle($id_articolo);
+    // Inserisco i valori tornati
+    $votes->setUpVotes($upVotes['SUM(voto.up)'])
+    ->setDownVote($downVotes['SUM(voto.down)'])
+    ->setArticleId($id_articolo);
+
     $votes = $votes->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/commentArea.phtml'));
 }
 $handler->setParam("<commentArea />", $votes);
