@@ -79,7 +79,7 @@ class User {
 
     public static function getArticleAuthor($id_articolo) {
         $connection = DBAccess::openDBConnection();
-        $querySelect = "SELECT * FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = $id_articolo ";
+        $querySelect = "SELECT utente.ID, utente.nome, utente.cognome, utente.email, utente.password, utente.permesso, utente.img_path FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = $id_articolo ";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0) {
             return null;
