@@ -77,7 +77,7 @@ else {
             }
         }
         $printArticolo .= $articolo->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/article.phtml'));
-    } 
+    }
     /**
      * Nel caso in cui non venisse trovato l'articolo si imposta un messaggio di errore attraverso il template
      */
@@ -100,7 +100,7 @@ else {
                 ->setImg($author->getImg())
                 ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/previusComment.phtml'));
         }
-    } 
+    }
     else  $comment = '<p>Nessun commento trovato</p>';
 
     $upVotes = Articolo::getUpVotesFromArticle($id_articolo);
@@ -115,7 +115,7 @@ else {
         if(isset($_SESSION['user_id']))
             $user = Access::getUser();
         if($user) {
-            // se esiste una chiave di sessione per l'utente, e se effettivamente l'utente esiste allora 
+            // se esiste una chiave di sessione per l'utente, e se effettivamente l'utente esiste allora
             //do la possibilita' di commentare l'articolo altrimenti se l'utente non esiste non mostro nulla
             $comment .= (new CommentBuilder)
             ->setImg($user->getImg())/* qui al posto di author va l'utente loggato */
@@ -128,8 +128,10 @@ else {
             if ( isset( $_GET['type'] ) ) {
                 if ($_GET['type'] == "up") {
                     $voteHandler->addUpVote($user);
+                    header("Refresh: 0; url=generic_page_article.php?art_id=$id_articolo");
                 } elseif ($_GET['type'] == "down") {
                     $voteHandler->addDownVote($user);
+                    header("Refresh: 0; url=generic_page_article.php?art_id=$id_articolo");
                 }
             }
 
