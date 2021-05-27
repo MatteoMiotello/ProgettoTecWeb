@@ -7,7 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/Access.php';
 
 
 $email = $_POST['email'];
-$password = $_POST['password'];
+$password = md5($_POST['password']);
 var_dump( $email );
 $result = LoginHandler::checkLogin($email, $password);
 
@@ -18,6 +18,3 @@ if ($result instanceof User) {
     $_SESSION['login_error'] = $result;
     header('Location: /pages/login.php?error=1');
 }
-
-
-

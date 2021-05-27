@@ -144,7 +144,7 @@ La lista di azioni che fanno uso di codice PHP comprende:
 Le query SQL sono chiaramente associate al codice PHP eseguito e, dove possibile, sono state templatizzate in modo da garantirne un riutilizzo in base ai parametri passati dalle GET/POST.
 Per evitare, inoltre, attacchi di tipo SQL Injection, è stata implementata una pulizia del testo scritto dagli utenti.
 Atom
-Atom è stato estremamente utile nello sviluppo di codice statico grazie ad un autocompletamento dal funzionamento eccellente ma soprattutto grazie al supporto ai plugin. Grazie a questo, è stato possibile installare i tool di validazione HTML e CSS in base agli standard W3C. Il risultato è stato un codice che dall’inizio alla fine ha sempre rispettato gli standard ed ha agevolato di molto la fase finale di validazione del sito tramite strumenti online.
+Atom è stato estremamente utile nello sviluppo di codice statico grazie ad un autocompletamento dal funzionamento eccellente ma soprattutto grazie al supporto ai plugin. Grazie a questo, è stato possibile installare i tool di validazione HTML e CSS basati sugli standard W3C. Il risultato è stato un codice che dall’inizio alla fine ha sempre rispettato gli standard ed ha agevolato di molto la fase finale di validazione del sito tramite strumenti online.
 
 3.2 Accessibilità
 Abbiamo prestato attenzione sin dall’inizio a curare l’accessibilità man mano che proseguivamo nello sviluppo così da evitare quanti più errori possibili nella speranza di rendere il sito facile da usare per qualsiasi categoria d’utenza.
@@ -155,5 +155,25 @@ Sempre per quanto riguarda le immagini, i redattori sono istruiti riguardo la ne
 Tutti i link rispettano il codice colore che consente di distinguere tra un link visitato e uno no, sono per di più segnalati i link a pagine esterne al sito e i link che avviano il download di un file.
 4 Fase di Testing
 4.1 Browser e dispositivi
-Per garantire che i risultati dello sviluppo fossero soddisfacenti abbiamo deciso di testare il sito su più browser e su più dispositivi. Siamo anche riusciti a coinvolgere degli amici che ci hanno aiutato molto, prestandoci il loro tempo e la loro disponibilità a navigare sul nostro sito. Per rendere il sito (hostato in locale) accessibile da utenti esterni abbiamo fatto uso del software ngrok che crea un tunnel accessibile solo da chi possiede un particolare link che abbiamo condiviso. Il software di base è gratuito e presenta dei limiti di connessioni per minuto, ma ci è stato comunque molto utile per avere un feedback da persone esterne che ci dessero una prospettiva diversa da quella di un informatico.
+Per garantire che i risultati dello sviluppo fossero soddisfacenti abbiamo deciso di testare il sito su più browser e su più dispositivi. Siamo anche riusciti a coinvolgere degli amici che ci hanno aiutato molto, prestandoci il loro tempo e la loro disponibilità a navigare sul nostro sito. Per rendere il sito, hostato in locale, accessibile da utenti esterni abbiamo fatto uso del software ngrok, che crea un tunnel a localhost accessibile solo da chi possiede un particolare link che abbiamo condiviso. Il software di base è gratuito e presenta dei limiti di connessioni per minuto, ma ci è stato comunque molto utile per avere un feedback da persone esterne che ci dessero una prospettiva diversa da quella di un informatico.
+Il sito è stato testato su vari browser con su pc, sia con javascript attivato che disattivato. Viene riportata di seguito la lista dei browser :
+* Chrome x.x.x.x;
+* Firefox x.x.x.x;
+* Edge x.x.x.x;
+* Opera x.x.x.x;
+* Safari x.x.x.x;
+I test di navigazione sono avvenuti seguendo sempre la stessa scaletta:
+* Visita di ogni link disponibile in ogni pagina (escluso per gli articoli, che sono stati presi a piacere per evitare di visitare sempre gli stessi);
+* Inserimento di un articolo, sia in veste di lettore e che in quella di redattore;
+* Esecuzione dell’accesso al proprio profilo utente, visita della pagina personale, cambio della password, logout;
+* In veste di amministratore si ripete il punto precedente e si aggiunge lo step extra riguardante la gestione degli articoli con tanto di modifica, aggiunta ed eliminazione;
+* Registrazione di un nuovo utente;
+* Ripetizione di tutti i test precedenti con il software NVDA per simulare uno screen reader.
+I test sono infine stati ripetuti un’ultima volta tramite dispositivi mobile per simulare l’esperienza d’uso di un cliente in movimento. Qui sotto la lista dei dispositivi utilizzati e relativi browser:
+* Huawei P30 – Chrome;
+* iPad x – Safari;
+* Xiaomi Mi 10 Lite 5G – Chrome;
+* ***AGGIUNGERE DISPOSITIVI***
+
 4.2 Test automatici
+Per garantire che le scelte prese riguardo ai colori del sito 
