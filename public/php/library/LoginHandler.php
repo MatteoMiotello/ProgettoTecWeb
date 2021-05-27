@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dbConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/LoginErrorTypeSet.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 
 class LoginHandler {
     /**
@@ -18,14 +18,11 @@ class LoginHandler {
         $riga = $connection
             ->query($usernameQuery)
             ->fetch_assoc();
-        var_dump($riga);
         if (is_null($riga) or empty( $riga )) {
             return false;
         }
 
         $user = new User( $riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'], $riga['password'], $riga['permesso'], $riga['img_path'] );
-        var_dump($password);
-        print($user->getPassword());
         if (!($password == $user->getPassword())) {
             return false;
         }

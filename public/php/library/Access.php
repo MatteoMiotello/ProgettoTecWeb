@@ -20,7 +20,7 @@ class Access {
 
     public function logOut(): bool {
         if (!session_destroy()) {
-            throw new \Exception('non è stato possibile eliminare la sessione corrente');
+            throw new Exception('non è stato possibile eliminare la sessione corrente');
         } else {
             return true;
         }

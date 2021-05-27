@@ -58,6 +58,9 @@ class VoteHandler {
         $db = DBAccess::openDBConnection();
         $result = $db->query('SELECT * FROM voto WHERE utente = ' . $user->getID() . ' and articolo = ' . $this->Article->getID())->fetch_assoc();
 
+        if(!$result)
+            return null;
+        
         if ($result['up'] == 1) {
             return true;
         }

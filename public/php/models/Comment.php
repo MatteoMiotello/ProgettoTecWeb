@@ -158,15 +158,19 @@ class Comment
 
 
     public function getAuthor(): User{
-        $access = DBAccess::openDBConnection();
+        $connection = DBAccess::openDBConnection();
 
-        $query = sprintf( 'SELECT * FROM utente WHERE ID = %s', $this->getIdAutore() );
+        $id = $this->getIdAutore();
+        $query = "SELECT * FROM utente WHERE utente.ID = $id ";
 
-        $queryResult = mysqli_query( $access->getConnection(), $query );
+        $queryResult = mysqli_query( $connection, $query );
 
-        $row = mysqli_fetch_row( $queryResult );
+        if (mysqli_num_rows($queryResult) == 0)
+            return null;
 
-        return ( new User( $row['ID'], $row['nome'], $row['cognome'], $row['email'], $row['password'], $row['permesso'], $row['img_row'] ));
+        $row = mysqli_fetch_assoc( $queryResult );
+
+        return ( new User( $row['ID'], $row['nome'], $row['cognome'], $row['email'], $row['password'], $row['permesso'], $row['img_path'] ));
     }
 
     public static function getCommentsFromArticle($IdArticolo) {

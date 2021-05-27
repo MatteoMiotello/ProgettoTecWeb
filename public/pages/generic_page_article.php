@@ -14,14 +14,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/ArticleBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/CommentBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/voteBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/Access.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/voteHandler.php';
-
-$connessioneRiuscita = DBAccess::openDBConnection();
-
-if ($connessioneRiuscita && isset($_POST['comment']) && Access::isAuthenticated()) {
-    $utente = Access::getUser();
-    Comment::uploadNewComment($id_articolo, $utente, '' . $_POST['comment'] . '', '' . date("Y-m-d h:i:s") . '', $connessioneRiuscita);
-}
+//require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/voteHandler.php';
+require_once '../php/library/VoteHandler.php';
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Articolo');
@@ -29,6 +23,12 @@ $handler->setBreadcrumb('Articolo');
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/generic_page_articolo_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 
+$connessioneRiuscita = DBAccess::openDBConnection();
+
+if ($connessioneRiuscita && isset($_POST['comment']) && Access::isAuthenticated()) {
+    $utente = Access::getUser();
+    $result = Comment::uploadNewComment($id_articolo,'', $utente->getId() , '' .$_POST['comment'] . '', '' . date("Y-m-d h:i:s") . '', $connessioneRiuscita);
+}
 
 if ( !empty( $_SERVER['HTTP_REFERER'] ) ) {
     if (strpos($_SERVER['HTTP_REFERER'], 'categorie.php')) {
@@ -92,7 +92,7 @@ else {
     if ($rawComments) {
         $comment = '';
         foreach ($rawComments as $rawCommento) {
-            $author = User::getArticleAuthor( $articoloModel->getID() );
+            $author = $rawCommento->getAuthor();
             $comment .= (new CommentBuilder)
                 ->setComment($rawCommento->getTesto())
                 ->setName($author->getName())
@@ -142,7 +142,6 @@ else {
             }
         }
     }
-    $votes->setAutenticationOptions();
     $votes = $votes->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/commentArea.phtml'));
 }
 $handler->setParam("<commentArea />", $votes);
