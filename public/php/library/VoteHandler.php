@@ -23,7 +23,6 @@ class VoteHandler {
         $this->deleteDownVote( $user );
 
         $query = 'INSERT INTO voto (utente, articolo, up, down) VALUES( "' . $user->getID() . '" , "' . $this->Article->getID() . '", 1, 0 )';
-
         $result = $db->query($query);
 
         if (!$result) {
@@ -56,7 +55,7 @@ class VoteHandler {
 
     public function getVotes(User $user): ?bool {
         $db = DBAccess::openDBConnection();
-        $result = $db->query('SELECT * FROM voto WHERE utente = ' . $user->getID() . ' and articolo = ' . $this->Article->getID())->fetch_assoc();
+        $result = $db->query('SELECT * FROM voto WHERE utente = ' . $user->getID() . ' AND articolo = ' . $this->Article->getID())->fetch_assoc();
 
         if(!$result)
             return null;
