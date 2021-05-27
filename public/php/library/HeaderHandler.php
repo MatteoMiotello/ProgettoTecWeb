@@ -53,9 +53,9 @@ class HeaderHandler {
     public static function getUserInfo() {
         $access = Access::create();
 
-        if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' ) or strpos( $_SERVER[ 'REQUEST_URI' ], 'register.php' ) ) {
+        /*if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' ) or strpos( $_SERVER[ 'REQUEST_URI' ], 'register.php' ) ) {
             return '';
-        }
+        }*/
 
         if ( !$access->isAuthenticated() ) {
             return '<a href="/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a>';
