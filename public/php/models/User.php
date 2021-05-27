@@ -47,7 +47,7 @@ class User {
         $this->Name = $nome;
         $this->Surname = $cognome;
         $this->Email = $email;
-        $this->Password = md5($password);
+        $this->Password = $password;
         $this->Permission = $permesso;
         $this->Img = $img_path;
     }

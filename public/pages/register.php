@@ -33,7 +33,7 @@ if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) &
                 $_POST['pic_sel'] = genderfluid;
         }
 
-        $newUser = new User(null, CheckValues::sanitize($_POST['nome']), CheckValues::sanitize($_POST['cognome']), CheckValues::sanitize($_POST['email']),  CheckValues::sanitize($_POST['password']),'usr', $_POST['pic_sel']);
+        $newUser = new User(null, CheckValues::sanitize($_POST['nome']), CheckValues::sanitize($_POST['cognome']), CheckValues::sanitize($_POST['email']),  md5(CheckValues::sanitize($_POST['password'])),'usr', $_POST['pic_sel']);
 
         if(User::loadNewUser($newUser)) {
             $handler->setOperationDone("Registrazione riuscita! Scrivi e commenta in libertà!");

@@ -12,20 +12,21 @@ class LoginHandler {
      * @throws \Exception
      */
     public static function checkLogin($email, $password) {
-        $connection = \DBAccess::openDBConnection();
-
+        $connection = DBAccess::openDBConnection();
         $usernameQuery = "SELECT * FROM `utente` WHERE email = '$email'";
 
         $riga = $connection
             ->query($usernameQuery)
             ->fetch_assoc();
-
+        var_dump($riga);
         if (is_null($riga) or empty( $riga )) {
             return false;
         }
 
-        $user = new \User( $riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'], $riga['password'], $riga['permesso'], $riga['img_path'] );
-        if ( !password_verify( $password, $user->getPassword() ) ) {
+        $user = new User( $riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'], $riga['password'], $riga['permesso'], $riga['img_path'] );
+        var_dump($password);
+        print($user->getPassword());
+        if (!($password == $user->getPassword())) {
             return false;
         }
 
