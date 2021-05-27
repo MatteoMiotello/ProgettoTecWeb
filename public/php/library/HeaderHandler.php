@@ -50,7 +50,7 @@ class HeaderHandler {
     }
 
 
-    public static function getUserInfo() {
+    public static function getUserInfo($currentLink) {
         $access = Access::create();
 
         /*if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' ) or strpos( $_SERVER[ 'REQUEST_URI' ], 'register.php' ) ) {
@@ -58,14 +58,21 @@ class HeaderHandler {
         }*/
 
         if ( !$access->isAuthenticated() ) {
+            if(strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' )) return '<div class="currentLink"><p>Accedi/Registrati</p></div>';
             return '<a href="/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a>';
         }
-
-        $html = '<div class="logout_cont vFlex">
-                  <a href="/pages/user.php?user=' . $_SESSION['user_id'] . '">Il mio profilo</a>
-                  <a href="/pages/logout.php">Esci</a></div>';
-
-        return $html;
+        else{
+          if(strpos( $_SERVER[ 'REQUEST_URI' ], 'user.php' )){
+            $html = '<div class="logout_cont vFlex">
+                    <span class="currentLink">Il mio profilo</span>
+                    <a href="/pages/logout.php">Esci</a></div>';
+          }
+          else{ $html = '<div class="logout_cont vFlex">
+                        <a href="/pages/user.php?user=' . $_SESSION['user_id'] . '">Il mio profilo</a>
+                        <a href="/pages/logout.php">Esci</a></div>';
+          }
+          return $html;
+        }
     }
     /* funzione div utente */
 }

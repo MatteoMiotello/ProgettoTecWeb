@@ -103,7 +103,7 @@ class TemplateHandler {
      */
     public function setHeaderParams() {
         $links = HeaderHandler::getHeaderLinks($this->CurrentRoute);
-        $user = HeaderHandler::getUserInfo();
+        $user = HeaderHandler::getUserInfo($this->CurrentRoute);
 
         $this->setParam('<nav-link/>', $links);
         $this->setParam( '<userCont/>', $user );
@@ -293,7 +293,7 @@ class TemplateHandler {
     }
 
     /**
-     * Imposta un messaggio di errore 
+     * Imposta un messaggio di errore
      * @param $string
     */
     public function setOperationError($string) {
@@ -302,7 +302,7 @@ class TemplateHandler {
     }
 
     /**
-     * Imposta un messaggio di errore 
+     * Imposta un messaggio di errore
      * @param $string
     */
     public function setOperationDone($string) {
