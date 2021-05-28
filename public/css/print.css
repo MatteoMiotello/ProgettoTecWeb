@@ -88,3 +88,8 @@ div[role=cont_utente] img{
 form[action="user_page.php"]{
   display: none;
 }
+
+textarea, input[type=text], input[type=email], input[type=password]{
+  width: -moz-available;
+  width: -webkit-fill-available;
+}

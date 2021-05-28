@@ -451,7 +451,6 @@ fieldset {
 
 .element {
   display: flex;
-  flex-direction: row-reverse;
   margin-top: 0.4em;
 }
 
@@ -864,10 +863,7 @@ div[role=cont_utente]+form button{
   margin: 1em 0.5em;
 }
 
-/*.reg_form input[type=text], .reg_form input[type=email], .reg_form input[type=password] {*/
 input[type=text], input[type=email], input[type=password] {
-  /*min-width: 25em;*/
-  /*width: 100%;*/
   margin-top: 0.2em;
   padding: 0.5em;
 }
