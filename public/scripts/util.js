@@ -18,7 +18,7 @@ function searchToggle() {
     }
 }
 
-//validazione form
+/* ---- validazione form ---- */
 String.prototype.trim = function () {
     return this.replace(/^\s+|\s+$/g, "");
 }
@@ -56,6 +56,8 @@ function testFormArea(x) {
     }
 }
 
+
+/* ---- test campi registrazione ---- */
 function testRegArea(x) {
   /*var i = document.getElementById("icon_err");*/
   var n = document.getElementById("name_err");
@@ -232,28 +234,26 @@ function validateReg() {
     return false;
 }
 
+
 // funzioni estetiche, con JS disattivato nessuna funzionalità viene a mancare
 /* ---- nasconde il pulsante "torna su" e lo mostra solo dopo aver fatto scroll verticale ---- */
 window.onload = function () {
-    hideBtn()
+    setTimeout(hideBtn(),1000);
+    showError();
 };
 window.onscroll = function () {
-    scrollFunction()
+    scrollFunction();
 };
-
-window.onload = function () {
-  showError();
-}
 
 function scrollFunction() {
     mybutton = document.getElementById("myBtn");
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
+        mybutton.style.visibility = "visible";
     } else {
-        mybutton.style.display = "none";
+        mybutton.style.visibility = "hidden";
     }
-}
+};
 
 function hideBtn() {
-    document.getElementById("myBtn").style.display = "none";
-}
+    document.getElementById("myBtn").style.visibility = "hidden";
+};
