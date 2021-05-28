@@ -24,7 +24,7 @@ $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/article_filter_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 
 if ($connessioneRiuscita == null)
-    die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina 
+    die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
 else {
     $rawArticles = Articolo::getArticoli($CategoryName, null);
     $articlesList = '';
@@ -45,9 +45,8 @@ else {
     }
 }
 $handler->setNoOperation();
-$handler->setParam("{{categoryName}}",$CategoryName);
+$handler->setParam("{{categoryName}}","Categoria: ".$CategoryName);
 $handler->setParam("<listaArticoli />",$articlesList);
-$handler->render(); 
+$handler->render();
 
 ?>
-

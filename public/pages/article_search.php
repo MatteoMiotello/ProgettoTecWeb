@@ -1,5 +1,7 @@
 <?php
-$search = $_POST['search'];
+$search = '';
+if(isset($_POST['search']))
+  $search = $_POST['search'];
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -38,7 +40,7 @@ else {
         $articlesList = "<div>nessun articolo presente</div>";
     }
 }
-$handler->setParam("{{categoryName}}",'Risultati ricerca');
+$handler->setParam("{{categoryName}}",'Risultati ricerca per: "'.$search.'"');
 $handler->setParam("<listaArticoli />",$articlesList);
 $handler->render();
 ?>

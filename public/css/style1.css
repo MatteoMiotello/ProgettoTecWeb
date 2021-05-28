@@ -783,7 +783,8 @@ section[role=comment] div p:first-child{
 
 /*  FILTER PAGE */
 .home_content_filter .articoli {
-  margin: 1em;
+  padding: 0;
+  border: none;
 }
 
 /* USER/ADMIN PAGE */
@@ -1009,6 +1010,10 @@ td {
     outline: none;
   }
 
+  .articoli{
+    padding: 0;
+  }
+
   .cat_page figcaption {
     font-size: 1.1em;
   }
@@ -1229,5 +1234,12 @@ td {
   }
 }
 @media screen and (max-width: 480px){
+  .cat_page {
+    flex-direction: column;
+    align-items: center;
+  }
 
+  .cat_page a{
+    max-width: 90%;
+  }
 }
