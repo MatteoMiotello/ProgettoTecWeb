@@ -65,14 +65,17 @@ class HeaderHandler {
           $utente = $_SESSION['user_id'];
           $path = User::getUserById($utente)->getImg();
           if(strpos( $_SERVER[ 'REQUEST_URI' ], 'user.php' )){
-            $html = "<div class='logout_cont vFlex'>
+            $html = "<div class='user_cont hFlex'>
+                    <div class='logout_cont vFlex'>
                     <span class='currentLink'>Il mio profilo</span>
-                    <a href='/pages/logout.php'>Esci</a>
-                    </div><img class='user_img' src=$path alt>";
+                    <a href='/pages/logout.php'>Esci</a></div>
+                    </div>
+                    <img class='user_img' src=$path alt>";
           }
-          else{ $html = "<div class='logout_cont vFlex'>
+          else{ $html = "<div class='user_cont hFlex'>
+                        <div class='logout_cont vFlex'>
                         <a href='/pages/user.php?user=$utente'>Il mio profilo</a>
-                        <a href='/pages/logout.php'>Esci</a>
+                        <a href='/pages/logout.php'>Esci</a></div>
                         </div><img class='user_img' src=$path alt>";
           }
           return $html;
