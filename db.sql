@@ -142,7 +142,7 @@ CREATE TABLE `utente` (
   `ID` int(6) NOT NULL AUTO_INCREMENT,
   `nome` varchar(30) NOT NULL,
   `cognome` varchar(30) NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL UNIQUE,
   `password` char(128) NOT NULL,
   `permesso` char(3) NOT NULL,
   `img_path` varchar(255) DEFAULT NULL,
@@ -156,7 +156,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` VALUES (125333,'Giosuè','Calgaro','giosue@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(218796,'Utente','Standard','utente@user.com','/*hash(user)*/','adm','/img/genderfluid_icon.png'),(456468,'Matteo','Miotello','matteo@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(716989,'Andrea','Polato','andrea@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(846787,'Tommaso','Allegretti','tommaso@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(846788,'Giosue','Calgaroo','meiogio7@gmail.com','admin','usr','img'),(846789,'Giosuè','Calgaro','giosue.calgaro@studenti.unipd.it','12345678','usr','../img/genderfluid_icon.png'),(846790,'Giosuè','Calgaro','giosue.calgaro@studenti.unipd.it','12345678','usr','../img/genderfluid_icon.png'),(846791,'Giosuè','Calgaro','giosue.calgaro@studenti.unipd.it','12345678','usr','../img/genderfluid_icon.png');
+INSERT INTO `utente` VALUES (125333,'Giosuè','Calgaro','giosue@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(218796,'Utente','Standard','utente@user.com','/*hash(user)*/','adm','/img/genderfluid_icon.png'),(456468,'Matteo','Miotello','matteo@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(716989,'Andrea','Polato','andrea@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(846787,'Tommaso','Allegretti','tommaso@admin.com','/*hash(admin)*/','adm','/img/male_icon.png'),(846788,'Giosue','Calgaroo','meiogio7@gmail.com','admin','usr','img'),(846789,'Giosuè','Calgaro','giosue.calgaro@studenti.unipd.it','12345678','usr','../img/genderfluid_icon.png');
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 

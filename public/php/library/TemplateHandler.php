@@ -11,7 +11,7 @@ class TemplateHandler {
     /**
      * @var string
      */
-    private $PageTitle;
+    private $PageTitle = '';
 
     /**
      * @var string
@@ -42,7 +42,24 @@ class TemplateHandler {
      */
     private $CurrentRoute;
 
+    /**
+     * @var string
+     */
+    private $Authors = '';
 
+    /**
+     * @var string
+     */
+    private $Description = '';
+
+    /**
+     * @var string
+     */
+    private $Keywords = '';
+
+    /**
+     * @var string
+     */
     private $Breadcrumb;
 
 
@@ -162,14 +179,20 @@ class TemplateHandler {
     }
 
 
+    private function setParams() {
+        $this->setParam('<common-title/>', $this->PageTitle );
+        $this->setParam( '<common-authors/>', $this->Authors );
+        $this->setParam( ' <common-description/>', $this->Description );
+        $this->setParam( '<common-keywords/>', $this->Keywords );
+    }
+
+
     /**
      * @param $title
      * @return $this
      */
     public function setPageTitle($title): self {
         $this->PageTitle = "<title>$title</title>";
-        $this->setParam('<common-title/>', $this->PageTitle);
-
         return $this;
     }
 
@@ -201,6 +224,62 @@ class TemplateHandler {
 
 
     /**
+     * @return mixed
+     */
+    public function getAuthors() {
+        return $this->Authors;
+    }
+
+
+    /**
+     * @param mixed $Authors
+     */
+    public function setAuthors($Authors): self {
+        $this->Authors = sprintf("<meta name=\"author\" cont\\ent=\"%s\">", $Authors);
+
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getDescription() {
+        return $this->Description;
+    }
+
+
+    /**
+     * @param mixed $Description
+     */
+    public function setDescription($Description): self {
+        $this->Description = sprintf("<meta name=\"description\" content=\"%s\">", $Description);
+
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getKeywords() {
+        return $this->Keywords;
+    }
+
+
+    /**
+     * @param mixed $Keywords
+     */
+    public function setKeywords($Keywords): self {
+        $this->Keywords = sprintf("<meta name=\"keywords\" content=\"%s\">", $Keywords);
+
+
+        return $this;
+    }
+
+
+
+    /**
      * Renderizza la pagina
      *
      * @throws Exception
@@ -208,7 +287,7 @@ class TemplateHandler {
     public function render() {
         $html = $this->getCommonHtml();
         $this->setHeaderParams();
-
+        $this->setParams();
 
         if ( !isset($this->Breadcrumb) ) {
             $this->setParam('<main-breadcrumb/>', '');

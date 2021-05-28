@@ -277,6 +277,10 @@ h1 {
   font-size: 1.3em;
 }
 
+.articoli{
+  padding-right: 1em;
+}
+
 article {
   background-color: white;
   -moz-box-shadow:    0 3px 5px 3px #ccc;
@@ -333,7 +337,6 @@ aside {
   box-shadow:         0 3px 5px 3px #ccc;
   padding: 1em;
   width: 70%;
-  margin-left: 1em;
   height: fit-content;
 }
 
@@ -448,7 +451,6 @@ fieldset {
 
 .element {
   display: flex;
-  flex-direction: row-reverse;
   margin-top: 0.4em;
 }
 
@@ -780,7 +782,8 @@ section[role=comment] div p:first-child{
 
 /*  FILTER PAGE */
 .home_content_filter .articoli {
-  margin: 1em;
+  padding: 0;
+  border: none;
 }
 
 /* USER/ADMIN PAGE */
@@ -860,10 +863,7 @@ div[role=cont_utente]+form button{
   margin: 1em 0.5em;
 }
 
-/*.reg_form input[type=text], .reg_form input[type=email], .reg_form input[type=password] {*/
 input[type=text], input[type=email], input[type=password] {
-  /*min-width: 25em;*/
-  /*width: 100%;*/
   margin-top: 0.2em;
   padding: 0.5em;
 }
@@ -1006,6 +1006,10 @@ td {
     outline: none;
   }
 
+  .articoli{
+    padding: 0;
+  }
+
   .cat_page figcaption {
     font-size: 1.1em;
   }
@@ -1038,9 +1042,9 @@ td {
     margin-left: 0.5em;
   }
 
-  .home_content .articoli {
+  /*.home_content .articoli {
     margin-right: 0;
-  }
+  }*/
 
   article div {
     width: 100%;
@@ -1226,5 +1230,12 @@ td {
   }
 }
 @media screen and (max-width: 480px){
-      
+  .cat_page {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cat_page a{
+    max-width: 90%;
+  }
 }
