@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/DotEnv.php';
 class CheckValues {
     public static function checkForCorrectValues($value, $typeOfCheck, $length) {
         $correctCharacters = true;
@@ -263,6 +263,8 @@ class Articolo {
         $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT * FROM articolo WHERE articolo.ID=$id_articolo";
         $queryResult = mysqli_query($connection, $querySelect);
+        if(!$queryResult)
+            return null;
         if (mysqli_num_rows($queryResult) == 0) {
             return null;
         } else {
@@ -293,19 +295,27 @@ class Articolo {
     public static function validateArticle($Id) {
         $Connection = DBAccess::openDBConnection();
         $querySelect = "UPDATE articolo SET articolo.verificato = 1 WHERE articolo.ID = $Id";
-        $queryResult = mysqli_query($Connection, $querySelect);
-        return $queryResult;
+        return mysqli_query($Connection, $querySelect); 
     }
 
     public static function loadNewArticle($articolo) {
+        $article_id = $articolo->getID();
+        $title = $articolo->getTitle();
+        $descrizione = $articolo->getDescription();
+        $content = $articolo->getDescription();
+        $autore = $articolo->getAuthor();
+        $data_pub = $articolo->getDataPub();
+        $upVotes = $articolo->getUpVotes();
+        $downVotes = $articolo->getDownVotes();
+        $path = $articolo->getImgPath();
+        $alt = $articolo->getAltImg();
+        $verificato = $articolo->getValidation();
+        
         $Connection = DBAccess::openDBConnection();
-        $querySelect = "INSERT INTO articolo(titolo, descrizione, testo, autore, data_pub, upvotes, downvotes, img_path, alt_img, verificato) values($articolo->getTitle(), $articolo->getDescription(), $articolo->getContent(), $articolo->getAuthor(), $articolo->getDataPub(), $articolo->getUpVotes(), $articolo->getDownVotes(), $articolo->getImgPath(), $articolo->getAltImg(), $articolo->getValidation()";
+
+        $querySelect = 'INSERT INTO articolo(ID, titolo, descrizione, testo, autore, data_pub,upvotes, downvotes, img_path, alt_img, verificato) values('.$article_id.',"'.$title.'", "'.$descrizione.'", "'.$content.'", '.$autore.', "'.$data_pub.'",'.$upVotes.', '.$downVotes.', "'.$path.'", "'.$alt.'", "'.$verificato.'")';
         $queryResult = mysqli_query($Connection, $querySelect);
-        if (mysqli_affected_rows($Connection) == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return $queryResult;
     }
 
     public static function getAutoreArticolo($id_articolo) {
@@ -324,12 +334,7 @@ class Articolo {
     public static function deleteArticle($id_articolo) {
         $connection = DBAccess::openDBConnection();
         $querySelect = "DELETE FROM articolo WHERE articolo.ID = $id_articolo";
-        $queryResult = mysqli_query($connection, $querySelect);
-        if (mysqli_affected_rows($connection) == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return mysqli_query($connection, $querySelect);
     }
 
     public static function getUpVotesFromArticle($id_articolo) {
@@ -350,6 +355,16 @@ class Articolo {
             return false;
         } else {
             return  mysqli_fetch_assoc($queryResult);
+        }
+    }
+    public static function getMaxId() {
+        $connection = DBAccess::openDBConnection();
+        $querySelect = "SELECT MAX(ID) from articolo";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0) {
+            return false;
+        } else {
+            return  mysqli_fetch_assoc($queryResult)['MAX(ID)'];
         }
     }
 }
@@ -458,13 +473,8 @@ class Categoria {
 
     public static function loadNewCategoryForArticle($category, $article_id) {
         $connection = DBAccess::openDBConnection();
-        $querySelect = "INSERT INTO cat_art values($article_id,$category) ";
-        $queryResult = mysqli_query($connection, $querySelect);
-        if (mysqli_affected_rows($connection) == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        $querySelect = 'INSERT INTO cat_art values('.$article_id.',"'.$category.'") ';
+        return mysqli_query($connection, $querySelect);
     }
 }
 

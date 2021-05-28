@@ -7,7 +7,7 @@ class DBAccess
 
     private static $connection;
     private static $access;
-
+    private static $DBName;
     public static function openDBConnection()
     {
         (new DotEnv($_SERVER['DOCUMENT_ROOT'] . '/../envirorment/.env'))->load();
@@ -21,6 +21,7 @@ class DBAccess
                 getenv('DB_PASSWORD'),
                 getenv('DB_NAME')
             );
+            DBAccess::$DBName = getenv('DB_NAME');
         }
 
         mysqli_select_db(DBAccess::$connection, getenv('DB_NAME')) or die("no database");
@@ -32,6 +33,13 @@ class DBAccess
         }
     }
 
+    /**
+     * return the name of the DB
+     * @return string
+     */
+    public static function getDBName() {
+        return DBAccess::$DBName;
+    }
 
     /**
      * @param $query
