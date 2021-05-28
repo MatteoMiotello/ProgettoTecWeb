@@ -81,5 +81,18 @@ class HeaderHandler {
           return $html;
         }
     }
-    /* funzione div utente */
+
+
+    public static function getMobLink($currentLink) {
+      $access = Access::create();
+      if(!$access->isAuthenticated())
+        return '';
+      else {
+        $user = $access->getUser();
+        $name = $user->getName();
+        $id = $user->getID();
+        if(strpos($_SERVER['REQUEST_URI'], 'user.php')) return "<p class='mob_pro'>$name</p>";
+        return "<a href='/pages/user.php?user=$id' class='mob_pro' tabindex='0'>$name</a>";
+      }
+    }
 }
