@@ -37,14 +37,6 @@ if(!Access::isAuthenticated()) {
     $handler->render();
     return;
 }
-$user = Access::create();
-if(!($user->isAdministrator())) {
-    $handler->setParam("<articolo />", "");
-    $handler->setParam("<commentArea />", "");
-    $handler->setOperationError("Non sei un amministratore! Non puoi accedere a questa sezione!");
-    $handler->render();
-    return;
-}
 
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/user_page_nuovo.html';
 

@@ -57,7 +57,7 @@ class HeaderHandler {
             return '';
         }*/
 
-        if ( !$access->isAuthenticated() ) {
+        if ( !$access->isAuthenticated() || !User::getUserById($_SESSION['user_id']) ) {
             if(strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' )) return '<div class="currentLink"><p>Accedi/Registrati</p></div>';
             return '<a href="/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a>';
         }

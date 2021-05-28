@@ -112,7 +112,7 @@ $votes = (new VoteBuilder);
 // controllo se l'utente e' loggato, in tal caso puo' commentare l'articolo, altrimenti no
 if (Access::isAuthenticated()) {
     $user = null;
-    if (isset($_SESSION['user_id']))
+    if (isset($_SESSION['user_id']) && Access::getUser()!=null)
         $user = Access::getUser();
     if ($user) {
         // se esiste una chiave di sessione per l'utente, e se effettivamente l'utente esiste allora

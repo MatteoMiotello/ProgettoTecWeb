@@ -1,6 +1,7 @@
 <?php
 
 require_once '../php/library/TemplateHandler.php';
+require_once '../php/dBConnection.php';
 
 $handler = new TemplateHandler();
 

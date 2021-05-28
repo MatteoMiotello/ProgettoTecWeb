@@ -13,27 +13,32 @@ $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/registrati_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 
 // TODO: manca la parte in cui vengono raccolti valori
-const male = '../img/male_icon.png';
-const famale = '../img/female_icon.png';
-const genderfluid = '../img/genderfluid_icon.png';
+const male = '/img/male_icon.png';
+const famale = '/img/female_icon.png';
+const genderfluid = '/img/genderfluid_icon.png';
 
 // se tutti i campi della form sono stati compilati allora si puo' procedere a caricarli
 if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['pic_sel']) && $connessioneRiuscita) {
     $newUser = null;
     try{
         // setto l'immagine profilo dell'utente in base alla scelta
+        $img;
         switch($_POST['pic_sel']) {
             case "male":
-                $_POST['pic_sel'] = male;
+                $img = male;
+                break;
              case "female":
-                $_POST['pic_sel'] = famale;
+                $img = famale;
+                break;
             case "genderfluid":
-                $_POST['pic_sel'] = genderfluid;
+                $img = genderfluid;
+                break;
             default:
-                $_POST['pic_sel'] = genderfluid;
+                $img = genderfluid;
+                break;
         }
 
-        $newUser = new User(null, CheckValues::sanitize($_POST['nome']), CheckValues::sanitize($_POST['cognome']), CheckValues::sanitize($_POST['email']),  md5(CheckValues::sanitize($_POST['password'])),'usr', $_POST['pic_sel']);
+        $newUser = new User(null, CheckValues::sanitize($_POST['nome']), CheckValues::sanitize($_POST['cognome']), CheckValues::sanitize($_POST['email']),  md5(CheckValues::sanitize($_POST['password'])),'usr', $img);
 
         if(User::loadNewUser($newUser)) {
             $handler->setOperationDone("Registrazione riuscita! Scrivi e commenta in libertà!");
