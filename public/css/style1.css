@@ -37,6 +37,10 @@ header {
   z-index: 1;
 }
 
+.mob_pro{
+  display: none;
+}
+
 #logo {
   max-width: 9em;
   margin-left: 1em;
@@ -44,7 +48,8 @@ header {
 
 .user_img {
   width: 60px;
-  height: 60px;
+  position: relative;
+  right: 1em;
 }
 
 header nav {
@@ -130,7 +135,7 @@ nav .currentItem {
 
 .user_cont {
   position: relative;
-  margin-right: 1em;
+  margin-right: -3em;
   align-items: center;
   justify-content: flex-end;
 }
@@ -975,6 +980,7 @@ td {
 
   header a.search_link {
     display: block;
+    align-self: center;
     width: 30px;
     text-align: center;
   }
@@ -1020,6 +1026,15 @@ td {
     font-size: 1em;
   }
 
+  .user_img{
+    width: 50px;
+    position: absolute;
+    top: 1.5em;
+    left: 1em;
+    border: solid 1px white;
+    border-radius: 50%;
+  }
+
   .menu_noJS {
     display: block;
   }
@@ -1030,16 +1045,25 @@ td {
   }
 
   #logo{
+    margin: auto;
+    position: relative;
+    left: 40px;
     max-width: 100px;
+  }
+
+  .mob_pro{
+    display: block;
+    position: absolute;
+    top: 2.2em;
+    left: 3em;
+    border-radius: 20px;
+    padding: .3em 1em;
+    background: white;
+    padding-left: 1.5em;
   }
 
   .wrapper {
     padding: 1em;
-  }
-
-  #logo{
-    margin: 0;
-    margin-left: 0.5em;
   }
 
   /*.home_content .articoli {

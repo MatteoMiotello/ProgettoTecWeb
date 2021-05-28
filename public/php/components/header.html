@@ -1,5 +1,6 @@
 <header id="top" class="hFlex">
     <a href="#content" class="sr-only" tabindex="0">Salta al contenuto</a>
+    <a href="/pages/user.php" class="mob_pro" tabindex="0">{{userName}}</a>
     <img src="/img/logo.png" alt="Benvenuto in viTimes" id="logo">
 
     <nav class="hFlex">
@@ -20,11 +21,10 @@
                 <div class="fa fa-bars"><span class="sr-only">Mostra menu a comparsa</span></div>
             </a>
         </div>
-        <div class="user_cont hFlex">
-            <userCont/>
+
+          <userCont/>
             <!--*SE BISOGNA EFFETTUARE L'ACCESSO:* <<a href="login.html" tabindex="0"><div>Accedi/Registrati</div></a>>-->
         </div>
-      </div>
 </header>
 <div class="mob_srch" id="search_mobile">
     <form method="post" action="/pages/article_search.php">
