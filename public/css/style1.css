@@ -135,14 +135,14 @@ nav .currentItem {
 
 .user_cont {
   position: relative;
-  margin-right: -3em;
+  margin-right: 1em;
   align-items: center;
   justify-content: flex-end;
 }
 
 .logout_cont {
   background: white;
-  margin-right: 30px;
+  margin-right: -2em;
   border: solid 1px black;
   transform: skew(-20deg);
   text-align: right;
@@ -165,7 +165,7 @@ nav .currentItem {
 
 .user_cont > a {
   background: white;
-  padding: 0.8em 45px 0.8em 0.5em;
+  padding: 0.8em 0.8em 0.8em 0.5em;
   margin-right: 30px;
   border: solid 1px black;
   transform: skew(-20deg);
@@ -1012,10 +1012,6 @@ td {
     outline: none;
   }
 
-  .articoli{
-    padding: 0;
-  }
-
   .cat_page figcaption {
     font-size: 1.1em;
   }
@@ -1031,8 +1027,10 @@ td {
     position: absolute;
     top: 1.5em;
     left: 1em;
-    border: solid 1px white;
-    border-radius: 50%;
+  }
+
+  .articoli{
+    padding: 0;
   }
 
   .menu_noJS {
@@ -1261,5 +1259,21 @@ td {
 
   .cat_page a{
     max-width: 90%;
+  }
+
+  .user_img{
+    top:3em;
+    width: 40px;
+  }
+
+  .mob_pro{
+    top: 1em;
+    padding: 0.2em 0.3em;
+    left: 1em;
+  }
+
+  #logo{
+    max-width: 80px;
+    padding: 16px 0 0 0;
   }
 }

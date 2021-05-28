@@ -58,8 +58,8 @@ class HeaderHandler {
         }*/
 
         if ( !$access->isAuthenticated() || !User::getUserById($_SESSION['user_id']) ) {
-            if(strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' )) return '<div class="currentLink"><p>Accedi/Registrati</p></div>';
-            return '<a href="/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a>';
+            if(strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' )) return '<div class="user_cont hFlex"><div class="currentLink"><p>Accedi/Registrati</p></div></div>';
+            return '<div class="user_cont hFlex"><a href="/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a></div>';
         }
         else{
           $utente = $_SESSION['user_id'];
