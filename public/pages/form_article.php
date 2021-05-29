@@ -20,6 +20,9 @@ $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/form_articolo_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 $handler->setCurrentRoute('form_articolo');
 
+$handler->setDescription("Scrivi un articolo, esponi un argomento a cui tieni!");
+$handler->setAuthors("Andrea, Giosuè, Tommaso, Matteo");
+
 // controllo che la connessione al db sia andata a buon fine, altrimenti stampo un messaggio di errore
 if (!$connessione) {
     $handler->setOperationError("Errore nell'apertura del db");

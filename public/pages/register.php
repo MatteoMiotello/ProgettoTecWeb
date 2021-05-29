@@ -18,12 +18,14 @@ if (!$connessione) {
     return;
 }
 
-$handler->setPageTitle('Registrati');
+$handler->setPageTitle('Registrazione');
 /*$handler->setBreadcrumb( 'Articoli della categoria: ' . $CategoryName )
     ->addLink( '/index.php', 'Home' )
     ->addLink( '/pages/categorie.php', 'Categorie' );*/
+$handler->setKeywords("registrazione, registrati, utente, profilo");
+$handler->setDescription("In questa sezione potrai registrare il tuo profilo utente.");
+$handler->setAuthors("Andrea, Giosuè, Tommaso, Matteo");
 
-// TODO: manca la parte in cui vengono raccolti valori
 const male = '/img/male_icon.png';
 const famale = '/img/female_icon.png';
 const genderfluid = '/img/genderfluid_icon.png';
