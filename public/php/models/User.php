@@ -131,7 +131,7 @@ class User {
 
     public static function getNumberOfLikesReceived($Id) {
         $Connection = DBAccess::openDBConnection();
-        $querySelect = "SELECT SUM(articolo.upvotes) as result from articolo, utente where utente.ID=$Id and utente.ID = articolo.autore";
+        $querySelect = "SELECT SUM(voto.up) from articolo, voto WHERE articolo.autore=$Id AND voto.articolo=articolo.ID";
         $queryResult = mysqli_query($Connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
             return null;
