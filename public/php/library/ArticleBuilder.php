@@ -191,7 +191,7 @@ class ArticleBuilder extends AbstractBuilder
     public function setEmailAuthor($Email)
     {
         $this->AuthorEmail = $Email;
-        $this->Params[ArticleBuilder::IMGALTARTICLE] = $this->getEmailAuthor();
+        $this->Params[ArticleBuilder::AUTHOREMAIL] = $this->getEmailAuthor();
         return $this;
     }
 
