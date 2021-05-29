@@ -48,6 +48,7 @@ header {
 
 .user_img{
   max-width: 60px;
+  z-index: 99;
 }
 
 header.user_img {

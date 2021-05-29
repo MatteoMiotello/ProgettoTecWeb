@@ -67,6 +67,12 @@ if ($covidNews != null) {
     $covidNewsList = "<div>nessuna news covid presente</div>";
 }
 
+// controllo se e' appena stato effettuato il login, nel caso printo un messaggio di avvenuto login
+if(isset($_GET['login']))
+    $handler->setOperationDone("Login avvenuto con successo, commenta, lascia un like oppure scrivi un articolo!");
+else 
+    $handler->setNoOperation();
+
 $handler->setParam("<listaArticoli />", $articlesList);
 $handler->setParam("<news />", $covidNewsList);
 
