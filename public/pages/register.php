@@ -16,14 +16,15 @@ $handler->setContent(file_get_contents($filePath));
 if (!$connessione) {
     $handler->setOperationError("Errore nell'apertura del db");
     return;
-}
-
-$handler->setPageTitle('Registrati');
+} else $handler->setNoOperation();
+$handler->setPageTitle('Registrazione');
 /*$handler->setBreadcrumb( 'Articoli della categoria: ' . $CategoryName )
     ->addLink( '/index.php', 'Home' )
     ->addLink( '/pages/categorie.php', 'Categorie' );*/
+$handler->setKeywords("registrazione, registrati, utente, profilo");
+$handler->setDescription("In questa sezione potrai registrare il tuo profilo utente.");
+$handler->setAuthors("Andrea, Giosuè, Tommaso, Matteo");
 
-// TODO: manca la parte in cui vengono raccolti valori
 const male = '/img/male_icon.png';
 const famale = '/img/female_icon.png';
 const genderfluid = '/img/genderfluid_icon.png';
@@ -53,11 +54,10 @@ if (isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) 
 
         if (User::loadNewUser($newUser)) {
             $handler->setOperationDone("Registrazione riuscita! Scrivi e commenta in libertà!");
-        } else $handler->setOperationError("I dati inseriti sono corretti ma il Database ha semesso di funzionare! Riprova più tardi!");
+        } else $handler->setOperationError("La mail inserita è già presente all'interno del database, registrati usandone un'altra!");
     } catch (Exception $e) {
         $handler->setOperationError("La compilazione dei campi dati non è avvenuta correttamente, riprovare!");
     }
 }
 
-$handler->setNoOperation();
 $handler->render();

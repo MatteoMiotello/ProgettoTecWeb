@@ -19,13 +19,6 @@ class TemplateHandler {
     private $Content = '';
 
     /**
-     * Aggiunge uno script Javascript
-     *
-     * @var string
-     */
-    private $JsFooter = '';
-
-    /**
      * Contiene tutti i parametri da sostituire
      *
      * @var array
@@ -236,7 +229,7 @@ class TemplateHandler {
      * @param mixed $Authors
      */
     public function setAuthors($Authors): self {
-        $this->Authors = sprintf("<meta name=\"author\" cont\\ent=\"%s\">", $Authors);
+        $this->Authors = sprintf("<meta name=\"author\" content=\"%s\">", $Authors);
 
         return $this;
     }

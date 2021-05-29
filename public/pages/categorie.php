@@ -17,7 +17,9 @@ $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/cat_nuovo.html';
 
 $handler->setContent(file_get_contents($filePath));
 $handler->setCurrentRoute('cat');
-
+$handler->setKeywords("categorie, articoli, argomenti, covid, economia, gossip, mondo, politica, scienza, spettacolo, sport");
+$handler->setDescription("Scorri tra le categorie e scegli gli articoli più adadtti a te in base agli argomenti trattati. Scopri i nostri articoli sulla politica, economia sul mondo e molto altro!");
+$handler->setAuthors("Andrea, Giosuè, Tommaso, Matteo");
 // controllo che la connessione al db sia andata a buon fine, altrimenti stampo un messaggio di errore
 if (!$connessione) {
     $handler->setOperationError("Errore nell'apertura del db");

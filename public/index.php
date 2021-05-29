@@ -23,6 +23,10 @@ $handler = new TemplateHandler();
 $handler->setPageTitle('Home');
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/index_nuovo.html';
 
+$handler->setKeywords("home, articoli, news, aggiornamenti, notizie");
+$handler->setDescription("Scorri la nostra home e rimani aggiornato sulle ultime notizie in Italia e nel mondo intero.");
+$handler->setAuthors("Andrea, Giosuè, Tommaso, Matteo");
+
 $handler->setBreadcrumb('Home');
 
 if (!file_exists($filePath)) {
