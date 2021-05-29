@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php' ;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/PreviewArticleBuilder.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
 
 $connessioneRiuscita = DBAccess::openDBConnection();
 
@@ -30,12 +30,12 @@ else {
     $articlesList = '';
     if ($rawArticles != null) {
         foreach ($rawArticles as $articolo) {
-            $articlesList .= (new PreviewArticleBuilder)
-            ->setID($articolo->getId())
+            $articlesList .= (new ArticleBuilder)
+            ->setArticleID($articolo->getId())
             ->setTitle($articolo->getTitle())
             ->setDescription($articolo->getDescription())
-            ->setImgPath($articolo->getImgPath())
-            ->setImgAlt($articolo->getAltImg())
+            ->setImgArticlePath($articolo->getImgPath())
+            ->setImgArticleAlt($articolo->getAltImg())
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/articlePreview.phtml'))
             ;
         }

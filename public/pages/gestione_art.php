@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/PreviewArticleBuilder.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
 
 $connessione = DBAccess::openDBConnection();
 
@@ -72,9 +72,9 @@ if (isset($_GET['art_id'])) {
 $rawArticles = Articolo::getArticoli(null, null);
 if ($rawArticles != null) {
     foreach ($rawArticles as $articolo) {
-        $articlesList .= (new PreviewArticleBuilder)
+        $articlesList .= (new ArticleBuilder)
             ->setValidationOption($articolo->getValidation())
-            ->setID($articolo->getId())
+            ->setArticleID($articolo->getId())
             ->setTitle($articolo->getTitle())
             ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/articleManager.phtml'));
     }
