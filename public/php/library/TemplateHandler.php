@@ -316,32 +316,6 @@ class TemplateHandler {
 
 
     /**
-     * Setta uno script js alla fine del file
-     *
-     * @param string $js puó essere codice oppure un path di un file
-     * @param bool $isFile se é un path di un file deve essere true
-     * @return self
-     */
-    public function setJsFooter(string $js, bool $isFile = false): self {
-        if (!$isFile) {
-            $this->JsFooter = "<script> $js </script>";
-            return $this;
-        }
-
-        $filePath = $_SERVER['DOCUMENT_ROOT'] . $js;
-
-        if (!file_exists($filePath)) {
-            throw new Exception('file non esistente');
-        }
-
-        $this->JsFooter = "<script src='$filePath'></script>";
-        $this->setParam('<main-js/>', $this->JsFooter);
-
-        return $this;
-    }
-
-
-    /**
      * Inserisce un parametro da sostituire
      *
      * @param string $tag
