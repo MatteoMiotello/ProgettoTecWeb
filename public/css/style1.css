@@ -186,7 +186,7 @@ nav .currentItem {
 
 .user_cont > .currentLink {
   background: lightgrey !important;
-  padding: 0.8em 45px 0.8em 0.5em;
+  padding: 0.8em 0.8em 0.8em 0.5em;
   margin-right: 30px;
   border: solid 1px black;
   transform: skew(-20deg);
