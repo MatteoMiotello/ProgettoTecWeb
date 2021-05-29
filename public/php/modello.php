@@ -234,14 +234,16 @@ class Articolo {
         // qui bisogna fare la query per aggiornare la validazione dell-articolo
         // non  necessariamente, basta aggiungere una query che prenda tutti i valori dell'articolo e li salva.
     }
-    public static function getArticoli($category,$limit) {
+    public static function getArticoli($category,$limit, $verified) {
         $connection = DBAccess::openDBConnection();
 
         if ($category != null)
             $querySelect = "SELECT * FROM articolo, cat_art
-                            WHERE  cat_art.nome_cat = '$category' AND articolo.ID = cat_art.ID_art
+                            WHERE  cat_art.nome_cat = '$category' AND articolo.ID = cat_art.ID_art AND verificato=1
                             ORDER BY ID ASC";
-        else
+        elseif($verified)
+            $querySelect = "SELECT * FROM articolo WHERE verificato=1 ORDER BY ID ASC";
+        else 
             $querySelect = "SELECT * FROM articolo ORDER BY ID ASC";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0) {

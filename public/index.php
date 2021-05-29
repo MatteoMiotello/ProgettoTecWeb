@@ -32,31 +32,31 @@ if (!file_exists($filePath)) {
 $handler->setContent(file_get_contents($filePath));
 $handler->setCurrentRoute('home');
 
-$rawArticles = Articolo::getArticoli(null, null);
+$rawArticles = Articolo::getArticoli(null, null, 1);
 $articlesList = '';
 if ($rawArticles != null) {
     foreach ($rawArticles as $articolo) {
-        $articlesList .= (new ArticleBuilder)
-            ->setArticleID($articolo->getId())
-            ->setTitle($articolo->getTitle())
-            ->setDescription($articolo->getDescription())
-            ->setImgArticlePath($articolo->getImgPath())
-            ->setImgArticleAlt($articolo->getAltImg())
-            ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/articlePreview.phtml'));
+            $articlesList .= (new ArticleBuilder)
+                ->setArticleID($articolo->getId())
+                ->setTitle($articolo->getTitle())
+                ->setDescription($articolo->getDescription())
+                ->setImgArticlePath($articolo->getImgPath())
+                ->setImgArticleAlt($articolo->getAltImg())
+                ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/articlePreview.phtml'));
     }
 } else {
     // messaggio che dice che non ci sono articoli del db
     $articlesList = "<div>nessun articolo presente</div>";
 }
 
-$covidNews = Articolo::getArticoli('Covid', 5);
+$covidNews = Articolo::getArticoli('Covid', 5, 1);
 $covidNewsList = '';
 if ($covidNews != null) {
     foreach ($covidNews as $articolo) {
-        $covidNewsList .= (new ArticleBuilder)
-            ->setTitle($articolo->getTitle())
-            ->setArticleID($articolo->getId())
-            ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/articleNews.phtml'));
+            $covidNewsList .= (new ArticleBuilder)
+                ->setTitle($articolo->getTitle())
+                ->setArticleID($articolo->getId())
+                ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/articleNews.phtml'));
     }
 } else {
     // messaggio che dice che non ci sono articoli del db

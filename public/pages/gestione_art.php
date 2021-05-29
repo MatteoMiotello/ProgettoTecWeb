@@ -69,7 +69,7 @@ if (isset($_GET['art_id'])) {
             $handler->setOperationError('L\'articolo selezionato non è presente');
     }
 } else $handler->setNoOperation();
-$rawArticles = Articolo::getArticoli(null, null);
+$rawArticles = Articolo::getArticoli(null, null, null);
 if ($rawArticles != null) {
     foreach ($rawArticles as $articolo) {
         $articlesList .= (new ArticleBuilder)

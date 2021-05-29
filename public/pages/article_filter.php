@@ -28,7 +28,7 @@ if (!$connessione) {
     return;
 }
 
-$rawArticles = Articolo::getArticoli($CategoryName, null);
+$rawArticles = Articolo::getArticoli($CategoryName, null,1);
 $articlesList = '';
 if ($rawArticles != null) {
     foreach ($rawArticles as $articolo) {
