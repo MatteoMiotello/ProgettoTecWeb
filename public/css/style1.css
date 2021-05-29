@@ -1276,6 +1276,7 @@ td {
     flex-direction: column;
   }
   .man_btns {
+    margin-top: 0.5em;
     width: auto;
     text-align: center;
     flex-direction: row;
