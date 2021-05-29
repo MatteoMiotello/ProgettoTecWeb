@@ -88,6 +88,9 @@ if ($articoloModel) {
  * Nel caso in cui non venisse trovato l'articolo si imposta un messaggio di errore attraverso il template
  */
 else {
+    //setto la pagina di errore come nuovo contenuto in modo da non avere tag fittizi presenti
+    $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/error.html';
+    $handler->setContent(file_get_contents($filePath));
     $handler->setOperationError("Nessun articolo trovato, you tried ;)");
     $handler->setParam("<commentArea />", "");
     $handler->render();
@@ -128,10 +131,8 @@ if (Access::isAuthenticated()) {
         if (isset($_GET['type'])) {
             if ($_GET['type'] == "up") {
                 $voteHandler->addUpVote($user);
-                // header("Refresh: 0; url=generic_page_article.php?art_id=$id_articolo");
             } elseif ($_GET['type'] == "down") {
                 $voteHandler->addDownVote($user);
-                //  header("Refresh: 0; url=generic_page_article.php?art_id=$id_articolo");
             }
         }
 

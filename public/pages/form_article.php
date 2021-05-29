@@ -24,8 +24,7 @@ $handler->setCurrentRoute('form_articolo');
 if (!$connessione) {
     $handler->setOperationError("Errore nell'apertura del db");
     return;
-} else
-    $handler->setNoOperation();
+}
 
 /**
  * controllo che l'utente sia loggato 
@@ -35,6 +34,8 @@ $articleContent = '';
 if (Access::isAuthenticated()) {
     if (isset($_SESSION['user_id']))
         $author = Access::getUser();
+        
+    $handler->setNoOperation();
 } else {
     $handler->setOperationError("Non hai eseguito il login! Esegui il login per poter inviarci il tuo elaborato!");
 }

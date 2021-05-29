@@ -14,7 +14,7 @@ $handler->setContent( $content )
     ->setJsFooter( "console.log('ciao') " );
 
 if ( isset( $_GET['error'] ) and $_GET['error'] == 1  ) {
-    $handler->setOperationError( 'Email o pasword sbagliati' );
+    $handler->setOperationError( 'Email o pasword sbagliati! Riprova!' );
 }
 
 $handler->render();

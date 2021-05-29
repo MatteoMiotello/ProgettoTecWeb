@@ -27,12 +27,10 @@ if (!$connessione) {
     return;
 }
 
-$filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/generic_page_articolo_nuovo.html';
+$filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/error.html';
 $handler->setContent(file_get_contents($filePath));
 
 if(!Access::isAuthenticated()) {
-    $handler->setParam("<articolo />", "");
-    $handler->setParam("<commentArea />", "");
     $handler->setOperationError("Non sei loggato, esegui il login!");
     $handler->render();
     return;
