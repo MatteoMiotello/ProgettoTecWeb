@@ -1035,7 +1035,7 @@ td {
     font-size: 1em;
   }
 
-  header.user_img{
+  header .user_img{
     width: 50px;
     position: absolute;
     top: 1.5em;
@@ -1287,7 +1287,7 @@ td {
     max-width: 90%;
   }
 
-  header.user_img{
+  header .user_img{
     top:3em;
     width: 40px;
   }
