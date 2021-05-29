@@ -327,10 +327,6 @@ article footer img {
   justify-content: space-between;
 }
 
-.man_btns a+a{
-  margin-top: 0.2em;
-}
-
 aside {
   background-color: white;
   -moz-box-shadow:    0 3px 5px 3px #ccc;
@@ -1263,6 +1259,19 @@ td {
   address{
     width: 100%;
   }
+  .managed {
+    flex-direction: column;
+  }
+  .man_btns {
+    margin-top: 0.5em;
+    width: auto;
+    text-align: center;
+    flex-direction: row;
+    border-left: none;
+  }
+  .man_btns  a {
+    margin: 0 0.5em 0.5em 0.5em;
+  }
 }
 @media screen and (max-width: 480px){
   .cat_page {
@@ -1288,5 +1297,9 @@ td {
   #logo{
     max-width: 80px;
     padding: 16px 0 0 0;
+  }
+  .man_btns {
+    margin-top: 1em;
+    font-size: 0.9em;
   }
 }

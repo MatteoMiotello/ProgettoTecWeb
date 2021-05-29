@@ -19,6 +19,7 @@ $handler->setAuthors("Andrea, Giosuè, Tommaso, Matteo");
 if ( isset( $_GET['error'] ) and $_GET['error'] == 1  ) {
     $handler->setOperationError( 'Email o pasword sbagliati! Riprova!' );
 }
+else $handler->setNoOperation();
 
 $handler->render();
 
