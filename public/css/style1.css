@@ -1302,4 +1302,10 @@ td {
     margin-top: 1em;
     font-size: 0.9em;
   }
+  .info_art {
+    flex-direction: column;
+  }
+  .info_art #author {
+    width: fit-content;
+  }
 }
