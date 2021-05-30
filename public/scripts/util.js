@@ -288,15 +288,15 @@ window.onscroll = function () {
 
 function scrollFunction() {
     mybutton = document.getElementById("myBtn");
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.visibility = "visible";
+    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        mybutton.style.right = "1em";
     } else {
-        mybutton.style.visibility = "hidden";
+        mybutton.style.right = "-100em";
     }
 };
 
 function hideElements() {
-    document.getElementById("myBtn").style.visibility = "hidden";
+    document.getElementById("myBtn").style.right = "-100em";
     document.getElementById("menu_noJS").style.display = "none";
     document.getElementById("mob_srch_noJS").style.display = "none";
 };

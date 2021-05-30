@@ -3,6 +3,11 @@
   margin: 0em;
 }
 
+.sr{
+  position: absolute;
+  left: -100em;
+}
+
 .hFlex {
   display: flex;
 }
@@ -123,6 +128,11 @@ nav .currentItem {
   border: none;
 }
 
+#search_button img, .mob_srch button img, #mob_srch_noJS button img{
+  width: 12px;
+}
+
+
 #search_button:hover, .mob_srch button:hover, #mob_srch_noJS button:hover{
   background:  #ccc;
 }
@@ -202,8 +212,10 @@ nav .currentItem {
 
 header a.icon {
   display: none;
-  color: #f2f2f2;
-  text-align: center;
+}
+
+header a.icon img {
+  width: 14px;
 }
 
 .mob_srch {
