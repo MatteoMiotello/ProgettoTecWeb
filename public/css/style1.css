@@ -1307,4 +1307,21 @@ td {
   .info_art #author {
     width: fit-content;
   }
+  div [role=cont_utente] {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      font-size: 1em;
+  }
+  div[role=cont_utente] div {
+    align-items: center;
+    margin-bottom: 1em;
+  }
+  div[role=cont_utente] img {
+    width: 4em;
+    height: 4em;
+  }
+  form h2 {
+    text-align: center;
+  }
 }
