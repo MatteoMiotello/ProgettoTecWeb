@@ -1,16 +1,16 @@
 <div class="upperPrint">
-  <h1 id="content" >{{title}}</h1>
+  <h1 id="content" tabindex="0">{{title}}</h1>
   <img src="{{articleImgPath}}" alt="{{altImg}}">
 </div>
-<p>{{articleContent}}</p>
+<p tabindex="0">{{articleContent}}</p>
 </div>
 <div class="info_art">
     <div id="author">
         <img src="{{authorImg}}">
-        <p>{{authorName}}</p>
-        <p>{{authorEmail}}</p>
+        <p tabindex="0"><span class="sr-only">Nome dell'autore autore: </span>{{authorName}}</p>
+        <p tabindex="0"><span class="sr-only">Email dell'autore: </span>{{authorEmail}}</p>
     </div>
     <div id="get_cat">
         <!-- tag che viene sostituito dalle categorie a cui appartiene l'articolo nb=> check se sono settate altrimenti messaggio che non ci sono cateegorie-->
-        <categories />
+        <span class="sr-only">Categorie dell'articolo: <categories /></span>
     </div>
