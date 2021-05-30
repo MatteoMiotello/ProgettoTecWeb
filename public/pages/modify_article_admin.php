@@ -53,10 +53,6 @@ if (!$articolo) {
     return;
 } else $handler->setNoOperation();
 
-if (isset($_GET['success']) and $_GET['success'] == 'true') {
-    $handler->setOperationDone('Salvataggio avvenuto con successo');
-}
-
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/form_articolo_admin_modifica.html';
 $handler->setContent(file_get_contents($filePath));
 $handler->setParam('{{ id_articolo }}', $articolo->getID());
