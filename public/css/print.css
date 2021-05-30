@@ -4,9 +4,8 @@ html{
   background: transparent;
 }
 
-header, header *, button, nav, .breadcrumbs, footer, footer *, body img{
+header, header *, button, nav, .breadcrumbs, footer, footer *, body img, #php_err{
   display: none !important;
-  /*background: transparent !important;*/
 }
 
 #wrapper{

@@ -59,7 +59,8 @@ class Access {
      * @return bool
      */
     public static function isAuthenticated(): bool {
-        if ( !isset( $_SESSION['authenticated'] ) or !$_SESSION['authenticated']) {
+        if ( !isset( $_SESSION['authenticated'] ) or !$_SESSION['authenticated'] or $_SESSION[ 'user_id' ]==null) {
+            unset($_SESSION['authenticated'], $_SESSION[ 'user_id' ]);
             return false;
         }
 
