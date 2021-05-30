@@ -8,15 +8,15 @@
           <p id="icon_err">Scegli un'icona del profilo</p>
           <div class="hFlex">
             <div class="vFlex">
-              <input type="radio" name="pic_sel" id="male_icon" title="Icona utente maschio" value="male" required>
+              <input type="radio" name="pic_sel" id="male_icon" title="Icona utente maschio" value="male" tabindex="0" required>
               <img class="user_img" src="../img/male_icon.png" alt="Icona utente maschio" title="Icona utente maschio">
             </div>
             <div class="vFlex">
-              <input type="radio" name="pic_sel" id="female_icon" title="Icona utente femmina" value="female" required>
+              <input type="radio" name="pic_sel" id="female_icon" title="Icona utente femmina" value="female" tabindex="0" required>
               <img class="user_img" src="../img/female_icon.png" alt="Icona utente femmina" title="Icona utente femmina">
             </div>
             <div class="vFlex">
-              <input type="radio" name="pic_sel" id="genderfluid_icon" title="Icona utente non binario" value="genderfluid" required>
+              <input type="radio" name="pic_sel" id="genderfluid_icon" title="Icona utente non binario" value="genderfluid" tabindex="0" required>
               <img class="user_img" src="../img/genderfluid_icon.png" alt="Icona utente non binario" title="Icona utente non binario">
             </div>
           </div>
@@ -24,21 +24,21 @@
         <fieldset class="vFlex">
           <legend>Inserisci i tuoi dati personali</legend>
           <label for="nome">Nome<span id="name_err">Sono accettati solo caratteri alfabetici</span></label>
-          <input name="nome" type="text" id="nome" pattern="^[a-zA-Z]$" required>
+          <input name="nome" type="text" id="nome" pattern="^[a-zA-Z]$" tabindex="0" required>
           <label for="cognome">Cognome<span id="surn_err">Sono accettati solo caratteri alfabetici</span></label>
-          <input name="cognome" type="text" id="cognome" pattern="^[a-zA-Z]$" required>
+          <input name="cognome" type="text" id="cognome" pattern="^[a-zA-Z]$" tabindex="0" required>
         </fieldset>
       </div>
         <fieldset class="vFlex">
           <legend>Inserisci i dati d'accesso</legend>
           <label for="email">Email <span id="mail_err">Inserisci un Indirizzo valido</span></label>
-          <input name="email" type="text" id="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+          <input name="email" type="text" id="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" tabindex="0" required>
           <label for="password1">Password (almeno 8 caratteri) <span id="pass_err">Inserisci una password valida</span></label>
-          <input name="password" type="password" id="password1" required>
+          <input name="password" type="password" id="password1" tabindex="0" required>
           <label for="password2">Ripeti password <span id="pass1_err">Le password non combaciano</span></label>
-          <input type="password" id="password2" required>
+          <input type="password" id="password2" tabindex="0" required>
         </fieldset>
         <label for="reg_btn">Registrandoti acconsenti al trattamento dei tuoi dati personali ai fini di autenticazione all’interno del sito.</label>
-        <input type="submit" onclick="validateReg()" id="reg_btn" value="Conferma dati">
+        <input type="submit" onclick="validateReg()" id="reg_btn" value="Conferma dati" tabindex="0" >
     </form>
   </div>

@@ -759,7 +759,6 @@ section[role=comment] div p:first-child{
   text-align: center;
   border: 2px solid #0d719d;
   padding: 14px 40px;
-  outline: none;
   color: black;
   transition: 0.25s;
   cursor: pointer;
