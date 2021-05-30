@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/DotEnv.php';
+
 class CheckValues {
     public static function checkForCorrectValues($value, $typeOfCheck, $length) {
         $correctCharacters = true;
@@ -10,7 +11,7 @@ class CheckValues {
                 break;
             case "alpha":
                 $copy = CheckValues::sanitize($value);
-                $copy = str_replace(' ', '', $copy);            
+                $copy = str_replace(' ', '', $copy);
                 $correctCharacters = preg_match('/[a-zA-Zèéàòùì]+/', $copy);
                 break;
             case "alnum":
@@ -29,11 +30,11 @@ class CheckValues {
         return $correctCharacters;
     }
 
-    public static function sanitize($var){
-      $var = trim($var);
-      $var = stripslashes($var);
-      $var = htmlspecialchars($var);
-      return $var;
+    public static function sanitize($var) {
+        $var = trim($var);
+        $var = stripslashes($var);
+        $var = htmlspecialchars($var);
+        return $var;
     }
 
 
@@ -71,22 +72,27 @@ class Articolo {
     private $altImg;
 
     private $validation;
+
     function __construct($ID, $titolo, $descrizione, $testo, $autore, $dataPub, $upVotes, $downVotes, $imgPath, $altImg, $validation) {
-            $this->setID($ID);
-            $this->setTitle($titolo);
-            $this->setContent($testo);
-            $this->setDescription($descrizione);
-            $this->setAuthor($autore);
-            $this->setDataPub($dataPub);
-            $this->setUpVotes($upVotes);
-            $this->setDownVotes($downVotes);
-            $this->setImgPath($imgPath);
-            $this->setAltImg($altImg);
-            $this->validation = $validation;
+        $this->setID($ID);
+        $this->setTitle($titolo);
+        $this->setContent($testo);
+        $this->setDescription($descrizione);
+        $this->setAuthor($autore);
+        $this->setDataPub($dataPub);
+        $this->setUpVotes($upVotes);
+        $this->setDownVotes($downVotes);
+        $this->setImgPath($imgPath);
+        $this->setAltImg($altImg);
+        $this->validation = $validation;
     }
 
 
     public function setImgPath($value) {
+        if ( !$value ){
+            $this->imgPath = $value;
+        }
+
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 255);
         if ($correctCharacters)
             $this->imgPath = $value;
@@ -213,6 +219,11 @@ class Articolo {
 
 
     public function setAltImg($value) {
+        if ( !$value ) {
+            $this->altImg = $value;
+            return;
+        }
+
         $correctCharacters = CheckValues::checkForCorrectValues($value, "alpha", 255);
         if ($correctCharacters)
             $this->altImg = $value;
@@ -229,21 +240,23 @@ class Articolo {
     public function getValidation() {
         return $this->validation;
     }
+
     public function setValidation($validation) {
         $this->validation = $validation;
         // qui bisogna fare la query per aggiornare la validazione dell-articolo
         // non  necessariamente, basta aggiungere una query che prenda tutti i valori dell'articolo e li salva.
     }
-    public static function getArticoli($category,$limit, $verified) {
+
+    public static function getArticoli($category, $limit, $verified) {
         $connection = DBAccess::openDBConnection();
 
         if ($category != null)
             $querySelect = "SELECT * FROM articolo, cat_art
                             WHERE  cat_art.nome_cat = '$category' AND articolo.ID = cat_art.ID_art AND verificato=1
                             ORDER BY ID ASC";
-        elseif($verified)
+        elseif ($verified)
             $querySelect = "SELECT * FROM articolo WHERE verificato=1 ORDER BY ID ASC";
-        else 
+        else
             $querySelect = "SELECT * FROM articolo ORDER BY ID ASC";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0) {
@@ -265,7 +278,7 @@ class Articolo {
         $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT * FROM articolo WHERE articolo.ID=$id_articolo";
         $queryResult = mysqli_query($connection, $querySelect);
-        if(!$queryResult)
+        if (!$queryResult)
             return null;
         if (mysqli_num_rows($queryResult) == 0) {
             return null;
@@ -297,7 +310,7 @@ class Articolo {
     public static function validateArticle($Id) {
         $Connection = DBAccess::openDBConnection();
         $querySelect = "UPDATE articolo SET articolo.verificato = 1 WHERE articolo.ID = $Id";
-        return mysqli_query($Connection, $querySelect); 
+        return mysqli_query($Connection, $querySelect);
     }
 
     public static function loadNewArticle($articolo) {
@@ -312,10 +325,10 @@ class Articolo {
         $path = $articolo->getImgPath();
         $alt = $articolo->getAltImg();
         $verificato = $articolo->getValidation();
-        
+
         $Connection = DBAccess::openDBConnection();
 
-        $querySelect = 'INSERT INTO articolo(ID, titolo, descrizione, testo, autore, data_pub,upvotes, downvotes, img_path, alt_img, verificato) values('.$article_id.',"'.$title.'", "'.$descrizione.'", "'.$content.'", '.$autore.', "'.$data_pub.'",'.$upVotes.', '.$downVotes.', "'.$path.'", "'.$alt.'", "'.$verificato.'")';
+        $querySelect = 'INSERT INTO articolo(ID, titolo, descrizione, testo, autore, data_pub,upvotes, downvotes, img_path, alt_img, verificato) values(' . $article_id . ',"' . $title . '", "' . $descrizione . '", "' . $content . '", ' . $autore . ', "' . $data_pub . '",' . $upVotes . ', ' . $downVotes . ', "' . $path . '", "' . $alt . '", "' . $verificato . '")';
         $queryResult = mysqli_query($Connection, $querySelect);
         return $queryResult;
     }
@@ -349,6 +362,7 @@ class Articolo {
             return mysqli_fetch_assoc($queryResult);
         }
     }
+
     public static function getDownVotesFromArticle($id_articolo) {
         $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT SUM(voto.down) FROM voto WHERE articolo = $id_articolo";
@@ -356,9 +370,10 @@ class Articolo {
         if (mysqli_num_rows($queryResult) == 0) {
             return false;
         } else {
-            return  mysqli_fetch_assoc($queryResult);
+            return mysqli_fetch_assoc($queryResult);
         }
     }
+
     public static function getMaxId() {
         $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT MAX(ID) from articolo";
@@ -366,8 +381,14 @@ class Articolo {
         if (mysqli_num_rows($queryResult) == 0) {
             return false;
         } else {
-            return  mysqli_fetch_assoc($queryResult)['MAX(ID)'];
+            return mysqli_fetch_assoc($queryResult)['MAX(ID)'];
         }
+    }
+
+    public static function updateArticolo( Articolo $articolo ) {
+        $connection = DBAccess::openDBConnection();
+        $querySelect = 'UPDATE `articolo` SET `titolo` = "'.$articolo->getTitle().'", `descrizione` = "'.$articolo->getDescription().'", `testo` = "'.$articolo->getContent().'", `autore` = "'.$articolo->getAuthor().'", `img_path` = "'.$articolo->getImgPath().'", `alt_img` = "'.$articolo->getAltImg().'" WHERE (`ID` = "'.$articolo->getID().'");';
+        return mysqli_query($connection, $querySelect);
     }
 }
 
@@ -475,7 +496,7 @@ class Categoria {
 
     public static function loadNewCategoryForArticle($category, $article_id) {
         $connection = DBAccess::openDBConnection();
-        $querySelect = 'INSERT INTO cat_art values('.$article_id.',"'.$category.'") ';
+        $querySelect = 'INSERT INTO cat_art values(' . $article_id . ',"' . $category . '") ';
         return mysqli_query($connection, $querySelect);
     }
 }
