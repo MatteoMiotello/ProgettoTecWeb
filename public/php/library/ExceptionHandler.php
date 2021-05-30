@@ -15,5 +15,5 @@ class ExceptionHandler {
         $this->Exception = $Exception;
     }
 
-    
+
 }
