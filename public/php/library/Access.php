@@ -48,7 +48,7 @@ class Access {
     /**
      * @return User|null
      */
-    public static function getUser(): User {
+    public static function getUser() {
         return User::getUserById($_SESSION['user_id']);
     }
 
@@ -59,11 +59,10 @@ class Access {
      * @return bool
      */
     public static function isAuthenticated(): bool {
-        if ( !isset( $_SESSION['authenticated'] ) or !$_SESSION['authenticated'] or $_SESSION[ 'user_id' ]==null) {
+        if ( !isset( $_SESSION['authenticated'] ) or !$_SESSION['authenticated'] or Access::getUser($_SESSION['user_id'])==null) {
             unset($_SESSION['authenticated'], $_SESSION[ 'user_id' ]);
             return false;
         }
-
         return true;
     }
 
