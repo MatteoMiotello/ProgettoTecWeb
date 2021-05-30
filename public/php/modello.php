@@ -289,6 +289,20 @@ class Articolo {
         }
     }
 
+
+    public function getCategorie() {
+        $query = 'SELECT * FROM `categoria` join `cat_art` on `cat_art`.`nome_cat` = `categoria`.nome join `articolo` on `articolo`.`ID` = `cat_art`.`ID_art`';
+        $connection = DBAccess::openDBConnection();
+        $categorie = [];
+        foreach ( $connection->query( $query )->fetch_assoc() as $item) {
+            var_dump( $item ,'<br/>' );
+
+        }
+
+        return $categorie;
+    }
+
+
     public static function searchArticolo($keyword, $limit) {
         $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT *  FROM articolo WHERE articolo.titolo LIKE '%$keyword%' OR articolo.descrizione LIKE '%$keyword%' OR articolo.testo LIKE '%$keyword%'";
@@ -389,6 +403,11 @@ class Articolo {
         $connection = DBAccess::openDBConnection();
         //$querySelect = 'UPDATE `articolo` SET `titolo` = "'.$articolo->getTitle().'", `descrizione` = "'.$articolo->getDescription().'", `testo` = "'.$articolo->getContent().'", `autore` = "'.$articolo->getAuthor().'", `img_path` = "'.$articolo->getImgPath().'", `alt_img` = "'.$articolo->getAltImg().'" WHERE (`ID` = "'.$articolo->getID().'");';
         $querySelect = 'UPDATE `articolo` SET `titolo` = "'.$articolo->getTitle().'", `descrizione` = "'.$articolo->getDescription().'", `testo` = "'.$articolo->getContent().'", `img_path` = "'.$articolo->getImgPath().'", `alt_img` = "'.$articolo->getAltImg().'" WHERE (`ID` = "'.$articolo->getID().'");';
+
+        $queryDelete = 'DELETE FROM `cat_art` WHERE `ID_art` = ' . $articolo->getID();
+
+        mysqli_query( $connection, $queryDelete );
+
         return mysqli_query($connection, $querySelect);
     }
 }
@@ -478,7 +497,6 @@ class Categoria {
         return $listaCategorie;
     }
 
-
     public static function getCategorieArticolo($id_articolo) {
         $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT categoria.nome, categoria.descrizione, categoria.img FROM cat_art INNER JOIN categoria ON cat_art.nome_cat = categoria.nome WHERE cat_art.ID_art = $id_articolo";
@@ -495,9 +513,10 @@ class Categoria {
         return $listaCategorie;
     }
 
+
     public static function loadNewCategoryForArticle($category, $article_id) {
         $connection = DBAccess::openDBConnection();
-        $querySelect = 'INSERT INTO cat_art values(' . $article_id . ',"' . $category . '") ';
+        $querySelect = 'INSERT INTO `cat_art` values(' . $article_id . ',"' . $category . '") ';
         return mysqli_query($connection, $querySelect);
     }
 }

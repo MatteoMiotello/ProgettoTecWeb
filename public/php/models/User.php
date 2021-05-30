@@ -286,7 +286,7 @@ class User {
      * @param mixed $Password
      */
     public function setPassword($Password) {
-        if (!strlen($Password) < 128) {
+        if (strlen($Password) > 255) {
             throw new Exception('Password is invalid');
         }
         $this->Password = $Password;
@@ -345,5 +345,13 @@ class User {
         $this->Permission = $Permission;
 
         return $this;
+    }
+
+
+    public function save() {
+
+        $query = 'UPDATE `utente` SET `ID` = "'.$this->getId().'", `nome` = "'. $this->getName().'", `cognome` = "'.$this->getSurname().'", `email` = "'.$this->getEmail().'", `password` = "'.$this->getPassword().'", `permesso` = "'.$this->getPermission().'", `img_path` = "'.$this->getImg().'" WHERE `ID` = '. $this->getId();
+        $connection = DBAccess::openDBConnection();
+        return mysqli_query( $connection, $query );
     }
 }

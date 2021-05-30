@@ -69,11 +69,8 @@ if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['t
 
     // se sono state settate categorie per l'articolo allora le carico nel db
     if (isset($_POST['category'])) {
-        print("si");
-        return;
-        $selectedCat = array();
         foreach ($_POST['category'] as $cat) {
-            $res = Categoria::loadNewCategoryForArticle($cat, $articleId);
+            $res = Categoria::loadNewCategoryForArticle($cat, $id);
         }
     }
 
