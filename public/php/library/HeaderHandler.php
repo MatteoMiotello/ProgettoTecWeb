@@ -83,7 +83,7 @@ class HeaderHandler {
     }
 
 
-    public static function getMobLink($currentLink) {
+    public static function getMobUser($currentLink) {
       $access = Access::create();
       if(!$access->isAuthenticated())
         return '';
@@ -94,5 +94,43 @@ class HeaderHandler {
         if(strpos($_SERVER['REQUEST_URI'], 'user.php')) return "<p class='mob_pro'>$name</p>";
         return "<a href='/pages/user.php?user=$id' class='mob_pro' tabindex='0'>$name</a>";
       }
+    }
+
+    public static  function getMobLinks($currentLink) {
+      if(Access::isAuthenticated()){
+        $user = $_SESSION['user_id'];
+        $params = [
+            'user' => [
+                "<li><a href='/pages/user.php?user=$user' tabindex='0'><div>Il mio profilo</div></a></li>",
+                'Il mio profilo',
+            ],
+            'logout' => [
+                '<li><a href="/pages/logout.php" tabindex="0"><div>Esci</div></a></li>',
+                'Esci',
+            ],
+        ];
+      }
+      else{
+        $params = [
+            'login' => [
+                '<li><a href="/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a></li>',
+                'Accedi/Registrati',
+            ],
+        ];
+      }
+      if (key_exists($currentLink, $params)) {
+          $params[$currentLink] = [
+              '<li class="currentItem"><div class="currentLink">' . $params[$currentLink][1] . '</div></li>',
+              $params[$currentLink][1],
+          ];
+      }
+
+      $links = '';
+
+      foreach ($params as $param) {
+          $links .= $param[0];
+      }
+
+      return $links;
     }
 }

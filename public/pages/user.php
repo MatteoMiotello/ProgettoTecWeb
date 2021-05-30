@@ -29,7 +29,7 @@ if (!$connessione) {
 
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/error.html';
 $handler->setContent(file_get_contents($filePath));
-
+$handler->setCurrentRoute("user");
 if(!Access::isAuthenticated()) {
     $handler->setOperationError("Non sei loggato, esegui il login!");
     $handler->render();
