@@ -35,8 +35,14 @@ else
     $handler->setNoOperation();
 
 if (isset($_POST['comment']) && Access::isAuthenticated()) {
-    $utente = Access::getUser();
-    $result = Comment::uploadNewComment($id_articolo, $utente->getId(), '' . $_POST['comment'] . '', '' . date("Y-m-d h:i:s") . '');
+    if($_POST['comment'] != "") {
+        $utente = Access::getUser();
+        $result = Comment::uploadNewComment($id_articolo, $utente->getId(), '' . $_POST['comment'] . '', '' . date("Y-m-d h:i:s") . '');
+        $handler->setOperationDone("Messaggio inviato correttamente");
+    }
+    else {
+        $handler->setOperationError("Inserisci un messaggio non vuoto");
+    }
 }
 
 if (!empty($_SERVER['HTTP_REFERER'])) {
