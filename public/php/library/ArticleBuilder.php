@@ -50,19 +50,19 @@ class ArticleBuilder extends AbstractBuilder
 
     /**
      * Path dell'immagine usata per l'articolo
-     * @var string 
+     * @var string
      */
     private $ImgPathArticle;
 
     /**
      * Alt usato per l'immagine dell'articolo
-     * @var string 
+     * @var string
      */
     private $ImgAltArticle;
 
     /**
      * Path dell'immagine usata per l'autore dell'articolo
-     * @var string 
+     * @var string
      */
     private $ImgPathUser;
 
@@ -74,13 +74,13 @@ class ArticleBuilder extends AbstractBuilder
 
     /**
      * Email dell'autore dell'articolo
-     *@var string  
+     *@var string
      */
     private $AuthorEmail;
 
     /**
      * Nome dell'autore dell'articolo
-     *@var string  
+     *@var string
      */
     private $AuthorName;
 
@@ -114,7 +114,7 @@ class ArticleBuilder extends AbstractBuilder
     }
 
     /**
-     * @return mixed 
+     * @return mixed
      */
     public function getContent()
     {
@@ -168,7 +168,7 @@ class ArticleBuilder extends AbstractBuilder
     }
 
     /**
-     * @return mixed 
+     * @return mixed
      */
     public function getNameAuthor()
     {
@@ -186,7 +186,7 @@ class ArticleBuilder extends AbstractBuilder
     }
 
     /**
-     * @return mixed 
+     * @return mixed
      */
     public function getEmailAuthor()
     {
@@ -204,7 +204,7 @@ class ArticleBuilder extends AbstractBuilder
     }
 
     /**
-     * @return mixed 
+     * @return mixed
      */
     public function getImgPathAuthor()
     {
@@ -228,7 +228,7 @@ class ArticleBuilder extends AbstractBuilder
         $this->Description = $Description;
         $this->Params[ArticleBuilder::DESCRIPTION] = $this->getDescription();
         return $this;
-    } 
+    }
 
     /**
      * @return mixed
@@ -259,7 +259,7 @@ class ArticleBuilder extends AbstractBuilder
     public function addCategory($categoria)
     {
         if ($this->Categories != '')
-            $this->Categories = $this->Categories . '<p>' . $categoria . '</p>';
+            $this->Categories = $this->Categories . '<p tabindex="0">' . $categoria . '</p>';
         else {
             $this->Categories = $categoria;
         }
