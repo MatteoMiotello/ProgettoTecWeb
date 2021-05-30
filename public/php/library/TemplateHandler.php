@@ -114,11 +114,12 @@ class TemplateHandler {
     public function setHeaderParams() {
         $links = HeaderHandler::getHeaderLinks($this->CurrentRoute);
         $user = HeaderHandler::getUserInfo($this->CurrentRoute);
-        $mob = HeaderHandler::getMobLink($this->CurrentRoute);
+        $mob = HeaderHandler::getMobUser($this->CurrentRoute);
+        $mlinks = HeaderHandler::getMobLinks($this->CurrentRoute);
         $this->setParam('<nav-link/>', $links);
         $this->setParam( '<userCont/>', $user );
         $this->setParam('<mob-user/>', $mob);
-
+        $this->setParam('<mob-links/>', $mlinks);
     }
 
 
