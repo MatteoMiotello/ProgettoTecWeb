@@ -10,7 +10,7 @@ class DBAccess
     private static $DBName;
     public static function openDBConnection()
     {
-        (new DotEnv($_SERVER['DOCUMENT_ROOT'] . '/../envirorment/.env'))->load();
+        ( new DotEnv() )->load();
 
         if (!DBAccess::$access) {
             DBAccess::$access = new DBAccess();

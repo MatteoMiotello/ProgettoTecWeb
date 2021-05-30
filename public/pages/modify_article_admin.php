@@ -21,6 +21,10 @@ $handler->setPageTitle('Form Articolo');
 $handler->setBreadcrumb('Scrivi un articolo');
 
 
+if ( isset( $_GET['success'] ) and $_GET['success'] == 'true' ) {
+    $handler->setOperationDone( 'Salvataggio avvenuto con successo' );
+}
+
 /**
  * Si eseguono controlli per verificare che effettivamente l'utente sia loggato e sia un amministratore
  */
@@ -56,39 +60,6 @@ else $handler->setNoOperation();
 
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/form_articolo_admin_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
-
-
-/**
- * controllo se la form e' gia' stata compilata, in tal caso emetto un messaggio di avvenuta operazione con relativo esito
- */
-if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['testo_art']) && isset($_POST['img']) && isset($_POST['alt']) && $author) {
-    try {
-        // provo a caricare l'articolo nel db
-        $articleId = Articolo::getMaxId()+1;
-        $authorId = $author->getId();
-        $newArticle = new Articolo($articleId, $_POST['titolo_art'], $_POST['descr_art'], $_POST['testo_art'], $authorId, date('Y-m-d G:i:s'), '0', '0', $_POST['img'],$_POST['alt'] , 1);
-        $result = Articolo::loadNewArticle($newArticle);
-
-        // se sono state settate categorie per l'articolo allora le carico nel db
-
-        if(isset($_POST['category'])) {
-            $selectedCat = array();
-            foreach($_POST['category'] as $cat) {
-                $res = Categoria::loadNewCategoryForArticle($cat, $articleId);  
-            }
-        }
-
-        // controllo che l'operazione sia andata a buon fine
-        if ($result) {
-            header('Location: /pages/gestione_art.php?changed=true');
-        } else {
-            header('Location: /pages/gestione_art.php?changed=false');
-        }
-    } catch (Exception $e) {
-        $handler->setOperationError($e->getMessage());
-    }
-}
-
 
 $autore = User::getArticleAuthor($articolo->getID());
 $categorieArticolo = Categoria::getCategorieArticolo($articolo->getID());

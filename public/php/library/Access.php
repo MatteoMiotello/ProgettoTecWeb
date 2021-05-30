@@ -49,8 +49,7 @@ class Access {
      * @return User|null
      */
     public static function getUser(): User {
-        $User = User::getUserById($_SESSION['user_id']);
-        return $User;
+        return User::getUserById($_SESSION['user_id']);
     }
 
 
