@@ -881,8 +881,8 @@ input[type=text], input[type=email], input[type=password] {
   margin-top: 1em;
 }
 
-fieldset + span {
-  margin: 1em 0 0.5em 0;
+fieldset + label {
+  margin: 1em 0 0.2em 0;
 }
 #reg_btn{
   height: 3em;
