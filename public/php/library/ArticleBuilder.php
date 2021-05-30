@@ -27,7 +27,7 @@ class ArticleBuilder extends AbstractBuilder
         $this->Params[ArticleBuilder::ARTICLECONTENT] = "";
         $this->Params[ArticleBuilder::AUTHORNAME] = "";
         $this->Params[ArticleBuilder::AUTHOREMAIL] = "";
-        $this->Params[ArticleBuilder::ARTICLECATEGORIES]  = "";
+        $this->Params[ArticleBuilder::ARTICLECATEGORIES]  = "Nessuna categoria selezionata ";
         $this->Params[ArticleBuilder::ARTICLECOMMENTS] = "";
     }
 
