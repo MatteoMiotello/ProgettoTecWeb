@@ -6,7 +6,7 @@
 =======
     <form class="box" action="/pages/after_login.php" onsubmit="return validateLogin()" method="post" id="log">
 >>>>>>> ce36f3f5db17e1382e11070ad125e484338552e1
-        <h1><span lang="en">LOGIN</span></h1>
+        <h1 id="content"><span lang="en">LOGIN</span></h1>
         <p id="mail_err">Indirizzo email non valido</p>
         <input type="email" id="email_addr" placeholder="Email" name="email" required>
         <p id="pass_err">Inserisci la password</p>
