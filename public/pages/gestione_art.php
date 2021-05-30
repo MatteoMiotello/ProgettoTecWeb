@@ -38,15 +38,14 @@ if (!($user->isAdministrator())) {
 
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/article_filter_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
+$handler->setNoOperation();
 
-if (isset($_GET['changed'])) {
-    if($_GET['changed']=='true') {
-        $handler->setOperationDone("L'operazione di modifica articolo è andata a buon fine!");
-    }
+if (isset($_GET['success'])) {
+    if($_GET['success'] == 'true')
+        $handler->setOperationDone('Salvataggio avvenuto con successo');
     else 
-        $handler->setOperationError("L'operazione di modifica articolo non e' andata a buon fine");
+        $handler->setOperationDone('Il Salvataggio non è andato a buon fine, riprova!');
 }
-else $handler->setNoOperation();
 
 $articlesList = '';
 /**
@@ -68,7 +67,7 @@ if (isset($_GET['art_id'])) {
         else
             $handler->setOperationError('L\'articolo selezionato non è presente');
     }
-} else $handler->setNoOperation();
+}
 $rawArticles = Articolo::getArticoli(null, null, null);
 if ($rawArticles != null) {
     foreach ($rawArticles as $articolo) {

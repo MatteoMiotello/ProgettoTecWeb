@@ -387,7 +387,8 @@ class Articolo {
 
     public static function updateArticolo( Articolo $articolo ) {
         $connection = DBAccess::openDBConnection();
-        $querySelect = 'UPDATE `articolo` SET `titolo` = "'.$articolo->getTitle().'", `descrizione` = "'.$articolo->getDescription().'", `testo` = "'.$articolo->getContent().'", `autore` = "'.$articolo->getAuthor().'", `img_path` = "'.$articolo->getImgPath().'", `alt_img` = "'.$articolo->getAltImg().'" WHERE (`ID` = "'.$articolo->getID().'");';
+        //$querySelect = 'UPDATE `articolo` SET `titolo` = "'.$articolo->getTitle().'", `descrizione` = "'.$articolo->getDescription().'", `testo` = "'.$articolo->getContent().'", `autore` = "'.$articolo->getAuthor().'", `img_path` = "'.$articolo->getImgPath().'", `alt_img` = "'.$articolo->getAltImg().'" WHERE (`ID` = "'.$articolo->getID().'");';
+        $querySelect = 'UPDATE `articolo` SET `titolo` = "'.$articolo->getTitle().'", `descrizione` = "'.$articolo->getDescription().'", `testo` = "'.$articolo->getContent().'", `img_path` = "'.$articolo->getImgPath().'", `alt_img` = "'.$articolo->getAltImg().'" WHERE (`ID` = "'.$articolo->getID().'");';
         return mysqli_query($connection, $querySelect);
     }
 }

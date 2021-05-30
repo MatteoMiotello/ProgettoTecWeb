@@ -69,6 +69,8 @@ if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['t
 
     // se sono state settate categorie per l'articolo allora le carico nel db
     if (isset($_POST['category'])) {
+        print("si");
+        return;
         $selectedCat = array();
         foreach ($_POST['category'] as $cat) {
             $res = Categoria::loadNewCategoryForArticle($cat, $articleId);
@@ -77,8 +79,8 @@ if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['t
 
     // controllo che l'operazione sia andata a buon fine
     if ($result) {
-        header('Location: /pages/modify_article_admin.php?success=true&art_id=' . $id);
+        header('Location: /pages/gestione_art.php?success=true');
     } else {
-        throw new Exception('non é stato possibile salvare il file');
+        header('Location: /pages/gestione_art.php?success=false');
     }
 }
