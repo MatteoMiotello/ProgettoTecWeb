@@ -27,7 +27,7 @@ class ArticleBuilder extends AbstractBuilder
         $this->Params[ArticleBuilder::ARTICLECONTENT] = "";
         $this->Params[ArticleBuilder::AUTHORNAME] = "";
         $this->Params[ArticleBuilder::AUTHOREMAIL] = "";
-        $this->Params[ArticleBuilder::ARTICLECATEGORIES]  = "Nessuna categoria selezionata ";
+        $this->Params[ArticleBuilder::ARTICLECATEGORIES]  = "<p tabindex='0'>Nessuna categoria selezionata<p>";
         $this->Params[ArticleBuilder::ARTICLECOMMENTS] = "";
     }
 
@@ -259,7 +259,7 @@ class ArticleBuilder extends AbstractBuilder
     public function addCategory($categoria)
     {
         if ($this->Categories != '')
-            $this->Categories = $this->Categories . '<p tabindex="0">' . $categoria . '</p>';
+            $this->Categories = $this->Categories . "<p tabindex='0'>" . $categoria . "</p>";
         else {
             $this->Categories = $categoria;
         }
