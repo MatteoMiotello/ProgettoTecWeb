@@ -20,7 +20,7 @@ class Access {
 
     public function logOut(): bool {
         if (!session_destroy()) {
-            throw new \Exception('non è stato possibile eliminare la sessione corrente');
+            throw new Exception('non è stato possibile eliminare la sessione corrente');
         } else {
             return true;
         }
@@ -48,8 +48,8 @@ class Access {
     /**
      * @return User|null
      */
-    public static function getUser($Connection): User {
-        $User = User::getUserById($_SESSION['user_id'], $Connection);
+    public static function getUser(): User {
+        $User = User::getUserById($_SESSION['user_id']);
         return $User;
     }
 
@@ -60,7 +60,7 @@ class Access {
      * @return bool
      */
     public static function isAuthenticated(): bool {
-        if (!key_exists('authenticated', $_SESSION) || !$_SESSION['authenticated']) {
+        if ( !isset( $_SESSION['authenticated'] ) or !$_SESSION['authenticated']) {
             return false;
         }
 
@@ -88,10 +88,15 @@ class Access {
      * @return bool
      */
     public function isEndUser(): bool {
-        if ($this->User->getPermission() == UserLevelType::CONSUMER) {
+        if ($this->User->getPermission() == UserLevelType::CUSTOMER) {
             return true;
         }
 
         return false;
+    }
+
+    public function logIn( User $user ) {
+        $_SESSION[ 'authenticated' ] = true;
+        $_SESSION[ 'user_id' ] = $user->getId();
     }
 }

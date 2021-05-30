@@ -4,7 +4,7 @@ html{
   background: transparent;
 }
 
-header, header *, nav, .breadcrumbs, footer, footer *, body img{
+header, header *, button, nav, .breadcrumbs, footer, footer *, body img{
   display: none !important;
   /*background: transparent !important;*/
 }
@@ -13,21 +13,83 @@ header, header *, nav, .breadcrumbs, footer, footer *, body img{
   padding: 0;
 }
 
-.home_content article+article{
-  border-top: solid 1px lightgrey;
+.articoli{
+  border-right: solid 1px lightgrey;
 }
 
 article, aside {
   -moz-box-shadow:    0 0 0 0;
   -webkit-box-shadow: 0 0 0 0;
   box-shadow: 0 0 0 0;
-  padding: 0.5em 0.5em 0.5em 1em;
+  padding: 1em 0.5em 1em 0.5em;
 }
 
 aside{
-  border-left: solid 1px lightgrey;
+  padding-left: 1em;
+}
+
+article+article, aside li+li{
+  margin-top: 0;
+  border-top: solid 1px lightgrey;
 }
 
 article div{
   width: 100%;
+}
+
+a {
+  color: black;
+}
+
+.cat_page {
+  flex-direction: column;
+  align-items: center;
+}
+
+.cat_page figure{
+  margin: 0.5em 0;
+  max-width: none;
+}
+
+.cat_page figcaption{
+  border: none;
+  text-decoration: underline;
+  position: relative;
+  padding: 0;
+  background: transparent;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: inherit;
+}
+
+#titolo_art, #descr_art, #testo_art {
+  max-height: 5em;
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+
+#testo_art{
+  margin: 0;
+}
+
+.pro_pic {
+  display: none;
+}
+
+.img_name fieldset+fieldset{
+  margin: 0;
+}
+
+div[role=cont_utente] img{
+  display: block !important;
+}
+
+form[action="user_page.php"]{
+  display: none;
+}
+
+textarea, input[type=text], input[type=email], input[type=password]{
+  width: -moz-available;
+  width: -webkit-fill-available;
 }

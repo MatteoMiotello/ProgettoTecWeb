@@ -37,14 +37,24 @@ header {
   z-index: 1;
 }
 
+.mob_pro{
+  display: none;
+}
+
 #logo {
   max-width: 9em;
   margin-left: 1em;
 }
 
-.user_img {
+.user_img{
+  max-width: 60px;
+  z-index: 99;
+}
+
+header .user_img {
   width: 60px;
-  height: 60px;
+  position: relative;
+  right: 1em;
 }
 
 header nav {
@@ -117,11 +127,6 @@ nav .currentItem {
   margin-left: 1em;
 }
 
-.user_desk {
-  margin-right: 0.5em;
-  border-radius: 50% !important;
-}
-
 #user_mob {
   display: none;
   margin-left: 1em;
@@ -137,7 +142,7 @@ nav .currentItem {
 
 .logout_cont {
   background: white;
-  margin-right: 30px;
+  margin-right: -2em;
   border: solid 1px black;
   transform: skew(-20deg);
   text-align: right;
@@ -160,7 +165,7 @@ nav .currentItem {
 
 .user_cont > a {
   background: white;
-  padding: 0.8em 45px 0.8em 0.5em;
+  padding: 0.8em 0.8em 0.8em 0.5em;
   margin-right: 30px;
   border: solid 1px black;
   transform: skew(-20deg);
@@ -175,15 +180,11 @@ nav .currentItem {
 }
 
 .user_cont > .currentLink {
-  background: lightgrey !important;
-  padding: 0.8em 45px 0.8em 0.5em;
+  background: lightgrey;
+  padding: 0.8em 0.8em 0.8em 0.5em;
   margin-right: 30px;
   border: solid 1px black;
   transform: skew(-20deg);
-}
-
-.user_cont .currentItem {
-  background-color: transparent !important;
 }
 
 .user_cont > .currentLink > p {
@@ -277,6 +278,10 @@ h1 {
   font-size: 1.3em;
 }
 
+.articoli{
+  padding-right: 1em;
+}
+
 article {
   background-color: white;
   -moz-box-shadow:    0 3px 5px 3px #ccc;
@@ -316,14 +321,10 @@ article footer img {
   display: flex;
   flex-direction: column;
   border-left: solid 2px #0d719d;
-  width: 15%!important;
+  width: 15%;
   align-items: center;
   text-align: right;
   justify-content: space-between;
-}
-
-.man_btns a+a{
-  margin-top: 0.2em;
 }
 
 aside {
@@ -333,7 +334,6 @@ aside {
   box-shadow:         0 3px 5px 3px #ccc;
   padding: 1em;
   width: 70%;
-  margin-left: 1em;
   height: fit-content;
 }
 
@@ -448,7 +448,6 @@ fieldset {
 
 .element {
   display: flex;
-  flex-direction: row-reverse;
   margin-top: 0.4em;
 }
 
@@ -562,22 +561,23 @@ legend {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: solid 1px;
-  padding: 0 3em 3em 3em;
-  margin-top: 3em;
+  padding: 1em 3em;
 }
 
 .upperPrint img {
-  order: 2;
-  width: 40%;
+  max-width: 40%;
+  min-width: 20%;
   margin-left: 2em;
 }
 
 .upperPrint h1 {
-  text-align: left;
+  text-align: justify;
+  align-self: end;
+  margin-bottom: 0;
 }
 
 .printArticolo p {
+  text-align: justify;
   padding: 0 3em 1em 3em;
 }
 
@@ -594,6 +594,10 @@ legend {
   display: flex;
   width: 45%;
   justify-content: flex-start;
+}
+
+#author img {
+  width: 25px;
 }
 
 .info_art #get_cat {
@@ -614,10 +618,13 @@ legend {
 
 .commentArea {
   justify-content: flex-start;
-  margin: 1em 2.5em 1em 2.5em;
-  padding: 0.5em 0.5em 0 0.5em;
+  padding: 0.5em 2em 0.5em 2em;
   border: solid 0px;
-  background-color: rgba(13, 113, 157, 0.3);
+  background: #b5d4e1;
+}
+
+.commentArea h2{
+  padding: 0.5em 0;
 }
 
 .commentArea section[role=comment]{
@@ -709,10 +716,14 @@ section[role=comment] div p:first-child{
   font-weight: 500;
 }
 
-#mail_err, #pass_err, #pass1_err, #err_msg, #name_err, #surn_err, #titl_err, #desc_err, #text_err{
+#icon_err, #mail_err, #user_err, #pass_err, #pass1_err, #err_msg, #name_err, #surn_err, #titl_err, #desc_err, #text_err{
   display: none;
   color: red;
   margin-left: 1em;
+}
+
+#icon_err {
+  margin-bottom: 0.5em;
 }
 
 /*label > #mail_err, label > #pass_err, label > #pass1_err, label > #name_err, label > #surn_err, label{
@@ -776,7 +787,8 @@ section[role=comment] div p:first-child{
 
 /*  FILTER PAGE */
 .home_content_filter .articoli {
-  margin: 1em;
+  padding: 0;
+  border: none;
 }
 
 /* USER/ADMIN PAGE */
@@ -833,19 +845,19 @@ div[role=cont_utente]+form button{
 
 .img_name {
   display: flex;
+  margin-bottom: 1em;
 }
 
 .img_name fieldset {
   width: 100%;
 }
 
-.pro_pic {
-  justify-content: center;
+.pro_pic div{
+  align-items: center;
 }
 
 .reg_form div{
   justify-content: center;
-  margin-bottom: 1em;
 }
 
 .img_name fieldset+fieldset {
@@ -856,10 +868,7 @@ div[role=cont_utente]+form button{
   margin: 1em 0.5em;
 }
 
-/*.reg_form input[type=text], .reg_form input[type=email], .reg_form input[type=password] {*/
 input[type=text], input[type=email], input[type=password] {
-  /*min-width: 25em;*/
-  /*width: 100%;*/
   margin-top: 0.2em;
   padding: 0.5em;
 }
@@ -901,18 +910,22 @@ fieldset + span {
 }
 
 #votes{
-  padding: 1em;
+  padding: 1em 0;
 }
 
 .fa-arrow-down{
   font-size: 30px;
   margin: 0 0.5em;
 }
-
+.fa-arrow-down-colored {
+  color:green;
+}
 .fa-arrow-down:hover{
   color: blue;
 }
-
+.fa-arrow-up-colored {
+  color: green;
+}
 .fa-arrow-up{
   font-size: 30px;
   margin: 0 0.5em;
@@ -967,6 +980,7 @@ td {
 
   header a.search_link {
     display: block;
+    align-self: center;
     width: 30px;
     text-align: center;
   }
@@ -1008,6 +1022,17 @@ td {
     font-size: 1em;
   }
 
+  header .user_img{
+    width: 50px;
+    position: absolute;
+    top: 1.5em;
+    left: 1em;
+  }
+
+  .articoli{
+    padding: 0;
+  }
+
   .menu_noJS {
     display: block;
   }
@@ -1018,20 +1043,30 @@ td {
   }
 
   #logo{
+    margin: auto;
+    position: relative;
+    left: 20px;
     max-width: 100px;
+  }
+
+  .mob_pro{
+    display: block;
+    position: absolute;
+    top: 2.2em;
+    left: 3em;
+    border-radius: 20px;
+    padding: .3em 1em;
+    background: white;
+    padding-left: 1.5em;
   }
 
   .wrapper {
     padding: 1em;
   }
 
-  #logo{
-    margin: 0;
-  }
-
-  .home_content .articoli {
+  /*.home_content .articoli {
     margin-right: 0;
-  }
+  }*/
 
   article div {
     width: 100%;
@@ -1046,12 +1081,8 @@ td {
     position: absolute;
   }
 
-  header nav {
-      display: none !important;
-  }
-
-  .user_desk {
-    display: none;
+  header nav .hFlex{
+      display: none;
   }
 
   #user_mob {
@@ -1120,6 +1151,19 @@ td {
     padding: 0;
   }
 
+  .upperPrint{
+    flex-direction: column;
+  }
+
+  .upperPrint h1{
+    order: 2;
+  }
+
+  .upperPrint img{
+    margin: 0;
+    max-width: 90%;
+  }
+
   .cat_page a {
     max-width: 45%;
   }
@@ -1186,7 +1230,7 @@ td {
   }
 
   a.search_link{
-    padding-right: 0.5em !important;
+    padding-right: 0.5em;
     margin: 0;
   }
 
@@ -1214,5 +1258,48 @@ td {
 
   address{
     width: 100%;
+  }
+  .managed {
+    flex-direction: column;
+  }
+  .man_btns {
+    margin-top: 0.5em;
+    width: auto;
+    text-align: center;
+    flex-direction: row;
+    border-left: none;
+  }
+  .man_btns  a {
+    margin: 0 0.5em 0.5em 0.5em;
+  }
+}
+@media screen and (max-width: 480px){
+  .cat_page {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cat_page a{
+    max-width: 90%;
+  }
+
+  header .user_img{
+    top:3em;
+    width: 40px;
+  }
+
+  .mob_pro{
+    top: 1em;
+    padding: 0.2em 0.3em;
+    left: 1em;
+  }
+
+  #logo{
+    max-width: 80px;
+    padding: 16px 0 0 0;
+  }
+  .man_btns {
+    margin-top: 1em;
+    font-size: 0.9em;
   }
 }

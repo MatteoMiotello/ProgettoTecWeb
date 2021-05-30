@@ -1,5 +1,7 @@
 <header id="top" class="hFlex">
-    <img src="../img/logo.png" alt="" id="logo">
+    <a href="#content" class="sr-only" tabindex="0">Salta al contenuto</a>
+    <mob-user/>
+    <img src="/img/logo.png" alt="Benvenuto in viTimes" id="logo">
 
     <nav class="hFlex">
         <ul class="hFlex">
@@ -7,8 +9,7 @@
         </ul>
     </nav>
     <form method="post" action="/pages/article_search.php">
-        <input type="text" name="search" placeholder="Ricerca articoli" id="search_bar" tabindex="0" required>
-        <button type="submit" value="submit" id="search_button" tabindex="0"><i class="fa fa-search"></i></button>
+        <input type="text" name="search" placeholder="Ricerca articoli" id="search_bar" tabindex="0" required><button type="submit" value="submit" id="search_button" tabindex="0"><i class="fa fa-search"></i></button>
     </form>
     <div class="right_section hFlex">
         <div class="mob_buttons_wrapper hFlex">
@@ -19,15 +20,14 @@
                 <div class="fa fa-bars"><span class="sr-only">Mostra menu a comparsa</span></div>
             </a>
         </div>
-        <div class="user_cont hFlex">
-            <userCont/>
+
+          <userCont/>
             <!--*SE BISOGNA EFFETTUARE L'ACCESSO:* <<a href="login.html" tabindex="0"><div>Accedi/Registrati</div></a>>-->
         </div>
-      </div>
 </header>
 <div class="mob_srch" id="search_mobile">
     <form method="post" action="/pages/article_search.php">
-        <input type="text" placeholder="Ricerca articoli" id="search_bar_mobile" required>
+        <input type="text" placeholder="Ricerca articoli" name="search" id="search_bar_mobile" required>
         <button type="submit" id="search_button_mob"><i class="fa fa-search"></i></button>
     </form>
 </div>

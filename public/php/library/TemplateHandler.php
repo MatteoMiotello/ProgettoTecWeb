@@ -11,19 +11,12 @@ class TemplateHandler {
     /**
      * @var string
      */
-    private $PageTitle;
+    private $PageTitle = '';
 
     /**
      * @var string
      */
     private $Content = '';
-
-    /**
-     * Aggiunge uno script Javascript
-     *
-     * @var string
-     */
-    private $JsFooter = '';
 
     /**
      * Contiene tutti i parametri da sostituire
@@ -42,7 +35,24 @@ class TemplateHandler {
      */
     private $CurrentRoute;
 
+    /**
+     * @var string
+     */
+    private $Authors = '';
 
+    /**
+     * @var string
+     */
+    private $Description = '';
+
+    /**
+     * @var string
+     */
+    private $Keywords = '';
+
+    /**
+     * @var string
+     */
     private $Breadcrumb;
 
 
@@ -103,10 +113,11 @@ class TemplateHandler {
      */
     public function setHeaderParams() {
         $links = HeaderHandler::getHeaderLinks($this->CurrentRoute);
-        $user = HeaderHandler::getUserInfo();
-
+        $user = HeaderHandler::getUserInfo($this->CurrentRoute);
+        $mob = HeaderHandler::getMobLink($this->CurrentRoute);
         $this->setParam('<nav-link/>', $links);
         $this->setParam( '<userCont/>', $user );
+        $this->setParam('<mob-user/>', $mob);
 
     }
 
@@ -154,14 +165,19 @@ class TemplateHandler {
     private function replaceParams($html) {
         foreach ($this->Params as $key => $param) {
 
-            if (!strpos($html, $key)) {
-                throw new Exception("Parameter $key not found");
-            }
-
-            $html = str_replace($key, $param, $html);
+            if (strpos($html, $key))
+                $html = str_replace($key, $param, $html);
         }
 
         return $html;
+    }
+
+
+    private function setParams() {
+        $this->setParam('<common-title/>', $this->PageTitle );
+        $this->setParam( '<common-authors/>', $this->Authors );
+        $this->setParam( ' <common-description/>', $this->Description );
+        $this->setParam( '<common-keywords/>', $this->Keywords );
     }
 
 
@@ -171,8 +187,6 @@ class TemplateHandler {
      */
     public function setPageTitle($title): self {
         $this->PageTitle = "<title>$title</title>";
-        $this->setParam('<common-title/>', $this->PageTitle);
-
         return $this;
     }
 
@@ -204,6 +218,62 @@ class TemplateHandler {
 
 
     /**
+     * @return mixed
+     */
+    public function getAuthors() {
+        return $this->Authors;
+    }
+
+
+    /**
+     * @param mixed $Authors
+     */
+    public function setAuthors($Authors): self {
+        $this->Authors = sprintf("<meta name=\"author\" content=\"%s\">", $Authors);
+
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getDescription() {
+        return $this->Description;
+    }
+
+
+    /**
+     * @param mixed $Description
+     */
+    public function setDescription($Description): self {
+        $this->Description = sprintf("<meta name=\"description\" content=\"%s\">", $Description);
+
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getKeywords() {
+        return $this->Keywords;
+    }
+
+
+    /**
+     * @param mixed $Keywords
+     */
+    public function setKeywords($Keywords): self {
+        $this->Keywords = sprintf("<meta name=\"keywords\" content=\"%s\">", $Keywords);
+
+
+        return $this;
+    }
+
+
+
+    /**
      * Renderizza la pagina
      *
      * @throws Exception
@@ -211,7 +281,7 @@ class TemplateHandler {
     public function render() {
         $html = $this->getCommonHtml();
         $this->setHeaderParams();
-
+        $this->setParams();
 
         if ( !isset($this->Breadcrumb) ) {
             $this->setParam('<main-breadcrumb/>', '');
@@ -233,32 +303,6 @@ class TemplateHandler {
     public function setContent(string $html) {
         $this->Content = $html;
         $this->setParam('<main-content/>', $this->Content);
-
-        return $this;
-    }
-
-
-    /**
-     * Setta uno script js alla fine del file
-     *
-     * @param string $js puó essere codice oppure un path di un file
-     * @param bool $isFile se é un path di un file deve essere true
-     * @return self
-     */
-    public function setJsFooter(string $js, bool $isFile = false): self {
-        if (!$isFile) {
-            $this->JsFooter = "<script> $js </script>";
-            return $this;
-        }
-
-        $filePath = $_SERVER['DOCUMENT_ROOT'] . $js;
-
-        if (!file_exists($filePath)) {
-            throw new Exception('file non esistente');
-        }
-
-        $this->JsFooter = "<script src='$filePath'></script>";
-        $this->setParam('<main-js/>', $this->JsFooter);
 
         return $this;
     }
@@ -293,7 +337,7 @@ class TemplateHandler {
     }
 
     /**
-     * Imposta un messaggio di errore 
+     * Imposta un messaggio di errore
      * @param $string
     */
     public function setOperationError($string) {
@@ -302,7 +346,7 @@ class TemplateHandler {
     }
 
     /**
-     * Imposta un messaggio di errore 
+     * Imposta un messaggio di errore
      * @param $string
     */
     public function setOperationDone($string) {
@@ -310,4 +354,10 @@ class TemplateHandler {
         $this->setParam('<operationResult />', $component );
     }
 
+    /**
+     * Toglie il tag <operationResul />
+     */
+    public function setNoOperation() {
+        $this->setParam('<operationResult />', "" );
+    }
 }

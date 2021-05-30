@@ -17,6 +17,8 @@ class ArticleBuilder extends AbstractBuilder
     const IMGPATHAUTHOR = '{{authorImg}}';
     const ARTICLECATEGORIES = '<categories />';
     const ARTICLECOMMENTS = '<listaCommenti />';
+    const ARTICLEID = '{{articleID}}';
+    CONST VALIDATIONOPTION = '<acceptArticle />';
 
     function __construct()
     {
@@ -81,6 +83,12 @@ class ArticleBuilder extends AbstractBuilder
      *@var string  
      */
     private $AuthorName;
+
+    /**
+     * ID articolo
+     * @var string
+     */
+    private $ArticleID;
 
     /**
      * Commenti all'articolo
@@ -191,7 +199,7 @@ class ArticleBuilder extends AbstractBuilder
     public function setEmailAuthor($Email)
     {
         $this->AuthorEmail = $Email;
-        $this->Params[ArticleBuilder::IMGALTARTICLE] = $this->getEmailAuthor();
+        $this->Params[ArticleBuilder::AUTHOREMAIL] = $this->getEmailAuthor();
         return $this;
     }
 
@@ -230,6 +238,22 @@ class ArticleBuilder extends AbstractBuilder
     }
 
     /**
+     * @return mixed
+     */
+    public function getArticleID() {
+        return $this->ArticleID;
+    }
+
+    /**
+     * @param $Id
+     */
+    public function setArticleId($Id){
+        $this->ArticleID = $Id;
+        $this->Params[ArticleBuilder::ARTICLEID] = $this->getArticleID();
+        return $this;
+    }
+
+    /**
      * @param $categoria
      */
     public function addCategory($categoria)
@@ -262,5 +286,14 @@ class ArticleBuilder extends AbstractBuilder
             $this->Comments = $Comment;
         }
         $this->Params[ArticleBuilder::ARTICLECOMMENTS] = $this->getComments();
+    }
+
+    public function setValidationOption($bool) {
+        if($bool)
+            $this->Params[ArticleBuilder::VALIDATIONOPTION] = "";
+        else {
+            $this->Params[ArticleBuilder::VALIDATIONOPTION] = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/acceptArticleManagment.phtml');
+        }
+        return $this;
     }
 }

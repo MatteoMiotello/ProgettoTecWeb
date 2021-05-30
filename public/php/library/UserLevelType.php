@@ -5,6 +5,5 @@ abstract class UserLevelType
 {
     const ADMINISTRATOR = 'adm';
 
-    const CONSUMER = 'usr';
+    const CUSTOMER = 'usr';
 }
-?>

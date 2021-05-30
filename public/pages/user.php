@@ -12,18 +12,35 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/UserBuilder.php';
 
-$connessioneRiuscita = DBAccess::openDBConnection();
+$connessione = DBAccess::openDBConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Pagina utente');
 
+
+/**
+ * Si eseguono controlli per verificare che effettivamente l'utente sia loggato e sia un amministratore
+ */
+// controllo che la connessione al db sia andata a buon fine, altrimenti stampo un messaggio di errore
+if (!$connessione) {
+    $handler->setOperationError("Errore nell'apertura del db");
+    return;
+}
+
+$filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/error.html';
+$handler->setContent(file_get_contents($filePath));
+
+if(!Access::isAuthenticated()) {
+    $handler->setOperationError("Non sei loggato, esegui il login!");
+    $handler->render();
+    return;
+}
+
 $filePath = $_SERVER['DOCUMENT_ROOT'].'/html/user_page_nuovo.html';
 
 $handler->setContent(file_get_contents($filePath));
+$IdUtente = $_GET['user'];
 
-if ($connessioneRiuscita == null)
-    die("Errore nell'apertura del db"); // non si prosegue all'esecuzione della pagina
-else {
     $userModel = User::getUserById($IdUtente);
     $numberOfArticles = User::getNumberOfWrittenArticles($IdUtente);
     $givenLikes = User::getNumberOfGivenLikes($IdUtente);
@@ -43,8 +60,6 @@ else {
         // messaggio che dice che non ci sono articoli del db
         $userPage = "<div>nessun utente presente</div>";
     }
-}
+
 $handler->setParam("<personalUserInfo />",$userPage);
 $handler->render();
-
-?>

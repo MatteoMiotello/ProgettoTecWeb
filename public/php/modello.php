@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/DotEnv.php';
 class CheckValues {
     public static function checkForCorrectValues($value, $typeOfCheck, $length) {
         $correctCharacters = true;
@@ -9,28 +9,39 @@ class CheckValues {
                 $correctCharacters = ctype_digit($value);
                 break;
             case "alpha":
-                $copy = $value;
-                $copy = str_replace(' ', '', $copy);
-                $correctCharacters = ctype_alpha($copy);
+                $copy = CheckValues::sanitize($value);
+                $copy = str_replace(' ', '', $copy);            
+                $correctCharacters = preg_match('/[a-zA-Zèéàòùì]+/', $copy);
                 break;
             case "alnum":
-                $correctCharacters = ctype_alnum($value);
+                $correctCharacters = ctype_alnum(CheckValues::sanitize($value));
                 break;
             case "data":
                 $correctCharacters = DateTime::createFromFormat('Y-m-d G:i:s', $value);
                 break;
             //controllo mail
+            case "email":
+                $correctCharacters = filter_var($value, FILTER_VALIDATE_EMAIL);
+                break;
             //SQL injection
-
         }
         $correctCharacters = $correctCharacters && (strlen($value) <= $length);
         return $correctCharacters;
+    }
+
+    public static function sanitize($var){
+      $var = trim($var);
+      $var = stripslashes($var);
+      $var = htmlspecialchars($var);
+      return $var;
     }
 
 
     public static function createMsgError($value) {
         return "Error Processing Request, $value Has Incorrect Characters Or Is Too Long";
     }
+
+
 }
 
 class Articolo {
@@ -78,7 +89,7 @@ class Articolo {
     public function setImgPath($value) {
         $correctCharacters = CheckValues::checkForCorrectValues($value, "", 255);
         if ($correctCharacters)
-            $this->imgPath = "../img/Sala_del_Consiglio_dei_Ministri_(Palazzo_Chigi,_Roma).jpeg";//$value;
+            $this->imgPath = $value;
         else
             throw new Exception(CheckValues::createMsgError("ImgPath"), 1);
     }
@@ -109,7 +120,7 @@ class Articolo {
 
 
     function setTitle($value) {
-        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 126);
+        $correctCharacters = CheckValues::checkForCorrectValues($value, "", 127);
         if ($correctCharacters)
             $this->titolo = $value;
         else
@@ -214,7 +225,7 @@ class Articolo {
     public function getAltImg() {
         return $this->altImg;
     }
-    
+
     public function getValidation() {
         return $this->validation;
     }
@@ -223,14 +234,16 @@ class Articolo {
         // qui bisogna fare la query per aggiornare la validazione dell-articolo
         // non  necessariamente, basta aggiungere una query che prenda tutti i valori dell'articolo e li salva.
     }
-    public static function getArticoli($category,$limit) {
+    public static function getArticoli($category,$limit, $verified) {
         $connection = DBAccess::openDBConnection();
 
         if ($category != null)
             $querySelect = "SELECT * FROM articolo, cat_art
-                            WHERE  cat_art.nome_cat = '$category' AND articolo.ID = cat_art.ID_art
+                            WHERE  cat_art.nome_cat = '$category' AND articolo.ID = cat_art.ID_art AND verificato=1
                             ORDER BY ID ASC";
-        else
+        elseif($verified)
+            $querySelect = "SELECT * FROM articolo WHERE verificato=1 ORDER BY ID ASC";
+        else 
             $querySelect = "SELECT * FROM articolo ORDER BY ID ASC";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0) {
@@ -252,6 +265,8 @@ class Articolo {
         $connection = DBAccess::openDBConnection();
         $querySelect = "SELECT * FROM articolo WHERE articolo.ID=$id_articolo";
         $queryResult = mysqli_query($connection, $querySelect);
+        if(!$queryResult)
+            return null;
         if (mysqli_num_rows($queryResult) == 0) {
             return null;
         } else {
@@ -279,63 +294,79 @@ class Articolo {
         return $listaArticoli;
     }
 
-    public static function validateArticle($Id): mysqli {
+    public static function validateArticle($Id) {
         $Connection = DBAccess::openDBConnection();
         $querySelect = "UPDATE articolo SET articolo.verificato = 1 WHERE articolo.ID = $Id";
-        $queryResult = mysqli_query($Connection, $querySelect);
-        return $Connection;
+        return mysqli_query($Connection, $querySelect); 
     }
 
     public static function loadNewArticle($articolo) {
+        $article_id = $articolo->getID();
+        $title = $articolo->getTitle();
+        $descrizione = $articolo->getDescription();
+        $content = $articolo->getDescription();
+        $autore = $articolo->getAuthor();
+        $data_pub = $articolo->getDataPub();
+        $upVotes = $articolo->getUpVotes();
+        $downVotes = $articolo->getDownVotes();
+        $path = $articolo->getImgPath();
+        $alt = $articolo->getAltImg();
+        $verificato = $articolo->getValidation();
+        
         $Connection = DBAccess::openDBConnection();
-        $querySelect = "INSERT INTO articolo(titolo, descrizione, testo, autore, data_pub, upvotes, downvotes, img_path, alt_img, verificato) values($articolo->getTitle(), $articolo->getDescription(), $articolo->getContent(), $articolo->getAuthor(), $articolo->getDataPub(), $articolo->getUpVotes(), $articolo->getDownVotes(), $articolo->getImgPath(), $articolo->getAltImg(), $articolo->getValidation()";
-        $queryResult = mysqli_query($Connection, $querySelect);
-        if (mysqli_affected_rows($Connection) == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-    /*public function setAltImg($value) {
-        (ctype_alpha($value) && strlen($value) <= 255) ? $this->altImg = $value : $this->altImg = "";
-    }*/
-    //
 
-    /*  public static function getArticoli($category, $connection)
-      {
-          if ($category != null)
-              $querySelect = "SELECT * FROM articolo, cat_art
-                              WHERE  cat_art.nome_cat = '$category' AND articolo.ID = cat_art.ID_art
-                              ORDER BY ID ASC";
-          else
-              $querySelect = "SELECT * FROM articolo ORDER BY ID ASC";
-          $queryResult = mysqli_query($connection, $querySelect);
-          printf("Error: %s\n", mysqli_error($connection));
-          if (mysqli_num_rows($queryResult) == 0) {
-              return null;
-          }
-          else { // ritorno la lista degli articoli all'interno del db
-              $listaArticoli = array();
-              while ($riga = mysqli_fetch_assoc($queryResult)) {
-                  $singoloArticolo = new static($riga['ID'], $riga['titolo'], $riga['descrizione'],$riga['testo'], $riga['autore'], $riga['data_pub'], $riga['upvotes'], $riga['downvotes'], $riga['img_path'], $riga['alt_img']);
-                  array_push($listaArticoli, $singoloArticolo);
-                  echo "dio merda ";
-                  echo get_class($singoloArticolo->getTesto());
-              }
-          }
-          return $listaArticoli;
-      }*/
+        $querySelect = 'INSERT INTO articolo(ID, titolo, descrizione, testo, autore, data_pub,upvotes, downvotes, img_path, alt_img, verificato) values('.$article_id.',"'.$title.'", "'.$descrizione.'", "'.$content.'", '.$autore.', "'.$data_pub.'",'.$upVotes.', '.$downVotes.', "'.$path.'", "'.$alt.'", "'.$verificato.'")';
+        $queryResult = mysqli_query($Connection, $querySelect);
+        return $queryResult;
+    }
 
     public static function getAutoreArticolo($id_articolo) {
         $connection = DBAccess::openDBConnection();
-        $querySelect = "SELECT * FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = '. $id_articolo . '";
+        $querySelect = "SELECT * FROM utente INNER JOIN articolo on (utente.ID = articolo.autore) WHERE articolo.ID = $id_articolo";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0)
             return null;
-        else { 
+        else {
             $riga = mysqli_fetch_assoc($queryResult);
             $autore = new User($riga['ID'], $riga['nome'], $riga['cognome'], $riga['email'], $riga['password'], $riga['permesso'], $riga['img_path']);
             return $autore;
+        }
+    }
+
+    public static function deleteArticle($id_articolo) {
+        $connection = DBAccess::openDBConnection();
+        $querySelect = "DELETE FROM articolo WHERE articolo.ID = $id_articolo";
+        return mysqli_query($connection, $querySelect);
+    }
+
+    public static function getUpVotesFromArticle($id_articolo) {
+        $connection = DBAccess::openDBConnection();
+        $querySelect = "SELECT SUM(voto.up) FROM voto WHERE articolo = $id_articolo";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0) {
+            return false;
+        } else {
+            return mysqli_fetch_assoc($queryResult);
+        }
+    }
+    public static function getDownVotesFromArticle($id_articolo) {
+        $connection = DBAccess::openDBConnection();
+        $querySelect = "SELECT SUM(voto.down) FROM voto WHERE articolo = $id_articolo";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0) {
+            return false;
+        } else {
+            return  mysqli_fetch_assoc($queryResult);
+        }
+    }
+    public static function getMaxId() {
+        $connection = DBAccess::openDBConnection();
+        $querySelect = "SELECT MAX(ID) from articolo";
+        $queryResult = mysqli_query($connection, $querySelect);
+        if (mysqli_num_rows($queryResult) == 0) {
+            return false;
+        } else {
+            return  mysqli_fetch_assoc($queryResult)['MAX(ID)'];
         }
     }
 }
@@ -444,13 +475,8 @@ class Categoria {
 
     public static function loadNewCategoryForArticle($category, $article_id) {
         $connection = DBAccess::openDBConnection();
-        $querySelect = "INSERT INTO cat_art values($article_id,$category) ";
-        $queryResult = mysqli_query($connection, $querySelect);
-        if (mysqli_affected_rows($connection) == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        $querySelect = 'INSERT INTO cat_art values('.$article_id.',"'.$category.'") ';
+        return mysqli_query($connection, $querySelect);
     }
 }
 

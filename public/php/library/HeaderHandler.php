@@ -50,20 +50,49 @@ class HeaderHandler {
     }
 
 
-    public static function getUserInfo() {
+    public static function getUserInfo($currentLink) {
         $access = Access::create();
 
-        if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' ) or strpos( $_SERVER[ 'REQUEST_URI' ], 'register.php' ) ) {
+        /*if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' ) or strpos( $_SERVER[ 'REQUEST_URI' ], 'register.php' ) ) {
             return '';
-        }
+        }*/
 
-        if ( !$access->isAuthenticated() ) {
-            return '<a href="login.php" tabindex="0"><div>Accedi/Registrati</div></a>';
+        if ( !$access->isAuthenticated() || !User::getUserById($_SESSION['user_id']) ) {
+            if(strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' )) return '<div class="user_cont hFlex"><div class="currentLink"><p>Accedi/Registrati</p></div></div>';
+            return '<div class="user_cont hFlex"><a href="/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a></div>';
         }
-
-        $html = '<div class="logout_cont vFlex">
-                  <a href="user_page.html">Il mio profilo</a>
-                  <a href="index.html?logout_php">Esci</a></div>';
+        else{
+          $utente = $_SESSION['user_id'];
+          $path = User::getUserById($utente)->getImg();
+          if(strpos( $_SERVER[ 'REQUEST_URI' ], 'user.php' )){
+            $html = "<div class='user_cont hFlex'>
+                    <div class='logout_cont vFlex'>
+                    <span class='currentLink'>Il mio profilo</span>
+                    <a href='/pages/logout.php'>Esci</a></div>
+                    </div>
+                    <img class='user_img' src=$path alt>";
+          }
+          else{ $html = "<div class='user_cont hFlex'>
+                        <div class='logout_cont vFlex'>
+                        <a href='/pages/user.php?user=$utente'>Il mio profilo</a>
+                        <a href='/pages/logout.php'>Esci</a></div>
+                        </div><img class='user_img' src=$path alt>";
+          }
+          return $html;
+        }
     }
-    /* funzione div utente */
+
+
+    public static function getMobLink($currentLink) {
+      $access = Access::create();
+      if(!$access->isAuthenticated())
+        return '';
+      else {
+        $user = $access->getUser();
+        $name = $user->getName();
+        $id = $user->getID();
+        if(strpos($_SERVER['REQUEST_URI'], 'user.php')) return "<p class='mob_pro'>$name</p>";
+        return "<a href='/pages/user.php?user=$id' class='mob_pro' tabindex='0'>$name</a>";
+      }
+    }
 }
