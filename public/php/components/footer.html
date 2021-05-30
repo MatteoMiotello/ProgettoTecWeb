@@ -10,13 +10,13 @@
         <a href="mailto:andrea.polato.7@studenti.unipd.it" tabindex="0">Matteo Miotello</a><br>
     </address>
 </footer>
-<div class="mob_srch_noJS">
-    <form method="post" action="/pages/article_search.php">
+<div id="mob_srch_noJS">
+    <form method="post" onsubmit="return validateSearch(document.getElementById('mob_search_button'))" action="/pages/article_search.php">
         <input type="text" placeholder="Ricerca articoli" name="search" id="search_bar_mobile" required>
-        <button type="submit"><i class="fa fa-search"></i></button>
+        <button type="submit" onclick="validateSearch(this)" id="mob_search_button"><i class="fa fa-search"></i></button>
     </form>
 </div>
-<nav class="menu_noJS vFlex">
+<nav id="menu_noJS" class="vFlex">
   <ul>
     <nav-link/>
     <mob-links/>

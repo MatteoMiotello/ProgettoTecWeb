@@ -35,7 +35,7 @@ else
     $handler->setNoOperation();
 
 if (isset($_POST['comment']) && Access::isAuthenticated()) {
-    if($_POST['comment'] != "") {
+    if(CheckValues::sanitize($_POST['comment'])!='') {
         $utente = Access::getUser();
         $result = Comment::uploadNewComment($id_articolo, $utente->getId(), '' . $_POST['comment'] . '', '' . date("Y-m-d h:i:s") . '');
         $handler->setOperationDone("Messaggio inviato correttamente");

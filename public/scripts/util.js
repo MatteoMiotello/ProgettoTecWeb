@@ -121,10 +121,12 @@ function isValid(x) {
     if (x === document.getElementById("email")) {
         var ex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
         if (!ex.test(x.value))
-            return false;
+          return false;
     } else {
-        if (x.value.trim() == '' || !x.checkValidity())
-            return false;
+        if (x.value.trim() == '' || !x.checkValidity()){
+          x.removeAttribute("pattern");
+          return false;
+        }
     }
     return true;
 }
@@ -188,11 +190,8 @@ function validateReg() {
 
     /* Elimina il messaggio d'errore dal browser, ma se JS viene disabilitato i campi rimangono 'required' */
     document.querySelector('input[name=pic_sel]').removeAttribute("required");
-    name.removeAttribute("pattern");
     name.removeAttribute("required");
-    surn.removeAttribute("pattern");
     surn.removeAttribute("required");
-    email.removeAttribute("pattern");
     email.removeAttribute("required");
     pass.removeAttribute("required");
     pass1.removeAttribute("required");
@@ -234,11 +233,53 @@ function validateReg() {
     return false;
 }
 
+/* ---- Ricerca non vuota ---- */
+function validateSearch(x){
+  if(x==document.getElementById("search_button")){
+    input = document.getElementById("search_bar");
+    input.removeAttribute("required");
+    if(input.value.trim()==''){
+      input.setAttribute("placeholder","Inserisci un termine");
+      input.value="";
+      input.className="redPh";
+      return false;
+    }
+    else
+        return true;
+  }
+  if(x==document.getElementById("resp_search_button")){
+    input = document.getElementById("search_bar_responsive");
+    input.removeAttribute("required");
+    if(input.value.trim()==''){
+      input.setAttribute("placeholder","Inserisci un termine");
+      input.value="";
+      input.className="redPh";
+      return false;
+    }
+    else
+        return true;
+  }
+  //niente menu_noJS (appunto perchè noJS)
+}
+
+
+/* ---- Inserimento Commento ---- */
+function validateComm(){
+  input = document.getElementById("insert_comment");
+  input.removeAttribute("required");
+  if(input.value.trim()==''){
+    input.setAttribute("placeholder","Inserisci un commento");
+    input.value="";
+    input.className="redPh";
+    return false;
+  }
+  return true;
+}
 
 // funzioni estetiche, con JS disattivato nessuna funzionalità viene a mancare
 /* ---- nasconde il pulsante "torna su" e lo mostra solo dopo aver fatto scroll verticale ---- */
 window.onload = function () {
-    setTimeout(hideBtn(),1000);
+    hideElements();
     showError();
 };
 window.onscroll = function () {
@@ -254,6 +295,8 @@ function scrollFunction() {
     }
 };
 
-function hideBtn() {
+function hideElements() {
     document.getElementById("myBtn").style.visibility = "hidden";
+    document.getElementById("menu_noJS").style.display = "none";
+    document.getElementById("mob_srch_noJS").style.display = "none";
 };

@@ -12,6 +12,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
 
 $connessione = DBAccess::openDBConnection();
 
+$search= CheckValues::sanitize($search);
 $handler = new TemplateHandler();
 $handler->setPageTitle('Risultati ricera per: ' . $search);
 

@@ -8,15 +8,15 @@
             <nav-link/>
         </ul>
     </nav>
-    <form method="post" action="/pages/article_search.php">
-        <input type="text" name="search" placeholder="Ricerca articoli" id="search_bar" tabindex="0" required><button type="submit" value="submit" id="search_button" tabindex="0"><i class="fa fa-search"></i></button>
+    <form method="post" onsubmit="return validateSearch(document.getElementById('search_button'))" action="/pages/article_search.php">
+        <input type="text" name="search" placeholder="Ricerca articoli" id="search_bar" tabindex="0" required><button type="submit" onclick="validateSearch(this)" value="submit" id="search_button" tabindex="0"><i class="fa fa-search"></i></button>
     </form>
     <div class="right_section hFlex">
         <div class="mob_buttons_wrapper hFlex">
-            <a href="javascript:void(0);" title="Mostra barra di ricerca" class="icon search_link" tabindex="0" onclick="searchToggle()">
+            <a href="#mob_srch_noJS" title="Mostra barra di ricerca" class="icon search_link" tabindex="0" onclick="searchToggle()">
                 <div class="fa fa-search"><span class="sr-only">Mostra barra di ricerca</span></div>
             </a>
-            <a href="javascript:void(0);" title="Mostra menu a comparsa" class="icon txt_link" tabindex="0" onclick="menuToggle()">
+            <a href="#menu_noJS" title="Mostra menu a comparsa" class="icon txt_link" tabindex="0" onclick="menuToggle()">
                 <div class="fa fa-bars"><span class="sr-only">Mostra menu a comparsa</span></div>
             </a>
         </div>
@@ -26,9 +26,9 @@
         </div>
 </header>
 <div class="mob_srch" id="search_mobile">
-    <form method="post" action="/pages/article_search.php">
-        <input type="text" placeholder="Ricerca articoli" name="search" id="search_bar_mobile" required>
-        <button type="submit" id="search_button_mob"><i class="fa fa-search"></i></button>
+    <form method="post" onsubmit="return validateSearch(document.getElementById('resp_search_button'))" action="/pages/article_search.php">
+        <input type="text" placeholder="Ricerca articoli" name="search" id="search_bar_responsive" required>
+        <button type="submit" onclick="validateSearch(this)" id="resp_search_button"><i class="fa fa-search"></i></button>
     </form>
 </div>
 <div class="mob_nav" id="hd">

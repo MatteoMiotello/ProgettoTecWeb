@@ -1,7 +1,7 @@
-<form class="hFlex" action="generic_page_article.php?art_id={{articleId}}" id="post_comm" method="post">
+<form class="hFlex" onsubmit="return validateComm()" action="generic_page_article.php?art_id={{articleId}}" id="post_comm" method="post">
     <img src="{{userImg}}" alt="" class="user_img user_desk">
     <section class="comm_container vFlex">
         <textarea name="comment" id="insert_comment" maxlength="200" placeholder="Inserisci un commento..." tabindex="0" required></textarea>
-        <button type="submit" name="pub_comm" tabindex="0">Pubblica</button>
+        <button type="submit" onclick="validateComm()" name="pub_comm" tabindex="0">Pubblica</button>
     </section>
 </form>
