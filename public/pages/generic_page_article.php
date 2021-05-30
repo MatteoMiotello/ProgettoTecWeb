@@ -31,7 +31,7 @@ if (!$connessione) {
     $handler->setOperationError("Errore nell'apertura del db");
     return;
 }
-else 
+else
     $handler->setNoOperation();
 
 if (isset($_POST['comment']) && Access::isAuthenticated()) {
@@ -69,13 +69,14 @@ $articoloModel = Articolo::getArticolo($id_articolo);
 if ($articoloModel) {
     $autore = User::getArticleAuthor($id_articolo);
     $listaCategorie = Categoria::getCategorieArticolo($articoloModel->getID());
+    $nameAuthor = $autore->getName().' '.$autore->getSurname();
     $articolo = (new ArticleBuilder)
         ->setImgArticlePath($articoloModel->getImgPath())
         ->setImgArticleAlt($articoloModel->getAltImg())
         ->setTitle($articoloModel->getTitle())
         ->setContent($articoloModel->getContent())
         ->setImgPathAuthor($autore->getImg())
-        ->setNameAuthor($autore->getName())
+        ->setNameAuthor($nameAuthor)
         ->setEmailAuthor($autore->getEmail());
     if ($listaCategorie) {
         foreach ($listaCategorie as $categoria) {
