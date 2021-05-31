@@ -461,7 +461,6 @@ fieldset {
 
 .img_sel textarea {
   resize: none;
-  width: 100%;
   margin-bottom: 0;
 }
 
@@ -897,6 +896,7 @@ div[role=cont_utente]+form button{
 
 .reg_form .user_img{
   margin: 1em 0.5em;
+  width: 4em;
 }
 
 input[type=text], input[type=email], input[type=password] {

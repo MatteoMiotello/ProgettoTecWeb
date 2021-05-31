@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/Articolo.php';
 
 class VoteHandler {
     private $Article;

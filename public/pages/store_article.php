@@ -4,8 +4,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/Access.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/dBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/Articolo.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/DotEnv.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/Categoria.php';
 
 $connessione = DBAccess::openDBConnection();
 Access::create();

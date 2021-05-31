@@ -3,8 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/dBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/Categoria.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/CategoryBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
 
@@ -23,7 +23,7 @@ $handler->setCurrentRoute('form_articolo');
 if (!$connessione) {
     $handler->setOperationError("Errore nell'apertura del db");
     return;
-} 
+}
 
 if (!Access::isAuthenticated()) {
     $handler->setOperationError("Non sei loggato, esegui il login!");
