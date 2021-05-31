@@ -312,12 +312,9 @@ article+article {
   margin-top: 1em;
 }
 
-article div {
-  width: 65%;
-}
-
 article > img {
   width: 30%;
+  min-width: 30%;
   margin: auto 1em auto 0;
 }
 
