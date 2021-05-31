@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 31, 2021 alle 14:34
+-- Creato il: Mag 31, 2021 alle 14:44
 -- Versione del server: 10.4.19-MariaDB
 -- Versione PHP: 7.3.28
 
@@ -26,10 +26,9 @@ SET time_zone = "+00:00";
 --
 -- Struttura della tabella `articolo`
 --
-DROP TABLE IF EXISTS `articolo`;
 
 CREATE TABLE `articolo` (
-  `ID` int(6) NOT NULL AUTO_INCREMENT,
+  `ID` int(6) NOT NULL,
   `titolo` varchar(126) NOT NULL,
   `descrizione` varchar(300) DEFAULT NULL,
   `testo` varchar(10000) NOT NULL,
@@ -39,11 +38,8 @@ CREATE TABLE `articolo` (
   `downvotes` int(7) DEFAULT 0,
   `img_path` varchar(255) DEFAULT NULL,
   `alt_img` varchar(255) DEFAULT NULL,
-  `verificato` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`ID`),
-  KEY `autore` (`autore`),
-  CONSTRAINT `articolo_ibfk_1` FOREIGN KEY (`autore`) REFERENCES `utente` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=878545 DEFAULT CHARSET=utf8mb4;
+  `verificato` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dump dei dati per la tabella `articolo`
@@ -64,13 +60,10 @@ INSERT INTO `articolo` (`ID`, `titolo`, `descrizione`, `testo`, `autore`, `data_
 -- Struttura della tabella `categoria`
 --
 
-DROP TABLE IF EXISTS `categoria`;
-
 CREATE TABLE `categoria` (
   `nome` varchar(20) NOT NULL,
   `descrizione` varchar(255) DEFAULT NULL,
-  `img` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`nome`)
+  `img` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -93,15 +86,9 @@ INSERT INTO `categoria` (`nome`, `descrizione`, `img`) VALUES
 -- Struttura della tabella `cat_art`
 --
 
-DROP TABLE IF EXISTS `cat_art`;
-
 CREATE TABLE `cat_art` (
   `ID_art` int(6) NOT NULL,
-  `nome_cat` varchar(20) NOT NULL,
-  PRIMARY KEY (`nome_cat`,`ID_art`),
-  KEY `ID_art` (`ID_art`),
-  CONSTRAINT `cat_art_ibfk_2` FOREIGN KEY (`ID_art`) REFERENCES `articolo` (`ID`) ON DELETE CASCADE,
-  CONSTRAINT `cat_art_ibfk_3` FOREIGN KEY (`nome_cat`) REFERENCES `categoria` (`nome`) ON DELETE CASCADE
+  `nome_cat` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -123,20 +110,13 @@ INSERT INTO `cat_art` (`ID_art`, `nome_cat`) VALUES
 -- Struttura della tabella `commento`
 --
 
-DROP TABLE IF EXISTS `commento`;
-
 CREATE TABLE `commento` (
   `ID_art` int(6) NOT NULL,
-  `ID_com` int(6) NOT NULL AUTO_INCREMENT,
+  `ID_com` int(6) NOT NULL,
   `autore` int(6) NOT NULL,
   `testo` varchar(10000) NOT NULL,
-  `data_pub` datetime NOT NULL,
-  PRIMARY KEY (`ID_com`),
-  KEY `autore` (`autore`),
-  KEY `ID_art` (`ID_art`),
-  CONSTRAINT `commento_ibfk_5` FOREIGN KEY (`ID_art`) REFERENCES `articolo` (`ID`) ON DELETE CASCADE,
-  CONSTRAINT `commento_ibfk_6` FOREIGN KEY (`autore`) REFERENCES `utente` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=530769 DEFAULT CHARSET=utf8mb4;
+  `data_pub` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -144,19 +124,15 @@ CREATE TABLE `commento` (
 -- Struttura della tabella `utente`
 --
 
-DROP TABLE IF EXISTS `utente`;
-
 CREATE TABLE `utente` (
-  `ID` int(6) NOT NULL AUTO_INCREMENT,
+  `ID` int(6) NOT NULL,
   `nome` varchar(30) NOT NULL,
   `cognome` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` char(128) NOT NULL,
   `permesso` char(3) NOT NULL,
-  `img_path` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=846799 DEFAULT CHARSET=utf8mb4;
+  `img_path` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dump dei dati per la tabella `utente`
@@ -175,15 +151,113 @@ INSERT INTO `utente` (`ID`, `nome`, `cognome`, `email`, `password`, `permesso`, 
 -- Struttura della tabella `voto`
 --
 
-DROP TABLE IF EXISTS `voto`;
-
 CREATE TABLE `voto` (
   `utente` int(6) NOT NULL,
   `articolo` int(6) NOT NULL,
   `up` tinyint(1) DEFAULT 0,
-  `down` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`utente`,`articolo`),
-  KEY `articolo` (`articolo`),
-  CONSTRAINT `voto_ibfk_4` FOREIGN KEY (`articolo`) REFERENCES `articolo` (`ID`) ON DELETE CASCADE,
-  CONSTRAINT `voto_ibfk_5` FOREIGN KEY (`utente`) REFERENCES `utente` (`ID`) ON DELETE CASCADE
+  `down` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indici per le tabelle scaricate
+--
+
+--
+-- Indici per le tabelle `articolo`
+--
+ALTER TABLE `articolo`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `autore` (`autore`);
+
+--
+-- Indici per le tabelle `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`nome`);
+
+--
+-- Indici per le tabelle `cat_art`
+--
+ALTER TABLE `cat_art`
+  ADD PRIMARY KEY (`nome_cat`,`ID_art`),
+  ADD KEY `ID_art` (`ID_art`);
+
+--
+-- Indici per le tabelle `commento`
+--
+ALTER TABLE `commento`
+  ADD PRIMARY KEY (`ID_com`),
+  ADD KEY `autore` (`autore`),
+  ADD KEY `ID_art` (`ID_art`);
+
+--
+-- Indici per le tabelle `utente`
+--
+ALTER TABLE `utente`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indici per le tabelle `voto`
+--
+ALTER TABLE `voto`
+  ADD PRIMARY KEY (`utente`,`articolo`),
+  ADD KEY `articolo` (`articolo`);
+
+--
+-- AUTO_INCREMENT per le tabelle scaricate
+--
+
+--
+-- AUTO_INCREMENT per la tabella `articolo`
+--
+ALTER TABLE `articolo`
+  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=878554;
+
+--
+-- AUTO_INCREMENT per la tabella `commento`
+--
+ALTER TABLE `commento`
+  MODIFY `ID_com` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=530772;
+
+--
+-- AUTO_INCREMENT per la tabella `utente`
+--
+ALTER TABLE `utente`
+  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=846807;
+
+--
+-- Limiti per le tabelle scaricate
+--
+
+--
+-- Limiti per la tabella `articolo`
+--
+ALTER TABLE `articolo`
+  ADD CONSTRAINT `articolo_ibfk_1` FOREIGN KEY (`autore`) REFERENCES `utente` (`ID`) ON DELETE CASCADE;
+
+--
+-- Limiti per la tabella `cat_art`
+--
+ALTER TABLE `cat_art`
+  ADD CONSTRAINT `cat_art_ibfk_2` FOREIGN KEY (`ID_art`) REFERENCES `articolo` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cat_art_ibfk_3` FOREIGN KEY (`nome_cat`) REFERENCES `categoria` (`nome`) ON DELETE CASCADE;
+
+--
+-- Limiti per la tabella `commento`
+--
+ALTER TABLE `commento`
+  ADD CONSTRAINT `commento_ibfk_5` FOREIGN KEY (`ID_art`) REFERENCES `articolo` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `commento_ibfk_6` FOREIGN KEY (`autore`) REFERENCES `utente` (`ID`) ON DELETE CASCADE;
+
+--
+-- Limiti per la tabella `voto`
+--
+ALTER TABLE `voto`
+  ADD CONSTRAINT `voto_ibfk_4` FOREIGN KEY (`articolo`) REFERENCES `articolo` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `voto_ibfk_5` FOREIGN KEY (`utente`) REFERENCES `utente` (`ID`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
