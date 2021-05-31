@@ -581,6 +581,9 @@ legend {
   align-items: center;
   justify-content: space-between;
   padding: 1em 3em;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: stretch
 }
 
 .upperPrint img {
@@ -593,6 +596,7 @@ legend {
   text-align: justify;
   align-self: end;
   margin-bottom: 0;
+  width: 100%;
 }
 
 .printArticolo p {
