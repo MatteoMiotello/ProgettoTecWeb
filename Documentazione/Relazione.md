@@ -114,20 +114,42 @@ Il footer contiene i due badge che certificano l’adesione agli standard HTML5 
 2.4.1 Sezione “Home”
 Nella sezione home si trovano due sezioni. La prima contiene gli ultimi articoli pubblicati in ordine decrescente, la seconda è una sezione secondaria e contiene anch’essa gli ultimi articoli pubblicati che però riguardano il Covid.
 2.4.2 Sezione “Categorie”
-Nella sezione categorie troviamo dei link con al loro interno un tag “<figure>”. In questo modo si veicola l’informazione in duplice modalità: sia con le immagini che con il testo. Il testo è stato curato tramite css per rispecchiare in tutto e per tutto un normale link, al fine di agevolare la comprensione della pagina all’utente.
+Nella sezione categorie troviamo dei link con al loro interno un tag “<figure>”. In questo modo si veicola l’informazione in duplice modalità: sia con le immagini che con il testo. Il testo è stato curato tramite css per rispecchiare in tutto e per tutto un normale link, al fine di agevolare la comprensione della pagina all’utente. Cliccando una su una categoria si viene portati in una pagina costruita dinamicamente in cui compare un titolo con dicitura: "Categoria:" seguito dal nome della categoria scelta, e una lista di articoli (delle preview) targetizzati con quella quella categoria. Un articolo può appartenere a più categorie.
 2.4.3 Sezione “Scrivi il tuo articolo”
-In questa sezione gli utenti sono in grado di proporre il proprio articolo alla supervisione dei redattori. Lo sviluppo di questa feature è mirato ad aumentare il senso di coinvolgimento dell’utente finale.
+In questa sezione gli utenti sono in grado di proporre il proprio articolo alla supervisione dei redattori. Lo sviluppo di questa feature è mirato ad aumentare il senso di coinvolgimento dell’utente finale. Se non è stato effettuato l'accesso da parte dell'utente sarà presente sotto le breadbrumbs un messaggio in rosso che invita l'utente a loggarsi per poter così inviare il proprio elaborato correttamente. Al contrario, se l'utente è loggato, tale messaggio non comparirà e si potrà proseguire con la compilazione dei campi dati. Nella pagina possono essere inseriti un titolo, una descrizione, che sarà visualizzabile solo nella preview dell'articolo, il testo dell'articolo, ed è poi possibile selezionare una o più categorie tra quelle presenti. Premendo sul pulsante "invia" comparirà un messaggio avvenuto/non avvenuto invio dell'elaborato. Nel caso di avvenuto invio, l'articolo verrà salvato sul db e sarà pronto per l'approvazione da parte di un utente admin. L'articolo non sarà pubblico fino a quando un utente amministratore non l'avrà validato. 
 2.4.5 Sezione “Accedi/Registrati”
-In questa sezione quello che effettivamente viene visualizzato è un contenitore che consente all’utente di effettuare l’accesso al proprio account. Nel caso in cui egli ne fosse sprovvisto, troverà sotto ai campi di login un pulsante con la dicitura “registrati”.
+In questa sezione viene mostrata una form che consente all’utente di effettuare l’accesso al proprio account. Nel caso in cui egli ne fosse sprovvisto, troverà sotto ai campi di login un pulsante con la dicitura “registrati”. Per efettuare il login l'utente dovrà inserire email e password propri, scelti durante la fase di registrazione.
 2.4.6 Sezione “Registrati”
-Sezione che prevede la scelta da parte dell’utente delle credenziali d’accesso e della propria immagine del profilo.
-2.4.7 Pagina “article_filter”
-Una pagina generica che serve a mostrare i risultati delle selezioni dell’utente. Viene usata sia nel caso di ricerca testuale, che in quello di selezione di categoria e per visualizzare gli articoli da gestire.
-2.4.8 Pagina “generic_page_article”
-Un’altra pagina generica riservata però alla visualizzazione del contenuto degli articoli e delle informazioni aggiuntive correlate, come votazioni, commenti e informazioni sull’autore.
-
-
-
+Sezione che prevede la scelta da parte dell’utente delle credenziali d’accesso e della propria immagine del profilo. Nella form, per una corretta registrazione, dovranno essere inseriti:
+- nome (solo caratteri alfabetici)
+- cognome (solo caratteri alfabetici)
+- email (solo caratteri alfanumerici)
+- password (qualsiasi carattere)
+e dovrà poi essere scelta un'immagine profilo, questa può essere scelta tramite click su radio button, in un insieme formato da tre possibili scelte:
+- male icon
+- female icon
+- genderfluid icon (not binary)
+2.4.7 Pagina per visualiazzazione articoli cercati (tramite categoria)
+Una pagina generica riempita dinamicamente che serve a mostrare i risultati delle ricerche per categoria dell'utente.
+2.4.8 Pagina per visualiazzazione articoli cercati (tramite barra di ricerca)
+Una pagina generica riempita dinamicamente che serve a mostrare i risultati delle ricerche tramite barra di ricerca dell'utente.
+2.4.9 Pagina visualizzazione articolo
+Pagina riservata alla visualizzazione del contenuto degli articoli e delle informazioni aggiuntive correlate, come votazioni, commenti e informazioni sull’autore. In questa pagina possimo visualizzare, dall'alto verso il basso: 
+- titolo dell'articolo, con a destra l'immagine relativa
+- testo dell'articolo
+- barra delimitata in cui si possono osservare da sinistra verso destra:
+	- immagine profilo dell'autore dell'articolo
+	- nome auore
+	- email autore
+	- categorie dell'articolo, sulla sinistra, nel caso non fosse stata selezionata nessuna categoria (dato che è un campoo opzionale) è presente un messaggio "Nessuna categoria selezionata"
+- sezione like/dislike, in cui si possono visualizzare i like/dislike ricevuti dall'articolo, e nel caso in cui l'utente avesse effettuato il login sono preenti anche due icone per poter inserire una votazione
+- sezione commenti: qui è possibile visualizzare i commenti ricevuti dall'articolo, nel caso in cui non ce ne fossero compare un mesaggio "Nessun commento presente". Se l'utente ha effettuato il login è anche presente una casella di input in cui poter inserire un commento e un pulsante "pubblica" con cui poterlo pubblicare.
+2.4.10 Pagina Gestione articoli (per utenti amministratori)
+Questa pagina è riservata agli utenti amministratori, qui compaiono tutti gli articoli presenti nel db, l'utente amministratore ha cosi la possibilità:
+-eliminare
+-modificare
+-accettare
+un articolo, tramite relativi pulsanti sulla sinistra della preview dell'articolo.
 
 2.5 Suddivisione dei compiti e strategia di sviluppo
 In seguito al primo meeting tra i membri del gruppo si è dubito evidenziata la necessità di “templateizzare” il sito. Questa decisione è giustificata dal fatto che la maggior parte delle pagine sono in costante aggiornamento e dipendono dai risultati di una query SQL effettuata su una database in continua evoluzione.
@@ -150,7 +172,7 @@ JavaScript viene utilizzato per:
 - nascondere il pulsante “torna su” e mostrarlo dopo aver fatto dello scroll verticale;
 - validazione form di login, registrazione e invio articoli.
 PHP e MySQL
-PHP è stato chiaramente utilizzato per la costruzione delle pagine ed è stato preferito in tutti i casi possibili all’utilizzo di codice AJAX: sia per avvantaggiare utenti con hardware molto datato, sia per fare sì che l’utente riesca sempre a ricevere le informazioni desiderate nel caso di non funzionamento di JavaScript.
+PHP è stato chiaramente utilizzato per la costruzione delle pagine ed è stato preferito in tutti i casi possibili all’utilizzo di codice AJAX: sia per avvantaggiare utenti con hardware molto datato, sia per fare sì che l’utente riesca sempre a ricevere le informazioni desiderate nel caso di non funzionamento di JavaScript. Casistiche favorevoli all'utilizzo di AJAX, ovvero quei casi in cui sarebbe preferibile non ricaricare l'intero contenuto della pagina (come ad esempio l'inserimento di una votazione, con relativo aggiornamento del numero di like/dislike, o l'inserimento di un commento, con il relativo aggiornamento della sezione commenti) sono state gestite con il solo utilizzo di php. Questo comporta l'intero aggiornamento della pagina.
 La lista di azioni che fanno uso di codice PHP comprende:
 - Login e registrazione di utenti;
 - Inserimento di nuovi articoli da parte di lettori e redattori;
