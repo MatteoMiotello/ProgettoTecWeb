@@ -53,25 +53,25 @@ class VoteHandler {
     }
 
 
-    public function getVotes(User $user): ?bool {
+    public function getVotes(User $user) {
         $db = DBAccess::openDBConnection();
         $result = $db->query('SELECT * FROM voto WHERE utente = ' . $user->getID() . ' AND articolo = ' . $this->Article->getID())->fetch_assoc();
 
         if(!$result)
-            return null;
+            return 0;
 
         if ($result['up'] == 1) {
-            return true;
+            return 1;
         }
 
         if ($result['down'] == 1) {
-            return false;
+            return -1;
         }
 
         return null;
     }
 
-    private function deleteUpVote( User $user ) {
+    public function deleteUpVote( User $user ) {
         $db = DBAccess::openDBConnection();
 
         $upQuery = 'SELECT * FROM voto WHERE utente =' . $user->getID() . ' AND articolo = ' . $this->Article->getID() . ' and up = 1 and down = 0';
@@ -82,7 +82,7 @@ class VoteHandler {
         }
     }
 
-    private function deleteDownVote( User $user ) {
+    public function deleteDownVote( User $user ) {
         $db = DBAccess::openDBConnection();
 
         $upQuery = 'SELECT * FROM voto WHERE utente =' . $user->getID() . ' AND articolo = ' . $this->Article->getID() . ' and up = 0 and down = 1';

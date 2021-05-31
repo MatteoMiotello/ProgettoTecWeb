@@ -137,15 +137,22 @@ if (Access::isAuthenticated()) {
 
         if (isset($_GET['type'])) {
             if ($_GET['type'] == "up") {
-                $voteHandler->addUpVote($user);
-            } elseif ($_GET['type'] == "down") {
-                $voteHandler->addDownVote($user);
+                if($voteHandler->getVotes($user)==-1 || $voteHandler->getVotes($user)==0)
+                  $voteHandler->addUpVote($user);
+                else
+                  $voteHandler->deleteUpVote($user);
+            }
+            elseif ($_GET['type'] == "down") {
+                if($voteHandler->getVotes($user)==1 || $voteHandler->getVotes($user)==0)
+                  $voteHandler->addDownVote($user);
+                else
+                  $voteHandler->deleteDownVote($user);
             }
         }
 
-        if ($voteHandler->getVotes($user)) {
+        if ($voteHandler->getVotes($user)==1) {
             $votes->setUpVotesColored();
-        } elseif ($voteHandler->getVotes($user) === false) {
+        } elseif ($voteHandler->getVotes($user) == -1) {
             $votes->setDownVotesColored();
         } else {
             $votes->resetVotesColored();

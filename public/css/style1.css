@@ -742,7 +742,7 @@ section[role=comment] div p:first-child{
   font-weight: 500;
 }
 
-#icon_err, #mail_err, #user_err, #pass_err, #pass1_err, #err_msg, #name_err, #surn_err, #titl_err, #desc_err, #text_err{
+#icon_err, #mail_err, #user_err, #pass_err, #pass1_err, #err_msg, #name_err, #surn_err, #titl_err, #desc_err, #text_err, #cp_err, #np_err, #rp_err{
   display: none;
   color: red;
   margin-left: 1em;
