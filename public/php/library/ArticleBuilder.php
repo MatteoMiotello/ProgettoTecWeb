@@ -259,9 +259,9 @@ class ArticleBuilder extends AbstractBuilder
     public function addCategory($categoria)
     {
         if ($this->Categories != '')
-            $this->Categories = $this->Categories . "<p tabindex='0'>" . $categoria . "</p>";
+            $this->Categories = $this->Categories . "<p tabindex='0'>$categoria</p>";
         else {
-            $this->Categories = $categoria;
+            $this->Categories = "<p tabindex='0'>$categoria</p>";
         }
         $this->Params[ArticleBuilder::ARTICLECATEGORIES] = $this->getCategories();
     }

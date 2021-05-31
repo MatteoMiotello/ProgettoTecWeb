@@ -63,7 +63,6 @@ function testRegArea(x) {
   var n = document.getElementById("name_err");
   var s = document.getElementById("surn_err");
   var m = document.getElementById("mail_err");
-  /*var u = document.getElementById("aka_err");*/
   var p = document.getElementById("pass_err");
 
   if (!isValid(x)) {
@@ -123,7 +122,8 @@ function isValid(x) {
         if (!ex.test(x.value))
           return false;
     } else {
-        if (x.value.trim() == '' || !x.checkValidity()){
+        x.value = x.value.trim();
+        if (x.value == '' || !x.checkValidity()){
           x.removeAttribute("pattern");
           return false;
         }
@@ -189,7 +189,9 @@ function validateReg() {
     var pass1 = document.getElementById("password2");
 
     /* Elimina il messaggio d'errore dal browser, ma se JS viene disabilitato i campi rimangono 'required' */
-    document.querySelector('input[name=pic_sel]').removeAttribute("required");
+    document.getElementById("male_icon").removeAttribute("required");
+    document.getElementById("female_icon").removeAttribute("required");
+    document.getElementById("genderfluid_icon").removeAttribute("required");
     name.removeAttribute("required");
     surn.removeAttribute("required");
     email.removeAttribute("required");
@@ -260,6 +262,62 @@ function validateSearch(x){
         return true;
   }
   //niente menu_noJS (appunto perchè noJS)
+}
+
+
+/* ---- Cambio password ---- */
+function testPwChange(x){
+  err1 = document.getElementById("cp_err");
+  err2 = document.getElementById("np_err");
+  if(x.value==""){
+    switch (x) {
+      case document.getElementById("curr_pw"):
+      err1.style.display = "inline-block";
+      break;
+      case document.getElementById("new_pw"):
+      err2.style.display = "inline-block";
+      break;
+    }
+    return false;
+  }else {
+    switch (x) {
+      case document.getElementById("curr_pw"):
+      err1.style.display = "none";
+      break;
+      case document.getElementById("new_pw"):
+      err2.style.display = "none";
+      break;
+    }
+    return true;
+  }
+}
+
+function validatePwChange(){
+  var cPW = document.getElementById("curr_pw");
+  var nPW = document.getElementById("new_pw");
+  var rPW = document.getElementById("rep_pw");
+  var repErr = document.getElementById("rp_err");
+  var t1 = testPwChange(cPW);
+  var t2 = testPwChange(nPW);
+  var t3;
+  if(t2){
+    if (nPW.value == rPW.value) {
+        repErr.style.display = "none";
+        t3 = true;
+    }
+    else{
+        repErr.style.display = "inline-block";
+        t3 = false;
+    }
+  }
+  else {
+    t3 = false;
+    repErr.style.display = "none";
+  }
+
+  if(t1 && t2 && t3)
+    return true;
+  return false
 }
 
 
