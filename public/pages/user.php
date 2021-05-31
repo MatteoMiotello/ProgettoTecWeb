@@ -28,7 +28,10 @@ if (!$connessione) {
 }
 
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/error.html';
+$handler->setContent(file_get_contents($filePath));
+$handler->setNoOperation();
 $handler->setCurrentRoute("user");
+
 $access = Access::create();
 if (!Access::isAuthenticated()) {
     $handler->setOperationError("Non sei loggato, esegui il login!");
@@ -38,7 +41,9 @@ if (!Access::isAuthenticated()) {
 $IdUtente = $_GET['user'];
 $userModel = User::getUserById($IdUtente);
 
-if (!$access->isAdministrator() and Access::getUser()->getId() != $userModel->getId()) {
+if($userModel==null){ $handler->setOperationError("Non esiste alcun utente con questo id"); $handler->render(); return; } 
+
+if (!$access->isAdministrator() && Access::getUser()->getId() != $userModel->getId()) {
     $handler->setOperationError('Non sei autorizzato ad accedere a questa pagina');
     $handler->render();
     return;
@@ -64,7 +69,6 @@ if ($userModel) {
         ->setUserAdminOption($userModel->isAdmin())
         ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/personalUserInfo.phtml'));
 } else {
-    // messaggio che dice che non ci sono articoli del db
     $userPage = "<div>nessun utente presente</div>";
 }
 
