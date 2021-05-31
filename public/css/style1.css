@@ -51,11 +51,6 @@ header {
   margin-left: 1em;
 }
 
-.user_img{
-  max-width: 60px;
-  z-index: 99;
-}
-
 header .user_img {
   width: 60px;
   position: relative;
@@ -291,11 +286,14 @@ h1 {
 
 .home_content {
   justify-content: space-between;
-  font-size: 1.3em;
 }
 
 .articoli{
   padding-right: 1em;
+}
+
+article, aside{
+  font-size: 1.3em;
 }
 
 article {
@@ -603,6 +601,7 @@ legend {
 
 .printArticolo p {
   text-align: justify;
+  font-size: 1.2em;
   padding: 0 3em 1em 3em;
 }
 
@@ -619,6 +618,7 @@ legend {
   display: flex;
   width: 45%;
   justify-content: flex-start;
+  align-items: center;
 }
 
 #author img {
@@ -645,7 +645,7 @@ legend {
 }
 
 .info_art p {
-  margin: 0 1em 0 1em;
+  margin: 0 0.5em;
 }
 
 .commentArea {
@@ -1183,6 +1183,7 @@ td {
 
   .upperPrint{
     flex-direction: column;
+    padding: 1em;
   }
 
   .upperPrint h1{
