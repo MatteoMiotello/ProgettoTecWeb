@@ -1327,7 +1327,7 @@ td {
     width: 40px;
   }
 
-  header >p.mob_pr, header >a.mob_pro {
+  header >p.mob_pro, header >a.mob_pro {
     top: 1em;
     padding: 0.2em 0.3em;
     left: 1em;
