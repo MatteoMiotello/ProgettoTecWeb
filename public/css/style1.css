@@ -42,7 +42,11 @@ header {
   z-index: 1;
 }
 
-.mob_pro{
+header > p.currentLink{
+  transform: skew(0deg);
+}
+
+header > p.mob_pro, header >a.mob_pro{
   display: none;
 }
 
@@ -337,8 +341,8 @@ article footer img {
   flex-direction: column;
   border-left: solid 2px #0d719d;
   width: 15%;
-  align-items: center;
-  text-align: right;
+  min-width: 15%;
+  padding-left: 1em;
   justify-content: space-between;
 }
 
@@ -594,7 +598,7 @@ legend {
 
 .upperPrint h1 {
   text-align: justify;
-  align-self: end;
+  align-self: flex-end;
   margin-bottom: 0;
   width: 100%;
 }
@@ -610,13 +614,14 @@ legend {
   justify-content: space-between;
   border-top: solid 1px;
   border-bottom: solid 1px;
-  height: 40px;
   align-items: center;
+  padding: 0.3em 0;
 }
 
 .info_art #author {
   display: flex;
-  width: 45%;
+  width: fit-content;
+  width: -moz-fit-content;
   justify-content: flex-start;
   align-items: center;
 }
@@ -634,7 +639,8 @@ legend {
 
 .info_art #get_cat {
   display: flex;
-  width: 45%;
+  width: fit-content;
+  width: -moz-fit-content;
   justify-content: flex-end;
   font-weight: bold;
   color: #03bafc;
@@ -1081,7 +1087,7 @@ td {
     max-width: 100px;
   }
 
-  .mob_pro{
+  header> p.mob_pro, header >a.mob_pro{
     display: block;
     position: absolute;
     top: 2.2em;
@@ -1189,6 +1195,7 @@ td {
 
   .upperPrint h1{
     order: 2;
+    margin-top: 0.5em;
   }
 
   .upperPrint img{
@@ -1320,7 +1327,7 @@ td {
     width: 40px;
   }
 
-  .mob_pro{
+  header >p.mob_pr, header >a.mob_pro {
     top: 1em;
     padding: 0.2em 0.3em;
     left: 1em;

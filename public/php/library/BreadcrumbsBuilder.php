@@ -22,7 +22,7 @@ class BreadcrumbsBuilder extends AbstractBuilder {
      * @return $this
      */
     public function addLink($link, $title) {
-        $this->Params['<links/>'] .= "<a xml:lang=\"en\" href=$link>$title</a> / ";
+        $this->Params['<links/>'] .= "<a lang=\"en\" href=$link>$title</a> / ";
 
         return $this;
     }
