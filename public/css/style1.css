@@ -278,7 +278,7 @@ header a.icon img {
 h1 {
   text-align: center;
   font-size: 2em;
-  padding: 10px;
+  padding-bottom: 0.5em;
   margin-bottom: 20px;
   border-bottom: solid 2px #0d719d;
   color: #9a0606;
@@ -601,7 +601,7 @@ legend {
 
 .printArticolo p {
   text-align: justify;
-  font-size: 1.2em;
+  font-size: 1.1em;
   padding: 0 3em 1em 3em;
 }
 
