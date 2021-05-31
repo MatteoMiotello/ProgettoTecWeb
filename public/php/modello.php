@@ -12,7 +12,7 @@ class CheckValues {
             case "alpha":
                 $copy = CheckValues::sanitize($value);
                 $copy = str_replace(' ', '', $copy);
-                $correctCharacters = preg_match('/[a-zA-Zèéàòùì]+/', $copy);
+                $correctCharacters = preg_match('/[a-zA-ZèéàòùìÀÉÈÌÒÙ]+/', $copy);
                 break;
             case "alnum":
                 $correctCharacters = ctype_alnum(CheckValues::sanitize($value));
@@ -253,11 +253,11 @@ class Articolo {
         if ($category != null)
             $querySelect = "SELECT * FROM articolo, cat_art
                             WHERE  cat_art.nome_cat = '$category' AND articolo.ID = cat_art.ID_art AND verificato=1
-                            ORDER BY ID ASC";
+                            ORDER BY ID DESC";
         elseif ($verified)
-            $querySelect = "SELECT * FROM articolo WHERE verificato=1 ORDER BY ID ASC";
+            $querySelect = "SELECT * FROM articolo WHERE verificato=1 ORDER BY ID DESC";
         else
-            $querySelect = "SELECT * FROM articolo ORDER BY ID ASC";
+            $querySelect = "SELECT * FROM articolo ORDER BY ID DESC";
         $queryResult = mysqli_query($connection, $querySelect);
         if (mysqli_num_rows($queryResult) == 0) {
             return null;
