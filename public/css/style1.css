@@ -620,6 +620,12 @@ legend {
   width: 25px;
 }
 
+#votes img{
+  width: 1.5em;
+  height: 1.5em;
+  margin: 0;
+}
+
 .info_art #get_cat {
   display: flex;
   width: 45%;

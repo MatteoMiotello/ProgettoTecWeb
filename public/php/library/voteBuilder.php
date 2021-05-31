@@ -8,9 +8,9 @@ class VoteBuilder extends AbstractBuilder {
     const ARROWUP = '<arrowUp />';
     const ARROWDOWN = '<arrowDown />';
     const ARTICLEID = '{{articleId}}';
-    const ARROWUPCOLORED = '{{colour_up}}';
-    const ARROWDOWNCOLORED = '{{colour_down}}';
-    
+    const ARROWUPCOLORED = '{{imgPathUp}}';
+    const ARROWDOWNCOLORED = '{{imgPathDown}}';
+
     private $UpVotes;
 
     private $DownVotes;
@@ -70,19 +70,19 @@ class VoteBuilder extends AbstractBuilder {
 
 
     public function setUpVotesColored() {
-        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = '';
-        $this->Params[VoteBuilder::ARROWUPCOLORED] = 'fa-arrow-up-colored';
+        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = '/img/dislike.png';
+        $this->Params[VoteBuilder::ARROWUPCOLORED] = '/img/likePressed.png';
     }
 
 
     public function setDownVotesColored() {
-        $this->Params[VoteBuilder::ARROWUPCOLORED] = '';
-        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = 'fa-arrow-down-colored';
+        $this->Params[VoteBuilder::ARROWUPCOLORED] = '/img/like.png';
+        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = '/img/dislikePressed.png';
     }
 
 
     public function resetVotesColored() {
-        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = '';
-        $this->Params[VoteBuilder::ARROWUPCOLORED] = '';
+        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = '/img/dislike.png';
+        $this->Params[VoteBuilder::ARROWUPCOLORED] = '/img/like.png';
     }
 }
