@@ -17,7 +17,7 @@ $connessione = DBAccess::openDBConnection();
 $handler = new TemplateHandler();
 $handler->setPageTitle('Categoria' . $CategoryName);
 $handler->setBreadcrumb('Articoli della categoria: ' . $CategoryName)
-    ->addLink('/pages/categorie.php', 'Categorie');
+    ->addLink('/apolato/pages/categorie.php', 'Categorie');
 
 $filePath = __DIR__ . '/../html/article_filter_nuovo.html';
 $handler->setContent(file_get_contents($filePath));

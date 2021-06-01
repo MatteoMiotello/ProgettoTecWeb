@@ -13,7 +13,7 @@ $connessione = DBAccess::openDBConnection();
 $handler = new TemplateHandler();
 $handler->setPageTitle('Form Articolo');
 $handler->setBreadcrumb('Scrivi un articolo (admin)')
-        ->addLink('/pages/user.php','Il mio profilo');
+        ->addLink('/apolato/pages/user.php','Il mio profilo');
 
 $filePath = __DIR__ . '/../html/error.html';
 

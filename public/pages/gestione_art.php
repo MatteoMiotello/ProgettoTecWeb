@@ -12,7 +12,7 @@ $connessione = DBAccess::openDBConnection();
 $handler = new TemplateHandler();
 $handler->setPageTitle('Gestione Articoli');
 $handler->setBreadcrumb('Gestione Articoli')
-        ->addLink('/pages/user.php', 'Il mio profilo');
+        ->addLink('/apolato/pages/user.php', 'Il mio profilo');
 
 /**
  * Si eseguono controlli per verificare che effettivamente l'utente sia loggato e sia un amministratore

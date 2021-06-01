@@ -13,12 +13,12 @@ if(!Access::isAuthenticated()){
   $result = LoginHandler::checkLogin($email, $password);
   if ($result) {
       Access::create()->logIn( $result );
-      header('Location: /index.php?login=1');
+      header('Location: /apolato/index.php?login=1');
   } else {
       $_SESSION['login_error'] = $result;
       header('Location: /pages/login.php?error=1');
   }
 }
 else{
-  header('Location: /index.php');
+  header('Location: /apolato/index.php');
 }

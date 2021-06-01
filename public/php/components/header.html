@@ -1,6 +1,6 @@
 <header id="top" class="hFlex">
     <mob-user/>
-    <img src="/img/logo.png" alt="Benvenuto in viTimes" id="logo">
+    <img src="/apolato/img/logo.png" alt="Benvenuto in viTimes" id="logo">
     <a href="#content" class="sr" tabindex="0">Salta al contenuto</a>
 
     <nav class="hFlex">
@@ -8,16 +8,16 @@
             <nav-link/>
         </ul>
     </nav>
-    <form method="post" onsubmit="return validateSearch(document.getElementById('search_button'))" action="/pages/article_search.php">
-        <input type="text" name="search" placeholder="Ricerca articoli" id="search_bar" tabindex="0" required><button type="submit" onclick="validateSearch(this)" value="submit" id="search_button" tabindex="0"><img src="/img/black_search.png" alt="Conferma"></button>
+    <form method="post" onsubmit="return validateSearch(document.getElementById('search_button'))" action="/apolato/pages/article_search.php">
+        <input type="text" name="search" placeholder="Ricerca articoli" id="search_bar" tabindex="0" required><button type="submit" onclick="validateSearch(this)" value="submit" id="search_button" tabindex="0"><img src="/apolato/img/black_search.png" alt="Conferma"></button>
     </form>
     <div class="right_section hFlex">
         <div class="mob_buttons_wrapper hFlex">
             <a href="#mob_srch_noJS" title="Mostra barra di ricerca" class="icon search_link" tabindex="0" onclick="searchToggle()">
-                <img src="/img/search.png" alt="Mostra barra di ricerca"><span class="sr">Mostra barra di ricerca</span>
+                <img src="/apolato/img/search.png" alt="Mostra barra di ricerca"><span class="sr">Mostra barra di ricerca</span>
             </a>
             <a href="#menu_noJS" title="Mostra menu a comparsa" class="icon txt_link" tabindex="0" onclick="menuToggle()">
-                <img src="/img/menu.png" alt="Mostra menu a comparsa"><span class="sr">Mostra menu a comparsa</span>
+                <img src="/apolato/img/menu.png" alt="Mostra menu a comparsa"><span class="sr">Mostra menu a comparsa</span>
             </a>
         </div>
 
@@ -26,9 +26,9 @@
         </div>
 </header>
 <div class="mob_srch" id="search_mobile">
-    <form method="post" onsubmit="return validateSearch(document.getElementById('resp_search_button'))" action="/pages/article_search.php">
+    <form method="post" onsubmit="return validateSearch(document.getElementById('resp_search_button'))" action="/apolato/pages/article_search.php">
         <input type="text" placeholder="Ricerca articoli" name="search" id="search_bar_responsive" required>
-        <button type="submit" onclick="validateSearch(this)" id="resp_search_button"><img src="/img/black_search.png" alt="Cerca"></button>
+        <button type="submit" onclick="validateSearch(this)" id="resp_search_button"><img src="/apolato/img/black_search.png" alt="Cerca"></button>
     </form>
 </div>
 <div class="mob_nav" id="hd">

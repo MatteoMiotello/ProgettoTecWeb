@@ -12,15 +12,15 @@ class HeaderHandler {
     public static function getHeaderLinks( $currentLink ) {
         $params = [
             'home' => [
-                '<li><a href="/index.php" tabindex="0" lang="en"><div>Home</div></a></li>',
+                '<li><a href="/apolato/index.php" tabindex="0" lang="en"><div>Home</div></a></li>',
                 'Home',
             ],
             'cat' => [
-                '<li><a href="/pages/categorie.php" tabindex="0"><div>Categorie</div></a></li>',
+                '<li><a href="/apolato/pages/categorie.php" tabindex="0"><div>Categorie</div></a></li>',
                 'Categorie',
             ],
             'form_articolo' => [
-                '<li><a href="/pages/form_article.php" tabindex="0"><div>Scrivi il tuo articolo</div></a></li>',
+                '<li><a href="/apolato/pages/form_article.php" tabindex="0"><div>Scrivi il tuo articolo</div></a></li>',
                 'Scrivi il tuo articolo',
             ],
         ];
@@ -59,7 +59,7 @@ class HeaderHandler {
 
         if ( !$access->isAuthenticated() || !User::getUserById($_SESSION['user_id']) ) {
             if(strpos( $_SERVER[ 'REQUEST_URI' ], 'login.php' )) return '<div class="user_cont hFlex"><div class="currentLink"><p>Accedi/Registrati</p></div></div>';
-            return '<div class="user_cont hFlex"><a href="/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a></div>';
+            return '<div class="user_cont hFlex"><a href="/apolato/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a></div>';
         }
         else{
           $utente = $_SESSION['user_id'];
@@ -68,14 +68,14 @@ class HeaderHandler {
             $html = "<div class='user_cont hFlex'>
                     <div class='logout_cont vFlex'>
                     <span class='currentLink'>Il mio profilo</span>
-                    <a href='/pages/logout.php'>Esci</a></div>
+                    <a href='/apolato/pages/logout.php'>Esci</a></div>
                     </div>
                     <img class='user_img' src=$path alt>";
           }
           else{ $html = "<div class='user_cont hFlex'>
                         <div class='logout_cont vFlex'>
-                        <a href='/pages/user.php?user=$utente'>Il mio profilo</a>
-                        <a href='/pages/logout.php'>Esci</a></div>
+                        <a href='/apolato/pages/user.php?user=$utente'>Il mio profilo</a>
+                        <a href='/apolato/pages/logout.php'>Esci</a></div>
                         </div><img class='user_img' src=$path alt>";
           }
           return $html;
@@ -92,7 +92,7 @@ class HeaderHandler {
         $name = $user->getName();
         $id = $user->getID();
         if(strpos($_SERVER['REQUEST_URI'], 'user.php')) return "<p class='mob_pro currentLink'>$name</p>";
-        return "<a href='/pages/user.php?user=$id' class='mob_pro' tabindex='0'>$name</a>";
+        return "<a href='/apolato/pages/user.php?user=$id' class='mob_pro' tabindex='0'>$name</a>";
       }
     }
 
@@ -101,11 +101,11 @@ class HeaderHandler {
         $user = $_SESSION['user_id'];
         $params = [
             'user' => [
-                "<li><a href='/pages/user.php?user=$user' tabindex='0'><div>Il mio profilo</div></a></li>",
+                "<li><a href='/apolato/pages/user.php?user=$user' tabindex='0'><div>Il mio profilo</div></a></li>",
                 'Il mio profilo',
             ],
             'logout' => [
-                '<li><a href="/pages/logout.php" tabindex="0"><div>Esci</div></a></li>',
+                '<li><a href="/apolato/pages/logout.php" tabindex="0"><div>Esci</div></a></li>',
                 'Esci',
             ],
         ];
@@ -113,7 +113,7 @@ class HeaderHandler {
       else{
         $params = [
             'login' => [
-                '<li><a href="/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a></li>',
+                '<li><a href="/apolato/pages/login.php" tabindex="0"><div>Accedi/Registrati</div></a></li>',
                 'Accedi/Registrati',
             ],
         ];

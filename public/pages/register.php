@@ -21,15 +21,15 @@ if (!$connessione) {
 } else $handler->setNoOperation();
 $handler->setPageTitle('Registrazione');
 /*$handler->setBreadcrumb( 'Articoli della categoria: ' . $CategoryName )
-    ->addLink( '/index.php', 'Home' )
-    ->addLink( '/pages/categorie.php', 'Categorie' );*/
+    ->addLink( '/apolato/index.php', 'Home' )
+    ->addLink( '/apolato/pages/categorie.php', 'Categorie' );*/
 $handler->setKeywords("registrazione, registrati, utente, profilo");
 $handler->setDescription("In questa sezione potrai registrare il tuo profilo utente.");
 $handler->setAuthors("Andrea, Giosuè, Tommaso, Matteo");
 
-const male = '/img/male_icon.png';
-const famale = '/img/female_icon.png';
-const genderfluid = '/img/genderfluid_icon.png';
+const male = '/apolato/img/male_icon.png';
+const famale = '/apolato/img/female_icon.png';
+const genderfluid = '/apolato/img/genderfluid_icon.png';
 
 // se tutti i campi della form sono stati compilati allora si puo' procedere a caricarli
 if (isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['pic_sel']) && $connessione) {

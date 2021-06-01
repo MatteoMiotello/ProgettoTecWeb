@@ -70,19 +70,19 @@ class VoteBuilder extends AbstractBuilder {
 
 
     public function setUpVotesColored() {
-        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = '/img/dislike.png';
-        $this->Params[VoteBuilder::ARROWUPCOLORED] = '/img/likePressed.png';
+        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = '/apolato/img/dislike.png';
+        $this->Params[VoteBuilder::ARROWUPCOLORED] = '/apolato/img/likePressed.png';
     }
 
 
     public function setDownVotesColored() {
-        $this->Params[VoteBuilder::ARROWUPCOLORED] = '/img/like.png';
-        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = '/img/dislikePressed.png';
+        $this->Params[VoteBuilder::ARROWUPCOLORED] = '/apolato/img/like.png';
+        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = '/apolato/img/dislikePressed.png';
     }
 
 
     public function resetVotesColored() {
-        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = '/img/dislike.png';
-        $this->Params[VoteBuilder::ARROWUPCOLORED] = '/img/like.png';
+        $this->Params[VoteBuilder::ARROWDOWNCOLORED] = '/apolato/img/dislike.png';
+        $this->Params[VoteBuilder::ARROWUPCOLORED] = '/apolato/img/like.png';
     }
 }

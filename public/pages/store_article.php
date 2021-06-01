@@ -30,8 +30,8 @@ if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['t
             }
 
             $fileName = uniqid();
-            $destDir = __DIR__. '/assets/article_images/';
-            $destDir = str_replace('/pages', '', $destDir);
+            $destDir = __DIR__. '/apolato/assets/article_images/';
+            $destDir = str_replace('/apolato/pages', '', $destDir);
             $extension = pathinfo($file['name'])['extension'];
             $fileNameFull = sprintf("%s.%s", $fileName, $extension);
             $destPath = sprintf("%s%s.%s", $destDir, $fileName, $extension);
@@ -45,7 +45,7 @@ if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['t
     // provo a caricare l'articolo nel db
     $articleId = Articolo::getMaxId() + 1;
 
-    $newArticle = new Articolo($articleId, $_POST['titolo_art'], $_POST['descr_art'], $_POST['testo_art'], $author->getId(), date('Y-m-d G:i:s'), '0', '0', "/assets/article_images/".$fileNameFull, $_POST['alt'], 1);
+    $newArticle = new Articolo($articleId, $_POST['titolo_art'], $_POST['descr_art'], $_POST['testo_art'], $author->getId(), date('Y-m-d G:i:s'), '0', '0', "/apolato/assets/article_images/".$fileNameFull, $_POST['alt'], 1);
 
     if (isset($_GET['art_id'])) {
         $art = Articolo::getArticolo($_GET['art_id']);

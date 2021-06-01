@@ -50,7 +50,7 @@ $articoloModel = Articolo::getArticolo($id_articolo);
 $handler->setBreadcrumb($articoloModel->getTitle());
 if (!empty($_SERVER['HTTP_REFERER'])) {
     if (strpos($_SERVER['HTTP_REFERER'], 'categorie.php')) {
-        $handler->addLink('/pages/categorie.php', 'Categorie');
+        $handler->addLink('/apolato/pages/categorie.php', 'Categorie');
     }
 
     // reperisco il link alla categoria dalla quale arriva tramite referer
@@ -68,14 +68,14 @@ if (!empty($_SERVER['HTTP_REFERER'])) {
 
     if ( strpos( $_SERVER['HTTP_REFERER'], 'index.php' )  ) {
         $_SESSION['breadcrumbs_title'] = 'Home';
-        $_SESSION['breadcrumbs_link'] = '/index.php';
+        $_SESSION['breadcrumbs_link'] = '/apolato/index.php';
         $_SESSION['id_art'] = $articoloModel->getID();
     }
 }
 
 if ( isset( $_SESSION['breadcrumbs_title'] ) and isset( $_SESSION['breadcrumbs_link'] ) and isset( $_SESSION['id_art'] ) and $_SESSION['id_art'] == $articoloModel->getID() ) {
     if ( $_SESSION['breadcrumbs_title'] != 'Home' ) {
-        $handler->addLink('/pages/categorie.php', 'Categorie');
+        $handler->addLink('/apolato/pages/categorie.php', 'Categorie');
     }
     $handler->addLink($_SESSION['breadcrumbs_link'], $_SESSION['breadcrumbs_title']);
 }
