@@ -7,10 +7,10 @@ if (isset($_GET['cat_name']))
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require __DIR__ . '/php/library/TemplateHandler.php';
-require_once __DIR__ .  '/php/models/Articolo.php';
-require_once __DIR__ . '/php/models/dBConnection.php';
-require_once __DIR__ .  '/php/library/ArticleBuilder.php';
+require __DIR__ . '/../php/library/TemplateHandler.php';
+require_once __DIR__ .  '/../php/models/Articolo.php';
+require_once __DIR__ . '/../php/models/dBConnection.php';
+require_once __DIR__ .  '/../php/library/ArticleBuilder.php';
 
 $connessione = DBAccess::openDBConnection();
 
@@ -19,7 +19,7 @@ $handler->setPageTitle('Categoria' . $CategoryName);
 $handler->setBreadcrumb('Articoli della categoria: ' . $CategoryName)
     ->addLink('/pages/categorie.php', 'Categorie');
 
-$filePath = __DIR__ . '/html/article_filter_nuovo.html';
+$filePath = __DIR__ . '/../html/article_filter_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 
 // controllo che la connessione al db sia andata a buon fine, altrimenti stampo un messaggio di errore
@@ -38,7 +38,7 @@ if ($rawArticles != null) {
             ->setDescription($articolo->getDescription())
             ->setImgArticlePath($articolo->getImgPath())
             ->setImgArticleAlt($articolo->getAltImg())
-            ->build(file_get_contents(__DIR__ . '/php/components/articlePreview.phtml'));
+            ->build(file_get_contents(__DIR__ . '/../php/components/articlePreview.phtml'));
     }
     $handler->setNoOperation();
 } else {

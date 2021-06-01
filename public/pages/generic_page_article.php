@@ -6,17 +6,17 @@ if ($_GET['art_id'])
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require __DIR__ . '/php/library/TemplateHandler.php';
-require_once __DIR__ .  '/php/models/CheckValues.php';
-require_once __DIR__ .  '/php/models/Articolo.php';
-require_once __DIR__ .  '/php/models/Categoria.php';
-require_once __DIR__ . '/php/models/Comment.php';
-require_once __DIR__ . '/php/models/User.php';
-require_once __DIR__ . '/php/models/dBConnection.php';
-require_once __DIR__ . '/php/library/ArticleBuilder.php';
-require_once __DIR__ . '/php/library/CommentBuilder.php';
-require_once __DIR__ . '/php/library/voteBuilder.php';
-require_once __DIR__ . '/php/library/Access.php';
+require __DIR__ . '/../php/library/TemplateHandler.php';
+require_once __DIR__ .  '/../php/models/CheckValues.php';
+require_once __DIR__ .  '/../php/models/Articolo.php';
+require_once __DIR__ .  '/../php/models/Categoria.php';
+require_once __DIR__ . '/../php/models/Comment.php';
+require_once __DIR__ . '/../php/models/User.php';
+require_once __DIR__ . '/../php/models/dBConnection.php';
+require_once __DIR__ . '/../php/library/ArticleBuilder.php';
+require_once __DIR__ . '/../php/library/CommentBuilder.php';
+require_once __DIR__ . '/../php/library/voteBuilder.php';
+require_once __DIR__ . '/../php/library/Access.php';
 //require_once __DIR__ . '/php/library/voteHandler.php';
 require_once '../php/library/VoteHandler.php';
 
@@ -104,14 +104,14 @@ if ($articoloModel) {
             $articolo->addCategory($categoria->getNome());
         }
     }
-    $printArticolo .= $articolo->build(file_get_contents(__DIR__ . '/php/components/article.phtml'));
+    $printArticolo .= $articolo->build(file_get_contents(__DIR__ . '/../php/components/article.phtml'));
 }
 /**
  * Nel caso in cui non venisse trovato l'articolo si imposta un messaggio di errore attraverso il template
  */
 else {
     //setto la pagina di errore come nuovo contenuto in modo da non avere tag fittizi presenti
-    $filePath = __DIR__ . '/html/error.html';
+    $filePath = __DIR__ . '/../html/error.html';
     $handler->setContent(file_get_contents($filePath));
     $handler->setOperationError("Nessun articolo trovato, you tried ;)");
     $handler->setParam("<commentArea />", "");
@@ -129,7 +129,7 @@ if ($rawComments) {
             ->setName($author->getName())
             ->setSurname($author->getSurname())
             ->setImg($author->getImg())
-            ->build(file_get_contents(__DIR__ . '/php/components/previusComment.phtml'));
+            ->build(file_get_contents(__DIR__ . '/../php/components/previusComment.phtml'));
     }
 } else  $comment = '<p>Nessun commento trovato</p>';
 
@@ -145,7 +145,7 @@ if (Access::isAuthenticated()) {
         $comment .= (new CommentBuilder)
             ->setImg($user->getImg())/* qui al posto di author va l'utente loggato */
             ->setArticleId($id_articolo)
-            ->build(file_get_contents(__DIR__ . '/php/components/newComment.phtml'));
+            ->build(file_get_contents(__DIR__ . '/../php/components/newComment.phtml'));
         // se l'utente effettivamente esiste allora do anche la possibilita' di dare un voto all'articolo
         $votes->setAutenticationOptions();
         $voteHandler = new VoteHandler($articoloModel);
@@ -183,7 +183,7 @@ $votes->setUpVotes($upVotes['SUM(voto.up)'])
     ->setDownVote($downVotes['SUM(voto.down)'])
     ->setArticleId($id_articolo);
 
-$votes = $votes->build(file_get_contents(__DIR__ . '/php/components/commentArea.phtml'));
+$votes = $votes->build(file_get_contents(__DIR__ . '/../php/components/commentArea.phtml'));
 
 $handler->setParam("<commentArea />", $votes);
 $handler->setParam("<listaCommenti />", $comment);

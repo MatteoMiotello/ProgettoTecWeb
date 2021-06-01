@@ -3,9 +3,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once __DIR__ . '/php/library/LoginHandler.php';
-require_once __DIR__ . '/php/models/User.php';
-require_once __DIR__ . '/php/library/Access.php';
+require_once __DIR__ . '/../php/library/LoginHandler.php';
+require_once __DIR__ . '/../php/models/User.php';
+require_once __DIR__ . '/../php/library/Access.php';
 
 if(!Access::isAuthenticated()){
   $email = CheckValues::sanitize($_POST['email']);
