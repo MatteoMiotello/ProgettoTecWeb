@@ -17,7 +17,7 @@ $author = Access::getUser();
 /**
  * controllo se la form e' gia' stata compilata, in tal caso emetto un messaggio di avvenuta operazione con relativo esito
  */
-if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['testo_art']) && isset($_POST['alt']) && $author) {
+if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['testo_art']) && $author) {
     $file = $_FILES['img'];
 
     $fileNameFull = null;
@@ -43,7 +43,7 @@ if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['t
     // provo a caricare l'articolo nel db
     $articleId = Articolo::getMaxId() + 1;
 
-    $newArticle = new Articolo($articleId, $_POST['titolo_art'], $_POST['descr_art'], $_POST['testo_art'], $author->getId(), date('Y-m-d G:i:s'), '0', '0', $fileNameFull, $_POST['alt'], 1);
+    $newArticle = new Articolo($articleId, $_POST['titolo_art'], $_POST['descr_art'], $_POST['testo_art'], $author->getId(), date('Y-m-d G:i:s'), '0', '0', "/assets/article_images/".$fileNameFull, $_POST['alt'], 1);
 
     if (isset($_GET['art_id'])) {
         $art = Articolo::getArticolo($_GET['art_id']);
