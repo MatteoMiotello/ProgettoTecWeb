@@ -185,7 +185,7 @@ class UserBuilder extends AbstractBuilder {
 
     public function setUserAdminOption($bool) {
         if($bool)
-            $this->Params[UserBuilder::USERADMINOPTION] =  file_get_contents(__DIR__.'/php/components/userAdminOption.phtml');
+            $this->Params[UserBuilder::USERADMINOPTION] =  file_get_contents(__DIR__.'/../components/userAdminOption.phtml');
         else
             $this->Params[UserBuilder::USERADMINOPTION] =  "";
         return $this;

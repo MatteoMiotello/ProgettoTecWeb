@@ -64,8 +64,8 @@ class VoteBuilder extends AbstractBuilder {
 
 
     public function setAutenticationOptions() {
-        $this->Params[VoteBuilder::ARROWUP] = file_get_contents(__DIR__ . '/php/components/arrowUp.phtml');
-        $this->Params[VoteBuilder::ARROWDOWN] = file_get_contents(__DIR__ . '/php/components/arrowDown.phtml');
+        $this->Params[VoteBuilder::ARROWUP] = file_get_contents(__DIR__ . '/../components/arrowUp.phtml');
+        $this->Params[VoteBuilder::ARROWDOWN] = file_get_contents(__DIR__ . '/../components/arrowDown.phtml');
     }
 
 
