@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__.'/php/models/CheckValues.php';
-require_once __DIR__.'/php/models/dBConnection.php';
+require_once __DIR__.'/CheckValues.php';
+require_once __DIR__.'/dBConnection.php';
 
 class Categoria {
     private $nome;

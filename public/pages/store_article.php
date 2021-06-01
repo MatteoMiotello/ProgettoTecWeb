@@ -3,11 +3,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once __DIR__ . '/php/library/Access.php';
-require_once __DIR__ . '/php/models/dBConnection.php';
-require_once __DIR__ . '/php/models/Articolo.php';
-require_once __DIR__ . '/php/library/DotEnv.php';
-require_once __DIR__ . '/php/models/Categoria.php';
+require_once __DIR__ . '/../php/library/Access.php';
+require_once __DIR__ . '/../php/models/dBConnection.php';
+require_once __DIR__ . '/../php/models/Articolo.php';
+require_once __DIR__ . '/../php/library/DotEnv.php';
+require_once __DIR__ . '/../php/models/Categoria.php';
 
 $connessione = DBAccess::openDBConnection();
 Access::create();
