@@ -21,7 +21,7 @@ if (!$connessione) {
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Home');
-$filePath = __DIR__ . '/../html/index_nuovo.html';
+$filePath = __DIR__ . '/html/index_nuovo.html';
 
 $handler->setKeywords("home, articoli, news, aggiornamenti, notizie");
 $handler->setDescription("Scorri la nostra home e rimani aggiornato sulle ultime notizie in Italia e nel mondo intero.");
