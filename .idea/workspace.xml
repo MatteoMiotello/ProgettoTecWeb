@@ -16,6 +16,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Documentazione/Meeting13_11.md" beforeDir="false" afterPath="$PROJECT_DIR$/Documentazione/Meeting13_11.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentazione/Relazione.md" beforeDir="false" afterPath="$PROJECT_DIR$/Documentazione/Relazione.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Progettazione_UI/Articolo.png" beforeDir="false" afterPath="$PROJECT_DIR$/Progettazione_UI/Articolo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Progettazione_UI/Home.png" beforeDir="false" afterPath="$PROJECT_DIR$/Progettazione_UI/Home.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Progettazione_UI/TecWeb.xd" beforeDir="false" afterPath="$PROJECT_DIR$/Progettazione_UI/TecWeb.xd" afterDir="false" />
@@ -42,6 +43,7 @@
       <change beforePath="$PROJECT_DIR$/public/html/common.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/common.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/html/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/error.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/html/form_articolo_admin_modifica.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/form_articolo_admin_modifica.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/html/form_articolo_admin_nuovo.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/form_articolo_admin_nuovo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/html/form_articolo_nuovo.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/form_articolo_nuovo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/html/form_articolo_nuovo_per_modifica.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/form_articolo_nuovo_per_modifica.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/html/generic_page_articolo_nuovo.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/html/generic_page_articolo_nuovo.html" afterDir="false" />
@@ -55,6 +57,7 @@
       <change beforePath="$PROJECT_DIR$/public/img/Wrinkled-Paper-Texture.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/Wrinkled-Paper-Texture.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/badge-w3c-valid-html5.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/badge-w3c-valid-html5.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/bgimage.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/bgimage.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/black_search.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/black_search.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/boy.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/boy.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/covid_cat.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/covid_cat.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/css.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/css.png" afterDir="false" />
@@ -66,12 +69,14 @@
       <change beforePath="$PROJECT_DIR$/public/img/like.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/like.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/male_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/male_icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/menu.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/menu.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/newspaper-texture.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/newspaper-texture.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/paesaggio.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/paesaggio.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/paperboard-texture_95678-72.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/paperboard-texture_95678-72.webp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/politics_cat.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/politics_cat.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/politics_cat.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/politics_cat.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/science_cat.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/science_cat.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/search.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/search.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/spett_cat.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/spett_cat.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/sport_cat.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/sport_cat.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/img/top.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/top.png" afterDir="false" />
@@ -115,7 +120,6 @@
       <change beforePath="$PROJECT_DIR$/public/php/components/userAdminOption.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/components/userAdminOption.phtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/php/components/userContainer.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/components/userContainer.phtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/php/components/visitorContainer.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/components/visitorContainer.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/php/models/dBConnection.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/models/dBConnection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/php/library/AbstractBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/AbstractBuilder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/php/library/Access.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/Access.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/php/library/ArticleBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/php/library/ArticleBuilder.php" afterDir="false" />
@@ -222,6 +226,8 @@
       <workItem from="1621891829352" duration="3659000" />
       <workItem from="1621979816505" duration="15848000" />
       <workItem from="1622409267826" duration="6842000" />
+      <workItem from="1622495538777" duration="134000" />
+      <workItem from="1622495854065" duration="1655000" />
     </task>
     <servers />
   </component>
