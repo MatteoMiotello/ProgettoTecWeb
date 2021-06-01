@@ -22,7 +22,7 @@ require_once '../php/library/VoteHandler.php';
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Articolo');
-$filePath = __DIR__ . '/html/generic_page_articolo_nuovo.html';
+$filePath = __DIR__ . '/../html/generic_page_articolo_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 
 $connessione = DBAccess::openDBConnection();
