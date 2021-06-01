@@ -3,8 +3,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/Articolo.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/Categoria.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/CategoryBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/Access.php';
@@ -30,14 +31,14 @@ if (!$connessione) {
 }
 
 /**
- * controllo che l'utente sia loggato 
+ * controllo che l'utente sia loggato
  */
 $author = null;
 $articleContent = '';
 if (Access::isAuthenticated()) {
     if (isset($_SESSION['user_id']))
         $author = Access::getUser();
-        
+
     $handler->setNoOperation();
 } else {
     $handler->setOperationError("Non hai eseguito il login! Esegui il login per poter inviarci il tuo elaborato!");
@@ -58,7 +59,7 @@ if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['t
         if(isset($_POST['category'])) {
             $selectedCat = array();
             foreach($_POST['category'] as $cat) {
-                $res = Categoria::loadNewCategoryForArticle($cat, $articleId);  
+                $res = Categoria::loadNewCategoryForArticle($cat, $articleId);
             }
         }
 

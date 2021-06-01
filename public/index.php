@@ -4,8 +4,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require $_SERVER['DOCUMENT_ROOT'] .  '/php/library/TemplateHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/modello.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/dBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/Articolo.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
 
 $connessione = DBAccess::openDBConnection();
@@ -70,7 +70,7 @@ if ($covidNews != null) {
 // controllo se e' appena stato effettuato il login, nel caso printo un messaggio di avvenuto login
 if(isset($_GET['login']))
     $handler->setOperationDone("Login avvenuto con successo, commenta, lascia un like oppure scrivi un articolo!");
-else 
+else
     $handler->setNoOperation();
 
 $handler->setParam("<listaArticoli />", $articlesList);

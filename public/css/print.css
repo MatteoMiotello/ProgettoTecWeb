@@ -4,12 +4,58 @@ html{
   background: transparent;
 }
 
-header, header *, button, nav, .breadcrumbs, footer, footer *, body img, #php_err{
+*{
+  overflow: auto !important;
+  font-family: serif;
+}
+
+h1, .info_art p{
+  color: black;
+}
+
+h1{
+  border-bottom: solid 2px black;
+}
+
+.upperPrint, .upperPrint h1{
+  width: 100%;
+}
+
+header nav, header input, .user_cont, button, nav, footer, footer *, img, #php_err, .breadcrumbs > a{
   display: none !important;
 }
 
-#wrapper{
+header, #wrapper, .breadcrumbs, .commentArea{
   padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.breadcrumbs{
+  margin-top: 3em;
+  margin-bottom: 2em;
+}
+
+header{
+  width: 100%;
+}
+
+.printArticolo p, .upperPrint{
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.commentArea{
+  display: none;
+}
+
+#logo{
+  display: block !important;
+  width: 100px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .articoli{

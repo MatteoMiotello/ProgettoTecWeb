@@ -297,10 +297,11 @@ function validatePwChange(){
   var nPW = document.getElementById("new_pw");
   var rPW = document.getElementById("rep_pw");
   var repErr = document.getElementById("rp_err");
+  var newErr = document.getElementById("np_err");
   var t1 = testPwChange(cPW);
   var t2 = testPwChange(nPW);
   var t3;
-  if(t2){
+  if(t2 && cPW.value!=nPW.value){
     if (nPW.value == rPW.value) {
         repErr.style.display = "none";
         t3 = true;
@@ -313,6 +314,7 @@ function validatePwChange(){
   else {
     t3 = false;
     repErr.style.display = "none";
+    newErr.style.display = "inline-block";
   }
 
   if(t1 && t2 && t3)

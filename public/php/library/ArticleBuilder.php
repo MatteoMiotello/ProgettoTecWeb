@@ -11,7 +11,7 @@ class ArticleBuilder extends AbstractBuilder
     const DESCRIPTION = '{{description}}';
     const ARTICLECONTENT = '{{articleContent}}';
     const IMGALTARTICLE = '{{altImg}}';
-    const IMGPATHARTICLE = '{{articleImgPath}}';
+    const IMGPATHARTICLE = '<img-path/>';
     const AUTHORNAME = '{{authorName}}';
     const AUTHOREMAIL = '{{authorEmail}}';
     const IMGPATHAUTHOR = '{{authorImg}}';
@@ -144,7 +144,8 @@ class ArticleBuilder extends AbstractBuilder
      */
     public function setImgArticlePath($ImgPath)
     {
-        $this->ImgPathArticle = $ImgPath;
+        if($ImgPath!=null)
+          $this->ImgPathArticle = "<img src='$ImgPath' alt='{{altImg}}'/>";
         $this->Params[ArticleBuilder::IMGPATHARTICLE] = $this->getImgArticlePath();
         return $this;
     }

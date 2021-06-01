@@ -3,8 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/Articolo.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
 
 $connessione = DBAccess::openDBConnection();
@@ -43,7 +43,7 @@ $handler->setNoOperation();
 if (isset($_GET['success'])) {
     if($_GET['success'] == 'true')
         $handler->setOperationDone('Salvataggio avvenuto con successo');
-    else 
+    else
         $handler->setOperationDone('Il Salvataggio non è andato a buon fine, riprova!');
 }
 

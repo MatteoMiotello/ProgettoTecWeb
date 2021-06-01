@@ -7,10 +7,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/CheckValues.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/Articolo.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/Categoria.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/Comment.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/ArticleBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/CommentBuilder.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/voteBuilder.php';
@@ -20,7 +22,6 @@ require_once '../php/library/VoteHandler.php';
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Articolo');
-$handler->setBreadcrumb('Articolo');
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/generic_page_articolo_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 
@@ -45,6 +46,8 @@ if (isset($_POST['comment']) && Access::isAuthenticated()) {
     }
 }
 
+$articoloModel = Articolo::getArticolo($id_articolo);
+$handler->setBreadcrumb($articoloModel->getTitle());
 if (!empty($_SERVER['HTTP_REFERER'])) {
     if (strpos($_SERVER['HTTP_REFERER'], 'categorie.php')) {
         $handler->addLink('/pages/categorie.php', 'Categorie');
@@ -56,13 +59,26 @@ if (!empty($_SERVER['HTTP_REFERER'])) {
         $categoryName = array_pop($array);
         $categoryName = ucfirst($categoryName);
 
-        $linkTitle = 'Categoria: ' . $categoryName;
-        $handler->addLink('/pages/categorie.php', 'Categorie');
+        $linkTitle = 'Articoli della categoria: ' . $categoryName;
 
-        $handler->addLink($_SERVER['HTTP_REFERER'], $linkTitle);
+        $_SESSION['breadcrumbs_title'] = $linkTitle;
+        $_SESSION['breadcrumbs_link'] = $_SERVER['HTTP_REFERER'];
+        $_SESSION['id_art'] = $articoloModel->getID();
+    }
+
+    if ( strpos( $_SERVER['HTTP_REFERER'], 'index.php' )  ) {
+        $_SESSION['breadcrumbs_title'] = 'Home';
+        $_SESSION['breadcrumbs_link'] = '/index.php';
+        $_SESSION['id_art'] = $articoloModel->getID();
     }
 }
 
+if ( isset( $_SESSION['breadcrumbs_title'] ) and isset( $_SESSION['breadcrumbs_link'] ) and isset( $_SESSION['id_art'] ) and $_SESSION['id_art'] == $articoloModel->getID() ) {
+    if ( $_SESSION['breadcrumbs_title'] != 'Home' ) {
+        $handler->addLink('/pages/categorie.php', 'Categorie');
+    }
+    $handler->addLink($_SESSION['breadcrumbs_link'], $_SESSION['breadcrumbs_title']);
+}
 
 if (!file_exists($filePath)) {
     throw new Exception('file non esistente');
@@ -71,7 +87,6 @@ if (!file_exists($filePath)) {
 
 // prelevo l'articolo dal db e costruisco la visualizzazione dello stesso tramite builder
 $printArticolo = '';
-$articoloModel = Articolo::getArticolo($id_articolo);
 if ($articoloModel) {
     $autore = User::getArticleAuthor($id_articolo);
     $listaCategorie = Categoria::getCategorieArticolo($articoloModel->getID());

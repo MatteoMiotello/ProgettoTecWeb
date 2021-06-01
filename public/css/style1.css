@@ -42,18 +42,17 @@ header {
   z-index: 1;
 }
 
-.mob_pro{
+header > p.currentLink{
+  transform: skew(0deg);
+}
+
+header > p.mob_pro, header >a.mob_pro{
   display: none;
 }
 
 #logo {
   max-width: 9em;
   margin-left: 1em;
-}
-
-.user_img{
-  max-width: 60px;
-  z-index: 99;
 }
 
 header .user_img {
@@ -250,6 +249,7 @@ header a.icon img {
   border-bottom: solid 1px black;
   background: azure /* #0d719d*/;
   padding: 0.5em 1em;
+  justify-content: space-between;
 }
 
 .breadcrumbs ul{
@@ -282,7 +282,7 @@ header a.icon img {
 h1 {
   text-align: center;
   font-size: 2em;
-  padding: 10px;
+  padding-bottom: 0.5em;
   margin-bottom: 20px;
   border-bottom: solid 2px #0d719d;
   color: #9a0606;
@@ -290,11 +290,14 @@ h1 {
 
 .home_content {
   justify-content: space-between;
-  font-size: 1.3em;
 }
 
 .articoli{
   padding-right: 1em;
+}
+
+article, aside{
+  font-size: 1.3em;
 }
 
 article {
@@ -313,12 +316,9 @@ article+article {
   margin-top: 1em;
 }
 
-article div {
-  width: 65%;
-}
-
 article > img {
   width: 30%;
+  min-width: 30%;
   margin: auto 1em auto 0;
 }
 
@@ -341,8 +341,8 @@ article footer img {
   flex-direction: column;
   border-left: solid 2px #0d719d;
   width: 15%;
-  align-items: center;
-  text-align: right;
+  min-width: 15%;
+  padding-left: 1em;
   justify-content: space-between;
 }
 
@@ -462,7 +462,6 @@ fieldset {
 
 .img_sel textarea {
   resize: none;
-  width: 100%;
   margin-bottom: 0;
 }
 
@@ -586,6 +585,9 @@ legend {
   align-items: center;
   justify-content: space-between;
   padding: 1em 3em;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: stretch
 }
 
 .upperPrint img {
@@ -596,12 +598,14 @@ legend {
 
 .upperPrint h1 {
   text-align: justify;
-  align-self: end;
+  align-self: flex-end;
   margin-bottom: 0;
+  width: 100%;
 }
 
 .printArticolo p {
   text-align: justify;
+  font-size: 1.1em;
   padding: 0 3em 1em 3em;
 }
 
@@ -610,14 +614,16 @@ legend {
   justify-content: space-between;
   border-top: solid 1px;
   border-bottom: solid 1px;
-  height: 40px;
   align-items: center;
+  padding: 0.3em 0;
 }
 
 .info_art #author {
   display: flex;
-  width: 45%;
+  width: fit-content;
+  width: -moz-fit-content;
   justify-content: flex-start;
+  align-items: center;
 }
 
 #author img {
@@ -633,7 +639,8 @@ legend {
 
 .info_art #get_cat {
   display: flex;
-  width: 45%;
+  width: fit-content;
+  width: -moz-fit-content;
   justify-content: flex-end;
   font-weight: bold;
   color: #03bafc;
@@ -644,7 +651,7 @@ legend {
 }
 
 .info_art p {
-  margin: 0 1em 0 1em;
+  margin: 0 0.5em;
 }
 
 .commentArea {
@@ -896,6 +903,7 @@ div[role=cont_utente]+form button{
 
 .reg_form .user_img{
   margin: 1em 0.5em;
+  width: 4em;
 }
 
 input[type=text], input[type=email], input[type=password] {
@@ -1079,7 +1087,7 @@ td {
     max-width: 100px;
   }
 
-  .mob_pro{
+  header> p.mob_pro, header >a.mob_pro{
     display: block;
     position: absolute;
     top: 2.2em;
@@ -1182,10 +1190,12 @@ td {
 
   .upperPrint{
     flex-direction: column;
+    padding: 1em;
   }
 
   .upperPrint h1{
     order: 2;
+    margin-top: 0.5em;
   }
 
   .upperPrint img{
@@ -1317,7 +1327,7 @@ td {
     width: 40px;
   }
 
-  .mob_pro{
+  header >p.mob_pro, header >a.mob_pro {
     top: 1em;
     padding: 0.2em 0.3em;
     left: 1em;

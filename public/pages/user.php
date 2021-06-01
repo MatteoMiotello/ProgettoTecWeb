@@ -8,8 +8,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/modello.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/dBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/CheckValues.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/dBConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/UserBuilder.php';
 
 $connessione = DBAccess::openDBConnection();
@@ -41,7 +41,7 @@ if (!Access::isAuthenticated()) {
 $IdUtente = $_GET['user'];
 $userModel = User::getUserById($IdUtente);
 
-if($userModel==null){ $handler->setOperationError("Non esiste alcun utente con questo id"); $handler->render(); return; } 
+if($userModel==null){ $handler->setOperationError("Non esiste alcun utente con questo id"); $handler->render(); return; }
 
 if (!$access->isAdministrator() && Access::getUser()->getId() != $userModel->getId()) {
     $handler->setOperationError('Non sei autorizzato ad accedere a questa pagina');
@@ -113,4 +113,3 @@ if (!empty($_POST)) {
 
 
 $handler->render();
-
