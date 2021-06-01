@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . '/php/library/Access.php';
-require_once __DIR__ . '/php/library/HeaderHandler.php';
-require_once __DIR__ . '/php/library/BreadcrumbsBuilder.php';
+require_once __DIR__ . '/Access.php';
+require_once __DIR__ . '/HeaderHandler.php';
+require_once __DIR__ . '/BreadcrumbsBuilder.php';
 
 /**
  * Class TemplateHandler controlla la composizione della pagina
