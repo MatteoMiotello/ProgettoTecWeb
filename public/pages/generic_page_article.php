@@ -18,7 +18,7 @@ require_once __DIR__ . '/../php/library/CommentBuilder.php';
 require_once __DIR__ . '/../php/library/voteBuilder.php';
 require_once __DIR__ . '/../php/library/Access.php';
 //require_once __DIR__ . '/php/library/voteHandler.php';
-require_once '../php/library/VoteHandler.php';
+require_once '/../php/library/VoteHandler.php';
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Articolo');
