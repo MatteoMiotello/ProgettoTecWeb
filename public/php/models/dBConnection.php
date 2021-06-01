@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/php/library/DotEnv.php';
+require_once __DIR__ . '/../library/DotEnv.php';
 
 class DBAccess
 {
