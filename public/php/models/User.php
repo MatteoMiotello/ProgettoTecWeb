@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/php/library/UserLevelType.php';
-require_once __DIR__ .  '/php/models/CheckValues.php';
+require_once __DIR__ . '/../library/UserLevelType.php';
+require_once __DIR__ .  '/CheckValues.php';
 
 class User {
     private $Id;
