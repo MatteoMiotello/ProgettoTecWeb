@@ -293,7 +293,7 @@ class ArticleBuilder extends AbstractBuilder
         if($bool)
             $this->Params[ArticleBuilder::VALIDATIONOPTION] = "";
         else {
-            $this->Params[ArticleBuilder::VALIDATIONOPTION] = file_get_contents(__DIR__.'/php/components/acceptArticleManagment.phtml');
+            $this->Params[ArticleBuilder::VALIDATIONOPTION] = file_get_contents(__DIR__.'/../components/acceptArticleManagment.phtml');
         }
         return $this;
     }

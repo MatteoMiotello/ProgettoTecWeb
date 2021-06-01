@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . '/php/models/User.php';
-require_once __DIR__ . '/php/library/LoginErrorTypeSet.php';
-require_once __DIR__ . '/php/models/dBConnection.php';
+require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/LoginErrorTypeSet.php';
+require_once __DIR__ . '/../models/dBConnection.php';
 
 class LoginHandler {
     /**
