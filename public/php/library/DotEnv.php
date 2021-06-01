@@ -11,7 +11,7 @@ class DotEnv {
 
 
     public function __construct() {
-        $path = $_SERVER['DOCUMENT_ROOT'] . '/../envirorment/.env';
+        $path = __DIR__ . '/../envirorment/.env';
         if (!file_exists($path)) {
             throw new InvalidArgumentException(sprintf('%s does not exist', $path));
         }

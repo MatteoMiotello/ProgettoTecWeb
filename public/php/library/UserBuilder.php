@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/library/AbstractBuilder.php');
+require_once(__DIR__ . '/php/library/AbstractBuilder.php');
 
 class UserBuilder extends AbstractBuilder {
     /**
@@ -185,7 +185,7 @@ class UserBuilder extends AbstractBuilder {
 
     public function setUserAdminOption($bool) {
         if($bool)
-            $this->Params[UserBuilder::USERADMINOPTION] =  file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/userAdminOption.phtml');
+            $this->Params[UserBuilder::USERADMINOPTION] =  file_get_contents(__DIR__.'/php/components/userAdminOption.phtml');
         else 
             $this->Params[UserBuilder::USERADMINOPTION] =  "";
         return $this;

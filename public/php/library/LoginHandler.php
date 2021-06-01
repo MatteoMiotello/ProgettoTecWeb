@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/User.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/LoginErrorTypeSet.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/dBConnection.php';
+require_once __DIR__ . '/php/models/User.php';
+require_once __DIR__ . '/php/library/LoginErrorTypeSet.php';
+require_once __DIR__ . '/php/models/dBConnection.php';
 
 class LoginHandler {
     /**

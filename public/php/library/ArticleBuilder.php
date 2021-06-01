@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/library/AbstractBuilder.php');
+require_once(__DIR__ . '/php/library/AbstractBuilder.php');
 
 class ArticleBuilder extends AbstractBuilder
 {
@@ -293,7 +293,7 @@ class ArticleBuilder extends AbstractBuilder
         if($bool)
             $this->Params[ArticleBuilder::VALIDATIONOPTION] = "";
         else {
-            $this->Params[ArticleBuilder::VALIDATIONOPTION] = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/php/components/acceptArticleManagment.phtml');
+            $this->Params[ArticleBuilder::VALIDATIONOPTION] = file_get_contents(__DIR__.'/php/components/acceptArticleManagment.phtml');
         }
         return $this;
     }

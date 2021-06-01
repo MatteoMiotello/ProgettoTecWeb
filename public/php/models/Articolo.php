@@ -1,7 +1,7 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/php/models/CheckValues.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/php/models/User.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/php/models/dBConnection.php';
+require_once __DIR__.'/php/models/CheckValues.php';
+require_once __DIR__.'/php/models/User.php';
+require_once __DIR__.'/php/models/dBConnection.php';
 
 class Articolo {
     private $ID;

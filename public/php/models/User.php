@@ -1,7 +1,7 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/UserLevelType.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/CheckValues.php';
+require_once __DIR__ . '/php/library/UserLevelType.php';
+require_once __DIR__ .  '/php/models/CheckValues.php';
 
 class User {
     private $Id;

@@ -1,6 +1,6 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/library/AbstractBuilder.php');
+require_once(__DIR__ . '/php/library/AbstractBuilder.php');
 
 class CommentBuilder extends AbstractBuilder {
     CONST USERNAME = '{{userName}}';

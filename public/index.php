@@ -3,10 +3,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require $_SERVER['DOCUMENT_ROOT'] .  '/php/library/TemplateHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/Articolo.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/dBConnection.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
+require __DIR__ .  '/php/library/TemplateHandler.php';
+require_once __DIR__ .  '/php/models/Articolo.php';
+require_once __DIR__ .  '/php/models/dBConnection.php';
+require_once __DIR__ .  '/php/library/ArticleBuilder.php';
 
 $connessione = DBAccess::openDBConnection();
 
@@ -21,7 +21,7 @@ if (!$connessione) {
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Home');
-$filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/index_nuovo.html';
+$filePath = __DIR__ . '/html/index_nuovo.html';
 
 $handler->setKeywords("home, articoli, news, aggiornamenti, notizie");
 $handler->setDescription("Scorri la nostra home e rimani aggiornato sulle ultime notizie in Italia e nel mondo intero.");
@@ -46,7 +46,7 @@ if ($rawArticles != null) {
                 ->setDescription($articolo->getDescription())
                 ->setImgArticlePath($articolo->getImgPath())
                 ->setImgArticleAlt($articolo->getAltImg())
-                ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/articlePreview.phtml'));
+                ->build(file_get_contents(__DIR__ . '/php/components/articlePreview.phtml'));
     }
 } else {
     // messaggio che dice che non ci sono articoli del db
@@ -60,7 +60,7 @@ if ($covidNews != null) {
             $covidNewsList .= (new ArticleBuilder)
                 ->setTitle($articolo->getTitle())
                 ->setArticleID($articolo->getId())
-                ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/articleNews.phtml'));
+                ->build(file_get_contents(__DIR__ . '/php/components/articleNews.phtml'));
     }
 } else {
     // messaggio che dice che non ci sono articoli del db

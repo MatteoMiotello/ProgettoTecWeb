@@ -7,10 +7,10 @@ else ; //errore da gestire
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/CheckValues.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/dBConnection.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/UserBuilder.php';
+require __DIR__ . '/php/library/TemplateHandler.php';
+require_once __DIR__ .  '/php/models/CheckValues.php';
+require_once __DIR__ . '/php/models/dBConnection.php';
+require_once __DIR__ . '/php/library/UserBuilder.php';
 
 $connessione = DBAccess::openDBConnection();
 
@@ -28,7 +28,7 @@ if (!$connessione) {
     return;
 }
 
-$filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/error.html';
+$filePath = __DIR__ . '/html/error.html';
 $handler->setContent(file_get_contents($filePath));
 $handler->setNoOperation();
 $handler->setCurrentRoute("user");
@@ -50,7 +50,7 @@ if (!$access->isAdministrator() && Access::getUser()->getId() != $userModel->get
     return;
 }
 $errorContent = file_get_contents($filePath);
-$filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/user_page_nuovo.html';
+$filePath = __DIR__ . '/html/user_page_nuovo.html';
 
 $handler->setContent($errorContent . file_get_contents($filePath));
 $handler->setParam('{{ user_id }}', $IdUtente);
@@ -68,7 +68,7 @@ if ($userModel) {
         ->setGivenLikes($givenLikes['SUM(voto.up)'])
         ->setReceivedLikes($receivedLikes)
         ->setUserAdminOption($userModel->isAdmin())
-        ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/personalUserInfo.phtml'));
+        ->build(file_get_contents(__DIR__ . '/php/components/personalUserInfo.phtml'));
 } else {
     $userPage = "<div>nessun utente presente</div>";
 }

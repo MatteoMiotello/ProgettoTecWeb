@@ -3,11 +3,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/Access.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/dBConnection.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/Articolo.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/library/DotEnv.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php/models/Categoria.php';
+require_once __DIR__ . '/php/library/Access.php';
+require_once __DIR__ . '/php/models/dBConnection.php';
+require_once __DIR__ . '/php/models/Articolo.php';
+require_once __DIR__ . '/php/library/DotEnv.php';
+require_once __DIR__ . '/php/models/Categoria.php';
 
 $connessione = DBAccess::openDBConnection();
 Access::create();
@@ -30,7 +30,7 @@ if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['t
             }
 
             $fileName = uniqid();
-            $destDir = $_SERVER['DOCUMENT_ROOT'] . getenv('ARTICLE_IMAGES_DIR');
+            $destDir = __DIR__ . getenv('ARTICLE_IMAGES_DIR');
             $extension = pathinfo($file['name'])['extension'];
             $fileNameFull = sprintf("%s.%s", $fileName, $extension);
             $destPath = sprintf("%s%s.%s", $destDir, $fileName, $extension);

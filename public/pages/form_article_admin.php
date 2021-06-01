@@ -2,11 +2,11 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require $_SERVER['DOCUMENT_ROOT'] . '/php/library/TemplateHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/dBConnection.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/models/Categoria.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/CategoryBuilder.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .  '/php/library/ArticleBuilder.php';
+require __DIR__ . '/php/library/TemplateHandler.php';
+require_once __DIR__ .  '/php/models/dBConnection.php';
+require_once __DIR__ .  '/php/models/Categoria.php';
+require_once __DIR__ .  '/php/library/CategoryBuilder.php';
+require_once __DIR__ .  '/php/library/ArticleBuilder.php';
 
 $connessione = DBAccess::openDBConnection();
 
@@ -15,7 +15,7 @@ $handler->setPageTitle('Form Articolo');
 $handler->setBreadcrumb('Scrivi un articolo (admin)')
         ->addLink('/pages/user.php','Il mio profilo');
 
-$filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/error.html';
+$filePath = __DIR__ . '/html/error.html';
 
 $handler->setContent(file_get_contents($filePath));
 $handler->setCurrentRoute('form_articolo_admin');
@@ -38,7 +38,7 @@ if (!($user->isAdministrator())) {
     return;
 }
 
-$filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/form_articolo_admin_nuovo.html';
+$filePath = __DIR__ . '/html/form_articolo_admin_nuovo.html';
 
 $handler->setContent(file_get_contents($filePath));
 $handler->setCurrentRoute('form_articolo_admin');
@@ -50,14 +50,14 @@ if ($categorie != null) {
     foreach ($categorie as $singolaCategoria) {
         $listaCategoria .= (new CategoryBuilder)
             ->setName($singolaCategoria->getNome())
-            ->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/chooseCategoryFormArticle.phtml'));
+            ->build(file_get_contents(__DIR__ . '/php/components/chooseCategoryFormArticle.phtml'));
     }
 } else {
     // messaggio che dice che non ci sono categorie del db
     $listaCategoria = "<div>nessuna categoria presente</div>";
 }
 
-$articleContent = (new ArticleBuilder)->build(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/formArticleContent.phtml'));
+$articleContent = (new ArticleBuilder)->build(file_get_contents(__DIR__ . '/php/components/formArticleContent.phtml'));
 $handler->setParam("<formArticleContent />", $articleContent);
 
 $handler->setParam("<listaCategorie />", $listaCategoria);

@@ -1,6 +1,6 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/library/AbstractBuilder.php');
+require_once(__DIR__ . '/php/library/AbstractBuilder.php');
 
 class VoteBuilder extends AbstractBuilder {
     const UPVOTES = '{{upVotes}}';
@@ -64,8 +64,8 @@ class VoteBuilder extends AbstractBuilder {
 
 
     public function setAutenticationOptions() {
-        $this->Params[VoteBuilder::ARROWUP] = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/arrowUp.phtml');
-        $this->Params[VoteBuilder::ARROWDOWN] = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/php/components/arrowDown.phtml');
+        $this->Params[VoteBuilder::ARROWUP] = file_get_contents(__DIR__ . '/php/components/arrowUp.phtml');
+        $this->Params[VoteBuilder::ARROWDOWN] = file_get_contents(__DIR__ . '/php/components/arrowDown.phtml');
     }
 
 
