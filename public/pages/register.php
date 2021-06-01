@@ -2,14 +2,14 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require __DIR__ . '/php/library/TemplateHandler.php';
-require_once __DIR__ .  '/php/models/CheckValues.php';
-require_once __DIR__ . '/php/models/dBConnection.php';
-require_once __DIR__ . '/php/models/User.php';
+require __DIR__ . '/../php/library/TemplateHandler.php';
+require_once __DIR__ .  '/../php/models/CheckValues.php';
+require_once __DIR__ . '/../php/models/dBConnection.php';
+require_once __DIR__ . '/../php/models/User.php';
 
 $connessione = DBAccess::openDBConnection();
 $handler = new TemplateHandler();
-$filePath = __DIR__ . '/html/registrati_nuovo.html';
+$filePath = __DIR__ . '/../html/registrati_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 $handler->setBreadcrumb( 'Registrati' )
     ->addLink( '/login.php', 'Accedi' );

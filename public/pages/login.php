@@ -1,14 +1,14 @@
 <?php
 
-require_once '../php/library/TemplateHandler.php';
-require_once '../php/models/dBConnection.php';
+require_once __DIR__.'/../php/library/TemplateHandler.php';
+require_once __DIR__.'/../php/models/dBConnection.php';
 
 $handler = new TemplateHandler();
 
 $handler->setPageTitle( 'Accedi' );
 $handler->setBreadcrumb( 'Accedi' );
 
-$content = file_get_contents( '../html/login.html' );
+$content = file_get_contents(__DIR__.'/../html/login.html' );
 $handler->setContent( $content );
 $handler->setCurrentRoute("login");
 $handler->setKeywords("login, utente");

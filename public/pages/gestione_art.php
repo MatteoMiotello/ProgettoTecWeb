@@ -2,10 +2,10 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require __DIR__ . '/php/library/TemplateHandler.php';
-require_once __DIR__ .  '/php/models/Articolo.php';
-require_once __DIR__ . '/php/models/dBConnection.php';
-require_once __DIR__ .  '/php/library/ArticleBuilder.php';
+require __DIR__ . '/../php/library/TemplateHandler.php';
+require_once __DIR__ .  '/../php/models/Articolo.php';
+require_once __DIR__ . '/../php/models/dBConnection.php';
+require_once __DIR__ .  '/../php/library/ArticleBuilder.php';
 
 $connessione = DBAccess::openDBConnection();
 
@@ -23,7 +23,7 @@ if (!$connessione) {
     return;
 }
 
-$filePath = __DIR__ . '/html/error.html';
+$filePath = __DIR__ . '/../html/error.html';
 $handler->setContent(file_get_contents($filePath));
 
 if (!Access::isAuthenticated()) {
@@ -38,7 +38,7 @@ if (!($user->isAdministrator())) {
     return;
 }
 
-$filePath = __DIR__ . '/html/article_filter_nuovo.html';
+$filePath = __DIR__ . '/../html/article_filter_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
 $handler->setNoOperation();
 
@@ -77,7 +77,7 @@ if ($rawArticles != null) {
             ->setValidationOption($articolo->getValidation())
             ->setArticleID($articolo->getId())
             ->setTitle($articolo->getTitle())
-            ->build(file_get_contents(__DIR__ . '/php/components/articleManager.phtml'));
+            ->build(file_get_contents(__DIR__ . '/../php/components/articleManager.phtml'));
     }
 } else {
     // messaggio che dice che non ci sono articoli del db
