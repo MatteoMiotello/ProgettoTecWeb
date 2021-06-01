@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ .  '/Articolo.php';
+require_once __DIR__ .  '/../models/Articolo.php';
 
 class VoteHandler {
     private $Article;
