@@ -29,7 +29,7 @@ Polato Andrea (Referente): 1201205 – andrea.polato.7@studenti.unipd.it
 
 
 
-1 Introduzione
+
 Il progetto scelto riguarda la realizzazione del sito web di una testata giornalistica immaginaria, la quale mira ad espandere il proprio bacino d’utenza tramite il coinvolgimento di utenti giovani o dotati di medie capacità informatiche così da essere in grado di destreggiarsi all’interno del sito internet.
 Il sito non ha l’unico scopo di raggiungere più utenti possibile ma ha anche l’obiettivo di fornire una valida alternativa alla carta stampata e di far sentire l’utente parte di una community in cui possa esprimersi liberamente e contribuire alla creazione dei contenuti.
 
@@ -156,10 +156,31 @@ In seguito al primo meeting tra i membri del gruppo si è dubito evidenziata la 
 Nella prima fase di sviluppo abbiamo quindi deciso di adottare una strategia di divisione dei compiti nella seguente modalità: due persone si sarebbero occupate di una prima versione completamente statica del sito e le altre due si sono preoccupate di mettere le basi per la gestione del sito lato server.
 Nella seconda fase invece il lavoro di entrambi i gruppi avrebbe dovuto fondersi dando vita al sito vero e proprio per poi, infine, procedere con tutti i test del caso.
 
+Visualizzazione
+La visualizzazione del sito è stata pensata in modo da rendere le pagine accessibili ad ogni
+categoria di utente e reattive alla tipologia di dispositivo usato. Sono state quindi utilizzate
+unità di misura relative e colori che garantissero sempre un adeguato livello di contrasto tra le
+scritte e lo sfondo sottostante.
+Il layout non è fisso, bensì cambia di pagina in pagina, questo da un lato ha portato ad un lavoro maggiore di stilizzazione del sito, ma da risultati in termini di visualizzazione piacevole e di fluidità del layout su qualsiasi tipo di schermo. Ogni pagina è stata stilizzata singolarmente, in modo che fosse il layout ad adattarsi al contenuto e non viceversa!
+Di seguito riportiamo quattro tipologie di visualizzazione del sito:
+- desktop
+- tablet
+- mobile
+- stampa
+
+Stampa 
+Per quanto riguarda la stampa, sono stati eliminati gli elementi di presentazione (immagini e
+background) e sono stati tenuti solo gli elementi necessari, ovvero il contenuto della pagina. È
+stato rimosso il menù, la barra di ricerca e il footer in quanto non necessari per la visualizzazione
+della pagina stampata, mentre sono stati tenuti il breadcrumb per specificare il percorso alla
+pagina selezionata, e il logo per distinguere il sito. Le pagine sono in bianco e nero per dare
+valore al contenuto anziché alla presentazione. Il font, che nella visualizzazione a schermo era
+san-serif, passa ad essere serif per una migliore leggibilità sulla carta stampata.
+
 3 Sviluppo
 3.1 Tecnologie utilizzate
 HTML5 e CSS3
-Abbiamo deciso di utilizzare HTML5 per via della sua semplicità di utilizzo e la presenza di tag semantici in grado di veicolare facilmente informazioni che garantiscono una maggiore accessibilità e usabilità. Il bacino di utenza ci aspettiamo non avrà problemi a navigare sul nostro sito.
+Abbiamo deciso di utilizzare HTML5 per via della sua semplicità di utilizzo e la presenza di tag semantici in grado di veicolare facilmente informazioni che garantiscono una maggiore accessibilità e usabilità. Il bacino di utenza che ci aspettiamo non avrà problemi a navigare sul nostro sito.
 In prima battuta è stato utilizzato per costruire tutto il sito e poi sono stati creati dei componenti html/phtml utilizzati dal gestore del template per decidere come costruire la pagina desiderata.
 CSS3 invece è stato scelto per la sua semplicità di utilizzo e la vasta gamma di opzioni offerte.
 Se ne è fatto un uso intensivo per rendere quando più accattivante possibile il sito e per la creazione di media query atte a renderlo quanto più utilizzabile su qualsiasi tipo di dispositivo.
@@ -168,11 +189,14 @@ Abbiamo tentato di utilizzare JavaScript nel modo più intelligente possibile, u
 Un esempio di questa filosofia è il menù ad hamburger: con JS funzionante fa apparire un menù appena sotto l’header, ma in caso di non utilizzo di JS c’è un menù in fondo alla pagina che viene comunque raggiunto grazie ad un’ancora a id.
 Lo stesso si può dire per la validazione delle form, in quanto abbiamo usato tag semantici e l’attributo “pattern” per assicurarci che in caso di non funzionamento di JavaScript vengano comunque eseguiti dei controlli di base, a discapito di un messaggio di errore che ovviamente non può essere personalizzato.
 JavaScript viene utilizzato per: 
-- mostrare e nascondere la barra di ricerca ed il menù da mobile;
+- mostrare e nascondere la barra di ricerca ed il menù da mobile, in modo da poterlo visualizzare come "menu a panino";
 - nascondere il pulsante “torna su” e mostrarlo dopo aver fatto dello scroll verticale;
 - validazione form di login, registrazione e invio articoli.
 PHP e MySQL
-PHP è stato chiaramente utilizzato per la costruzione delle pagine ed è stato preferito in tutti i casi possibili all’utilizzo di codice AJAX: sia per avvantaggiare utenti con hardware molto datato, sia per fare sì che l’utente riesca sempre a ricevere le informazioni desiderate nel caso di non funzionamento di JavaScript. Casistiche favorevoli all'utilizzo di AJAX, ovvero quei casi in cui sarebbe preferibile non ricaricare l'intero contenuto della pagina (come ad esempio l'inserimento di una votazione, con relativo aggiornamento del numero di like/dislike, o l'inserimento di un commento, con il relativo aggiornamento della sezione commenti) sono state gestite con il solo utilizzo di php. Questo comporta l'intero aggiornamento della pagina.
+PHP è stato utilizzato per la costruzione delle pagine ed è stato preferito in tutti i casi possibili all’utilizzo di codice AJAX: sia per avvantaggiare utenti con hardware molto datato, sia per fare sì che l’utente riesca sempre a ricevere le informazioni desiderate nel caso di non funzionamento di JavaScript. Casistiche favorevoli all'utilizzo di AJAX, ovvero quei casi in cui sarebbe preferibile non ricaricare l'intero contenuto della pagina (come ad esempio l'inserimento di una votazione, con relativo aggiornamento del numero di like/dislike, o l'inserimento di un commento, con il relativo aggiornamento della sezione commenti) sono state gestite con il solo utilizzo di php. Questo comporta l'intero aggiornamento della pagina.
+
+E'
+
 La lista di azioni che fanno uso di codice PHP comprende:
 - Login e registrazione di utenti;
 - Inserimento di nuovi articoli da parte di lettori e redattori;

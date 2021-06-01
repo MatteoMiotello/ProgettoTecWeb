@@ -24,7 +24,8 @@ if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['t
     if (!empty($file['name']) and !empty($file['tmp_name']) and !empty($file['size'])) {
         /* salvo l'immagine con uniqid  */
         if (isset($file)) {
-            if ($file['size'] > 640000) {
+            print($file['size']);
+            if ($file['size'] > 150000) {
                 throw new Exception('File is too large');
             }
 
