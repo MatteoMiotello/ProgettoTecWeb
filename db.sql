@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 31, 2021 alle 22:25
+-- Creato il: Giu 01, 2021 alle 10:40
 -- Versione del server: 10.4.19-MariaDB
 -- Versione PHP: 7.3.28
 
@@ -79,9 +79,9 @@ CREATE TABLE `categoria` (
 
 INSERT INTO `categoria` (`nome`, `descrizione`, `img`) VALUES
 ('Covid', 'Tutto l\'essenziale per tenersi aggiornati sulla pandemia', '/img/covid_cat.jpeg'),
-('Economia', '/*description*/', '/img/economy_cat.jpeg'),
+('Economia', 'Borsa, Criptovalute e molto altro', '/img/economy_cat.jpeg'),
 ('Gossip', 'Tutti i pettegolezzi sulle star e i personaggi di rilievo', '/img/gossip_cat.jpeg'),
-('Mondo', 'Le principali notizie sui paesi esteri', '/img/world_cat.jpeg'),
+('Mondo', 'Le principali notizie provenienti da tutto il mondo', '/img/world_cat.jpeg'),
 ('Politica', 'Le ultime notizie su elezioni, leggi e politica', '/img/politics_cat.jpeg'),
 ('Scienze', 'Stai al passo con i tempi grazie alla sezione dedicata a scienze e tecnologia', '/img/science_cat.jpeg'),
 ('Spettacolo', 'Nuovi film, musica, libri e teatro, c\'è tutto ciò che cerchi', '/img/spett_cat.jpeg'),
@@ -229,13 +229,13 @@ ALTER TABLE `voto`
 -- AUTO_INCREMENT per la tabella `articolo`
 --
 ALTER TABLE `articolo`
-  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=878566;
+  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=878572;
 
 --
 -- AUTO_INCREMENT per la tabella `commento`
 --
 ALTER TABLE `commento`
-  MODIFY `ID_com` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=530773;
+  MODIFY `ID_com` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=530774;
 
 --
 -- AUTO_INCREMENT per la tabella `utente`
