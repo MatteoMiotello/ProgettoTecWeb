@@ -12,12 +12,13 @@ $connessione = DBAccess::openDBConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Form Articolo');
-$handler->setBreadcrumb('Scrivi un articolo');
+$handler->setBreadcrumb('Scrivi un articolo (admin)')
+        ->addLink('/pages/user.php','Il mio profilo');
 
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/error.html';
 
 $handler->setContent(file_get_contents($filePath));
-$handler->setCurrentRoute('form_articolo');
+$handler->setCurrentRoute('form_articolo_admin');
 
 // controllo che la connessione al db sia andata a buon fine, altrimenti stampo un messaggio di errore
 if (!$connessione) {
@@ -40,7 +41,7 @@ if (!($user->isAdministrator())) {
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/form_articolo_admin_nuovo.html';
 
 $handler->setContent(file_get_contents($filePath));
-$handler->setCurrentRoute('form_articolo');
+$handler->setCurrentRoute('form_articolo_admin');
 $handler->setNoOperation();
 
 $categorie = Categoria::getCategorie();

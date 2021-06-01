@@ -16,6 +16,7 @@ $connessione = DBAccess::openDBConnection();
 
 $handler = new TemplateHandler();
 $handler->setPageTitle('Pagina utente');
+$handler->setBreadcrumb('Il mio profilo');
 
 
 /**

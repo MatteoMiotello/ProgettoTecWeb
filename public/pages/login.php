@@ -5,9 +5,8 @@ require_once '../php/models/dBConnection.php';
 
 $handler = new TemplateHandler();
 
-$handler->setPageTitle( 'Login' );
-$handler->setBreadcrumb( 'Login' )
-    ->addLink( '/index.php', 'Home' );
+$handler->setPageTitle( 'Accedi' );
+$handler->setBreadcrumb( 'Accedi' );
 
 $content = file_get_contents( '../html/login.html' );
 $handler->setContent( $content );

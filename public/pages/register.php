@@ -11,6 +11,8 @@ $connessione = DBAccess::openDBConnection();
 $handler = new TemplateHandler();
 $filePath = $_SERVER['DOCUMENT_ROOT'] . '/html/registrati_nuovo.html';
 $handler->setContent(file_get_contents($filePath));
+$handler->setBreadcrumb( 'Registrati' )
+    ->addLink( '/login.php', 'Accedi' );
 
 // controllo che la connessione al db sia andata a buon fine, altrimenti stampo un messaggio di errore
 if (!$connessione) {
