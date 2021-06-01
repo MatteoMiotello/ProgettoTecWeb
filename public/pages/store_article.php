@@ -30,7 +30,8 @@ if (isset($_POST['titolo_art']) && isset($_POST['descr_art']) && isset($_POST['t
             }
 
             $fileName = uniqid();
-            $destDir = __DIR__ . getenv('ARTICLE_IMAGES_DIR');
+            $destDir = __DIR__. '/assets/article_images/';
+            $destDir = str_replace('/pages', '', $destDir);
             $extension = pathinfo($file['name'])['extension'];
             $fileNameFull = sprintf("%s.%s", $fileName, $extension);
             $destPath = sprintf("%s%s.%s", $destDir, $fileName, $extension);
