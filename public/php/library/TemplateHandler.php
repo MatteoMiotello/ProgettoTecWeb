@@ -83,7 +83,7 @@ class TemplateHandler {
      * @throws Exception
      */
     private function getHeaderHtml() {
-        $footerPath = __DIR__ . '/php/components/header.html';
+        $footerPath = __DIR__ . '/../components/header.html';
 
         if (!file_exists($footerPath)) {
             throw new Exception('header not found');
@@ -115,7 +115,7 @@ class TemplateHandler {
      * @throws Exception
      */
     private function getFooterHtml() {
-        $footerPath = __DIR__ . '/php/components/footer.html';
+        $footerPath = __DIR__ . '/../components/footer.html';
 
         if (!file_exists($footerPath)) {
             throw new Exception('footer not found');
@@ -132,7 +132,7 @@ class TemplateHandler {
      * @throws Exception
      */
     private function getCommonHtml() {
-        $filePath = __DIR__ . '/html/common.html';
+        $filePath = __DIR__ . '/../../html/common.html';
 
         if (!file_exists($filePath)) {
             throw new Exception('file non esistente');
@@ -272,7 +272,7 @@ class TemplateHandler {
         if ( !isset($this->Breadcrumb) ) {
             $this->setParam('<main-breadcrumb/>', '');
         } else {
-            $breadcrumbs = $this->Breadcrumb->build(file_get_contents(__DIR__ . "/php/components/breadcrumbs.phtml"));
+            $breadcrumbs = $this->Breadcrumb->build(file_get_contents(__DIR__ . "/../components/breadcrumbs.phtml"));
             $this->setParam('<main-breadcrumb/>', $breadcrumbs);
         }
 
@@ -327,7 +327,7 @@ class TemplateHandler {
      * @param $string
     */
     public function setOperationError($string) {
-        $component = str_replace('{{messge}}', $string, file_get_contents(__DIR__.'/php/components/operationError.phtml'));
+        $component = str_replace('{{messge}}', $string, file_get_contents(__DIR__.'/../components/operationError.phtml'));
         $this->setParam('<operationResult />', $component );
     }
 
@@ -336,7 +336,7 @@ class TemplateHandler {
      * @param $string
     */
     public function setOperationDone($string) {
-        $component = str_replace('{{messge}}', $string, file_get_contents(__DIR__.'/php/components/operationDone.phtml'));
+        $component = str_replace('{{messge}}', $string, file_get_contents(__DIR__.'/../components/operationDone.phtml'));
         $this->setParam('<operationResult />', $component );
     }
 
