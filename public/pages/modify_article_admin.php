@@ -8,12 +8,12 @@ if (isset($_GET['art_id']))
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require __DIR__ . '/php/library/TemplateHandler.php';
-require_once __DIR__ .  '/php/models/Articolo.php';
-require_once __DIR__ .  '/php/models/Categoria.php';
-require_once __DIR__ . '/php/models/dBConnection.php';
-require_once __DIR__ . '/php/library/CategoryBuilder.php';
-require_once __DIR__ . '/php/library/ArticleBuilder.php';
+require __DIR__ . '/../php/library/TemplateHandler.php';
+require_once __DIR__ .  '/../php/models/Articolo.php';
+require_once __DIR__ .  '/../php/models/Categoria.php';
+require_once __DIR__ . '/../php/models/dBConnection.php';
+require_once __DIR__ . '/../php/library/CategoryBuilder.php';
+require_once __DIR__ . '/../php/library/ArticleBuilder.php';
 
 $connessione = DBAccess::openDBConnection();
 
@@ -31,7 +31,7 @@ if (!$connessione) {
     return;
 }
 
-$filePath = __DIR__ . '/html/error.html';
+$filePath = __DIR__ . '/../html/error.html';
 $handler->setContent(file_get_contents($filePath));
 
 if (!Access::isAuthenticated()) {
@@ -54,7 +54,7 @@ if (!$articolo) {
     return;
 } else $handler->setNoOperation();
 
-$filePath = __DIR__ . '/html/form_articolo_admin_modifica.html';
+$filePath = __DIR__ . '/../html/form_articolo_admin_modifica.html';
 $handler->setContent(file_get_contents($filePath));
 $handler->setParam('{{ id_articolo }}', $articolo->getID());
 
@@ -65,7 +65,7 @@ $articleContent = (new ArticleBuilder)
     ->setTitle($articolo->getTitle())
     ->setDescription($articolo->getDescription())
     ->setContent($articolo->getContent())
-    ->build(file_get_contents(__DIR__ . '/php/components/formArticleContent.phtml'));
+    ->build(file_get_contents(__DIR__ . '/../php/components/formArticleContent.phtml'));
 if ($categorie) {
     $listaCategoria = '';
     foreach ($categorie as $singolaCategoria) {
@@ -79,7 +79,7 @@ if ($categorie) {
             }
         }
 
-        $listaCategoria .= $value->build(file_get_contents(__DIR__ . '/php/components/chooseCategoryFormArticle.phtml'));
+        $listaCategoria .= $value->build(file_get_contents(__DIR__ . '/../php/components/chooseCategoryFormArticle.phtml'));
     }
 } else {
     // messaggio che dice che non ci sono categorie del db
