@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/php/library/AbstractBuilder.php');
+require_once(__DIR__ . '/AbstractBuilder.php');
 
 class VoteBuilder extends AbstractBuilder {
     const UPVOTES = '{{upVotes}}';

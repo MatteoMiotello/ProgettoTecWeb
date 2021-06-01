@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/php/models/User.php';
+require_once __DIR__ . '/../models/User.php';
 
 class Access {
     /**

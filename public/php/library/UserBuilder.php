@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/php/library/AbstractBuilder.php');
+require_once(__DIR__ . '/AbstractBuilder.php');
 
 class UserBuilder extends AbstractBuilder {
     /**
@@ -56,7 +56,7 @@ class UserBuilder extends AbstractBuilder {
         $this->Params[UserBuilder::USEREMAIL] = 'Nessuna Email presente';
     }
 
-    /** 
+    /**
      * @return mixed
      */
     public function getUserName() {
@@ -155,7 +155,7 @@ class UserBuilder extends AbstractBuilder {
     public function setGivenLikes($Number) {
         if($Number!="")
             $this->GivenLikes = $Number;
-        else 
+        else
             $this->GivenLikes = '0';
         $this->Params[UserBuilder::GIVENLIKES] = $this->getGivenLikes();
         return $this;
@@ -177,7 +177,7 @@ class UserBuilder extends AbstractBuilder {
     public function setReceivedLikes($Number) {
         if($Number != "")
             $this->ReceivedLikes = $Number;
-        else 
+        else
             $this->ReceivedLikes = '0';
         $this->Params[UserBuilder::RECEIVEDLIKES] = $this->getReceivedLikes();
         return $this;
@@ -186,7 +186,7 @@ class UserBuilder extends AbstractBuilder {
     public function setUserAdminOption($bool) {
         if($bool)
             $this->Params[UserBuilder::USERADMINOPTION] =  file_get_contents(__DIR__.'/php/components/userAdminOption.phtml');
-        else 
+        else
             $this->Params[UserBuilder::USERADMINOPTION] =  "";
         return $this;
     }
